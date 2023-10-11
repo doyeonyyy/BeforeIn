@@ -6,15 +6,23 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+import Gifu
 
 class MainViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("로드완료")
+        let testLabel = UILabel().then{
+            $0.text = "메인화면"
+        }
+        view.addSubview(testLabel)
+        testLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
-
 
 }
 

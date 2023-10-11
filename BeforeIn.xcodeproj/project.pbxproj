@@ -16,6 +16,15 @@
 		1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCBA2AD6B20000E6D388 /* BaseViewController.swift */; };
 		1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCBD2AD6B23100E6D388 /* LoginViewController.swift */; };
 		1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCC02AD6B25100E6D388 /* RegisterViewController.swift */; };
+		1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */; };
+		1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCC52AD6B2A300E6D388 /* QuizViewController.swift */; };
+		1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */; };
+		1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */; };
+		1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */; };
+		1596DCD22AD6B31F00E6D388 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD12AD6B31F00E6D388 /* SnapKit */; };
+		1596DCD42AD6B31F00E6D388 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */; };
+		1596DCD72AD6B32900E6D388 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD62AD6B32900E6D388 /* Then */; };
+		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +39,11 @@
 		1596DCBA2AD6B20000E6D388 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1596DCBD2AD6B23100E6D388 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1596DCC02AD6B25100E6D388 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroViewController.swift; sourceTree = "<group>"; };
+		1596DCC52AD6B2A300E6D388 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +51,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1596DCD22AD6B31F00E6D388 /* SnapKit in Frameworks */,
+				1596DCD72AD6B32900E6D388 /* Then in Frameworks */,
+				1596DCD42AD6B31F00E6D388 /* SnapKit-Dynamic in Frameworks */,
+				1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +87,10 @@
 				1596DCB82AD6B1E400E6D388 /* MainPage */,
 				1596DCBC2AD6B22000E6D388 /* LoginPage */,
 				1596DCBF2AD6B24000E6D388 /* RegisterPage */,
+				1596DCC22AD6B27F00E6D388 /* QuizPage */,
+				1596DCC72AD6B2AB00E6D388 /* SearchPage */,
+				1596DCCA2AD6B2C300E6D388 /* DetailPage */,
+				1596DCCD2AD6B2E500E6D388 /* ProfilePage */,
 				1596DCAB2AD6B18B00E6D388 /* Assets.xcassets */,
 				1596DCAD2AD6B18B00E6D388 /* LaunchScreen.storyboard */,
 				1596DCB02AD6B18B00E6D388 /* Info.plist */,
@@ -109,6 +131,39 @@
 			path = RegisterPage;
 			sourceTree = "<group>";
 		};
+		1596DCC22AD6B27F00E6D388 /* QuizPage */ = {
+			isa = PBXGroup;
+			children = (
+				1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */,
+				1596DCC52AD6B2A300E6D388 /* QuizViewController.swift */,
+			);
+			path = QuizPage;
+			sourceTree = "<group>";
+		};
+		1596DCC72AD6B2AB00E6D388 /* SearchPage */ = {
+			isa = PBXGroup;
+			children = (
+				1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */,
+			);
+			path = SearchPage;
+			sourceTree = "<group>";
+		};
+		1596DCCA2AD6B2C300E6D388 /* DetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */,
+			);
+			path = DetailPage;
+			sourceTree = "<group>";
+		};
+		1596DCCD2AD6B2E500E6D388 /* ProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */,
+			);
+			path = ProfilePage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,6 +180,12 @@
 			dependencies = (
 			);
 			name = BeforeIn;
+			packageProductDependencies = (
+				1596DCD12AD6B31F00E6D388 /* SnapKit */,
+				1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */,
+				1596DCD62AD6B32900E6D388 /* Then */,
+				1596DCD92AD6B33700E6D388 /* Gifu */,
+			);
 			productName = BeforeIn;
 			productReference = 1596DC9F2AD6B18A00E6D388 /* BeforeIn.app */;
 			productType = "com.apple.product-type.application";
@@ -153,6 +214,11 @@
 				Base,
 			);
 			mainGroup = 1596DC962AD6B18A00E6D388;
+			packageReferences = (
+				1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1596DCD52AD6B32900E6D388 /* XCRemoteSwiftPackageReference "Then" */,
+				1596DCD82AD6B33700E6D388 /* XCRemoteSwiftPackageReference "Gifu" */,
+			);
 			productRefGroup = 1596DCA02AD6B18A00E6D388 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -183,7 +249,12 @@
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
+				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
+				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
+				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
+				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
+				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
 			);
@@ -396,6 +467,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		1596DCD52AD6B32900E6D388 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		1596DCD82AD6B33700E6D388 /* XCRemoteSwiftPackageReference "Gifu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaishin/Gifu.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1596DCD12AD6B31F00E6D388 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		1596DCD62AD6B32900E6D388 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1596DCD52AD6B32900E6D388 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		1596DCD92AD6B33700E6D388 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1596DCD82AD6B33700E6D388 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1596DC972AD6B18A00E6D388 /* Project object */;
 }
