@@ -74,9 +74,8 @@ class LoginView: UIView {
     lazy var maintainStackView = UIStackView().then {
         $0.addArrangedSubview(maintainLabel)
         $0.addArrangedSubview(maintainButton)
-        $0.spacing = 8
+        $0.spacing = 5
         $0.axis = .horizontal
-        $0.alignment = .fill
     }
     
     lazy var loginButton = UIButton().then {
@@ -177,7 +176,6 @@ class LoginView: UIView {
         maintainStackView.snp.makeConstraints{
             $0.top.equalTo(pwView.snp.bottom).offset(17)
             $0.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(25)
-            $0.right.equalTo(self.safeAreaLayoutGuide.snp.right).offset(-228)
         }
         
         loginButton.snp.makeConstraints {
