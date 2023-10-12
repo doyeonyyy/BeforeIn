@@ -47,6 +47,10 @@ class SearchViewController: BaseViewController {
 //        $0.backgroundColor = .lightGray // 지우기
         $0.showsHorizontalScrollIndicator = false
     }
+    
+    private let divider = UIView().then {
+        $0.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+    }
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -66,6 +70,7 @@ class SearchViewController: BaseViewController {
         view.addSubview(searchTextField)
         view.addSubview(cancelButton)
         view.addSubview(scrollView)
+        view.addSubview(divider)
         
         // makeConstraints
         searchTextField.snp.makeConstraints {
@@ -89,6 +94,12 @@ class SearchViewController: BaseViewController {
         
         categoryStackView.snp.makeConstraints {
             $0.top.leading.trailing.height.centerY.equalTo(scrollView)
+        }
+        
+        divider.snp.makeConstraints {
+            $0.top.equalTo(categoryStackView.snp.bottom).offset(16)
+            $0.height.equalTo(2)
+            $0.width.equalToSuperview()
         }
         
         
