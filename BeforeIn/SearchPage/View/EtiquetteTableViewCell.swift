@@ -12,24 +12,24 @@ import UIKit
 class EtiquetteTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    private let image = UIImageView().then {
+    var image = UIImageView().then {
         $0.image = UIImage(systemName: "photo.fill")
         $0.tintColor = .gray
     }
     
-    private let stackView = UIStackView().then {
+    var stackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 8
         $0.alignment = .leading
         $0.distribution = .fill
     }
     
-    private let titleLabel = UILabel().then {
+    var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .black
     }
     
-    private let descriptionLabel = UILabel().then {
+    var descriptionLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = .black
        
@@ -38,6 +38,8 @@ class EtiquetteTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.backgroundColor = UIColor.lightGray
         
         // addSubview
         stackView.addArrangedSubview(titleLabel)
@@ -69,6 +71,12 @@ class EtiquetteTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 16, bottom: 16, right: 16))
     }
 
 }

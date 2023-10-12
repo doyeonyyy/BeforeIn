@@ -61,7 +61,7 @@ class SearchViewController: BaseViewController {
     }
     
     private let etiquetteTableView = UITableView().then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .white
     }
 
     // MARK: - View Life Cycle
@@ -119,6 +119,7 @@ class SearchViewController: BaseViewController {
         etiquetteTableView.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
     }
@@ -143,6 +144,7 @@ class SearchViewController: BaseViewController {
         etiquetteTableView.register(EtiquetteTableViewCell.self, forCellReuseIdentifier: "EtiquetteTableViewCell")
         etiquetteTableView.dataSource = self
         etiquetteTableView.delegate = self
+        etiquetteTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
     }
     
     @objc func searchButtonTapped() {
@@ -167,10 +169,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EtiquetteTableViewCell", for: indexPath) as! EtiquetteTableViewCell
+        cell.titleLabel.text = dummyEtiquetteTitle[indexPath.row]
+        cell.descriptionLabel.text = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 200
     }
 }
