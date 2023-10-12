@@ -19,14 +19,21 @@ class SearchViewController: BaseViewController {
         $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.addLeftPadding(8)
-        $0.rightView = searchButton
+        $0.rightView = searchButtonContainer
         $0.rightViewMode = .unlessEditing
     }
     
     private lazy var searchButton = UIButton().then{
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        $0.tintColor = .gray // TODO: 색상 정하기(figma에 지정된 색 없음)
+        $0.tintColor = .gray
         $0.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+    }
+    
+    private lazy var searchButtonContainer = UIView().then {
+        $0.addSubview(searchButton)
+        searchButton.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8))
+        }
     }
     
     private lazy var cancelButton = UIButton().then {
@@ -60,7 +67,7 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Methods & Selectors
     func configureUI() {
-        navigationController?.isNavigationBarHidden = true // 네비게이션 바를 숨김
+        navigationController?.isNavigationBarHidden = true
 
         addButtonsToCategoryStackView()
         
