@@ -61,10 +61,65 @@ class LoginView: UIView {
         $0.textColor = .systemGray2
     }
     
+    lazy var maintainLabel = UILabel().then {
+        $0.text = "로그인 상태 유지"
+        $0.font = UIFont.systemFont(ofSize: 16)
+    }
     
+    lazy var maintainButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "square"), for: .normal)
+        $0.tintColor = .black
+    }
+    
+    lazy var maintainStackView = UIStackView().then {
+        $0.addArrangedSubview(maintainLabel)
+        $0.addArrangedSubview(maintainButton)
+        $0.spacing = 8
+        $0.axis = .horizontal
+        $0.alignment = .fill
+    }
+    
+    lazy var loginButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.backgroundColor = .BeforeInRed
+        $0.layer.cornerRadius = 8
+    }
+    
+    lazy var findIdButton = UIButton().then {
+        $0.setTitle("아이디 찾기", for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+    }
+    
+    lazy var findPwButton = UIButton().then {
+        $0.setTitle("비밀번호 찾기", for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+    }
+    
+    lazy var registerButton = UIButton().then {
+        $0.setTitle("회원가입", for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+    }
+    
+    lazy var buttonStackView = UIStackView().then {
+        $0.addArrangedSubview(findIdButton)
+        $0.addArrangedSubview(findPwButton)
+        $0.addArrangedSubview(registerButton)
+        $0.spacing = 16
+        $0.axis = .horizontal
+        $0.alignment = .fill
+    }
+    
+    
+    // Life Cycle
     override init(frame: CGRect){
         super.init(frame: frame)
-        addSubView()
+        setTextField()
+        addSubview()
         setUI()
         
     }
@@ -75,12 +130,20 @@ class LoginView: UIView {
     }
     
     
+    
     // Methods
-    func addSubView(){
-        addSubview(idView)
-        addSubview(pwView)
+    func setTextField(){
+        idTextField.delegate = self
+        pwTextField.delegate = self
     }
     
+    func addSubview(){
+        addSubview(idView)
+        addSubview(pwView)
+        addSubview(maintainStackView)
+        addSubview(loginButton)
+        addSubview(buttonStackView)
+    }
     
     func setUI(){
         idLabel.snp.makeConstraints {
@@ -95,7 +158,7 @@ class LoginView: UIView {
         }
         
         idView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(321)
+            $0.top.equalTo(self.snp.top).offset(321)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
@@ -115,8 +178,43 @@ class LoginView: UIView {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
+        maintainStackView.snp.makeConstraints{
+            $0.top.equalTo(pwView.snp.bottom).offset(17)
+            $0.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(25)
+            $0.right.equalTo(self.safeAreaLayoutGuide.snp.right).offset(-228)
+        }
+        
+        loginButton.snp.makeConstraints {
+            $0.top.equalTo(maintainStackView.snp.bottom).offset(40)
+            $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
+            $0.height.equalTo(50)
+        }
+        
+        buttonStackView.snp.makeConstraints{
+            $0.top.equalTo(loginButton.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+        }
     }
     
+    
+    
+    
+}
+
+
+// MARK: - UITextFieldDelegate
+extension LoginView: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.idTextField {
+            self.pwTextField.becomeFirstResponder()
+        }
+        return true
+    }
     
 }
 
