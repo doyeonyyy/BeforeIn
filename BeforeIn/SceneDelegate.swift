@@ -14,11 +14,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-    guard let windowScene = (scene as? UIWindowScene) else { return }
-    window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-    window?.windowScene = windowScene
-    window?.rootViewController = MainViewController() // RootVC
-    window?.makeKeyAndVisible()
+//    guard let windowScene = (scene as? UIWindowScene) else { return }
+//    window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//    window?.windowScene = windowScene
+//    window?.rootViewController = MainViewController() // RootVC
+//    window?.makeKeyAndVisible()
+        guard let scene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: scene)
+        let mainVC = TapbarController()
+        window.backgroundColor = .white
+        window.rootViewController = mainVC
+        window.makeKeyAndVisible()
+        self.window = window
 
     }
 

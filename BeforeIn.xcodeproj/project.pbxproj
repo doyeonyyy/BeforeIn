@@ -25,6 +25,7 @@
 		1596DCD42AD6B31F00E6D388 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */; };
 		1596DCD72AD6B32900E6D388 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD62AD6B32900E6D388 /* Then */; };
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
+		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				1596DCBA2AD6B20000E6D388 /* BaseViewController.swift */,
+				1596DCDB2AD79EB700E6D388 /* TabbarController.swift */,
 				E779C6302AD7998500702D60 /* UIColor.swift */,
 			);
 			name = Extension;
@@ -252,6 +255,7 @@
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
+				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
