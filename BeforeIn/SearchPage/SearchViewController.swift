@@ -16,6 +16,7 @@ class SearchViewController: BaseViewController {
         $0.borderStyle = .none
         $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         $0.layer.cornerRadius = 10
+//        $0.addLeftPadding(8)
         $0.rightView = searchButton
         $0.rightViewMode = .unlessEditing
     }
@@ -23,12 +24,14 @@ class SearchViewController: BaseViewController {
     private let searchButton = UIButton().then{
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = .gray // TODO: 색상 정하기(figma에 지정된 색 없음)
+        $0.addTarget(self, action: #selector(tappedSearchButton), for: .touchUpInside)
     }
     
     private let cancelButton = UIButton().then {
         $0.setTitle("취소", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .none
+        $0.addTarget(self, action: #selector(tappedCancelButton), for: .touchUpInside)
     }
   
     // MARK: - View Life Cycle
@@ -59,5 +62,15 @@ class SearchViewController: BaseViewController {
         }
         
         
+    }
+    
+    @objc func tappedSearchButton() {
+        print("검색 버튼 터치")
+        // TODO: 검색 버튼 터치시 작업 내용
+    }
+    
+    @objc func tappedCancelButton() {
+        print("취소 버튼 터치")
+        // TODO: 취소 버튼 터치시 작업 내용
     }
 }
