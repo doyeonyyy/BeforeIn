@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         let mainVC = TapbarController()
         window.backgroundColor = .white
-        window.rootViewController = mainVC
+        window.rootViewController = LoginViewController()
         window.makeKeyAndVisible()
         self.window = window
 
