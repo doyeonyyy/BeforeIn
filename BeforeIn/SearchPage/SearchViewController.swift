@@ -12,6 +12,7 @@ import UIKit
 class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "교통", "운동"]
+    private let dummyEtiquetteTitle: [String] = ["영화관", "도서관", "소개팅", "목욕탕", "찜질방", "반려동물 산책 시"]
     
     private lazy var searchTextField = UITextField().then {
         $0.placeholder = "검색어를 입력하세요"
@@ -48,8 +49,8 @@ class SearchViewController: BaseViewController {
         $0.spacing = 8
         $0.alignment = .leading
         $0.distribution = .fill
-        
     }
+    
     private let scrollView = UIScrollView().then {
 //        $0.backgroundColor = .lightGray // 지우기
         $0.showsHorizontalScrollIndicator = false
@@ -57,6 +58,10 @@ class SearchViewController: BaseViewController {
     
     private let divider = UIView().then {
         $0.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+    }
+    
+    private let etiquetteTableView = UITableView().then {
+        $0.backgroundColor = .gray
     }
 
     // MARK: - View Life Cycle
@@ -70,6 +75,7 @@ class SearchViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = true
 
         addButtonsToCategoryStackView()
+        configureTableView()
         
         // addSubview
         scrollView.addSubview(categoryStackView)
@@ -78,6 +84,7 @@ class SearchViewController: BaseViewController {
         view.addSubview(cancelButton)
         view.addSubview(scrollView)
         view.addSubview(divider)
+        view.addSubview(etiquetteTableView)
         
         // makeConstraints
         searchTextField.snp.makeConstraints {
@@ -105,10 +112,14 @@ class SearchViewController: BaseViewController {
         
         divider.snp.makeConstraints {
             $0.top.equalTo(categoryStackView.snp.bottom).offset(16)
-            $0.height.equalTo(2)
+            $0.height.equalTo(3)
             $0.width.equalToSuperview()
         }
         
+        etiquetteTableView.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
         
     }
     
@@ -128,6 +139,12 @@ class SearchViewController: BaseViewController {
         }
     }
     
+    private func configureTableView() {
+        etiquetteTableView.register(EtiquetteTableViewCell.self, forCellReuseIdentifier: "EtiquetteTableViewCell")
+        etiquetteTableView.dataSource = self
+        etiquetteTableView.delegate = self
+    }
+    
     @objc func searchButtonTapped() {
         print("검색 버튼 터치")
         // TODO: 검색 버튼 터치시 작업 내용
@@ -140,5 +157,20 @@ class SearchViewController: BaseViewController {
     @objc func categoryButtonTapped() {
         print("카테고리 버튼 터치")
         // TODO: 카테고리 버튼 터치시 작업 내용
+    }
+}
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dummyEtiquetteTitle.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EtiquetteTableViewCell", for: indexPath) as! EtiquetteTableViewCell
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }

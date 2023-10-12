@@ -28,6 +28,7 @@
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
+		E7C8AE112AD801A800C084A7 /* EtiquetteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		1596DCC72AD6B2AB00E6D388 /* SearchPage */ = {
 			isa = PBXGroup;
 			children = (
+				E7C8AE0F2AD8017500C084A7 /* View */,
 				1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */,
 			);
 			path = SearchPage;
@@ -171,6 +174,14 @@
 				1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */,
 			);
 			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		E7C8AE0F2AD8017500C084A7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
+				E7C8AE112AD801A800C084A7 /* EtiquetteTableViewCell.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
