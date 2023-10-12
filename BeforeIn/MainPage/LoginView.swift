@@ -11,7 +11,7 @@ import Then
 
 class LoginView: UIView {
     
-    // UI Properties
+    // MARK: - UI Properties
     lazy var idView = UIView().then {
         $0.layer.borderColor = UIColor.systemGray2.cgColor
         $0.layer.borderWidth = 1
@@ -115,10 +115,9 @@ class LoginView: UIView {
     }
     
     
-    // Life Cycle
+    // MARK: - Life Cycle
     override init(frame: CGRect){
         super.init(frame: frame)
-        setTextField()
         addSubview()
         setUI()
         
@@ -130,13 +129,7 @@ class LoginView: UIView {
     }
     
     
-    
-    // Methods
-    func setTextField(){
-        idTextField.delegate = self
-        pwTextField.delegate = self
-    }
-    
+    // MARK: - Methods
     func addSubview(){
         addSubview(idView)
         addSubview(pwView)
@@ -145,15 +138,18 @@ class LoginView: UIView {
         addSubview(buttonStackView)
     }
     
+   // lazy var idLabelCenterYConstraint = idLabel.snp.centerY.equalTo(idView)
+   // lazy var pwLableCenterYConstraint = pwLabel.centerY.equalTo(pwView)
+    
     func setUI(){
         idLabel.snp.makeConstraints {
-            $0.top.equalTo(idView.snp.top).offset(14)
             $0.left.equalTo(idView.snp.left).offset(8)
             $0.right.equalTo(idView.snp.right).offset(-8)
-            $0.bottom.equalTo(idView.snp.bottom).offset(-14)
+            $0.centerY.equalTo(idView)
         }
         
         idTextField.snp.makeConstraints {
+            $0.height.equalTo(48)
             $0.edges.equalTo(idView)
         }
         
@@ -163,13 +159,13 @@ class LoginView: UIView {
         }
         
         pwLabel.snp.makeConstraints {
-            $0.top.equalTo(pwView.snp.top).offset(14)
             $0.left.equalTo(pwView.snp.left).offset(8)
             $0.right.equalTo(pwView.snp.right).offset(-8)
-            $0.bottom.equalTo(pwView.snp.bottom).offset(-14)
+            $0.centerY.equalTo(pwView)
         }
         
         pwTextField.snp.makeConstraints {
+            $0.height.equalTo(48)
             $0.edges.equalTo(pwView)
         }
         
@@ -198,23 +194,6 @@ class LoginView: UIView {
     
     
     
-    
-}
-
-
-// MARK: - UITextFieldDelegate
-extension LoginView: UITextFieldDelegate {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.endEditing(true)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == self.idTextField {
-            self.pwTextField.becomeFirstResponder()
-        }
-        return true
-    }
     
 }
 
