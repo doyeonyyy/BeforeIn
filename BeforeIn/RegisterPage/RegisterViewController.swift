@@ -19,6 +19,7 @@ class RegisterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "회원가입"
         setTextField()
         setNotification()
         setupAddTarget()

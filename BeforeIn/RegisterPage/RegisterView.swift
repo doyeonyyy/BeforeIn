@@ -121,6 +121,7 @@ class RegisterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Methods
     func addSubview(){
         addSubview(registerIdLabel)
