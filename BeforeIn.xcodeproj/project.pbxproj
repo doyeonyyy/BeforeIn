@@ -27,6 +27,7 @@
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
+		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				1596DCBA2AD6B20000E6D388 /* BaseViewController.swift */,
 				1596DCDB2AD79EB700E6D388 /* TabbarController.swift */,
 				E779C6302AD7998500702D60 /* UIColor.swift */,
+				E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
+				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
