@@ -90,7 +90,7 @@ class RegisterView: UIView {
     }
     
     lazy var registerBirthTextField = UITextField().then {
-        $0.placeholder = "생년월일 8자리를 입력하세요."
+        $0.placeholder = "생년월일 8자리를 입력하세요. (예: 990101)"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no

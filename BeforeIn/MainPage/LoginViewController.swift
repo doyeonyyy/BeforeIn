@@ -15,11 +15,11 @@ class LoginViewController: BaseViewController {
     // MARK: - Life Cycle
     override func loadView(){
         view = loginView
-        setTextField()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextField()
         setupAddTarget()
     }
     
@@ -65,7 +65,6 @@ class LoginViewController: BaseViewController {
     @objc func registerButtonTapped() {
         let registerVC = RegisterViewController()
         self.navigationController?.pushViewController(registerVC, animated: true)
-        
     }
     
 }
