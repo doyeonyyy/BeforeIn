@@ -26,6 +26,7 @@ class LoginView: UIView {
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
         $0.keyboardType = .emailAddress
+        $0.clearsOnBeginEditing = false
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
         $0.leftViewMode = .always
     }
@@ -146,10 +147,10 @@ class LoginView: UIView {
             $0.right.equalTo(idView.snp.right).offset(-8)
             $0.centerY.equalTo(idView)
         }
-        
+
         idTextField.snp.makeConstraints {
-            $0.height.equalTo(48)
             $0.edges.equalTo(idView)
+            $0.height.equalTo(48)
         }
         
         idView.snp.makeConstraints {
@@ -164,8 +165,8 @@ class LoginView: UIView {
         }
         
         pwTextField.snp.makeConstraints {
-            $0.height.equalTo(48)
             $0.edges.equalTo(pwView)
+            $0.height.equalTo(48)
         }
         
         pwView.snp.makeConstraints {

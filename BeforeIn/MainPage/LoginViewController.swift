@@ -18,7 +18,6 @@ class LoginViewController: BaseViewController {
         setTextField()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddTarget()
@@ -64,7 +63,6 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func registerButtonTapped() {
-        print("회원가입 버튼이 눌렸습니다")
         let registerVC = RegisterViewController()
         self.navigationController?.pushViewController(registerVC, animated: true)
         
