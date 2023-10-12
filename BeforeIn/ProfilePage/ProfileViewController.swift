@@ -250,7 +250,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         
         level.snp.makeConstraints { make in
             make.top.equalTo(nameBoxLabel.snp.bottom).offset(8)
-            make.leading.equalTo(mentBoxLabel.snp.leading).offset(120)
+            make.trailing.equalTo(grayRectangle.snp.trailing).offset(-24)
         }
         
         mentBoxLabel.snp.makeConstraints { make in
