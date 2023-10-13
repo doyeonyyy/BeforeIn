@@ -26,6 +26,9 @@
 		1596DCD72AD6B32900E6D388 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD62AD6B32900E6D388 /* Then */; };
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
+		1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDD2AD7B7D800E6D388 /* MainView.swift */; };
+		1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */; };
+		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,9 @@
 		1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		1596DCDD2AD7B7D800E6D388 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemCell.swift; sourceTree = "<group>"; };
+		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				1596DCA62AD6B18A00E6D388 /* ViewController.swift */,
+				1596DCDD2AD7B7D800E6D388 /* MainView.swift */,
+				1596DCE52AD801E300E6D388 /* CustomCell */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -168,6 +176,15 @@
 				1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */,
 			);
 			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		1596DCE52AD801E300E6D388 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */,
+				1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,14 +270,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
+				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
+				1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */,
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
+				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
