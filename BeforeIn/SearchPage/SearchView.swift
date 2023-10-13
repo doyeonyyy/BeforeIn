@@ -53,11 +53,18 @@ class SearchView: UIView {
         $0.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
     }
     
-    let etiquetteTableView = UITableView().then {
-        $0.separatorStyle = .none
-        $0.showsVerticalScrollIndicator = false
-//        $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+    let layout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = 24
+        $0.itemSize = CGSize(width: 345, height: 116)
     }
+
+    lazy var etiquetteCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+    }
+    
     // MARK: - Life Cycle
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -79,7 +86,7 @@ class SearchView: UIView {
         addSubview(cancelButton)
         addSubview(scrollView)
         addSubview(divider)
-        addSubview(etiquetteTableView)
+        addSubview(etiquetteCollectionView)
     }
     
     func configureUI() {
@@ -114,7 +121,7 @@ class SearchView: UIView {
             $0.width.equalToSuperview()
         }
         
-        etiquetteTableView.snp.makeConstraints {
+        etiquetteCollectionView.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.bottom.equalTo(safeAreaLayoutGuide)

@@ -1,5 +1,5 @@
 //
-//  EtiquetteTableViewCell.swift
+//  EtiquetteCell.swift
 //  BeforeIn
 //
 //  Created by Sanghun K. on 10/12/23.
@@ -9,7 +9,7 @@ import SnapKit
 import Then
 import UIKit
 
-class EtiquetteTableViewCell: UITableViewCell {
+class EtiquetteCell: UICollectionViewCell {
     
     // MARK: - Properties
     var image = UIImageView().then {
@@ -37,10 +37,17 @@ class EtiquetteTableViewCell: UITableViewCell {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
        
     }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupUI()
+    }
+    
+    private func setupUI() {
         contentView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         contentView.layer.cornerRadius = 8
         
@@ -64,25 +71,9 @@ class EtiquetteTableViewCell: UITableViewCell {
             $0.leading.equalTo(image.snp.trailing).offset(24)
             $0.trailing.equalToSuperview().offset(-24)
         }
-    
+        
     }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func layoutSubviews() {
-           super.layoutSubviews()
-
-           contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0))
-       }
+   
 }
+    
+    

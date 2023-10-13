@@ -24,7 +24,7 @@ class SearchViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = true
         setupAddTarget()
         addButtonsToCategoryStackView()
-        configureTableView()
+        configureCollectionView()
     }
     
     // MARK: - Methods
@@ -57,10 +57,10 @@ class SearchViewController: BaseViewController {
         }
     }
     
-    private func configureTableView() {
-        searchView.etiquetteTableView.register(EtiquetteTableViewCell.self, forCellReuseIdentifier: "EtiquetteTableViewCell")
-        searchView.etiquetteTableView.dataSource = self
-        searchView.etiquetteTableView.delegate = self
+    private func configureCollectionView() {
+        searchView.etiquetteCollectionView.register(EtiquetteCell.self, forCellWithReuseIdentifier: "EtiquetteCell")
+        searchView.etiquetteCollectionView.dataSource = self
+        searchView.etiquetteCollectionView.delegate = self
     }
     
     // MARK: - @objc
@@ -105,35 +105,24 @@ class SearchViewController: BaseViewController {
         
     }
 }
-// MARK: - TableView
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - etiquetteCollectionView
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyEtiquetteTitle.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EtiquetteTableViewCell", for: indexPath) as! EtiquetteTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
         cell.titleLabel.text = dummyEtiquetteTitle[indexPath.row]
         cell.descriptionLabel.text = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
         return cell
     }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView()
-        footerView.backgroundColor = UIColor.clear
-        return footerView
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 116
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 12 // 원하는 간격으로 설정
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? EtiquetteCell {
+            if let title = cell.titleLabel.text {
+                print("컬렉션 뷰 - '\(title)' 셀 누름")
+            }
+        }
     }
-    
-    
 }
