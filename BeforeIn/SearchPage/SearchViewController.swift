@@ -17,8 +17,13 @@ class SearchViewController: BaseViewController {
     
     /// 더미데이터
     private let dummyEtiquetteTitle: [String] = ["영화관", "도서관", "소개팅", "목욕탕", "찜질방", "반려동물 산책 시"]
+    private let dummyEtiquetteDescription = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
     
     // MARK: - View Life Cycle
+    override func loadView() {
+        view = searchView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
@@ -27,10 +32,15 @@ class SearchViewController: BaseViewController {
         configureCollectionView()
     }
     
-    // MARK: - Methods
-    override func loadView() {
-        view = searchView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let categoryButton = searchView.categoryStackView.arrangedSubviews.first as? UIButton {
+            categoryButton.sendActions(for: .touchUpInside)
+        }
     }
+    
+    // MARK: - Methods
+    
     
     func setupAddTarget(){
         searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
@@ -114,7 +124,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
         cell.titleLabel.text = dummyEtiquetteTitle[indexPath.row]
-        cell.descriptionLabel.text = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
+        cell.descriptionLabel.text = dummyEtiquetteDescription
         return cell
     }
     
