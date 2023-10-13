@@ -118,7 +118,7 @@ class SearchView: UIView {
         divider.snp.makeConstraints {
             $0.top.equalTo(categoryStackView.snp.bottom).offset(16)
             $0.height.equalTo(3)
-            $0.width.equalToSuperview()
+            $0.leading.trailing.width.equalToSuperview()
         }
         
         etiquetteCollectionView.snp.makeConstraints {
