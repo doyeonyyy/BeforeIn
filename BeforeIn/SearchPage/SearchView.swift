@@ -93,7 +93,7 @@ class SearchView: UIView {
         
         // makeConstraints
         searchTextField.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(20) // TODO: top 60을 어디를 기준으로 잡아야할지..
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(cancelButton.snp.leading).offset(-16)
             $0.height.equalTo(50)

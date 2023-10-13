@@ -26,7 +26,6 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
         setupAddTarget()
         addButtonsToCategoryStackView()
         configureCollectionView()
