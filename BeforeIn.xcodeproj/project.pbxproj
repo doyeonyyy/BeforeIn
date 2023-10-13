@@ -30,6 +30,10 @@
 		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
+		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
+		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
+		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
+		67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA612AD92E6000EA1DA7 /* DetailView.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +61,10 @@
 		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
+		67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDetailView.swift; sourceTree = "<group>"; };
+		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
+		67E5AA612AD92E6000EA1DA7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +181,10 @@
 			isa = PBXGroup;
 			children = (
 				1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */,
+				67E5AA612AD92E6000EA1DA7 /* DetailView.swift */,
+				67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */,
+				67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */,
+				67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */,
 			);
 			path = DetailPage;
 			sourceTree = "<group>";
@@ -280,7 +292,9 @@
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
 				1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */,
+				67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */,
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
+				67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
@@ -288,7 +302,9 @@
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
 				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,
+				67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */,
 				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
+				67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
