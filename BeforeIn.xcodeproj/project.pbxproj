@@ -22,14 +22,15 @@
 		1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */; };
 		1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */; };
 		1596DCD22AD6B31F00E6D388 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD12AD6B31F00E6D388 /* SnapKit */; };
-		1596DCD42AD6B31F00E6D388 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */; };
 		1596DCD72AD6B32900E6D388 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD62AD6B32900E6D388 /* Then */; };
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
 		1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDD2AD7B7D800E6D388 /* MainView.swift */; };
 		1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */; };
 		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
+		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
+		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +54,9 @@
 		1596DCDD2AD7B7D800E6D388 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemCell.swift; sourceTree = "<group>"; };
 		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
+		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +66,6 @@
 			files = (
 				1596DCD22AD6B31F00E6D388 /* SnapKit in Frameworks */,
 				1596DCD72AD6B32900E6D388 /* Then in Frameworks */,
-				1596DCD42AD6B31F00E6D388 /* SnapKit-Dynamic in Frameworks */,
 				1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +126,7 @@
 				1596DCBA2AD6B20000E6D388 /* BaseViewController.swift */,
 				1596DCDB2AD79EB700E6D388 /* TabbarController.swift */,
 				E779C6302AD7998500702D60 /* UIColor.swift */,
+				E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 		1596DCBC2AD6B22000E6D388 /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
+				675F21722AD7B6F800C4BD37 /* LoginView.swift */,
 				1596DCBD2AD6B23100E6D388 /* LoginViewController.swift */,
 			);
 			name = LoginPage;
@@ -205,7 +209,6 @@
 			name = BeforeIn;
 			packageProductDependencies = (
 				1596DCD12AD6B31F00E6D388 /* SnapKit */,
-				1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */,
 				1596DCD62AD6B32900E6D388 /* Then */,
 				1596DCD92AD6B33700E6D388 /* Gifu */,
 			);
@@ -279,8 +282,10 @@
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
+				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
 				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,
+				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
@@ -354,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -411,7 +416,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -528,11 +533,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		1596DCD32AD6B31F00E6D388 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1596DCD02AD6B31F00E6D388 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 		1596DCD62AD6B32900E6D388 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

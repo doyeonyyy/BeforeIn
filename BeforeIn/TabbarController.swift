@@ -19,7 +19,7 @@ class TapbarController: UITabBarController {
         self.tabBar.backgroundColor = .systemBackground
         self.modalPresentationStyle = .fullScreen
         self.tabBar.unselectedItemTintColor = .systemGray
-        self.tabBar.tintColor = .beforeInRed
+        self.tabBar.tintColor = .BeforeInRed
 
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
