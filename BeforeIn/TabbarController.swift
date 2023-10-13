@@ -34,9 +34,9 @@ class TapbarController: UITabBarController {
         let vc1 = UINavigationController(rootViewController: MainViewController())
         let vc2 = UINavigationController(rootViewController: SearchViewController())
         let vc3 = UINavigationController(rootViewController: ProfileViewController())
-        vc1.tabBarItem = UITabBarItem(title: "Main", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
-        vc2.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
-        vc3.tabBarItem = UITabBarItem(title: "MyPage", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
+        vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
 
 
         setViewControllers([vc1, vc2, vc3], animated: false)
