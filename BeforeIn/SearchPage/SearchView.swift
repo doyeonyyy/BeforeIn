@@ -102,6 +102,7 @@ class SearchView: UIView {
         cancelButton.snp.makeConstraints {
             $0.centerY.equalTo(searchTextField)
             $0.trailing.equalToSuperview().offset(-24)
+            $0.width.equalTo(41)
         }
         
         scrollView.snp.makeConstraints {
