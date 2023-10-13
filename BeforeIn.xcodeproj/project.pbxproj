@@ -26,10 +26,6 @@
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
-		1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDD2AD7B7D800E6D388 /* MainView.swift */; };
-		1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */; };
-		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
-		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
 		E7C8AE112AD801A800C084A7 /* EtiquetteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */; };
@@ -54,10 +50,6 @@
 		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		1596DCDD2AD7B7D800E6D388 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemCell.swift; sourceTree = "<group>"; };
-		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
-		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,8 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				1596DCA62AD6B18A00E6D388 /* ViewController.swift */,
-				1596DCDD2AD7B7D800E6D388 /* MainView.swift */,
-				1596DCE52AD801E300E6D388 /* CustomCell */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -148,7 +138,6 @@
 		1596DCBF2AD6B24000E6D388 /* RegisterPage */ = {
 			isa = PBXGroup;
 			children = (
-				675F21762AD8157300C4BD37 /* RegisterView.swift */,
 				1596DCC02AD6B25100E6D388 /* RegisterViewController.swift */,
 			);
 			path = RegisterPage;
@@ -194,13 +183,6 @@
 				E7C8AE102AD801A800C084A7 /* EtiquetteTableViewCell.swift */,
 			);
 			path = View;
-		1596DCE52AD801E300E6D388 /* CustomCell */ = {
-			isa = PBXGroup;
-			children = (
-				1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */,
-				1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */,
-			);
-			path = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +268,8 @@
 			files = (
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				E7C8AE112AD801A800C084A7 /* EtiquetteTableViewCell.swift in Sources */,
-				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
-				1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */,
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
@@ -297,11 +277,9 @@
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
-				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,
 				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
-				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
 			);
