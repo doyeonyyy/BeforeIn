@@ -21,7 +21,6 @@ class RegisterViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "회원가입"
         setTextField()
-        setNotification()
         setupAddTarget()
     }
     
@@ -34,12 +33,6 @@ class RegisterViewController: BaseViewController {
         registerView.registerBirthTextField.delegate = self
     }
     
-    func setNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     func setupAddTarget(){
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
     }
@@ -50,15 +43,7 @@ class RegisterViewController: BaseViewController {
         print("버튼 눌림")
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @objc func keyboardWillShow(_ sender: Notification) {
-        self.view.frame.origin.y = -170
-    }
-    
-    @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0
-        
-    }
+
 }
 
 
@@ -83,4 +68,25 @@ extension RegisterViewController: UITextFieldDelegate {
         }
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == registerView.registerBirthTextField {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -180
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    
 }
+

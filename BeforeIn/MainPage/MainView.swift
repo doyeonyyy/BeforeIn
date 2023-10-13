@@ -48,7 +48,7 @@ class MainView: UIView {
         $0.setTitle("퀴즈 다시 풀러가기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        $0.backgroundColor = .beforeInRed
+        $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
     }
