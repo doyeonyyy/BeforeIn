@@ -15,12 +15,11 @@ class LoginViewController: BaseViewController {
     // MARK: - Life Cycle
     override func loadView(){
         view = loginView
-        setTextField()
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextField()
         setupAddTarget()
     }
     
@@ -32,6 +31,7 @@ class LoginViewController: BaseViewController {
     }
     
     func setupAddTarget() {
+        loginView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         loginView.maintainButton.addTarget(self, action: #selector(maintainButtonTapped), for: .touchUpInside)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.findIdButton.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
@@ -41,6 +41,19 @@ class LoginViewController: BaseViewController {
     
     
     // MARK: - @objc
+    @objc func showPwButtonTapped(){
+        loginView.showPwButton.isSelected.toggle()
+        
+        if loginView.showPwButton.isSelected {
+            loginView.showPwButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            loginView.pwTextField.isSecureTextEntry = true
+        } else {
+            loginView.showPwButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            loginView.pwTextField.isSecureTextEntry = false
+        }
+        
+    }
+    
     @objc func maintainButtonTapped() {
         loginView.maintainButton.isSelected.toggle()
         
@@ -64,10 +77,8 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func registerButtonTapped() {
-        print("회원가입 버튼이 눌렸습니다")
         let registerVC = RegisterViewController()
         self.navigationController?.pushViewController(registerVC, animated: true)
-        
     }
     
 }
@@ -88,6 +99,41 @@ extension LoginViewController: UITextFieldDelegate {
         }
         return true
     }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == loginView.idTextField {
+            loginView.idLabel.font = UIFont.systemFont(ofSize: 9)
+            loginView.idLabelCenterY.constant = -13
+        }
+        if textField == loginView.pwTextField {
+            loginView.pwLabel.font = UIFont.systemFont(ofSize: 9)
+            loginView.pwLabelCenterY.constant = -13
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.loginView.layoutIfNeeded()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == loginView.idTextField {
+            if loginView.idTextField.text == "" {
+                loginView.idLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.idLabelCenterY.constant = 0
+            }
+        }
+        if textField == loginView.pwTextField {
+            if loginView.pwTextField.text == ""{
+                loginView.pwLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.pwLabelCenterY.constant = 0
+            }
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.loginView.layoutIfNeeded()
+        }
+    }
+    
+
     
     
 }
