@@ -144,16 +144,26 @@ class LoginView: UIView {
         addSubview(buttonStackView)
     }
     
-   // lazy var idLabelCenterYConstraint = idLabel.snp.centerY.equalTo(idView)
-   // lazy var pwLableCenterYConstraint = pwLabel.centerY.equalTo(pwView)
+    lazy var idLabelCenterY: NSLayoutConstraint = {
+        let constraint = idLabel.centerYAnchor.constraint(equalTo: idTextField.centerYAnchor)
+        return constraint
+    }()
+    
+    lazy var pwLabelCenterY: NSLayoutConstraint = {
+        let constraint = pwLabel.centerYAnchor.constraint(equalTo: pwTextField.centerYAnchor)
+        return constraint
+    }()
     
     func setUI(){
-        idLabel.snp.makeConstraints {
-            $0.left.equalTo(idView.snp.left).offset(8)
-            $0.right.equalTo(idView.snp.right).offset(-8)
-            $0.centerY.equalTo(idView)
+        idLabel.translatesAutoresizingMaskIntoConstraints = false
+        pwLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        idLabel.snp.makeConstraints { make in
+            make.left.equalTo(idView.snp.left).offset(8)
+            make.right.equalTo(idView.snp.right).offset(-8)
+            idLabelCenterY.isActive = true
         }
-
+        
         idTextField.snp.makeConstraints {
             $0.edges.equalTo(idView)
             $0.height.equalTo(48)
@@ -172,7 +182,7 @@ class LoginView: UIView {
         pwLabel.snp.makeConstraints {
             $0.left.equalTo(pwView.snp.left).offset(8)
             $0.right.equalTo(pwView.snp.right).offset(-8)
-            $0.centerY.equalTo(pwView)
+            pwLabelCenterY.isActive = true
         }
         
         pwTextField.snp.makeConstraints {

@@ -101,4 +101,39 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == loginView.idTextField {
+            loginView.idLabel.font = UIFont.systemFont(ofSize: 9)
+            loginView.idLabelCenterY.constant = -13
+        }
+        if textField == loginView.pwTextField {
+            loginView.pwLabel.font = UIFont.systemFont(ofSize: 9)
+            loginView.pwLabelCenterY.constant = -13
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.loginView.layoutIfNeeded()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == loginView.idTextField {
+            if loginView.idTextField.text == "" {
+                loginView.idLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.idLabelCenterY.constant = 0
+            }
+        }
+        if textField == loginView.pwTextField {
+            if loginView.pwTextField.text == ""{
+                loginView.pwLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.pwLabelCenterY.constant = 0
+            }
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.loginView.layoutIfNeeded()
+        }
+    }
+    
+
+    
+    
 }
