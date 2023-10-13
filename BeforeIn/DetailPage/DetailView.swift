@@ -11,16 +11,17 @@ import Then
 
 class DetailView: UIView {
     
-    // MARK: - Properties
-    private let firstDetailView = FirstDetailView()
-    private let secondDetailView = SecondDetailView()
-    private let thirdDetailView = ThirdDetailView()
-    
     // MARK: - UI Properties
     let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
     }
     let contentView = UIView()
+    
+    
+    // MARK: - Properties
+    private let firstDetailView = FirstDetailView()
+    private let secondDetailView = SecondDetailView()
+    private let thirdDetailView = ThirdDetailView()
     
     
     // MARK: - Life Cycle

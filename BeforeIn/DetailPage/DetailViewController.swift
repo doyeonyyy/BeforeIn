@@ -8,6 +8,7 @@
 import UIKit
 
 class DetailViewController: BaseViewController {
+    
     // MARK: - Properties
     private let detailView = DetailView()
 
