@@ -49,7 +49,7 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     
-    lazy var showPwButton = UIButton().then{
+    lazy var showPwButton = UIButton().then {
         $0.setImage(UIImage(systemName: "eye"), for: .normal)
         $0.tintColor = .black
     }
@@ -72,7 +72,7 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     
-    lazy var showCheckButton = UIButton().then{
+    lazy var showCheckButton = UIButton().then {
         $0.setImage(UIImage(systemName: "eye"), for: .normal)
         $0.tintColor = .black
     }

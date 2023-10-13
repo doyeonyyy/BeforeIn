@@ -44,6 +44,7 @@ class LoginView: UIView {
         $0.layer.masksToBounds = true
         $0.addSubview(pwTextField)
         $0.addSubview(pwLabel)
+        $0.addSubview(showPwButton)
     }
     
     lazy var pwTextField = UITextField().then {
@@ -60,6 +61,11 @@ class LoginView: UIView {
         $0.text = "비밀번호를 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.textColor = .systemGray2
+    }
+    
+    lazy var showPwButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
     }
     
     lazy var maintainLabel = UILabel().then {
@@ -138,16 +144,26 @@ class LoginView: UIView {
         addSubview(buttonStackView)
     }
     
-   // lazy var idLabelCenterYConstraint = idLabel.snp.centerY.equalTo(idView)
-   // lazy var pwLableCenterYConstraint = pwLabel.centerY.equalTo(pwView)
+    lazy var idLabelCenterY: NSLayoutConstraint = {
+        let constraint = idLabel.centerYAnchor.constraint(equalTo: idTextField.centerYAnchor)
+        return constraint
+    }()
+    
+    lazy var pwLabelCenterY: NSLayoutConstraint = {
+        let constraint = pwLabel.centerYAnchor.constraint(equalTo: pwTextField.centerYAnchor)
+        return constraint
+    }()
     
     func setUI(){
-        idLabel.snp.makeConstraints {
-            $0.left.equalTo(idView.snp.left).offset(8)
-            $0.right.equalTo(idView.snp.right).offset(-8)
-            $0.centerY.equalTo(idView)
+        idLabel.translatesAutoresizingMaskIntoConstraints = false
+        pwLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        idLabel.snp.makeConstraints { make in
+            make.left.equalTo(idView.snp.left).offset(8)
+            make.right.equalTo(idView.snp.right).offset(-8)
+            idLabelCenterY.isActive = true
         }
-
+        
         idTextField.snp.makeConstraints {
             $0.edges.equalTo(idView)
             $0.height.equalTo(48)
@@ -158,10 +174,15 @@ class LoginView: UIView {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
+        showPwButton.snp.makeConstraints {
+            $0.right.equalTo(pwView.snp.right).offset(-8)
+            $0.centerY.equalTo(pwView)
+        }
+        
         pwLabel.snp.makeConstraints {
             $0.left.equalTo(pwView.snp.left).offset(8)
             $0.right.equalTo(pwView.snp.right).offset(-8)
-            $0.centerY.equalTo(pwView)
+            pwLabelCenterY.isActive = true
         }
         
         pwTextField.snp.makeConstraints {
