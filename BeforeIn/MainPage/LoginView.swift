@@ -44,6 +44,7 @@ class LoginView: UIView {
         $0.layer.masksToBounds = true
         $0.addSubview(pwTextField)
         $0.addSubview(pwLabel)
+        $0.addSubview(showPwButton)
     }
     
     lazy var pwTextField = UITextField().then {
@@ -60,6 +61,11 @@ class LoginView: UIView {
         $0.text = "비밀번호를 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.textColor = .systemGray2
+    }
+    
+    lazy var showPwButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
     }
     
     lazy var maintainLabel = UILabel().then {
@@ -156,6 +162,11 @@ class LoginView: UIView {
         idView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(321)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
+        }
+        
+        showPwButton.snp.makeConstraints {
+            $0.right.equalTo(pwView.snp.right).offset(-8)
+            $0.centerY.equalTo(pwView)
         }
         
         pwLabel.snp.makeConstraints {

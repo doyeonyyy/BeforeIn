@@ -31,6 +31,7 @@ class LoginViewController: BaseViewController {
     }
     
     func setupAddTarget() {
+        loginView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         loginView.maintainButton.addTarget(self, action: #selector(maintainButtonTapped), for: .touchUpInside)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.findIdButton.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
@@ -40,6 +41,19 @@ class LoginViewController: BaseViewController {
     
     
     // MARK: - @objc
+    @objc func showPwButtonTapped(){
+        loginView.showPwButton.isSelected.toggle()
+        
+        if loginView.showPwButton.isSelected {
+            loginView.showPwButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            loginView.pwTextField.isSecureTextEntry = true
+        } else {
+            loginView.showPwButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            loginView.pwTextField.isSecureTextEntry = false
+        }
+        
+    }
+    
     @objc func maintainButtonTapped() {
         loginView.maintainButton.isSelected.toggle()
         
