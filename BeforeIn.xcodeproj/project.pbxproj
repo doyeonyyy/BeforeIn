@@ -25,6 +25,7 @@
 		1596DCD72AD6B32900E6D388 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD62AD6B32900E6D388 /* Then */; };
 		1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 1596DCD92AD6B33700E6D388 /* Gifu */; };
 		1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDB2AD79EB700E6D388 /* TabbarController.swift */; };
+		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
@@ -48,6 +49,7 @@
 		1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1596DCCE2AD6B2F400E6D388 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1596DCDB2AD79EB700E6D388 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */,
 				1596DCC52AD6B2A300E6D388 /* QuizViewController.swift */,
+				63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */,
 			);
 			path = QuizPage;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,

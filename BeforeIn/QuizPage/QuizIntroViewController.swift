@@ -69,7 +69,7 @@ class QuizIntroViewController: BaseViewController {
         buttonA.setTitle("건너뛰기", for: .normal)
         buttonA.setTitleColor(UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1), for: .normal)
         buttonA.backgroundColor = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)
-        buttonA.layer.cornerRadius = 41
+        buttonA.layer.cornerRadius = 25
         view.addSubview(buttonA)
         buttonA.snp.makeConstraints { make in
             make.width.equalTo(138)
@@ -82,7 +82,7 @@ class QuizIntroViewController: BaseViewController {
         buttonB.setTitle("Get Start!!", for: .normal)
         buttonB.setTitleColor(.white, for: .normal)
         buttonB.backgroundColor = UIColor.BeforeInRed
-        buttonB.layer.cornerRadius = 41
+        buttonB.layer.cornerRadius = 25
         view.addSubview(buttonB)
         buttonB.snp.makeConstraints { make in
             make.width.equalTo(buttonA.snp.width)

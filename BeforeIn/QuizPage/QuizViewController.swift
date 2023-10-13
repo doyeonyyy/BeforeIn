@@ -12,5 +12,6 @@ class QuizViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 }
