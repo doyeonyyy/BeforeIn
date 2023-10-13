@@ -107,12 +107,12 @@ class SearchView: UIView {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(24)
             $0.leading.equalToSuperview().offset(24)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalTo(self)
             $0.height.equalTo(35)
         }
         
         categoryStackView.snp.makeConstraints {
-            $0.top.leading.trailing.height.centerY.equalTo(scrollView)
+            $0.top.bottom.leading.trailing.height.centerY.equalTo(scrollView)
         }
         
         divider.snp.makeConstraints {
