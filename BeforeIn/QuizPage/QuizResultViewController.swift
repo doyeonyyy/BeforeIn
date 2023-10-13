@@ -32,7 +32,7 @@ class QuizResultViewController: UIViewController {
             make.leading.equalTo(labelA.snp.trailing).offset(4)
         }
         let labelC = UILabel()
-        labelC.text = "Lv.1 검은머리짐승입니다"
+        labelC.text = "Lv.1 검은머리 짐승입니다"
         labelC.textColor = .black
         labelC.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28)
         view.addSubview(labelC)
@@ -62,6 +62,16 @@ class QuizResultViewController: UIViewController {
         levelImage.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(240)
+        }
+        
+        let labelD = UILabel()
+        labelD.text = "Lv.1 검은머리 짐승"
+        labelD.textColor = .black
+        labelD.font = UIFont(name: "Inter-Regular", size: 14)
+        view.addSubview(labelD)
+        labelD.snp.makeConstraints { make in
+            make.top.equalTo(labelC.snp.bottom).offset(110)
+            make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
