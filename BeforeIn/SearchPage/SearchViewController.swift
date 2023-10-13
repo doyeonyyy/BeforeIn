@@ -57,8 +57,8 @@ class SearchViewController: BaseViewController {
             button.layer.borderColor = UIColor.BeforeInRed?.cgColor
             button.layer.borderWidth = 1
             button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
-            button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24) // TODO: contentEdgeInsets 대체제 찾기
-//            button.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 24, bottom: 5, trailing: 24)
+            // TODO: contentEdgeInsets 대체제 찾기
+            button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
             button.layer.cornerRadius = 16.5
             button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
             button.tag = index

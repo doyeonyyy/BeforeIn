@@ -47,6 +47,7 @@ class SearchView: UIView {
     
     let scrollView = UIScrollView().then {
         $0.showsHorizontalScrollIndicator = false
+        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
     }
     
     let divider = UIView().then {
@@ -81,7 +82,6 @@ class SearchView: UIView {
     // MARK: - Methods
     func addSubview(){
         scrollView.addSubview(categoryStackView)
-        
         addSubview(searchTextField)
         addSubview(cancelButton)
         addSubview(scrollView)
@@ -106,7 +106,7 @@ class SearchView: UIView {
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().offset(24)
+            $0.leading.equalToSuperview()
             $0.trailing.equalTo(self)
             $0.height.equalTo(35)
         }
