@@ -35,6 +35,8 @@ class RegisterViewController: BaseViewController {
     
     func setupAddTarget(){
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
+        registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
     }
     
     
@@ -42,6 +44,30 @@ class RegisterViewController: BaseViewController {
     @objc func registerButtonTapped() {
         print("버튼 눌림")
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func showPwButtonTapped(){
+        registerView.showPwButton.isSelected.toggle()
+        
+        if registerView.showPwButton.isSelected {
+            registerView.showPwButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            registerView.registerPwTextField.isSecureTextEntry = true
+        } else {
+            registerView.showPwButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            registerView.registerPwTextField.isSecureTextEntry = false
+        }
+    }
+    
+    @objc func showCheckButtonTapped(){
+        registerView.showCheckButton.isSelected.toggle()
+        
+        if registerView.showCheckButton.isSelected {
+            registerView.showCheckButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            registerView.registerCheckTextField.isSecureTextEntry = true
+        } else {
+            registerView.showCheckButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            registerView.registerCheckTextField.isSecureTextEntry = false
+        }
     }
 
 }

@@ -49,6 +49,11 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     
+    lazy var showPwButton = UIButton().then{
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
+    }
+    
     lazy var registerCheckLabel = UILabel().then {
         $0.text = "비밀번호 확인"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
@@ -65,6 +70,11 @@ class RegisterView: UIView {
     
     lazy var registerCheckBottom = UIView().then {
         $0.backgroundColor = .systemGray2
+    }
+    
+    lazy var showCheckButton = UIButton().then{
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
     }
     
     lazy var registerNameLabel = UILabel().then {
@@ -131,10 +141,12 @@ class RegisterView: UIView {
         addSubview(registerPwLabel)
         addSubview(registerPwTextField)
         addSubview(registerPwBottom)
+        addSubview(showPwButton)
         
         addSubview(registerCheckLabel)
         addSubview(registerCheckTextField)
         addSubview(registerCheckBottom)
+        addSubview(showCheckButton)
         
         addSubview(registerNameLabel)
         addSubview(registerNameTextField)
@@ -177,6 +189,10 @@ class RegisterView: UIView {
             $0.bottom.equalTo(registerPwTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
+        showPwButton.snp.makeConstraints{
+            $0.top.equalTo(registerPwLabel.snp.bottom).offset(17)
+            $0.right.equalTo(self.snp.right).offset(-30)
+        }
         
         registerCheckLabel.snp.makeConstraints {
             $0.top.equalTo(registerPwBottom.snp.bottom).offset(40)
@@ -192,6 +208,11 @@ class RegisterView: UIView {
             $0.bottom.equalTo(registerCheckTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
+        showCheckButton.snp.makeConstraints{
+            $0.top.equalTo(registerCheckLabel.snp.bottom).offset(17)
+            $0.right.equalTo(self.snp.right).offset(-30)
+        }
+        
         
         registerNameLabel.snp.makeConstraints {
             $0.top.equalTo(registerCheckBottom.snp.bottom).offset(40)
