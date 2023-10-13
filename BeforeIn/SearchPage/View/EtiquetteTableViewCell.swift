@@ -27,19 +27,23 @@ class EtiquetteTableViewCell: UITableViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .black
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
     }
     
     var descriptionLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = .black
+        $0.numberOfLines = 2
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
        
     }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = UIColor.lightGray
+        contentView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+        contentView.layer.cornerRadius = 8
+        
         
         // addSubview
         stackView.addArrangedSubview(titleLabel)
@@ -52,10 +56,13 @@ class EtiquetteTableViewCell: UITableViewCell {
         image.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)
+            $0.width.equalTo(80)
+            $0.height.equalTo(80)
         }
         stackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(image).offset(24)
+            $0.leading.equalTo(image.snp.trailing).offset(24)
+            $0.trailing.equalToSuperview().offset(-24)
         }
     
     }
@@ -74,9 +81,8 @@ class EtiquetteTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        super.layoutSubviews()
+           super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 16, bottom: 16, right: 16))
-    }
-
+           contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0))
+       }
 }

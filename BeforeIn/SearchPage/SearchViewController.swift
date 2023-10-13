@@ -12,6 +12,7 @@ import UIKit
 class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "교통", "운동"]
+    /// 더미데이터
     private let dummyEtiquetteTitle: [String] = ["영화관", "도서관", "소개팅", "목욕탕", "찜질방", "반려동물 산책 시"]
     
     private lazy var searchTextField = UITextField().then {
@@ -52,7 +53,6 @@ class SearchViewController: BaseViewController {
     }
     
     private let scrollView = UIScrollView().then {
-//        $0.backgroundColor = .lightGray // 지우기
         $0.showsHorizontalScrollIndicator = false
     }
     
@@ -61,7 +61,9 @@ class SearchViewController: BaseViewController {
     }
     
     private let etiquetteTableView = UITableView().then {
-        $0.backgroundColor = .white
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
+//        $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
     }
 
     // MARK: - View Life Cycle
@@ -125,17 +127,19 @@ class SearchViewController: BaseViewController {
     }
     
     private func addButtonsToCategoryStackView() {
-        for category in etiquetteCategories {
+        for (index, category) in etiquetteCategories.enumerated() {
             let button = UIButton()
             button.setTitle(category, for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = UIColor.beforeInRed
+            button.setTitleColor(.BeforeInRed, for: .normal)
+            button.backgroundColor = .white
+            button.layer.borderColor = UIColor.BeforeInRed?.cgColor
+            button.layer.borderWidth = 1
             button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
             button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24) // TODO: contentEdgeInsets 대체제 찾기
 //            button.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 24, bottom: 5, trailing: 24)
             button.layer.cornerRadius = 16.5
-            let boldFont = UIFont.systemFont(ofSize: 18, weight: .black)
-            button.titleLabel?.font = boldFont
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+            button.tag = index
             categoryStackView.addArrangedSubview(button)
         }
     }
@@ -144,7 +148,7 @@ class SearchViewController: BaseViewController {
         etiquetteTableView.register(EtiquetteTableViewCell.self, forCellReuseIdentifier: "EtiquetteTableViewCell")
         etiquetteTableView.dataSource = self
         etiquetteTableView.delegate = self
-        etiquetteTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+        
     }
     
     @objc func searchButtonTapped() {
@@ -156,13 +160,42 @@ class SearchViewController: BaseViewController {
         print("취소 버튼 터치")
         // TODO: 취소 버튼 터치시 작업 내용
     }
-    @objc func categoryButtonTapped() {
-        print("카테고리 버튼 터치")
-        // TODO: 카테고리 버튼 터치시 작업 내용
+    @objc func categoryButtonTapped(_ sender: UIButton) {
+        
+        for subview in categoryStackView.arrangedSubviews {
+            if let button = subview as? UIButton {
+                button.setTitleColor(.BeforeInRed, for: .normal)
+                button.backgroundColor = .white
+                button.layer.borderColor = UIColor.BeforeInRed?.cgColor
+                button.layer.borderWidth = 1
+            }
+        }
+
+        sender.backgroundColor = UIColor.beforeInRed
+        sender.setTitleColor(.white, for: .normal)
+
+        // TODO: 카테고리 버튼 index 번호에 따른 터치시 작업 내용
+        switch sender.tag {
+        case 0:
+            print("전체 누름")
+        case 1:
+            print("경조사 누름")
+        case 2:
+            print("일상에서 누름")
+        case 3:
+            print("교통 누름")
+        case 4:
+            print("운동 누름")
+        default:
+            break
+        }
+        
     }
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dummyEtiquetteTitle.count
     }
@@ -173,8 +206,22 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.descriptionLabel.text = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = UIColor.clear
+        return footerView
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 116
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 12 // 원하는 간격으로 설정
+    }
+    
+    
 }
