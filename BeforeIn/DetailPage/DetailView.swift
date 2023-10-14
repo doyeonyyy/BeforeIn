@@ -19,9 +19,9 @@ class DetailView: UIView {
     
     
     // MARK: - Properties
-    private let firstDetailView = FirstDetailView()
-    private let secondDetailView = SecondDetailView()
-    private let thirdDetailView = ThirdDetailView()
+    let firstDetailView = FirstDetailView()
+    let secondDetailView = SecondDetailView()
+    let thirdDetailView = ThirdDetailView()
     
     
     // MARK: - Life Cycle

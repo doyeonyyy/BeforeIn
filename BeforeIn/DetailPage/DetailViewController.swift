@@ -20,12 +20,17 @@ class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
+        setupAddTarget()
     }
     
+    // MARK: - Methods
+    func setupAddTarget(){
+        detailView.firstDetailView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
     
-
-
-
-
+    // MARK: - @objc
+    @objc func backButtonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
     
 }
