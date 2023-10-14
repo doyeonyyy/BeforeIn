@@ -41,6 +41,7 @@ class DontsCell: UICollectionViewCell {
     private func setupUI() {
         contentView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         contentView.layer.cornerRadius = 8
+        contentView.clipsToBounds = true
         
         // addSubview
         contentView.addSubview(backgroundImage)

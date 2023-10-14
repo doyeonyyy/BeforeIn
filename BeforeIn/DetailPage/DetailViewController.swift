@@ -124,7 +124,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DontsCell", for: indexPath) as! DontsCell
-        cell.backgroundColor = .gray
+        cell.backgroundColor = .clear
         cell.titleLabel.text = dummyTitle[indexPath.row]
         cell.descriptionLabel.text = dummyDescription
         return cell
