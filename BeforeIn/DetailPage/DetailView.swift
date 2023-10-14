@@ -13,7 +13,7 @@ class DetailView: UIView {
     
     // MARK: - UI Properties
     let scrollView = UIScrollView().then {
-        $0.alwaysBounceVertical = true
+        $0.bounces = false
         $0.contentInsetAdjustmentBehavior = .never
     }
     let contentView = UIView()
