@@ -40,6 +40,29 @@ class SecondDetailView: UIView {
         $0.numberOfLines = 0
     }
     
+    // TODO: - 궁금한점: 결혼식, 장례식 등이 아닌 경우에는 이 버튼들은 안보이게 하는건지..?_?
+    lazy var beforeInButton = UIButton().then {
+        $0.setTitle("들어가기 전", for: .normal)
+        $0.setTitleColor(.lightGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.backgroundColor = .none
+    }
+    
+    lazy var afterInButton = UIButton().then {
+        $0.setTitle("들어가서", for: .normal)
+        $0.setTitleColor(.lightGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.backgroundColor = .none
+    }
+    
+    lazy var beforeOutButton = UIButton().then {
+        $0.setTitle("나오면서", for: .normal)
+        $0.setTitleColor(.lightGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.backgroundColor = .none
+    }
+    
+    
     // MARK: - Life Cycle
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -59,6 +82,9 @@ class SecondDetailView: UIView {
         addSubview(titleEmoji)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
+        addSubview(beforeInButton)
+        addSubview(afterInButton)
+        addSubview(beforeOutButton)
     }
     
     func setUI(){
@@ -77,7 +103,18 @@ class SecondDetailView: UIView {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.leading.equalToSuperview().offset(24)
         }
-        
+        beforeInButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
+            $0.leading.equalToSuperview().offset(24)
+        }
+        afterInButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
+            $0.leading.equalTo(beforeInButton.snp.trailing).offset(32)
+        }
+        beforeOutButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
+            $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
+        }
     }
     
 }
