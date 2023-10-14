@@ -191,8 +191,8 @@
 		1596DCCA2AD6B2C300E6D388 /* DetailPage */ = {
 			isa = PBXGroup;
 			children = (
-				1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */,
 				67E5AA612AD92E6000EA1DA7 /* DetailView.swift */,
+				1596DCCB2AD6B2CF00E6D388 /* DetailViewController.swift */,
 				67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */,
 				67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */,
 				67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */,
