@@ -33,12 +33,16 @@ class FirstDetailView: UIView {
         $0.textColor = .white
     }
     
+    lazy var swipeDownGuideImage = UIImageView().then {
+        $0.image = UIImage(systemName: "chevron.compact.down")
+        $0.tintColor = UIColor(white: 1, alpha: 0.5)
+    }
+
     // MARK: - Life Cycle
     override init(frame: CGRect){
         super.init(frame: frame)
         addSubview()
         setUI()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -46,13 +50,17 @@ class FirstDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        addSwipeDownGuideImageAnimation()
+    }
     
     func addSubview() {
         addSubview(detailImageView)
         addSubview(backButton)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        
+        addSubview(swipeDownGuideImage)
     }
     
     func setUI(){
@@ -75,7 +83,24 @@ class FirstDetailView: UIView {
             $0.bottom.equalToSuperview().offset(-88)
             $0.leading.equalToSuperview().offset(16)
         }
+        
+        swipeDownGuideImage.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(28)
+            $0.height.equalTo(24)
+        }
     }
     
+    func addSwipeDownGuideImageAnimation() {
+        swipeDownGuideImage.alpha = 0.0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.swipeDownGuideImage.alpha = 1.0
+        }) { (finished) in
+            UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                self.swipeDownGuideImage.alpha = 0.0
+            })
+        }
+    }
 }
 
