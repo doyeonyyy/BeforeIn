@@ -119,14 +119,30 @@ class DetailViewController: BaseViewController {
 // MARK: - dontsCollectionView / dosCollectionView
 extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyTitle.count
+        if collectionView == detailView.secondDetailView.dontsCollectionView {
+            /// dontsCollectionView 내용
+            return dummyTitle.count
+        } else if collectionView == detailView.thirdDetailView.dosCollectionView {
+            /// dosCollectionView 내용
+            return dummyTitle.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteDetailCell", for: indexPath) as! EtiquetteDetailCell
-        cell.backgroundColor = .clear
-        cell.titleLabel.text = dummyTitle[indexPath.row]
-        cell.descriptionLabel.text = dummyDescription
+
+        if collectionView == detailView.secondDetailView.dontsCollectionView {
+            /// dontsCollectionView 내용
+            cell.backgroundColor = .clear
+            cell.titleLabel.text = "11\(dummyTitle[indexPath.row])"
+            cell.descriptionLabel.text = "11\(dummyDescription)"
+        } else if collectionView == detailView.thirdDetailView.dosCollectionView {
+            /// dosCollectionView 내용
+            cell.backgroundColor = .clear
+            cell.titleLabel.text = "22\(dummyTitle[indexPath.row])"
+            cell.descriptionLabel.text = "22\(dummyDescription)"
+        }
         return cell
     }
 }

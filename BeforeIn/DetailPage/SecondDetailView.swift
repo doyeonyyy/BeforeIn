@@ -129,7 +129,7 @@ class SecondDetailView: UIView {
             $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
         }
         dontsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
+            $0.top.equalTo(beforeInButton.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
