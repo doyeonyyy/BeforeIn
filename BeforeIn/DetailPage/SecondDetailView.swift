@@ -65,7 +65,7 @@ class SecondDetailView: UIView {
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 16
-        $0.itemSize = CGSize(width: 332, height: 350)
+        $0.itemSize = CGSize(width: 332, height: 422)
     }
 
     lazy var dontsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
@@ -73,6 +73,7 @@ class SecondDetailView: UIView {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        
     }
     
     // MARK: - Life Cycle
@@ -129,8 +130,9 @@ class SecondDetailView: UIView {
             $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
         }
         dontsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(beforeInButton.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(422)
         }
     }
     

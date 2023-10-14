@@ -116,7 +116,7 @@ class DetailViewController: BaseViewController {
     
 }
 
-// MARK: - dontsCollectionView / dosCollectionView
+// MARK: - CollectionView
 extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {

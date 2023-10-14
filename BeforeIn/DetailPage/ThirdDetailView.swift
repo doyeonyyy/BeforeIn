@@ -64,7 +64,7 @@ class ThirdDetailView: UIView {
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 16
-        $0.itemSize = CGSize(width: 332, height: 350)
+        $0.itemSize = CGSize(width: 332, height: 422)
     }
     
     lazy var dosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
@@ -130,8 +130,9 @@ class ThirdDetailView: UIView {
             $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
         }
         dosCollectionView.snp.makeConstraints {
-            $0.top.equalTo(beforeInButton.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(422)
         }
     }
     
