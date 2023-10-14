@@ -33,7 +33,12 @@ class FirstDetailView: UIView {
         $0.textColor = .white
     }
     
-    lazy var swipeDownGuideImage = UIImageView().then {
+    lazy var swipeDownGuideImageUp = UIImageView().then {
+        $0.image = UIImage(systemName: "chevron.compact.down")
+        $0.tintColor = UIColor(white: 1, alpha: 0.5)
+    }
+    
+    lazy var swipeDownGuideImageDown = UIImageView().then {
         $0.image = UIImage(systemName: "chevron.compact.down")
         $0.tintColor = UIColor(white: 1, alpha: 0.5)
     }
@@ -60,7 +65,8 @@ class FirstDetailView: UIView {
         addSubview(backButton)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        addSubview(swipeDownGuideImage)
+        addSubview(swipeDownGuideImageUp)
+        addSubview(swipeDownGuideImageDown)
     }
     
     func setUI(){
@@ -84,7 +90,13 @@ class FirstDetailView: UIView {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        swipeDownGuideImage.snp.makeConstraints {
+        swipeDownGuideImageUp.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-24)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(28)
+            $0.height.equalTo(24)
+        }
+        swipeDownGuideImageDown.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-16)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(28)
@@ -93,14 +105,24 @@ class FirstDetailView: UIView {
     }
     
     func addSwipeDownGuideImageAnimation() {
-        swipeDownGuideImage.alpha = 0.0
+        swipeDownGuideImageUp.alpha = 0.0
         UIView.animate(withDuration: 0.5, animations: {
-            self.swipeDownGuideImage.alpha = 1.0
+            self.swipeDownGuideImageUp.alpha = 1.0
         }) { (finished) in
             UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
-                self.swipeDownGuideImage.alpha = 0.0
+                self.swipeDownGuideImageUp.alpha = 0.0
+            })
+        }
+        swipeDownGuideImageDown.alpha = 0.0
+        UIView.animate(withDuration: 1.0, animations: {
+            self.swipeDownGuideImageDown.alpha = 1.0
+        }) { (finished) in
+            UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                self.swipeDownGuideImageDown.alpha = 0.0
             })
         }
     }
+    
+    
 }
 
