@@ -1,5 +1,5 @@
 //
-//  DontsCell.swift
+//  EtiquetteDetailCell.swift
 //  BeforeIn
 //
 //  Created by Sanghun K. on 10/14/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DontsCell: UICollectionViewCell {
+class EtiquetteDetailCell: UICollectionViewCell {
     
     // MARK: - Properties
     var backgroundImage = UIImageView().then {

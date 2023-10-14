@@ -49,11 +49,11 @@ class DetailViewController: BaseViewController {
     
     private func configureDontsCollectionView() {
         /// secondDetailView
-        detailView.secondDetailView.dontsCollectionView.register(DontsCell.self, forCellWithReuseIdentifier: "DontsCell")
+        detailView.secondDetailView.dontsCollectionView.register(EtiquetteDetailCell.self, forCellWithReuseIdentifier: "EtiquetteDetailCell")
         detailView.secondDetailView.dontsCollectionView.dataSource = self
         detailView.secondDetailView.dontsCollectionView.delegate = self
         /// thirdDetailView
-        detailView.thirdDetailView.dosCollectionView.register(DontsCell.self, forCellWithReuseIdentifier: "DontsCell")
+        detailView.thirdDetailView.dosCollectionView.register(EtiquetteDetailCell.self, forCellWithReuseIdentifier: "EtiquetteDetailCell")
         detailView.thirdDetailView.dosCollectionView.dataSource = self
         detailView.thirdDetailView.dosCollectionView.delegate = self
     }
@@ -123,7 +123,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DontsCell", for: indexPath) as! DontsCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteDetailCell", for: indexPath) as! EtiquetteDetailCell
         cell.backgroundColor = .clear
         cell.titleLabel.text = dummyTitle[indexPath.row]
         cell.descriptionLabel.text = dummyDescription
