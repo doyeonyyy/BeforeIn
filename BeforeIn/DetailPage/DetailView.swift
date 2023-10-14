@@ -14,6 +14,7 @@ class DetailView: UIView {
     // MARK: - UI Properties
     let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
+        $0.contentInsetAdjustmentBehavior = .never
     }
     let contentView = UIView()
     
@@ -48,26 +49,24 @@ class DetailView: UIView {
     
     func setUI() {
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
+//            $0.edges.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
+            $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
         }
-        
         contentView.snp.makeConstraints {
             $0.top.bottom.left.right.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
         }
-        
         firstDetailView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalTo(scrollView.snp.height)
         }
-        
         secondDetailView.snp.makeConstraints {
             $0.top.equalTo(firstDetailView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(scrollView.snp.height)
         }
-        
         thirdDetailView.snp.makeConstraints {
             $0.top.equalTo(secondDetailView.snp.bottom)
             $0.width.equalToSuperview()

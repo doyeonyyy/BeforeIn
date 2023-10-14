@@ -75,7 +75,7 @@ class FirstDetailView: UIView {
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalTo(detailImageView.snp.top).offset(16)
+            $0.top.equalTo(detailImageView.snp.top).offset(60)
             $0.leading.equalToSuperview().offset(16)
             $0.width.height.equalTo(34)
         }
