@@ -13,8 +13,7 @@ class EtiquetteCell: UICollectionViewCell {
     
     // MARK: - Properties
     var image = UIImageView().then {
-        $0.image = UIImage(systemName: "photo.fill")
-        $0.tintColor = .gray
+        $0.backgroundColor = .gray
     }
     
     var stackView = UIStackView().then {

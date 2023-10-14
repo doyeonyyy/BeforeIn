@@ -131,6 +131,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         if let cell = collectionView.cellForItem(at: indexPath) as? EtiquetteCell {
             if let title = cell.titleLabel.text {
                 print("컬렉션 뷰 - '\(title)' 셀 누름")
+                navigationController?.pushViewController(DetailViewController(), animated: true) // DetailViewController 작업 확인용
             }
         }
     }
