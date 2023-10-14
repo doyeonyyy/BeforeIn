@@ -62,6 +62,17 @@ class SecondDetailView: UIView {
         $0.backgroundColor = .none
     }
     
+    let layout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 16
+        $0.itemSize = CGSize(width: 332, height: 422)
+    }
+
+    lazy var dontsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        $0.showsHorizontalScrollIndicator = false
+    }
     
     // MARK: - Life Cycle
     override init(frame: CGRect){
@@ -85,6 +96,7 @@ class SecondDetailView: UIView {
         addSubview(beforeInButton)
         addSubview(afterInButton)
         addSubview(beforeOutButton)
+        addSubview(dontsCollectionView)
     }
     
     func setUI(){
@@ -114,6 +126,11 @@ class SecondDetailView: UIView {
         beforeOutButton.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
             $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
+        }
+        dontsCollectionView.snp.makeConstraints {
+            $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
+            $0.leading.equalToSuperview().inset(24)
+            $0.bottom.trailing.equalToSuperview()
         }
     }
     

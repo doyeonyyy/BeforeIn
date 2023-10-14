@@ -11,6 +11,9 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let detailView = DetailView()
+    /// 더미데이터
+    private let dummyTitle: [String] = ["흰색 의상은 피해주세요.", "굶고 가지 마세요", "춤추지 마세요"]
+    private let dummyDescription = "신부의 아름다운 드레스를 위해 참아주세요"
 
     // MARK: - Life Cycle
     override func loadView(){
@@ -26,6 +29,7 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         detailView.secondDetailView.beforeInButton.sendActions(for: .touchUpInside)
+        configureDontsCollectionView()
     }
     
     // MARK: - Methods
@@ -35,6 +39,13 @@ class DetailViewController: BaseViewController {
         detailView.secondDetailView.afterInButton.addTarget(self, action: #selector(contextualButtonTapped), for: .touchUpInside)
         detailView.secondDetailView.beforeOutButton.addTarget(self, action: #selector(contextualButtonTapped), for: .touchUpInside)
     }
+    
+    private func configureDontsCollectionView() {
+        detailView.secondDetailView.dontsCollectionView.register(DontsCell.self, forCellWithReuseIdentifier: "DontsCell")
+        detailView.secondDetailView.dontsCollectionView.dataSource = self
+        detailView.secondDetailView.dontsCollectionView.delegate = self
+    }
+    
     
     // MARK: - @objc
     @objc func backButtonTapped(){
@@ -63,6 +74,24 @@ class DetailViewController: BaseViewController {
                 // TODO: - 나오면서 버튼 터치시 작업 내용
             default:
                 break
-            }
+        }
+    }
+    
+    
+    
+}
+
+// MARK: - dontsCollectionView / dosCollectionView
+extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dummyTitle.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DontsCell", for: indexPath) as! DontsCell
+        cell.backgroundColor = .gray
+        cell.titleLabel.text = dummyTitle[indexPath.row]
+        cell.descriptionLabel.text = dummyDescription
+        return cell
     }
 }
