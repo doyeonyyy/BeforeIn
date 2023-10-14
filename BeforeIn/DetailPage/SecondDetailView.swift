@@ -65,7 +65,7 @@ class SecondDetailView: UIView {
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 16
-        $0.itemSize = CGSize(width: 332, height: 422)
+        $0.itemSize = CGSize(width: 332, height: 350)
     }
 
     lazy var dontsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {

@@ -29,21 +29,33 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         detailView.secondDetailView.beforeInButton.sendActions(for: .touchUpInside)
+        detailView.thirdDetailView.beforeInButton.sendActions(for: .touchUpInside)
         configureDontsCollectionView()
     }
     
     // MARK: - Methods
     func setupAddTarget(){
+        /// firstDetailView
         detailView.firstDetailView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.beforeInButton.addTarget(self, action: #selector(contextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.afterInButton.addTarget(self, action: #selector(contextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.beforeOutButton.addTarget(self, action: #selector(contextualButtonTapped), for: .touchUpInside)
+        /// secondDetailView
+        detailView.secondDetailView.beforeInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
+        detailView.secondDetailView.afterInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
+        detailView.secondDetailView.beforeOutButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
+        /// thirdDetailView
+        detailView.thirdDetailView.beforeInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
+        detailView.thirdDetailView.afterInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
+        detailView.thirdDetailView.beforeOutButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
     }
     
     private func configureDontsCollectionView() {
+        /// secondDetailView
         detailView.secondDetailView.dontsCollectionView.register(DontsCell.self, forCellWithReuseIdentifier: "DontsCell")
         detailView.secondDetailView.dontsCollectionView.dataSource = self
         detailView.secondDetailView.dontsCollectionView.delegate = self
+        /// thirdDetailView
+        detailView.thirdDetailView.dosCollectionView.register(DontsCell.self, forCellWithReuseIdentifier: "DontsCell")
+        detailView.thirdDetailView.dosCollectionView.dataSource = self
+        detailView.thirdDetailView.dosCollectionView.delegate = self
     }
     
     
@@ -52,7 +64,7 @@ class DetailViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func contextualButtonTapped(sender: UIButton) {
+    @objc func dontsContextualButtonTapped(sender: UIButton) {
         let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
 
         detailView.secondDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
@@ -77,7 +89,30 @@ class DetailViewController: BaseViewController {
         }
     }
     
-    
+    @objc func dosContextualButtonTapped(sender: UIButton) {
+        let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
+
+        detailView.thirdDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
+        detailView.thirdDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
+        detailView.thirdDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
+
+        sender.setTitleColor(.beforeInBlue, for: .normal)
+        sender.titleLabel?.font = boldFont
+        
+        switch sender {
+            case detailView.thirdDetailView.beforeInButton:
+                print("'들어가기전' 버튼 누름")
+                // TODO: - 들어가기전 버튼 터치시 작업 내용
+            case detailView.thirdDetailView.afterInButton:
+                print("'들어가서' 버튼 누름")
+                // TODO: - 들어가서 버튼 터치시 작업 내용
+            case detailView.thirdDetailView.beforeOutButton:
+                print("'나오면서' 버튼 누름")
+                // TODO: - 나오면서 버튼 터치시 작업 내용
+            default:
+                break
+        }
+    }
     
 }
 
