@@ -72,6 +72,7 @@ class SecondDetailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
+        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
     }
     
     // MARK: - Life Cycle
@@ -129,8 +130,7 @@ class SecondDetailView: UIView {
         }
         dontsCollectionView.snp.makeConstraints {
             $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
-            $0.leading.equalToSuperview().inset(24)
-            $0.bottom.trailing.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
