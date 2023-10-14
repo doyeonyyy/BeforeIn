@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import UIKit
 
 class EtiquetteDetailCell: UICollectionViewCell {
     
