@@ -1,13 +1,13 @@
 //
-//  displayViewController.swift
+//  DisplayViewController.swift
 //  BeforeIn
 //
-//  Created by 허수빈 on 10/13/23.
+//  Created by 허수빈 on 10/15/23.
 //
 
 import UIKit
 
-class displayViewController: UIViewController {
+class DisplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
