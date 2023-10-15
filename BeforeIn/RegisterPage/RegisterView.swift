@@ -31,6 +31,15 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     
+    lazy var checkIdButton = UIButton().then {
+        $0.setTitle("  중복확인  ", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.backgroundColor = .BeforeInRed
+        $0.layer.cornerRadius = 15
+        $0.layer.masksToBounds = true
+    }
+    
     lazy var registerPwLabel = UILabel().then {
         $0.text = "비밀번호"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
@@ -137,6 +146,7 @@ class RegisterView: UIView {
         addSubview(registerIdLabel)
         addSubview(registerIdTextField)
         addSubview(registerIdBottom)
+        addSubview(checkIdButton)
         
         addSubview(registerPwLabel)
         addSubview(registerPwTextField)
@@ -173,6 +183,10 @@ class RegisterView: UIView {
             $0.left.right.equalTo(registerIdTextField)
             $0.bottom.equalTo(registerIdTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
+        }
+        checkIdButton.snp.makeConstraints{
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(registerIdBottom.snp.top).offset(-5)
         }
         
         registerPwLabel.snp.makeConstraints {
