@@ -71,7 +71,7 @@ class DetailViewController: BaseViewController {
         detailView.secondDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
         detailView.secondDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
 
-        sender.setTitleColor(.beforeInRed, for: .normal)
+        sender.setTitleColor(.BeforeInRed, for: .normal)
         sender.titleLabel?.font = boldFont
         
         switch sender {
@@ -96,7 +96,7 @@ class DetailViewController: BaseViewController {
         detailView.thirdDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
         detailView.thirdDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
 
-        sender.setTitleColor(.beforeInBlue, for: .normal)
+        sender.setTitleColor(.BeforeInBlue, for: .normal)
         sender.titleLabel?.font = boldFont
         
         switch sender {
