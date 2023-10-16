@@ -27,23 +27,28 @@ class RegisterViewController: BaseViewController {
     // MARK: - Methods
     func setTextField(){
         registerView.registerIdTextField.delegate = self
+        registerView.registerNameTextField.delegate = self
+        registerView.registerPhoneTextField.delegate = self
         registerView.registerPwTextField.delegate = self
         registerView.registerCheckTextField.delegate = self
-        registerView.registerNameTextField.delegate = self
-        registerView.registerBirthTextField.delegate = self
     }
     
     func setupAddTarget(){
         registerView.checkIdButton.addTarget(self, action: #selector(checkIdButtonTapped), for: .touchUpInside)
-        registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        registerView.checkPhoneButton.addTarget(self, action: #selector(checkPhoneButtonTapped), for: .touchUpInside)
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
+        registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
     }
     
     
     // MARK: - @objc
     @objc func checkIdButtonTapped(){
         print("중복확인 버튼 눌림")
+    }
+    
+    @objc func checkPhoneButtonTapped(){
+        print("휴대폰인증 버튼 눌림")
     }
     
     @objc func showPwButtonTapped(){
@@ -87,21 +92,21 @@ extension RegisterViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == registerView.registerIdTextField {
+            registerView.registerNameTextField.becomeFirstResponder()
+        } else if textField == registerView.registerNameTextField {
+            registerView.registerPhoneTextField.becomeFirstResponder()
+        } else if textField == registerView.registerPhoneTextField {
             registerView.registerPwTextField.becomeFirstResponder()
         } else if textField == registerView.registerPwTextField {
             registerView.registerCheckTextField.becomeFirstResponder()
         } else if textField == registerView.registerCheckTextField {
-            registerView.registerNameTextField.becomeFirstResponder()
-        } else if textField == registerView.registerNameTextField {
-            registerView.registerBirthTextField.becomeFirstResponder()
-        } else if textField == registerView.registerBirthTextField {
             registerButtonTapped()
         }
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == registerView.registerBirthTextField {
+        if textField == registerView.registerCheckTextField {
             UIView.animate(withDuration: 0.3) {
                 self.view.frame.origin.y = -180
             }

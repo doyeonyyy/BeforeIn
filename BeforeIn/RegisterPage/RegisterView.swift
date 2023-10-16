@@ -17,7 +17,6 @@ class RegisterView: UIView {
         $0.text = "아이디"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
-    
     lazy var registerIdTextField = UITextField().then {
         $0.placeholder = "아이디를 입력하세요."
         $0.autocapitalizationType = .none
@@ -26,13 +25,49 @@ class RegisterView: UIView {
         $0.keyboardType = .emailAddress
         $0.clearsOnBeginEditing = false
     }
-    
     lazy var registerIdBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
-    
     lazy var checkIdButton = UIButton().then {
         $0.setTitle("  중복확인  ", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.backgroundColor = .BeforeInRed
+        $0.layer.cornerRadius = 15
+        $0.layer.masksToBounds = true
+    }
+    
+    lazy var registerNameLabel = UILabel().then {
+        $0.text = "이름"
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
+    }
+    lazy var registerNameTextField = UITextField().then {
+        $0.placeholder = "실명을 입력하세요."
+        $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
+        $0.spellCheckingType = .no
+        $0.clearsOnBeginEditing = false
+    }
+    lazy var registerNameBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    
+    lazy var registerPhoneLabel = UILabel().then {
+        $0.text = "휴대폰번호"
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
+    }
+    lazy var registerPhoneTextField = UITextField().then {
+        $0.placeholder = "휴대폰번호를 입력하세요"
+        $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
+        $0.spellCheckingType = .no
+        $0.clearsOnBeginEditing = false
+    }
+    lazy var registerPhoneBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    lazy var checkPhoneButton = UIButton().then {
+        $0.setTitle("  휴대폰인증  ", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         $0.backgroundColor = .BeforeInRed
@@ -44,7 +79,6 @@ class RegisterView: UIView {
         $0.text = "비밀번호"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
-    
     lazy var registerPwTextField = UITextField().then {
         $0.placeholder = "비밀번호를 입력하세요."
         $0.autocapitalizationType = .none
@@ -53,11 +87,9 @@ class RegisterView: UIView {
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
-    
     lazy var registerPwBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
-    
     lazy var showPwButton = UIButton().then {
         $0.setImage(UIImage(systemName: "eye"), for: .normal)
         $0.tintColor = .black
@@ -67,7 +99,6 @@ class RegisterView: UIView {
         $0.text = "비밀번호 확인"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
-    
     lazy var registerCheckTextField = UITextField().then {
         $0.placeholder = "비밀번호를 다시 입력하세요."
         $0.autocapitalizationType = .none
@@ -76,48 +107,12 @@ class RegisterView: UIView {
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
-    
     lazy var registerCheckBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
-    
     lazy var showCheckButton = UIButton().then {
         $0.setImage(UIImage(systemName: "eye"), for: .normal)
         $0.tintColor = .black
-    }
-    
-    lazy var registerNameLabel = UILabel().then {
-        $0.text = "이름"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
-    }
-    
-    lazy var registerNameTextField = UITextField().then {
-        $0.placeholder = "실명을 입력하세요."
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
-        $0.spellCheckingType = .no
-        $0.clearsOnBeginEditing = false
-    }
-    
-    lazy var registerNameBottom = UIView().then {
-        $0.backgroundColor = .systemGray2
-    }
-    
-    lazy var registerBirthLabel = UILabel().then {
-        $0.text = "생년월일"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
-    }
-    
-    lazy var registerBirthTextField = UITextField().then {
-        $0.placeholder = "생년월일 8자리를 입력하세요. (예: 990101)"
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
-        $0.spellCheckingType = .no
-        $0.clearsOnBeginEditing = false
-    }
-    
-    lazy var registerBirthBottom = UIView().then {
-        $0.backgroundColor = .systemGray2
     }
     
     lazy var registerButton = UIButton().then {
@@ -148,6 +143,15 @@ class RegisterView: UIView {
         addSubview(registerIdBottom)
         addSubview(checkIdButton)
         
+        addSubview(registerNameLabel)
+        addSubview(registerNameTextField)
+        addSubview(registerNameBottom)
+        
+        addSubview(registerPhoneLabel)
+        addSubview(registerPhoneTextField)
+        addSubview(registerPhoneBottom)
+        addSubview(checkPhoneButton)
+        
         addSubview(registerPwLabel)
         addSubview(registerPwTextField)
         addSubview(registerPwBottom)
@@ -157,14 +161,6 @@ class RegisterView: UIView {
         addSubview(registerCheckTextField)
         addSubview(registerCheckBottom)
         addSubview(showCheckButton)
-        
-        addSubview(registerNameLabel)
-        addSubview(registerNameTextField)
-        addSubview(registerNameBottom)
-        
-        addSubview(registerBirthLabel)
-        addSubview(registerBirthTextField)
-        addSubview(registerBirthBottom)
         
         addSubview(registerButton)
     }
@@ -189,8 +185,42 @@ class RegisterView: UIView {
             $0.bottom.equalTo(registerIdBottom.snp.top).offset(-5)
         }
         
-        registerPwLabel.snp.makeConstraints {
+        registerNameLabel.snp.makeConstraints {
             $0.top.equalTo(registerIdBottom.snp.bottom).offset(40)
+            $0.left.equalTo(self.snp.left).offset(24)
+        }
+        registerNameTextField.snp.makeConstraints {
+            $0.top.equalTo(registerNameLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-24)
+        }
+        registerNameBottom.snp.makeConstraints {
+            $0.left.right.equalTo(registerNameTextField)
+            $0.bottom.equalTo(registerNameTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        
+        registerPhoneLabel.snp.makeConstraints {
+            $0.top.equalTo(registerNameBottom.snp.bottom).offset(40)
+            $0.left.equalTo(self.snp.left).offset(24)
+        }
+        registerPhoneTextField.snp.makeConstraints {
+            $0.top.equalTo(registerPhoneLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-24)
+        }
+        registerPhoneBottom.snp.makeConstraints {
+            $0.left.right.equalTo(registerPhoneTextField)
+            $0.bottom.equalTo(registerPhoneTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        checkPhoneButton.snp.makeConstraints{
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(registerPhoneBottom.snp.top).offset(-5)
+        }
+        
+        registerPwLabel.snp.makeConstraints {
+            $0.top.equalTo(registerPhoneBottom.snp.bottom).offset(40)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerPwTextField.snp.makeConstraints {
@@ -227,39 +257,8 @@ class RegisterView: UIView {
             $0.right.equalTo(self.snp.right).offset(-30)
         }
         
-        
-        registerNameLabel.snp.makeConstraints {
-            $0.top.equalTo(registerCheckBottom.snp.bottom).offset(40)
-            $0.left.equalTo(self.snp.left).offset(24)
-        }
-        registerNameTextField.snp.makeConstraints {
-            $0.top.equalTo(registerNameLabel.snp.bottom).offset(17)
-            $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
-        }
-        registerNameBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerNameTextField)
-            $0.bottom.equalTo(registerNameTextField.snp.bottom).offset(4)
-            $0.height.equalTo(1)
-        }
-        
-        registerBirthLabel.snp.makeConstraints {
-            $0.top.equalTo(registerNameBottom.snp.bottom).offset(40)
-            $0.left.equalTo(self.snp.left).offset(24)
-        }
-        registerBirthTextField.snp.makeConstraints {
-            $0.top.equalTo(registerBirthLabel.snp.bottom).offset(17)
-            $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
-        }
-        registerBirthBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerBirthTextField)
-            $0.bottom.equalTo(registerBirthTextField.snp.bottom).offset(4)
-            $0.height.equalTo(1)
-        }
-        
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(registerBirthBottom.snp.bottom).offset(64)
+            $0.top.equalTo(registerCheckBottom.snp.bottom).offset(64)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
             $0.height.equalTo(50)
         }
