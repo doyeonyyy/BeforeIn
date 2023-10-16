@@ -24,10 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         let mainVC = TapbarController()
+        let quizVC = QuizStartViewController()
         window.backgroundColor = .white
-        window.rootViewController = mainVC
+        window.rootViewController = quizVC
         window.makeKeyAndVisible()
         self.window = window
+        
+        quizVC.checkQuizRun()
 
         
         func sceneDidDisconnect(_ scene: UIScene) {
