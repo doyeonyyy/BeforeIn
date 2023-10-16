@@ -2,7 +2,7 @@
 //  DisplayViewController.swift
 //  BeforeIn
 //
-//  Created by 허수빈 on 10/15/23.
+//  Created by 허수빈 on 10/16/23.
 //
 
 import UIKit
