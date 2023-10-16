@@ -136,9 +136,9 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     }()
     
     private let cellData: [String] = [
-        "로그인 관리",
         "디스플레이",
-        "정보"
+        "정보",
+        "로그아웃"
     ]
     
     override func viewDidLoad() {
@@ -166,6 +166,33 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         
         defineLayoutConstraints()
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let displayViewController = DisplayViewController()
+            present(displayViewController, animated: true, completion: nil)
+        } else if indexPath.row == 1 {
+            let infoViewController = InfoViewController()
+            present(infoViewController, animated: true, completion: nil)
+        } else if indexPath.row == 2 {
+            
+            let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
+
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { (action) in
+
+            }
+            alertController.addAction(confirmAction)
+
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellData.count
