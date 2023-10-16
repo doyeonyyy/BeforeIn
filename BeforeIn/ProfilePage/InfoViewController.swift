@@ -1,29 +1,100 @@
-//
-//  InfoViewController.swift
-//  BeforeIn
-//
-//  Created by 허수빈 on 10/16/23.
-//
+
+
 
 import UIKit
+import SnapKit
 
-class InfoViewController: UIViewController {
-
+class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    let infoCancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("취소", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.cornerRadius = 16
+        return tableView
+    }()
+    
+    
+    let infoDoneButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("완료", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let cellIdentifier = "InfoCell"
+    let tableData = ["리더", "부리더", "팀원 1", "팀원 2", "팀원 3"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1)
+        view.addSubview(infoCancelButton)
+        view.addSubview(tableView)
+        view.addSubview(infoDoneButton)
+        infoCancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        infoDoneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        
+        
+        infoCancelButton.snp.makeConstraints { make in
+            make.width.equalTo(41)
+            make.height.equalTo(27)
+            make.leading.equalTo(view.snp.leading).offset(24)
+            make.top.equalTo(view.snp.top).offset(24)
+        }
+        
+        infoDoneButton.snp.makeConstraints { make in
+            make.width.equalTo(41)
+            make.height.equalTo(27)
+            make.trailing.equalTo(view.snp.trailing).offset(-24)
+            make.top.equalTo(view.snp.top).offset(24)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.width.equalTo(345)
+            make.height.equalTo(238)
+            make.top.equalTo(infoCancelButton.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+        }
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableData.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.textLabel?.text = tableData[indexPath.row]
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // 원하는 폰트 및 크기로 설정
+        cell.accessoryType = .disclosureIndicator // 화살표 아이콘 추가
 
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    @objc func cancelButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func doneButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
 }
