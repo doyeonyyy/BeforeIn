@@ -93,7 +93,7 @@ class SearchViewController: BaseViewController {
             }
         }
 
-        sender.backgroundColor = UIColor.beforeInRed
+        sender.backgroundColor = UIColor.BeforeInRed
         sender.setTitleColor(.white, for: .normal)
 
         // TODO: 카테고리 버튼 index 번호에 따른 터치시 작업 내용
@@ -131,6 +131,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         if let cell = collectionView.cellForItem(at: indexPath) as? EtiquetteCell {
             if let title = cell.titleLabel.text {
                 print("컬렉션 뷰 - '\(title)' 셀 누름")
+                navigationController?.pushViewController(DetailViewController(), animated: true) // DetailViewController 작업 확인용
             }
         }
     }
