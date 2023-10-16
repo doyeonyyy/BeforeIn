@@ -21,10 +21,10 @@ class QuizContentsViewController: UIViewController {
         setupLayout()
     }
     
-    init(quizPage: String, quizContent: String) {
+    init(page: String, content: String) {
         super.init(nibName: nil, bundle: nil)
-        quizPage.text = quizPage
-        quizContent.text = quizContent
+        quizPage.text = page
+        quizContent.text = content
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +51,7 @@ class QuizContentsViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(85)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(100)
         }
