@@ -28,6 +28,9 @@
 		1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDD2AD7B7D800E6D388 /* MainView.swift */; };
 		1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */; };
 		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
+		159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78BF2ADD56E900FE210E /* Etiquette.swift */; };
+		159B78C32ADD573B00FE210E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78C22ADD573B00FE210E /* User.swift */; };
+		159B78C52ADD57A700FE210E /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78C42ADD57A700FE210E /* Quiz.swift */; };
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
@@ -67,6 +70,9 @@
 		1596DCDD2AD7B7D800E6D388 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemCell.swift; sourceTree = "<group>"; };
 		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
+		159B78BF2ADD56E900FE210E /* Etiquette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etiquette.swift; sourceTree = "<group>"; };
+		159B78C22ADD573B00FE210E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		159B78C42ADD57A700FE210E /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 				1596DCB62AD6B1A300E6D388 /* .gitignore */,
 				1596DCA22AD6B18A00E6D388 /* AppDelegate.swift */,
 				1596DCA42AD6B18A00E6D388 /* SceneDelegate.swift */,
+				159B78C12ADD56EE00FE210E /* Model */,
 				1596DCB92AD6B1EE00E6D388 /* Extension */,
 				1596DCB82AD6B1E400E6D388 /* MainPage */,
 				1596DCBC2AD6B22000E6D388 /* LoginPage */,
@@ -226,6 +233,16 @@
 				1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		159B78C12ADD56EE00FE210E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				159B78BF2ADD56E900FE210E /* Etiquette.swift */,
+				159B78C22ADD573B00FE210E /* User.swift */,
+				159B78C42ADD57A700FE210E /* Quiz.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		63AB9D632ADD0968008E85BA /* Quiz PVC */ = {
@@ -339,6 +356,7 @@
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
+				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				1596DCBB2AD6B20000E6D388 /* BaseViewController.swift in Sources */,
 				1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */,
 				67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */,
@@ -364,8 +382,10 @@
 				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
+				159B78C52ADD57A700FE210E /* Quiz.swift in Sources */,
 				63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */,
 				B397E30A2ADCCA2C00F3363F /* InfoViewController.swift in Sources */,
+				159B78C32ADD573B00FE210E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
