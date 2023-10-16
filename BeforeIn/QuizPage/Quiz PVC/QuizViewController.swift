@@ -21,7 +21,7 @@ class QuizViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
         }
-        
+
         let pagesLabel = UILabel()
         pagesLabel.text = "1/10"
         pagesLabel.textColor = .black
@@ -31,7 +31,7 @@ class QuizViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(116)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
-        
+
         let buttonO = UIButton()
         buttonO.setImage(UIImage(named: "O"), for: .normal)
         view.addSubview(buttonO)
@@ -40,7 +40,7 @@ class QuizViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(328)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(40)
         }
-        
+
         let buttonX = UIButton()
         buttonX.setImage(UIImage(named: "X"), for: .normal)
         view.addSubview(buttonX)
@@ -50,7 +50,7 @@ class QuizViewController: BaseViewController {
             make.leading.equalTo(buttonO.snp.trailing).offset(100)
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(30.89)
         }
-        
+
         let previousButton = UIButton()
         previousButton.setTitle("이전", for: .normal)
         previousButton.setTitleColor(.gray, for: .normal)
@@ -59,7 +59,7 @@ class QuizViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(626)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(40)
         }
-        
+
         let continueButton = UIButton()
         continueButton.setTitle("다음", for: .normal)
         continueButton.setTitleColor(.black, for: .normal)
@@ -68,5 +68,6 @@ class QuizViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(626)
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
         }
-    }
+    }    
 }
+        
