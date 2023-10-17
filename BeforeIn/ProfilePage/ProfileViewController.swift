@@ -186,7 +186,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                 do {
                     try Auth.auth().signOut()
                     let loginViewController = LoginViewController()
-                    self.transitionToRootView(view: loginViewController)
+                    self.transitionToRootView(view: UINavigationController(rootViewController: (loginViewController)))
                 } catch let signOutError as NSError {
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
@@ -201,7 +201,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                         } else {
                             print("탈퇴 성공")
                             let loginViewController = LoginViewController()
-                            self.transitionToRootView(view: loginViewController)
+                            self.transitionToRootView(view: UINavigationController(rootViewController: (loginViewController)))
                         }
                     }
                 } else {

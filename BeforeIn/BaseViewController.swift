@@ -58,6 +58,6 @@ class BaseViewController: UIViewController {
         transition.subtype = CATransitionSubtype.fromRight
 
         self.view.window?.layer.add(transition, forKey: kCATransition)
-        self.view.window?.rootViewController = UINavigationController(rootViewController: view)
+        self.view.window?.rootViewController = view
     }
 }
