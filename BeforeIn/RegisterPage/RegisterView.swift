@@ -18,7 +18,7 @@ class RegisterView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     lazy var registerIdTextField = UITextField().then {
-        $0.placeholder = "아이디를 입력하세요."
+        $0.placeholder = "이메일 주소를 입력하세요."
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no

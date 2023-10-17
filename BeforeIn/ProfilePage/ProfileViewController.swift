@@ -4,6 +4,7 @@
 
 import SnapKit
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -138,7 +139,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     private let cellData: [String] = [
         "디스플레이",
         "정보",
-        "로그아웃"
+        "로그아웃",
+        "회원탈퇴"
     ]
     
     override func viewDidLoad() {
@@ -168,8 +170,10 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     }
     
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if indexPath.row == 0 {
             let displayViewController = DisplayViewController()
             present(displayViewController, animated: true, completion: nil)
@@ -177,22 +181,40 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             let infoViewController = InfoViewController()
             present(infoViewController, animated: true, completion: nil)
         } else if indexPath.row == 2 {
-            
-            let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
-
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { (action) in
-
+            // 3. 로그아웃
+            showAlertOneButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", buttonTitle: "확인") {
+                do {
+                    try Auth.auth().signOut()
+                    let loginViewController = LoginViewController()
+                    self.transitionToRootView(view: loginViewController)
+                } catch let signOutError as NSError {
+                    print("Error signing out: \(signOutError.localizedDescription)")
+                }
             }
-            alertController.addAction(confirmAction)
-
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-
-            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 3 {
+            // 4. 회원탈퇴
+            showAlertOneButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", buttonTitle: "확인") {
+                if let user = Auth.auth().currentUser {
+                    user.delete { error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            print("탈퇴 성공")
+                            let loginViewController = LoginViewController()
+                            self.transitionToRootView(view: loginViewController)
+                        }
+                    }
+                } else {
+                    print("로그인 정보가 존재하지 않습니다")
+                }
+            }
         }
+        
     }
-
-
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellData.count
@@ -216,7 +238,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.bottom.equalTo(cell.contentView.snp.bottom)
             make.height.equalTo(1)
         }
-
+        
         
         let chevronImageView = UIImageView()
         chevronImageView.image = UIImage(systemName: "chevron.forward")
@@ -291,7 +313,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
-                
+        
         myLevelRectangle.snp.makeConstraints { make in
             make.width.equalTo(62)
             make.height.equalTo(12)

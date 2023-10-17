@@ -69,6 +69,9 @@
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
+		676DE2272ADE62280002C6D8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE2262ADE62280002C6D8 /* FirebaseAuth */; };
+		676DE2292ADE62280002C6D8 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE2282ADE62280002C6D8 /* FirebaseAuthCombine-Community */; };
+		676DE22B2ADE66930002C6D8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE22A2ADE66930002C6D8 /* FirebaseFirestore */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -140,6 +143,7 @@
 				159B79022ADE6DE600FE210E /* FirebaseAnalyticsSwift in Frameworks */,
 				159B79102ADE6DE600FE210E /* FirebaseDatabase in Frameworks */,
 				1596DCD72AD6B32900E6D388 /* Then in Frameworks */,
+				676DE2272ADE62280002C6D8 /* FirebaseAuth in Frameworks */,
 				159B78CA2ADE10DD00FE210E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				159B79082ADE6DE600FE210E /* FirebaseAppDistribution-Beta in Frameworks */,
 				159B79282ADE6DE600FE210E /* FirebaseMessaging in Frameworks */,
@@ -176,6 +180,7 @@
 			children = (
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
+				676DE2252ADE62280002C6D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -322,6 +327,13 @@
 			path = "Quiz PVC";
 			sourceTree = "<group>";
 		};
+		676DE2252ADE62280002C6D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E718CB772ADA6B8500896ACC /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,11 +370,6 @@
 				1596DCD12AD6B31F00E6D388 /* SnapKit */,
 				1596DCD62AD6B32900E6D388 /* Then */,
 				1596DCD92AD6B33700E6D388 /* Gifu */,
-				159B78C72ADE10DD00FE210E /* FirebaseAnalytics */,
-				159B78C92ADE10DD00FE210E /* FirebaseAnalyticsOnDeviceConversion */,
-				159B78CB2ADE10DD00FE210E /* FirebaseAnalyticsSwift */,
-				159B78CD2ADE10DD00FE210E /* FirebaseAnalyticsWithoutAdIdSupport */,
-				159B78CF2ADE10DD00FE210E /* FirebaseAppCheck */,
 				159B78FD2ADE6DE600FE210E /* FirebaseAnalytics */,
 				159B78FF2ADE6DE600FE210E /* FirebaseAnalyticsOnDeviceConversion */,
 				159B79012ADE6DE600FE210E /* FirebaseAnalyticsSwift */,

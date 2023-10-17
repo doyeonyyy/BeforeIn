@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class RegisterViewController: BaseViewController {
     
     // MARK: - Properties
     private let registerView = RegisterView()
+    private let db = Firestore.firestore()
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -22,6 +25,11 @@ class RegisterViewController: BaseViewController {
         self.title = "회원가입"
         setTextField()
         setupAddTarget()
+        print("회원가입VC ViewDidLoad")
+    }
+    
+    deinit {
+        print("회원가입VC 해제")
     }
     
     // MARK: - Methods
@@ -75,11 +83,44 @@ class RegisterViewController: BaseViewController {
         }
     }
     
+    
+    // 1. 회원가입 (유효성 검사 로직 필요)
     @objc func registerButtonTapped() {
-        print("등록버튼 눌림")
-        self.navigationController?.popViewController(animated: true)
+        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
+           let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
+           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
+           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
+            
+            if email.isEmpty {
+                showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
+            } else if name.isEmpty {
+                showAlertOneButton(title: "이름", message: "이름을 입력하세요.", buttonTitle: "확인")
+            } else if phone.isEmpty {
+                showAlertOneButton(title: "휴대폰번호", message: "휴대폰번호를 입력하세요.", buttonTitle: "확인")
+            } else if password.isEmpty {
+                showAlertOneButton(title: "비밀번호", message: "비밀번호를 입력하세요.", buttonTitle: "확인")
+            } else if checkPassword.isEmpty {
+                showAlertOneButton(title: "비밀번호 확인", message: "비밀번호를 다시 한번 입력하세요.", buttonTitle: "확인")
+            } else if password != checkPassword {
+                showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
+            } else {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let e = error {
+                        self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
+                    } else {
+                        self.db.collection("User").addDocument(data: [
+                            "email": email,
+                            "password": password,
+                            "name": name
+                        ])
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
+        
     }
-
 }
 
 
