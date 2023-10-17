@@ -52,5 +52,14 @@ class BaseViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    
+    // 루트뷰 변경, 화면 이동
+    func transitionToRootView(view: UIViewController) {
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        self.view.window?.rootViewController = view
+    }
 }

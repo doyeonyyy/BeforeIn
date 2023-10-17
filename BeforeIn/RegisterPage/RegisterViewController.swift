@@ -25,6 +25,11 @@ class RegisterViewController: BaseViewController {
         self.title = "회원가입"
         setTextField()
         setupAddTarget()
+        print("회원가입VC ViewDidLoad")
+    }
+    
+    deinit {
+        print("회원가입VC 해제")
     }
     
     // MARK: - Methods

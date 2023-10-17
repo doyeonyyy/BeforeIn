@@ -22,6 +22,11 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         setTextField()
         setupAddTarget()
+        print("로그인VC ViewDidLoad")
+    }
+    
+    deinit {
+        print("로그인VC 해제")
     }
     
     
@@ -77,11 +82,15 @@ class LoginViewController: BaseViewController {
                     print("로그인 실패 : \(error.localizedDescription)")
                 } else if let authResult = authResult {
                     print("로그인 성공")
+                    let tapBarController = TapbarController()
+                    self.transitionToRootView(view: tapBarController)
                 }
             }
         }
     }
-
+    
+    
+    
     
     @objc func findIdButtonTapped() {
         print("아이디찾기 버튼이 눌렸습니다")
@@ -148,7 +157,7 @@ extension LoginViewController: UITextFieldDelegate {
         }
     }
     
-
+    
     
     
 }

@@ -169,7 +169,6 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     }
     
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             let displayViewController = DisplayViewController()
@@ -183,16 +182,20 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                 do {
                     try Auth.auth().signOut()
                     print("로그아웃 성공")
+                    
+                    let loginViewController = LoginViewController()
+                    self.transitionToRootView(view: loginViewController)
                 } catch let signOutError as NSError {
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
             }
         }
     }
-
-
-
-
+    
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellData.count
@@ -216,7 +219,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.bottom.equalTo(cell.contentView.snp.bottom)
             make.height.equalTo(1)
         }
-
+        
         
         let chevronImageView = UIImageView()
         chevronImageView.image = UIImage(systemName: "chevron.forward")
@@ -291,7 +294,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
-                
+        
         myLevelRectangle.snp.makeConstraints { make in
             make.width.equalTo(62)
             make.height.equalTo(12)

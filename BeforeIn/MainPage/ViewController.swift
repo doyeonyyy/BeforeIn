@@ -28,6 +28,7 @@ class MainViewController: BaseViewController {
         mainView.recommendEtiquetteCollectionView.delegate = self
         mainView.recommendEtiquetteCollectionView.dataSource = self
         mainView.recommendEtiquetteCollectionView.register(RecommendItemCell.self, forCellWithReuseIdentifier: "RecommendItemCell")
+        print("메인VC ViewDidLoad")
     }
 
 }
