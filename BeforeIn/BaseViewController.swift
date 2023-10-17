@@ -14,6 +14,43 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
+    
+    
+    // Alert
+    func showAlertOneButton(title: String, message: String?, buttonTitle: String, completion: (() -> Void)? = nil) {
+        
+        let alertCotroller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: buttonTitle, style: .default) { _ in
+            completion?()
+        }
+        
+        alertCotroller.addAction(action)
+        
+        present(alertCotroller, animated: true, completion: nil)
+    
+    }
+
+    
+    func showAlertTwoButton(title: String,
+                            message: String?,
+                            button1Title: String,
+                            button2Title: String,
+                            completion1: (() -> Void)? = nil,
+                            completion2: (() -> Void)? = nil) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action1 = UIAlertAction(title: button1Title, style: .default) { _ in
+            completion1?()
+        }
+        let action2 = UIAlertAction(title: button2Title, style: .default) { _ in
+            completion2?()
+        }
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
 }
-
-

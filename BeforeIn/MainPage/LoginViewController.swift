@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: BaseViewController {
     
@@ -64,9 +65,23 @@ class LoginViewController: BaseViewController {
         }
     }
     
+    // 2. 로그인
     @objc func loginButtonTapped() {
-        print("로그인 버튼이 눌렸습니다")
+        if let email = loginView.idTextField.text, let pw = loginView.pwTextField.text {
+            Auth.auth().signIn(withEmail: email, password: pw) { authResult, error in
+                if let error = error {
+                    self.showAlertOneButton(title: "로그인 실패",
+                                            message: "아이디 또는 비밀번호가 틀렸습니다.",
+                                            buttonTitle: "확인") {
+                    }
+                    print("로그인 실패 : \(error.localizedDescription)")
+                } else if let authResult = authResult {
+                    print("로그인 성공")
+                }
+            }
+        }
     }
+
     
     @objc func findIdButtonTapped() {
         print("아이디찾기 버튼이 눌렸습니다")

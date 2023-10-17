@@ -4,6 +4,7 @@
 
 import SnapKit
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -177,20 +178,19 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             let infoViewController = InfoViewController()
             present(infoViewController, animated: true, completion: nil)
         } else if indexPath.row == 2 {
-            
-            let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
-
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { (action) in
-
+            // 3. 로그아웃
+            showAlertOneButton(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", buttonTitle: "확인") {
+                do {
+                    try Auth.auth().signOut()
+                    print("로그아웃 성공")
+                } catch let signOutError as NSError {
+                    print("Error signing out: \(signOutError.localizedDescription)")
+                }
             }
-            alertController.addAction(confirmAction)
-
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-
-            present(alertController, animated: true, completion: nil)
         }
     }
+
+
 
 
     

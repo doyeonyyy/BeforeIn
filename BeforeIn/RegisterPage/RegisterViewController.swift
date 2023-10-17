@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class RegisterViewController: BaseViewController {
     
     // MARK: - Properties
     private let registerView = RegisterView()
+    private let db = Firestore.firestore()
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -74,12 +77,42 @@ class RegisterViewController: BaseViewController {
             registerView.registerCheckTextField.isSecureTextEntry = false
         }
     }
-    
+   
+    // 1. 회원가입 (빈 문자열 로직, 얼랏, 유효성검사)
     @objc func registerButtonTapped() {
-        print("등록버튼 눌림")
-        self.navigationController?.popViewController(animated: true)
+        if let email = registerView.registerIdTextField.text,
+           let password = registerView.registerPwTextField.text,
+           let checkPassword = registerView.registerCheckTextField.text,
+           let name = registerView.registerNameTextField.text {
+            
+            // 빈 문자열 확인 로직 추가해야됨
+            if name.isEmpty {
+                let alert = UIAlertController(title: "이름", message: "이름을 입력하세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if password == checkPassword {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let e = error {
+                        print(e.localizedDescription)
+                    } else {
+                        self.db.collection("User").addDocument(data: [
+                            "email" : email,
+                            "password" : password,
+                            "name" : name
+                        ])
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } else {
+                let alert = UIAlertController(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
-
 }
 
 
