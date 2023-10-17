@@ -139,7 +139,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     private let cellData: [String] = [
         "디스플레이",
         "정보",
-        "로그아웃"
+        "로그아웃",
+        "회원탈퇴"
     ]
     
     override func viewDidLoad() {
@@ -170,6 +171,9 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if indexPath.row == 0 {
             let displayViewController = DisplayViewController()
             present(displayViewController, animated: true, completion: nil)
@@ -178,7 +182,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             present(infoViewController, animated: true, completion: nil)
         } else if indexPath.row == 2 {
             // 3. 로그아웃
-            showAlertOneButton(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", buttonTitle: "확인") {
+            showAlertOneButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", buttonTitle: "확인") {
                 do {
                     try Auth.auth().signOut()
                     let loginViewController = LoginViewController()
@@ -187,9 +191,24 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
             }
+        } else if indexPath.row == 3 {
+            // 4. 회원탈퇴
+            showAlertOneButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", buttonTitle: "확인") {
+                if let user = Auth.auth().currentUser {
+                    user.delete { error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            print("탈퇴 성공")
+                        }
+                    }
+                } else {
+                    print("로그인 정보가 존재하지 않습니다")
+                }
+            }
         }
+        
     }
-    
     
     
     
