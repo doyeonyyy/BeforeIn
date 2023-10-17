@@ -41,7 +41,6 @@
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
-		676DE2242ADE301F0002C6D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 676DE2232ADE301F0002C6D8 /* GoogleService-Info.plist */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -84,7 +83,6 @@
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		676DE2232ADE301F0002C6D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 				1596DCAB2AD6B18B00E6D388 /* Assets.xcassets */,
 				1596DCAD2AD6B18B00E6D388 /* LaunchScreen.storyboard */,
 				1596DCB02AD6B18B00E6D388 /* Info.plist */,
-				676DE2232ADE301F0002C6D8 /* GoogleService-Info.plist */,
 			);
 			path = BeforeIn;
 			sourceTree = "<group>";
@@ -359,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1596DCB72AD6B1A300E6D388 /* .gitignore in Resources */,
-				676DE2242ADE301F0002C6D8 /* GoogleService-Info.plist in Resources */,
 				1596DCAF2AD6B18B00E6D388 /* LaunchScreen.storyboard in Resources */,
 				1596DCAC2AD6B18B00E6D388 /* Assets.xcassets in Resources */,
 			);
