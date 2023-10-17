@@ -82,41 +82,44 @@ class RegisterViewController: BaseViewController {
             registerView.registerCheckTextField.isSecureTextEntry = false
         }
     }
-   
-    // 1. 회원가입 (빈 문자열 로직, 얼랏, 유효성검사)
+    
+    
+    // 1. 회원가입 (유효성 검사 로직 필요)
     @objc func registerButtonTapped() {
-        if let email = registerView.registerIdTextField.text,
-           let password = registerView.registerPwTextField.text,
-           let checkPassword = registerView.registerCheckTextField.text,
-           let name = registerView.registerNameTextField.text {
+        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
+           let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
+           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
+           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
             
-            // 빈 문자열 확인 로직 추가해야됨
-            if name.isEmpty {
-                let alert = UIAlertController(title: "이름", message: "이름을 입력하세요.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
-            
-            if password == checkPassword {
+            if email.isEmpty {
+                showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
+            } else if name.isEmpty {
+                showAlertOneButton(title: "이름", message: "이름을 입력하세요.", buttonTitle: "확인")
+            } else if phone.isEmpty {
+                showAlertOneButton(title: "휴대폰번호", message: "휴대폰번호를 입력하세요.", buttonTitle: "확인")
+            } else if password.isEmpty {
+                showAlertOneButton(title: "비밀번호", message: "비밀번호를 입력하세요.", buttonTitle: "확인")
+            } else if checkPassword.isEmpty {
+                showAlertOneButton(title: "비밀번호 확인", message: "비밀번호를 다시 한번 입력하세요.", buttonTitle: "확인")
+            } else if password != checkPassword {
+                showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
+            } else {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
-                        print(e.localizedDescription)
+                        self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
                     } else {
                         self.db.collection("User").addDocument(data: [
-                            "email" : email,
-                            "password" : password,
-                            "name" : name
+                            "email": email,
+                            "password": password,
+                            "name": name
                         ])
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
-            } else {
-                let alert = UIAlertController(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
             }
         }
+        
     }
 }
 

@@ -15,7 +15,6 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     
-    
     // Alert
     func showAlertOneButton(title: String, message: String?, buttonTitle: String, completion: (() -> Void)? = nil) {
         
@@ -30,7 +29,6 @@ class BaseViewController: UIViewController {
     
     }
 
-    
     func showAlertTwoButton(title: String,
                             message: String?,
                             button1Title: String,

@@ -181,8 +181,6 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             showAlertOneButton(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", buttonTitle: "확인") {
                 do {
                     try Auth.auth().signOut()
-                    print("로그아웃 성공")
-                    
                     let loginViewController = LoginViewController()
                     self.transitionToRootView(view: loginViewController)
                 } catch let signOutError as NSError {
