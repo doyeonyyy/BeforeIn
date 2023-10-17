@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>chanho.TestApp</string>
+	<string>chanho.BeforeIn</string>
 	<key>PROJECT_ID</key>
 	<string>testaoo-76c26</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:412072184635:ios:99660071bce93caee7851e</string>
+	<string>1:412072184635:ios:f6e8bb0652215336e7851e</string>
+	<key>DATABASE_URL</key>
+	<string>https://testaoo-76c26-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
