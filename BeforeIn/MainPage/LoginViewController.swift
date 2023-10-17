@@ -38,7 +38,6 @@ class LoginViewController: BaseViewController {
     
     func setupAddTarget() {
         loginView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
-        loginView.maintainButton.addTarget(self, action: #selector(maintainButtonTapped), for: .touchUpInside)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.findIdButton.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
         loginView.findPwButton.addTarget(self, action: #selector(findPwButtonTapped), for: .touchUpInside)
@@ -60,16 +59,6 @@ class LoginViewController: BaseViewController {
         
     }
     
-    @objc func maintainButtonTapped() {
-        loginView.maintainButton.isSelected.toggle()
-        
-        if loginView.maintainButton.isSelected {
-            loginView.maintainButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
-        } else {
-            loginView.maintainButton.setImage(UIImage(systemName: "square"), for: .normal)
-        }
-    }
-    
     // 2. 로그인
     @objc func loginButtonTapped() {
         if let email = loginView.idTextField.text, let pw = loginView.pwTextField.text {
@@ -88,8 +77,6 @@ class LoginViewController: BaseViewController {
             }
         }
     }
-    
-    
     
     
     @objc func findIdButtonTapped() {

@@ -200,6 +200,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                             print(error)
                         } else {
                             print("탈퇴 성공")
+                            let loginViewController = LoginViewController()
+                            self.transitionToRootView(view: loginViewController)
                         }
                     }
                 } else {
