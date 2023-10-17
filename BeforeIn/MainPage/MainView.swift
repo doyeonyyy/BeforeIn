@@ -11,11 +11,6 @@ import Then
 
 class MainView: UIView {
     
-    var mainViewModel: MainViewModel? {
-        didSet{
-            updateView()
-        }
-    }
     
     private let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
@@ -127,11 +122,20 @@ class MainView: UIView {
         return collectionView
     }()
     
-    private let seeMoreButton = UIButton().then{
+    let seeMoreButton = UIButton().then{
         $0.setTitle("더보기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         $0.setTitleColor(.black, for: .normal)
         
+    }
+    
+    var mainViewModel: MainViewModel? {
+        didSet {
+            mainViewModel?.updateView = { [weak self] in
+                self?.updateView()
+            }
+            updateView()
+        }
     }
 
     
@@ -261,20 +265,10 @@ class MainView: UIView {
     
     private func updateView() {
         nameLabel.text = "\(mainViewModel?.name ?? "ㅇㅇㅇ")님은 현재"
-        levelLabel.text = "\(mainViewModel?.level ?? "검은머리 짐승")"
+        levelLabel.text = mainViewModel?.level
         etiquetteViewContent.text = "\(mainViewModel?.etiquetteContent ?? "예")"
+        print("view 업데이트")
     }
 
 }
 
-class MainViewModel {
-    var name: String
-    var level: String
-    var etiquetteContent: String
-    
-    init(name: String, level: String, etiquetteContent: String) {
-        self.name = name
-        self.level = level
-        self.etiquetteContent = etiquetteContent
-    }
-}

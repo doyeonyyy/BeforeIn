@@ -15,3 +15,5 @@ struct Etiquette {
     let backgroundImage: UIImage
     let mainImage: UIImage
 }
+
+var etiquetteList: [Etiquette] = []
