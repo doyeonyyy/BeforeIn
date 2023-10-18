@@ -49,8 +49,25 @@ class RegisterViewController: BaseViewController {
     
     
     // MARK: - @objc
-    @objc func checkIdButtonTapped(){
-        print("중복확인 버튼 눌림")
+    // 아이디 중복확인
+    @objc func checkIdButtonTapped() {
+        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces) {
+            if !email.isEmpty {
+                userManager.findUser(email: email) { isUsed in
+                    if isUsed {
+                        self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
+                        self.registerView.checkIdButton.backgroundColor = .systemGray6
+                        self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
+                    } else {
+                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 아이디입니다.", buttonTitle: "확인")
+                        self.registerView.checkIdButton.backgroundColor = .BeforeInRed
+                        self.registerView.checkIdButton.setTitleColor(UIColor.white, for: .normal)
+                    }
+                }
+            } else  {
+                showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
+            }
+        }
     }
     
     @objc func checkPhoneButtonTapped(){
@@ -103,20 +120,19 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else {
-                
+                let newUser = User(email: email, name: name, nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: phone)
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
-                        
                     } else {
-                        self.userManager.addUser(email: email, name: name, nickname: "", profileImage: "", level: 1, phone: phone)
+                        self.userManager.addUser(user: newUser)
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
         }
     }
-
+    
 }
 
 
