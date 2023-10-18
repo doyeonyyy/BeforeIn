@@ -75,8 +75,7 @@ class SearchViewController: BaseViewController {
     }
     
     @objc func cancelButtonTapped() {
-        print("취소 버튼 터치")
-        // TODO: 취소 버튼 터치시 작업 내용
+        searchView.searchTextField.text = ""
     }
     
     @objc func categoryButtonTapped(_ sender: UIButton) {
