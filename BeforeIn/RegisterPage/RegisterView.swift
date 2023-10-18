@@ -30,9 +30,9 @@ class RegisterView: UIView {
     }
     lazy var checkIdButton = UIButton().then {
         $0.setTitle("  중복확인  ", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        $0.backgroundColor = .BeforeInRed
+        $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
