@@ -19,7 +19,7 @@ struct UserManager {
             "email": user.email,
             "name": user.name,
             "nickname": user.nickname,
-            "profileImage": user.profileImage,
+           // "profileImage": user.profileImage,
             "level": user.level,
             "phone": user.phone
         ])

@@ -45,6 +45,7 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
     }
     
     
@@ -120,7 +121,7 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else {
-                let newUser = User(email: email, name: name, nickname: "", profileImage: "", level: 1, phone: phone)
+                let newUser = User(email: email, name: name, nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: phone)
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
@@ -133,7 +134,30 @@ class RegisterViewController: BaseViewController {
         }
     }
     
+    @objc func writingComplete() {
+        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
+           let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
+           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
+           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
+            
+            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty
+            
+            UIView.animate(withDuration: 0.3) {
+                if isFormValid {
+                    self.registerView.registerButton.backgroundColor = .BeforeInRed
+                    self.registerView.registerButton.setTitleColor(UIColor.white, for: .normal)
+                    self.registerView.registerButton.isEnabled = true
+                } else {
+                    self.registerView.registerButton.backgroundColor = .systemGray6
+                    self.registerView.registerButton.isEnabled = false
+                }
+            }
+        }
+    }
 }
+    
+
 
 
 //MARK: - UITextFieldDelegate

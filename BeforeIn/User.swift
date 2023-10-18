@@ -12,7 +12,7 @@ struct User {
     let email: String
     let name: String
     let nickname: String
-    let profileImage: String
+    let profileImage: UIImage
     let level: Int
     let phone: String
 }
