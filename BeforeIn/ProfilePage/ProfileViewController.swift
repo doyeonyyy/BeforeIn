@@ -176,8 +176,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 2 {
-            // 3. 로그아웃
-            showAlertOneButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", buttonTitle: "확인") {
+            // 로그아웃
+            showAlertTwoButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 do {
                     try Auth.auth().signOut()
                     let loginViewController = LoginViewController()
@@ -187,8 +187,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                 }
             }
         } else if indexPath.row == 3 {
-            // 4. 회원탈퇴
-            showAlertOneButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", buttonTitle: "확인") {
+            // 회원탈퇴
+            showAlertTwoButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 if let user = Auth.auth().currentUser {
                     self.userManager.deleteUser(user: user)
                     user.delete { error in
