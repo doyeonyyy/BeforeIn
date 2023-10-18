@@ -2,11 +2,13 @@
 
 
 
-import SnapKit
 import UIKit
 import FirebaseAuth
+import SnapKit
 
 class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    let userManager = UserManager()
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -171,22 +173,15 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 0 {
-            let displayViewController = DisplayViewController()
-            present(displayViewController, animated: true, completion: nil)
-        } else if indexPath.row == 1 {
-            let infoViewController = InfoViewController()
-            present(infoViewController, animated: true, completion: nil)
-        } else if indexPath.row == 2 {
+        if indexPath.row == 2 {
             // 3. 로그아웃
             showAlertOneButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", buttonTitle: "확인") {
                 do {
                     try Auth.auth().signOut()
                     let loginViewController = LoginViewController()
-                    self.transitionToRootView(view: UINavigationController(rootViewController: (loginViewController)))
+                    self.transitionToRootView(view: UINavigationController(rootViewController: loginViewController))
                 } catch let signOutError as NSError {
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
@@ -195,24 +190,20 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             // 4. 회원탈퇴
             showAlertOneButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", buttonTitle: "확인") {
                 if let user = Auth.auth().currentUser {
+                    self.userManager.deleteUser(user: user)
                     user.delete { error in
                         if let error = error {
-                            print(error)
+                            print("Firebase Error: \(error)")
                         } else {
-                            print("탈퇴 성공")
+                            print("회원탈퇴 성공")
                             let loginViewController = LoginViewController()
-                            self.transitionToRootView(view: UINavigationController(rootViewController: (loginViewController)))
+                            self.transitionToRootView(view: UINavigationController(rootViewController: loginViewController))
                         }
                     }
-                } else {
-                    print("로그인 정보가 존재하지 않습니다")
                 }
             }
         }
-        
     }
-    
-    
     
     
     
