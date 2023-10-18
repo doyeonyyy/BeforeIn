@@ -28,13 +28,7 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         let mainViewModel = MainViewModel(user: self.user1)
         mainView.mainViewModel = mainViewModel
-        mainView.recentlyEtiquetteCollectionView.delegate = self
-        mainView.recentlyEtiquetteCollectionView.dataSource = self
-        mainView.recentlyEtiquetteCollectionView.register(RecentItemCell.self, forCellWithReuseIdentifier: "RecentItemCell")
-        mainView.recommendEtiquetteCollectionView.delegate = self
-        mainView.recommendEtiquetteCollectionView.dataSource = self
-        mainView.recommendEtiquetteCollectionView.register(RecommendItemCell.self, forCellWithReuseIdentifier: "RecommendItemCell")
-        recommendedEtiquetteCollectionView = mainView.recommendEtiquetteCollectionView
+        setupCollectionView()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
     }
@@ -45,6 +39,16 @@ class MainViewController: BaseViewController {
     
     @objc func quizButtonClick() {
         self.fetchEtiquetteContent()
+    }
+    
+    func setupCollectionView() {
+        mainView.recentlyEtiquetteCollectionView.delegate = self
+        mainView.recentlyEtiquetteCollectionView.dataSource = self
+        mainView.recentlyEtiquetteCollectionView.register(RecentItemCell.self, forCellWithReuseIdentifier: "RecentItemCell")
+        mainView.recommendEtiquetteCollectionView.delegate = self
+        mainView.recommendEtiquetteCollectionView.dataSource = self
+        mainView.recommendEtiquetteCollectionView.register(RecommendItemCell.self, forCellWithReuseIdentifier: "RecommendItemCell")
+        recommendedEtiquetteCollectionView = mainView.recommendEtiquetteCollectionView
     }
     
     func fetchEtiquetteContent() {
