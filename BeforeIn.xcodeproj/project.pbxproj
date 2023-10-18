@@ -70,6 +70,8 @@
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
+		63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */; };
+		63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */; };
 		673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CD34F2ADF7CD00090C051 /* UserManager.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
@@ -118,6 +120,8 @@
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
+		63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroViewModel.swift; sourceTree = "<group>"; };
+		63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		673CD34F2ADF7CD00090C051 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -266,8 +270,10 @@
 			isa = PBXGroup;
 			children = (
 				1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */,
+				63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */,
 				63AB9D632ADD0968008E85BA /* Quiz PVC */,
 				63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */,
+				63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */,
 			);
 			path = QuizPage;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 			files = (
 				159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */,
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
+				63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */,
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
@@ -508,6 +515,7 @@
 				63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
+				63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */,
 				E7EFDA222AD8F3F7000963C8 /* EtiquetteCell.swift in Sources */,
 				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,

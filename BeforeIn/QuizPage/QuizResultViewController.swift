@@ -12,7 +12,7 @@ class QuizResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let labelA = UILabel()
+        
         labelA.text = "검사결과"
         labelA.textColor = .black
         labelA.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 20)
@@ -22,7 +22,7 @@ class QuizResultViewController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(76)
         }
         
-        let labelB = UILabel()
+        
         labelB.text = "000님은"
         labelB.textColor = .black
         labelB.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 32)
@@ -31,7 +31,7 @@ class QuizResultViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(158)
             make.leading.equalTo(labelA.snp.trailing).offset(4)
         }
-        let labelC = UILabel()
+        
         labelC.text = "Lv.1 검은머리 짐승입니다"
         labelC.textColor = .black
         labelC.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28)
@@ -41,7 +41,7 @@ class QuizResultViewController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(76)
         }
         
-        let startButton = UIButton()
+        
         startButton.setTitle("비포인 시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = UIColor.BeforeInRed
@@ -54,7 +54,6 @@ class QuizResultViewController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(75)
         }
         
-        let levelImage = UIImageView()
         view.addSubview(levelImage)
         levelImage.image = UIImage(named: "level1")
         levelImage.frame = CGRect(x: 0, y: 0, width: 131.25, height: 137)
@@ -64,7 +63,6 @@ class QuizResultViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(240)
         }
         
-        let labelD = UILabel()
         labelD.text = "Lv.1 검은머리 짐승"
         labelD.textColor = .black
         labelD.font = UIFont(name: "Inter-Regular", size: 14)
