@@ -49,6 +49,7 @@ class DisplayViewController: UIViewController {
     let lightModeLabel: UILabel = {
         let label = UILabel()
         label.text = "라이트 모드"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -57,6 +58,7 @@ class DisplayViewController: UIViewController {
     let darkModeLabel: UILabel = {
         let label = UILabel()
         label.text = "다크 모드"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -78,11 +80,64 @@ class DisplayViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-
+    
+    var isDarkMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        
+        disCancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        
+        
+        
+        let lightModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(lightModeTapped))
+        lightModeCircle.addGestureRecognizer(lightModeTapGesture)
+        lightModeCircle.isUserInteractionEnabled = true
+        
+        let darkModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(darkModeTapped))
+        darkModeCircle.addGestureRecognizer(darkModeTapGesture)
+        darkModeCircle.isUserInteractionEnabled = true
+    }
+    
+    @objc func lightModeTapped() {
+        if isDarkMode == true {
+            isDarkMode = false
+        }
+        if isDarkMode == true {
+            lightModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
+            lightModeCircle.layer.borderWidth = 0
+            darkModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+            darkModeCircle.layer.borderWidth = 1
+        }
+        else {
+            lightModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+            lightModeCircle.layer.borderWidth = 1
+            darkModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
+            darkModeCircle.layer.borderWidth = 0
+        }
+    }
+    
+    @objc func darkModeTapped() {
+        if isDarkMode == false {
+            isDarkMode = true
+        }
+        if isDarkMode == false {
+            lightModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+            lightModeCircle.layer.borderWidth = 1
+            darkModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
+            darkModeCircle.layer.borderWidth = 0
+        }
+        else {
+            lightModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
+            lightModeCircle.layer.borderWidth = 0
+            darkModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+            darkModeCircle.layer.borderWidth = 1
+        }
+    }
+    
+    private func setupUI() {
         
         view.backgroundColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1)
         view.addSubview(disCancelButton)
@@ -94,8 +149,6 @@ class DisplayViewController: UIViewController {
         view.addSubview(darkModeLabel)
         view.addSubview(lightModeCircle)
         view.addSubview(darkModeCircle)
-        disCancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         
         disCancelButton.snp.makeConstraints { make in
             make.width.equalTo(41)
