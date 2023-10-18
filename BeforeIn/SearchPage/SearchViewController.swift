@@ -14,7 +14,9 @@ class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let searchView = SearchView()
     private let searchViewModel = SearchViewModel()
-    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "교통", "운동"]
+    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "공공장소"]
+    var filteredEtiquetteList: [Etiquette] = etiquetteList
+    var etiquetteCollectionView: UICollectionView!
     
     // MARK: - View Life Cycle
     override func loadView() {
@@ -67,6 +69,7 @@ class SearchViewController: BaseViewController {
         searchView.etiquetteCollectionView.register(EtiquetteCell.self, forCellWithReuseIdentifier: "EtiquetteCell")
         searchView.etiquetteCollectionView.dataSource = self
         searchView.etiquetteCollectionView.delegate = self
+        etiquetteCollectionView = searchView.etiquetteCollectionView
     }
     
     // MARK: - @objc
@@ -92,33 +95,36 @@ class SearchViewController: BaseViewController {
         sender.setTitleColor(.white, for: .normal)
 
         // TODO: 카테고리 버튼 index 번호에 따른 터치시 작업 내용
+        
         switch sender.tag {
-        case 0:
-            print("에티켓 카테고리 - '전체' 누름")
-        case 1:
-            print("에티켓 카테고리 - '경조사' 누름")
-        case 2:
-            print("에티켓 카테고리 - '일상에서' 누름")
-        case 3:
-            print("에티켓 카테고리 - '교통' 누름")
-        case 4:
-            print("에티켓 카테고리 - '운동' 누름")
+        case 0: // 카테고리 "전체"
+            filteredEtiquetteList = etiquetteList
+        case 1: // 카테고리 "경조사"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "경조사" }
+        case 2: // 카테고리 "일상에서"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "일상에서" }
+        case 3: // 카테고리 "교통"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
+        case 4: // 카테고리 "운동"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "공공장소" }
         default:
             break
         }
+        self.etiquetteCollectionView.reloadData()
         
     }
 }
 // MARK: - etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return etiquetteList.count
+//        return etiquetteList.count
+        return filteredEtiquetteList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
         
-        let etiquette = etiquetteList[indexPath.row]
+        let etiquette = filteredEtiquetteList[indexPath.row]
         
         cell.titleLabel.text = etiquette.place
         cell.descriptionLabel.text = etiquette.content.first
