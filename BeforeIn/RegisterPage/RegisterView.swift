@@ -117,10 +117,11 @@ class RegisterView: UIView {
     
     lazy var registerButton = UIButton().then {
         $0.setTitle("비포인 시작하기", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        $0.backgroundColor = .BeforeInRed
+        $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 8
+       // $0.isEnabled = false
     }
     
     // MARK: - Life Cycle

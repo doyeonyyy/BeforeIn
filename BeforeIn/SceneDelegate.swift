@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if Auth.auth().currentUser != nil {
             let tapVC = TapbarController()
-            let navigationController = UINavigationController(rootViewController: tapVC)
-            window.rootViewController = navigationController
+            window.rootViewController = tapVC
         } else {
             let loginVC = LoginViewController()
             let navigationController = UINavigationController(rootViewController: loginVC)
