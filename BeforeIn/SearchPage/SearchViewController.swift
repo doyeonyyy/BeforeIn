@@ -13,7 +13,6 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     private let searchView = SearchView()
-    private let searchViewModel = SearchViewModel()
     private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "공공장소"]
     var filteredEtiquetteList: [Etiquette] = etiquetteList
     var etiquetteCollectionView: UICollectionView!

@@ -81,7 +81,6 @@
 		B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */; };
 		B397E30A2ADCCA2C00F3363F /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3092ADCCA2C00F3363F /* InfoViewController.swift */; };
 		E718CB792ADA6BB300896ACC /* EtiquetteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */; };
-		E77904D52ADFA55F005B1F85 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77904D42ADFA55F005B1F85 /* SearchViewModel.swift */; };
 		E779C6312AD7998500702D60 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E779C6302AD7998500702D60 /* UIColor.swift */; };
 		E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */; };
 		E7EFDA222AD8F3F7000963C8 /* EtiquetteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EFDA212AD8F3F7000963C8 /* EtiquetteCell.swift */; };
@@ -129,7 +128,6 @@
 		B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		B397E3092ADCCA2C00F3363F /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteDetailCell.swift; sourceTree = "<group>"; };
-		E77904D42ADFA55F005B1F85 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		E779C6302AD7998500702D60 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		E7EFDA212AD8F3F7000963C8 /* EtiquetteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteCell.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				E7EFDA232AD8FC49000963C8 /* SearchView.swift */,
-				E77904D42ADFA55F005B1F85 /* SearchViewModel.swift */,
 				1596DCC82AD6B2BD00E6D388 /* SearchViewController.swift */,
 				E7EFDA202AD8F39D000963C8 /* CustomCell */,
 			);
@@ -485,7 +482,6 @@
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
-				E77904D52ADFA55F005B1F85 /* SearchViewModel.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
