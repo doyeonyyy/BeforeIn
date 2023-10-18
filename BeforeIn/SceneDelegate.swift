@@ -17,15 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         
-//        if Auth.auth().currentUser != nil {
-//            let tapVC = TapbarController()
-//            let navigationController = UINavigationController(rootViewController: tapVC)
-//            window.rootViewController = navigationController
-//        } else {
-//            let loginVC = LoginViewController()
-//            let navigationController = UINavigationController(rootViewController: loginVC)
-//            window.rootViewController = navigationController
-//        }
+        if Auth.auth().currentUser != nil {
+            let tapVC = TapbarController()
+            window.rootViewController = tapVC
+        } else {
+            let loginVC = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            window.rootViewController = navigationController
+        }
         
         window.rootViewController = QuizIntroViewController()
         window.makeKeyAndVisible()

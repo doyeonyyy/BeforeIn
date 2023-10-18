@@ -45,6 +45,7 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
     }
     
     
@@ -58,10 +59,12 @@ class RegisterViewController: BaseViewController {
                         self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
                         self.registerView.checkIdButton.backgroundColor = .systemGray6
                         self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
+
                     } else {
                         self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 아이디입니다.", buttonTitle: "확인")
                         self.registerView.checkIdButton.backgroundColor = .BeforeInRed
                         self.registerView.checkIdButton.setTitleColor(UIColor.white, for: .normal)
+
                     }
                 }
             } else  {
@@ -69,6 +72,7 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
+
     
     @objc func checkPhoneButtonTapped(){
         print("휴대폰인증 버튼 눌림")
@@ -133,7 +137,30 @@ class RegisterViewController: BaseViewController {
         }
     }
     
+    @objc func writingComplete() {
+        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
+           let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
+           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
+           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
+            
+            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty
+            
+            UIView.animate(withDuration: 0.3) {
+                if isFormValid {
+                    self.registerView.registerButton.backgroundColor = .BeforeInRed
+                    self.registerView.registerButton.setTitleColor(UIColor.white, for: .normal)
+                    self.registerView.registerButton.isEnabled = true
+                } else {
+                    self.registerView.registerButton.backgroundColor = .systemGray6
+                    self.registerView.registerButton.isEnabled = false
+                }
+            }
+        }
+    }
 }
+    
+
 
 
 //MARK: - UITextFieldDelegate
@@ -177,5 +204,27 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString input: String) -> Bool {
+        if textField == registerView.registerNameTextField {
+            let stringSet = CharacterSet.letters
+            let replaceStringSet = CharacterSet(charactersIn: input)
+            
+            if !stringSet.isSuperset(of: replaceStringSet) {
+                showAlertOneButton(title: "입력 오류", message: "문자를 입력해주세요.", buttonTitle: "확인")
+                return false
+            }
+        } else if textField == registerView.registerPhoneTextField {
+            let intSet = CharacterSet.decimalDigits
+            let replaceIntSet = CharacterSet(charactersIn: input)
+            
+            if !intSet.isSuperset(of: replaceIntSet) {
+                showAlertOneButton(title: "입력 오류", message: "숫자를 입력해주세요.", buttonTitle: "확인")
+                return false
+            }
+        }
+        return true
+    }
+
+
 }
 
