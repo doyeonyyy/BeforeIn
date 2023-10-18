@@ -16,7 +16,7 @@ class MainViewController: BaseViewController {
     var firebaseDB: DatabaseReference!
     var recommendedEtiquetteCollectionView: UICollectionView!
     
-    private var user1 = User(email: "lcho3878@naver.com", name: "이찬호", nickname: "lcho3878", profileImage: "", level: 5, phone: "")
+    private var user1 = User(email: "lcho3878@naver.com", name: "이찬호", nickname: "lcho3878", profileImage: UIImage(systemName: "person.fill")!, level: 5, phone: "")
     let mainView = MainView()
     
     override func loadView() {
