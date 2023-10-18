@@ -120,7 +120,7 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else {
-                let newUser = User(email: email, name: name, nickname: "", profileImage: "", level: 1, phone: phone)
+                let newUser = User(email: email, name: name, nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: phone)
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
