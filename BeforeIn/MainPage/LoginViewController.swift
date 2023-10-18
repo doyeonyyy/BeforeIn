@@ -58,7 +58,7 @@ class LoginViewController: BaseViewController {
         
     }
     
-    // 2. 로그인
+    // 로그인
     @objc func loginButtonTapped() {
         if let email = loginView.idTextField.text, let pw = loginView.pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) { authResult, error in

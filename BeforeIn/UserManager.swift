@@ -25,7 +25,6 @@ struct UserManager {
         ])
     }
     
-    
     func deleteUser(user: FirebaseAuth.User){
         if let email = user.email {
             db.collection("User").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
@@ -40,9 +39,20 @@ struct UserManager {
         }
     }
     
-    func findUser(){
-        
+    func findUser(email: String, completion: @escaping (Bool) -> Void) {
+        let userDB = db.collection("User")
+        // 입력한 이메일이 있는지 확인 쿼리
+        let query = userDB.whereField("email", isEqualTo: email)
+        query.getDocuments { (snapShot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(true) // 사용 불가능, 에러 처리 필요
+            } else if let qs = snapShot, qs.documents.isEmpty {
+                completion(false) // 사용 가능
+            } else {
+                completion(true) // 사용 불가능
+            }
+        }
     }
-    
     
 }
