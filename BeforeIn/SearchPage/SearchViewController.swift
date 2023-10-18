@@ -28,6 +28,8 @@ class SearchViewController: BaseViewController {
         setupAddTarget()
         addButtonsToCategoryStackView()
         configureCollectionView()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,13 +40,9 @@ class SearchViewController: BaseViewController {
     }
     
     // MARK: - Methods
-    
-    
     func setupAddTarget(){
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        searchView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        searchView.searchButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        searchView.searchTextField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
     }
     
     private func addButtonsToCategoryStackView() {
@@ -73,12 +71,34 @@ class SearchViewController: BaseViewController {
     }
     
     // MARK: - @objc
-    @objc func searchButtonTapped() {
-        searchViewModel.searchEtiquette()
+    @objc func textFieldDidChanged(_ sender: Any?) {
+        if let searchText = searchView.searchTextField.text, !searchText.isEmpty {
+            searchView.searchButton.setTitle("취소", for: .normal)
+            searchView.searchButton.setTitleColor(.black, for: .normal)
+            searchView.searchButton.setImage(nil, for: .normal)
+
+            filteredEtiquetteList = searchText.isEmpty ? etiquetteList : etiquetteList.filter { $0.place.lowercased().contains(searchText.lowercased()) }
+            self.etiquetteCollectionView.reloadData()
+        } else {
+            cancelButtonTapped()
+        }
     }
     
     @objc func cancelButtonTapped() {
+        if let categoryButton = searchView.categoryStackView.arrangedSubviews.first as? UIButton {
+            categoryButton.sendActions(for: .touchUpInside)
+        }
+        
+        let image = UIImage(systemName: "magnifyingglass")
+        searchView.searchButton.setImage(image, for: .normal)
+        searchView.searchButton.tintColor = .darkGray
+        searchView.searchButton.setTitle(nil, for: .normal)
+        
         searchView.searchTextField.text = ""
+        searchView.searchTextField.resignFirstResponder() // 포커스 해제
+        
+        filteredEtiquetteList = etiquetteList
+        self.etiquetteCollectionView.reloadData()
     }
     
     @objc func categoryButtonTapped(_ sender: UIButton) {
@@ -93,8 +113,6 @@ class SearchViewController: BaseViewController {
 
         sender.backgroundColor = UIColor.BeforeInRed
         sender.setTitleColor(.white, for: .normal)
-
-        // TODO: 카테고리 버튼 index 번호에 따른 터치시 작업 내용
         
         switch sender.tag {
         case 0: // 카테고리 "전체"
@@ -103,15 +121,14 @@ class SearchViewController: BaseViewController {
             filteredEtiquetteList = etiquetteList.filter { $0.category == "경조사" }
         case 2: // 카테고리 "일상에서"
             filteredEtiquetteList = etiquetteList.filter { $0.category == "일상에서" }
-        case 3: // 카테고리 "교통"
+        case 3: // 카테고리 "대중교통"
             filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
-        case 4: // 카테고리 "운동"
+        case 4: // 카테고리 "공공장소"
             filteredEtiquetteList = etiquetteList.filter { $0.category == "공공장소" }
         default:
             break
         }
         self.etiquetteCollectionView.reloadData()
-        
     }
 }
 // MARK: - etiquetteCollectionView

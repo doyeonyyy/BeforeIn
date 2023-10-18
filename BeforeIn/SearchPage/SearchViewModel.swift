@@ -9,7 +9,4 @@ import Foundation
 
 class SearchViewModel {
     
-    func searchEtiquette() {
-        print("검색 버튼 터치")
-    }
 }
