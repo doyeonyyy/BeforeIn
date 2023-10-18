@@ -7,13 +7,12 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
 class RegisterViewController: BaseViewController {
     
     // MARK: - Properties
     private let registerView = RegisterView()
-    private let db = Firestore.firestore()
+    let userManager = UserManager()
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -25,7 +24,6 @@ class RegisterViewController: BaseViewController {
         self.title = "회원가입"
         setTextField()
         setupAddTarget()
-        print("회원가입VC ViewDidLoad")
     }
     
     deinit {
@@ -105,22 +103,20 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else {
+                
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
+                        
                     } else {
-                        self.db.collection("User").addDocument(data: [
-                            "email": email,
-                            "password": password,
-                            "name": name
-                        ])
+                        self.userManager.addUser(email: email, name: name, nickname: "", profileImage: "", level: 1, phone: phone)
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
         }
-        
     }
+
 }
 
 

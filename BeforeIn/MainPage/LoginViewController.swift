@@ -22,7 +22,6 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         setTextField()
         setupAddTarget()
-        print("로그인VC ViewDidLoad")
     }
     
     deinit {

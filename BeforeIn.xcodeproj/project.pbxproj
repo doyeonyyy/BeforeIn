@@ -68,11 +68,10 @@
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
+		673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CD34F2ADF7CD00090C051 /* UserManager.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
-		676DE2272ADE62280002C6D8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE2262ADE62280002C6D8 /* FirebaseAuth */; };
-		676DE2292ADE62280002C6D8 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE2282ADE62280002C6D8 /* FirebaseAuthCombine-Community */; };
-		676DE22B2ADE66930002C6D8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 676DE22A2ADE66930002C6D8 /* FirebaseFirestore */; };
+		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -115,6 +114,7 @@
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
+		673CD34F2ADF7CD00090C051 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				159B79022ADE6DE600FE210E /* FirebaseAnalyticsSwift in Frameworks */,
 				159B79102ADE6DE600FE210E /* FirebaseDatabase in Frameworks */,
 				1596DCD72AD6B32900E6D388 /* Then in Frameworks */,
-				676DE2272ADE62280002C6D8 /* FirebaseAuth in Frameworks */,
+				676DE2272ADE62280002C6D8 /* (null) in Frameworks */,
 				159B78CA2ADE10DD00FE210E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				159B79082ADE6DE600FE210E /* FirebaseAppDistribution-Beta in Frameworks */,
 				159B79282ADE6DE600FE210E /* FirebaseMessaging in Frameworks */,
@@ -316,6 +316,7 @@
 				159B78BF2ADD56E900FE210E /* Etiquette.swift */,
 				159B78C22ADD573B00FE210E /* User.swift */,
 				159B78C42ADD57A700FE210E /* Quiz.swift */,
+				673CD34F2ADF7CD00090C051 /* UserManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -481,6 +482,7 @@
 				E7EFDA242AD8FC49000963C8 /* SearchView.swift in Sources */,
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */,
+				673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
 				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,
 				E718CB792ADA6BB300896ACC /* EtiquetteDetailCell.swift in Sources */,
