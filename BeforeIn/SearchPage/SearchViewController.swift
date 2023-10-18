@@ -126,6 +126,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         
         let etiquette = filteredEtiquetteList[indexPath.row]
         
+        cell.imageView.image = etiquette.mainImage
         cell.titleLabel.text = etiquette.place
         cell.descriptionLabel.text = etiquette.content.first
 
