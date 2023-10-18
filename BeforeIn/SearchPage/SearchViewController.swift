@@ -13,11 +13,8 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     private let searchView = SearchView()
+    private let searchViewModel = SearchViewModel()
     private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "교통", "운동"]
-    
-    /// 더미데이터
-    private let dummyEtiquetteTitle: [String] = ["영화관", "도서관", "소개팅", "목욕탕", "찜질방", "반려동물 산책 시"]
-    private let dummyEtiquetteDescription = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
     
     // MARK: - View Life Cycle
     override func loadView() {
@@ -74,8 +71,7 @@ class SearchViewController: BaseViewController {
     
     // MARK: - @objc
     @objc func searchButtonTapped() {
-        print("검색 버튼 터치")
-        // TODO: 검색 버튼 터치시 작업 내용
+        searchViewModel.searchEtiquette()
     }
     
     @objc func cancelButtonTapped() {
@@ -117,13 +113,17 @@ class SearchViewController: BaseViewController {
 // MARK: - etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyEtiquetteTitle.count
+        return etiquetteList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
-        cell.titleLabel.text = dummyEtiquetteTitle[indexPath.row]
-        cell.descriptionLabel.text = dummyEtiquetteDescription
+        
+        let etiquette = etiquetteList[indexPath.row]
+        
+        cell.titleLabel.text = etiquette.place
+        cell.descriptionLabel.text = etiquette.content.first
+
         return cell
     }
     
