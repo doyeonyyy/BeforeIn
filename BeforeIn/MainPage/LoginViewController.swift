@@ -68,7 +68,7 @@ class LoginViewController: BaseViewController {
                                             buttonTitle: "확인") {
                     }
                     print("로그인 실패 : \(error.localizedDescription)")
-                } else if let authResult = authResult {
+                } else if authResult != nil {
                     print("로그인 성공")
                     let tapBarController = TapbarController()
                     self.transitionToRootView(view: tapBarController)
