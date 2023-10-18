@@ -14,17 +14,16 @@ struct UserManager {
     let db = Firestore.firestore()
     
     // 생성할때는 기본이미지로 생성(이미지 URL저장), 마이페이지에서 수정하면 업데이트
-    func addUser(email: String, name: String, nickname: String, profileImage: String, level: Int, phone: String) {
+    func addUser(user: User) {
         db.collection("User").addDocument(data: [
-            "email": email,
-            "name": name,
-            "nickname": nickname,
-            "profileImage": profileImage,
-            "level": level,
-            "phone": phone
+            "email": user.email,
+            "name": user.name,
+            "nickname": user.nickname,
+            "profileImage": user.profileImage,
+            "level": user.level,
+            "phone": user.phone
         ])
     }
-    
     
     func deleteUser(user: FirebaseAuth.User){
         if let email = user.email {
@@ -40,9 +39,19 @@ struct UserManager {
         }
     }
     
-    func findUser(){
-        
+    func findUser(email: String, completion: @escaping (Bool) -> Void) {
+        let userDB = db.collection("User")
+        let query = userDB.whereField("email", isEqualTo: email)
+        query.getDocuments { (snapShot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(true) // 사용 불가능, 에러 처리 필요
+            } else if let qs = snapShot, qs.documents.isEmpty {
+                completion(false) // 사용 가능
+            } else {
+                completion(true) // 사용 불가능
+            }
+        }
     }
-    
     
 }

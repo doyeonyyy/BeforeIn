@@ -58,7 +58,7 @@ class LoginViewController: BaseViewController {
         
     }
     
-    // 2. 로그인
+    // 로그인
     @objc func loginButtonTapped() {
         if let email = loginView.idTextField.text, let pw = loginView.pwTextField.text {
             Auth.auth().signIn(withEmail: email, password: pw) { authResult, error in
@@ -68,7 +68,7 @@ class LoginViewController: BaseViewController {
                                             buttonTitle: "확인") {
                     }
                     print("로그인 실패 : \(error.localizedDescription)")
-                } else if let authResult = authResult {
+                } else if authResult != nil {
                     print("로그인 성공")
                     let tapBarController = TapbarController()
                     self.transitionToRootView(view: tapBarController)
