@@ -35,6 +35,12 @@ class RecommendItemCell: UICollectionViewCell {
         setupUI()
     }
     
+    func configureUI(_ etiquette: Etiquette) {
+        contentImageView.image = etiquette.mainImage
+        mainLabel.text = "\(etiquette.place) 꿀팁 에티켓"
+        contentLabel.text = "\(etiquette.content[0])"
+    }
+    
     private func setupUI() {
         
         contentView.layer.cornerRadius = 16
