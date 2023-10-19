@@ -12,7 +12,7 @@ import Then
 class FirstDetailView: UIView {
     
     // MARK: - UI Properties
-    lazy var detailImageView = UIView().then {
+    lazy var detailImageView = UIImageView().then {
         $0.backgroundColor = .darkGray
     }
     
