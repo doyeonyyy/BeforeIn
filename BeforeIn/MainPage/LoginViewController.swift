@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginView = LoginView()
+    let userManager = UserManager()
     
     // MARK: - Life Cycle
     override func loadView(){
@@ -23,6 +25,10 @@ class LoginViewController: BaseViewController {
         setupAddTarget()
     }
     
+    deinit {
+        print("로그인VC 해제")
+    }
+    
     
     // MARK: - Methods
     func setTextField(){
@@ -32,7 +38,6 @@ class LoginViewController: BaseViewController {
     
     func setupAddTarget() {
         loginView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
-        loginView.maintainButton.addTarget(self, action: #selector(maintainButtonTapped), for: .touchUpInside)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.findIdButton.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
         loginView.findPwButton.addTarget(self, action: #selector(findPwButtonTapped), for: .touchUpInside)
@@ -54,18 +59,28 @@ class LoginViewController: BaseViewController {
         
     }
     
-    @objc func maintainButtonTapped() {
-        loginView.maintainButton.isSelected.toggle()
-        
-        if loginView.maintainButton.isSelected {
-            loginView.maintainButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
-        } else {
-            loginView.maintainButton.setImage(UIImage(systemName: "square"), for: .normal)
-        }
-    }
-    
+    // 로그인
     @objc func loginButtonTapped() {
-        print("로그인 버튼이 눌렸습니다")
+        if let email = loginView.idTextField.text, let pw = loginView.pwTextField.text {
+            Auth.auth().signIn(withEmail: email, password: pw) { authResult, error in
+                if let error = error {
+                    self.showAlertOneButton(title: "로그인 실패",
+                                            message: "아이디 또는 비밀번호가 틀렸습니다.",
+                                            buttonTitle: "확인") {
+                    }
+                    print("로그인 실패 : \(error.localizedDescription)")
+                } else {
+                    self.userManager.findUser(email: email) { user in
+                        if let user = user {
+                            currentUser = user
+                            print("로그인 성공")
+                            let tapBarController = TapbarController()
+                            self.transitionToRootView(view: tapBarController)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @objc func findIdButtonTapped() {
@@ -82,7 +97,6 @@ class LoginViewController: BaseViewController {
     }
     
 }
-
 
 // MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
@@ -133,7 +147,7 @@ extension LoginViewController: UITextFieldDelegate {
         }
     }
     
-
+    
     
     
 }

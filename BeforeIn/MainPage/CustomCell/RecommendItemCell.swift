@@ -18,7 +18,7 @@ class RecommendItemCell: UICollectionViewCell {
         $0.text = "소개팅 꿀팁 에티켓"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
-    var contentLabel = UILabel().then {
+    var descriptionLabel = UILabel().then {
         $0.text = "\"너가 그래서 솔로\"...이것만 알면 너도 올해는 커플!"
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = .systemGray
@@ -35,6 +35,12 @@ class RecommendItemCell: UICollectionViewCell {
         setupUI()
     }
     
+    func configureUI(_ etiquette: Etiquette) {
+        contentImageView.image = etiquette.mainImage
+        mainLabel.text = "\(etiquette.place) 꿀팁 에티켓"
+        descriptionLabel.text = etiquette.description
+    }
+    
     private func setupUI() {
         
         contentView.layer.cornerRadius = 16
@@ -43,7 +49,7 @@ class RecommendItemCell: UICollectionViewCell {
         
         contentView.addSubview(contentImageView)
         contentView.addSubview(mainLabel)
-        contentView.addSubview(contentLabel)
+        contentView.addSubview(descriptionLabel)
         
         contentImageView.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -54,7 +60,7 @@ class RecommendItemCell: UICollectionViewCell {
             make.top.equalTo(contentImageView.snp.bottom).offset(22)
             make.centerX.equalToSuperview()
         }
-        contentLabel.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(18)
         }

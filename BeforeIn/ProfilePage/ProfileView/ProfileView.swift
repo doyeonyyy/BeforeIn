@@ -1,12 +1,14 @@
+//
+//  ProfileView.swift
+//  BeforeIn
+//
+//  Created by t2023-m079 on 10/18/23.
+//
 
-
-
-
-import SnapKit
+import Foundation
 import UIKit
 
-class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class ProfileView: UIView{
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "000님"
@@ -29,9 +31,10 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "아이디"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.text = "userid@.com"
+//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+        label.textColor = UIColor.systemGray
+        label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -42,6 +45,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 40
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -128,114 +132,79 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         return view
     }()
     
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         return tableView
     }()
     
-    private let cellData: [String] = [
-        "로그인 관리",
-        "디스플레이",
-        "정보"
-    ]
+    var profileViewModel: ProfileViewModel?{
+        didSet {
+            profileViewModel?.updateView = { [weak self] in
+                self?.updateView()
+            }
+            updateView()
+        }
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.addSubview(nicknameLabel)
-        view.addSubview(mentLabel)
-        view.addSubview(idLabel)
-        view.addSubview(circularImageView)
-        view.addSubview(shadowView)
-        view.addSubview(grayRectangle)
-        view.addSubview(nameBoxLabel)
-        view.addSubview(levelLabel)
-        view.addSubview(level)
-        view.addSubview(mentBoxLabel)
-        view.addSubview(levelRectangle)
-        view.addSubview(myLevelRectangle)
-        view.addSubview(line)
-        view.addSubview(tableView)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubViews()
         defineLayoutConstraints()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellData.count
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addSubViews()
+        defineLayoutConstraints()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let text = cellData[indexPath.row]
-        
-        cell.textLabel?.text = text
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
-        
-        let line = UIView()
-        line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(line)
-        
-        line.snp.makeConstraints { make in
-            make.leading.equalTo(cell.contentView.snp.leading)
-            make.trailing.equalTo(cell.contentView.snp.trailing)
-            make.bottom.equalTo(cell.contentView.snp.bottom)
-            make.height.equalTo(1)
-        }
-
-        
-        let chevronImageView = UIImageView()
-        chevronImageView.image = UIImage(systemName: "chevron.forward")
-        chevronImageView.tintColor = .gray
-        chevronImageView.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(chevronImageView)
-        
-        chevronImageView.snp.makeConstraints { make in
-            make.width.equalTo(14)
-            make.height.equalTo(22)
-            make.centerY.equalTo(cell.contentView)
-            make.trailing.equalTo(cell.contentView).offset(-24)
-        }
-        
-        return cell
+    private func addSubViews() {
+        addSubview(nicknameLabel)
+        addSubview(mentLabel)
+        addSubview(idLabel)
+        addSubview(circularImageView)
+        addSubview(shadowView)
+        addSubview(grayRectangle)
+        addSubview(nameBoxLabel)
+        addSubview(levelLabel)
+        addSubview(level)
+        addSubview(mentBoxLabel)
+        addSubview(levelRectangle)
+        addSubview(myLevelRectangle)
+        addSubview(line)
+        addSubview(tableView)
     }
-    
     
     private func defineLayoutConstraints() {
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(90)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.top.equalTo(self.snp.top).offset(90)
+            make.leading.equalTo(self.snp.leading).offset(24)
         }
         
         mentLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(94)
+            make.top.equalTo(self.snp.top).offset(94)
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(2)
         }
         
         idLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.leading.equalTo(self.snp.leading).offset(24)
         }
         
         circularImageView.snp.makeConstraints { make in
             make.width.equalTo(80)
             make.height.equalTo(80)
-            make.trailing.equalTo(view.snp.trailing).offset(-24)
-            make.top.equalTo(view.snp.top).offset(86)
+            make.trailing.equalTo(self.snp.trailing).offset(-24)
+            make.top.equalTo(self.snp.top).offset(86)
         }
         
         grayRectangle.snp.makeConstraints { make in
             make.width.equalTo(345)
             make.height.equalTo(200)
             make.top.equalTo(idLabel.snp.bottom).offset(32)
-            make.leading.equalTo(view.snp.leading).offset(24)
+            make.leading.equalTo(self.snp.leading).offset(24)
         }
         
         nameBoxLabel.snp.makeConstraints { make in
@@ -264,7 +233,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
-                
+        
         myLevelRectangle.snp.makeConstraints { make in
             make.width.equalTo(62)
             make.height.equalTo(12)
@@ -280,9 +249,9 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(line.snp.bottom)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
-            make.bottom.equalTo(view.snp.bottom)
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom)
         }
         
         shadowView.addSubview(grayRectangle)
@@ -290,4 +259,17 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             make.edges.equalTo(shadowView)
         }
     }
+    
+    private func updateView() {
+        nicknameLabel.text = profileViewModel?.nickname
+        nameBoxLabel.text = profileViewModel?.nameBox
+        level.text = profileViewModel?.levelNumberText
+        levelLabel.text = profileViewModel?.levelText
+        circularImageView.image = profileViewModel?.profileImage
+        idLabel.text = profileViewModel?.email
+        print("profileView 업데이트")
+        
+    }
+
+   
 }

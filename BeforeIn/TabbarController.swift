@@ -6,12 +6,23 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class TapbarController: UITabBarController {
+    
+    private var handle: AuthStateDidChangeListenerHandle?
+    let userManager = UserManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewControllerSetting()
         self.tabBarSetting()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setCurrentUser()
+        print("탭바 viewWillAppear")
     }
 
     private func tabBarSetting() {
@@ -41,5 +52,17 @@ class TapbarController: UITabBarController {
 
         setViewControllers([vc1, vc2, vc3], animated: false)
 
+    }
+    
+    private func setCurrentUser(){
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user, let email = user.email {
+                self.userManager.findUser(email: email) { findUser in
+                    if let user = findUser {
+                        currentUser = user
+                    }
+                }
+            }
+        }
     }
 }
