@@ -55,11 +55,39 @@ class DetailViewController: BaseViewController {
         /// firstDetailView
         detailView.firstDetailView.titleLabel.text = "\(selectedEtiquette?.place ?? "place") 에티켓 알아보기"
         detailView.firstDetailView.descriptionLabel.text = "\(selectedEtiquette?.place ?? "place")에서 지켜야할 기본 규칙을 알아봅시다"
-        detailView.firstDetailView.detailImageView.image = selectedEtiquette?.backgroundImage
+//        detailView.firstDetailView.detailImageView.image = selectedEtiquette?.backgroundImage
+        if let image = selectedEtiquette?.backgroundImage {
+            let maskedImage = applyMask(to: image)
+            detailView.firstDetailView.detailImageView.image = maskedImage
+        }
         /// secondDetailView
         detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["good"]?.count ?? 0)"
         /// thirdDetailView
         detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["bad"]?.count ?? 0)"
+
+    }
+
+    private func applyMask(to image: UIImage) -> UIImage {
+        if let cgImage = image.cgImage {
+            let width = cgImage.width
+            let height = cgImage.height
+            let bitsPerComponent = 8
+            let bytesPerRow = 4 * width
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+            let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+
+            if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+                context.clip(to: CGRect(x: 0, y: 0, width: width, height: height))
+                context.setFillColor(UIColor(white: 0, alpha: 0.7).cgColor)
+                context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+
+                if let maskedImage = context.makeImage() {
+                    return UIImage(cgImage: maskedImage)
+                }
+            }
+        }
+        return image
     }
     
     
@@ -118,6 +146,5 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
-
     }
 }
