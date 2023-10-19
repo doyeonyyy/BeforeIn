@@ -15,7 +15,12 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         "디스플레이",
         "정보",
         "로그아웃",
-        "회원탈퇴"
+        "회원탈퇴",
+        "유저 id 변경(leech3878)",
+        "유저 이메일 변경(google)",
+        "유저 레벨 변경(2)",
+        "프로필 이미지 변경",
+        "유저 레벨 변경(4)"
     ]
     
     override func loadView() {
@@ -24,7 +29,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let profileViewModel = profileViewModel(user: chanho)
+        let profileViewModel = ProfileViewModel(user: chanho)
         profileView.profileViewModel = profileViewModel
         profileView.tableView.dataSource = self
         profileView.tableView.delegate = self
@@ -75,6 +80,23 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                     }
                 }
             }
+        }
+        else if indexPath.row == 4 {
+            profileView.profileViewModel?.user.nickname = "leech3878"
+//            "유저 레벨 변경(2)",
+//            "프로필 이미지 변경"
+        }
+        else if indexPath.row == 5 {
+            profileView.profileViewModel?.user.email = "lcho3878@google.com"
+        }
+        else if indexPath.row == 6 {
+            profileView.profileViewModel?.user.level = 2
+        }
+        else if indexPath.row == 7 {
+            profileView.profileViewModel?.user.profileImage = UIImage(systemName: "person.fill")!
+        }
+        else if indexPath.row == 8 {
+            profileView.profileViewModel?.user.level = 4
         }
     }
     

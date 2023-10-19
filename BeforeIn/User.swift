@@ -11,10 +11,10 @@ import UIKit
 var currentUser: User?
 
 struct User {
-    let email: String
-    let name: String
-    let nickname: String
-    let profileImage: UIImage
-    let level: Int
+    var email: String
+    var name: String
+    var nickname: String
+    var profileImage: UIImage
+    var level: Int
     let phone: String
 }
