@@ -103,7 +103,7 @@ class RegisterViewController: BaseViewController {
     }
     
     
-    // 1. 회원가입 (유효성 검사 로직 필요)
+    // 회원가입
     @objc func registerButtonTapped() {
         if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
            let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
@@ -144,7 +144,9 @@ class RegisterViewController: BaseViewController {
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
            let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
             
-            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty
+            let vaildEmail = email.isValidEmail()
+            let vaildPW = password.isValidPassword()
+            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty && vaildEmail && vaildPW
             
             UIView.animate(withDuration: 0.3) {
                 if isFormValid {
