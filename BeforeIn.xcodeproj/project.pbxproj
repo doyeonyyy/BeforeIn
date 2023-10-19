@@ -82,6 +82,7 @@
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
 		67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA612AD92E6000EA1DA7 /* DetailView.swift */; };
 		67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FFB4FE2AE0D2F6008108FA /* String.swift */; };
+		67FFB5032AE0D900008108FA /* QuizIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FFB5022AE0D900008108FA /* QuizIntroView.swift */; };
 		B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */; };
 		B397E30A2ADCCA2C00F3363F /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3092ADCCA2C00F3363F /* InfoViewController.swift */; };
 		E718CB792ADA6BB300896ACC /* EtiquetteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */; };
@@ -133,6 +134,7 @@
 		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
 		67E5AA612AD92E6000EA1DA7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		67FFB4FE2AE0D2F6008108FA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		67FFB5022AE0D900008108FA /* QuizIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizIntroView.swift; sourceTree = "<group>"; };
 		B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		B397E3092ADCCA2C00F3363F /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteDetailCell.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				1596DCC32AD6B28D00E6D388 /* QuizIntroViewController.swift */,
 				63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */,
+				67FFB5022AE0D900008108FA /* QuizIntroView.swift */,
 				63AB9D632ADD0968008E85BA /* Quiz PVC */,
 				63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */,
 				63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */,
@@ -513,6 +516,7 @@
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */,
 				673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */,
+				67FFB5032AE0D900008108FA /* QuizIntroView.swift in Sources */,
 				159B79392ADFBB3400FE210E /* ProfileViewModel.swift in Sources */,
 				1596DCCF2AD6B2F400E6D388 /* ProfileViewController.swift in Sources */,
 				1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */,

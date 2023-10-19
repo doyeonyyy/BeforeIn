@@ -13,6 +13,7 @@ class RegisterViewController: BaseViewController {
     // MARK: - Properties
     private let registerView = RegisterView()
     let userManager = UserManager()
+    var checkEmail = false
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -54,20 +55,25 @@ class RegisterViewController: BaseViewController {
     @objc func checkIdButtonTapped() {
         if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces) {
             if !email.isEmpty {
-                userManager.findUser(email: email) { isUsed in
-                    if isUsed != nil {
-                        self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
-                        self.registerView.checkIdButton.backgroundColor = .systemGray6
-                        self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
-
-                    } else {
-                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 아이디입니다.", buttonTitle: "확인")
-                        self.registerView.checkIdButton.backgroundColor = .BeforeInRed
-                        self.registerView.checkIdButton.setTitleColor(UIColor.white, for: .normal)
-
+                if email.isValidEmail() {
+                    userManager.findUser(email: email) { isUsed in
+                        if isUsed != nil {
+                            self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
+                            self.registerView.checkIdButton.backgroundColor = .systemGray6
+                            self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
+                            self.checkEmail = false
+                        } else {
+                            self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 아이디입니다.", buttonTitle: "확인")
+                            self.registerView.checkIdButton.backgroundColor = .BeforeInRed
+                            self.registerView.checkIdButton.setTitleColor(UIColor.white, for: .normal)
+                            self.checkEmail = true
+                            self.writingComplete()
+                        }
                     }
+                } else {
+                    showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
                 }
-            } else  {
+            } else {
                 showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             }
         }
@@ -146,7 +152,7 @@ class RegisterViewController: BaseViewController {
             
             let vaildEmail = email.isValidEmail()
             let vaildPW = password.isValidPassword()
-            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty && vaildEmail && vaildPW
+            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty && checkEmail && vaildEmail && vaildPW
             
             UIView.animate(withDuration: 0.3) {
                 if isFormValid {
@@ -181,8 +187,6 @@ extension RegisterViewController: UITextFieldDelegate {
             registerView.registerPwTextField.becomeFirstResponder()
         } else if textField == registerView.registerPwTextField {
             registerView.registerCheckTextField.becomeFirstResponder()
-        } else if textField == registerView.registerCheckTextField {
-            registerButtonTapped()
         }
         return true
     }
