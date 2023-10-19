@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+var currentUser: User?
+
 struct User {
     let email: String
     let name: String
