@@ -14,6 +14,7 @@ class RegisterViewController: BaseViewController {
     private let registerView = RegisterView()
     private let userManager = UserManager()
     private var checkEmail = false
+    private var checkNickname = false
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -35,14 +36,14 @@ class RegisterViewController: BaseViewController {
     func setTextField(){
         registerView.registerIdTextField.delegate = self
         registerView.registerNameTextField.delegate = self
-        registerView.registerPhoneTextField.delegate = self
+        registerView.registerNicknameTextField.delegate = self
         registerView.registerPwTextField.delegate = self
         registerView.registerCheckTextField.delegate = self
     }
     
     func setupAddTarget(){
         registerView.checkIdButton.addTarget(self, action: #selector(checkIdButtonTapped), for: .touchUpInside)
-        registerView.checkPhoneButton.addTarget(self, action: #selector(checkPhoneButtonTapped), for: .touchUpInside)
+        registerView.checkNicknameButton.addTarget(self, action: #selector(checkNicknameButtonTapped), for: .touchUpInside)
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
@@ -73,17 +74,31 @@ class RegisterViewController: BaseViewController {
                 } else {
                     showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
                 }
-            } else {
-                showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             }
         }
     }
 
-    
-    @objc func checkPhoneButtonTapped(){
-        print("휴대폰인증 버튼 눌림")
+    @objc func checkNicknameButtonTapped() {
+        if let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces) {
+            if !nickname.isEmpty {
+                userManager.findNickname(nickname: nickname) { isUsed in
+                    if isUsed {
+                        self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 닉네임입니다.", buttonTitle: "확인")
+                        self.registerView.checkNicknameButton.backgroundColor = .systemGray6
+                        self.registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
+                        self.checkNickname = false
+                    } else {
+                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 닉네임입니다.", buttonTitle: "확인")
+                        self.registerView.checkNicknameButton.backgroundColor = .BeforeInRed
+                        self.registerView.checkNicknameButton.setTitleColor(UIColor.white, for: .normal)
+                        self.checkNickname = true
+                        self.writingComplete()
+                    }
+                }
+            }
+        }
     }
-    
+        
     @objc func showPwButtonTapped(){
         registerView.showPwButton.isSelected.toggle()
         
@@ -113,7 +128,7 @@ class RegisterViewController: BaseViewController {
     @objc func registerButtonTapped() {
         if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
            let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
-           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces),
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
            let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
             
@@ -121,8 +136,8 @@ class RegisterViewController: BaseViewController {
                 showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             } else if name.isEmpty {
                 showAlertOneButton(title: "이름", message: "이름을 입력하세요.", buttonTitle: "확인")
-            } else if phone.isEmpty {
-                showAlertOneButton(title: "휴대폰번호", message: "휴대폰번호를 입력하세요.", buttonTitle: "확인")
+            } else if nickname.isEmpty {
+                showAlertOneButton(title: "닉네임", message: "닉네임을 입력하세요.", buttonTitle: "확인")
             } else if password.isEmpty {
                 showAlertOneButton(title: "비밀번호", message: "비밀번호를 입력하세요.", buttonTitle: "확인")
             } else if checkPassword.isEmpty {
@@ -130,7 +145,7 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else {
-                let newUser = User(email: email, name: name, nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: phone)
+                let newUser = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: "")
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
@@ -146,13 +161,13 @@ class RegisterViewController: BaseViewController {
     @objc func writingComplete() {
         if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces),
            let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
-           let phone = registerView.registerPhoneTextField.text?.trimmingCharacters(in: .whitespaces),
+           let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces),
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
            let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
             
             let vaildEmail = email.isValidEmail()
             let vaildPW = password.isValidPassword()
-            let isFormValid = !email.isEmpty && !name.isEmpty && !phone.isEmpty && !password.isEmpty && !checkPassword.isEmpty && checkEmail && vaildEmail && vaildPW
+            let isFormValid = !email.isEmpty && !name.isEmpty && !nickname.isEmpty && !password.isEmpty && !checkPassword.isEmpty && checkEmail && checkNickname && vaildEmail && vaildPW
             
             UIView.animate(withDuration: 0.3) {
                 if isFormValid {
@@ -181,8 +196,8 @@ extension RegisterViewController: UITextFieldDelegate {
         if textField == registerView.registerIdTextField {
             registerView.registerNameTextField.becomeFirstResponder()
         } else if textField == registerView.registerNameTextField {
-            registerView.registerPhoneTextField.becomeFirstResponder()
-        } else if textField == registerView.registerPhoneTextField {
+            registerView.registerNicknameTextField.becomeFirstResponder()
+        } else if textField == registerView.registerNicknameTextField {
             registerView.registerPwTextField.becomeFirstResponder()
         } else if textField == registerView.registerPwTextField {
             registerView.registerCheckTextField.becomeFirstResponder()
@@ -216,14 +231,6 @@ extension RegisterViewController: UITextFieldDelegate {
             
             if !stringSet.isSuperset(of: replaceStringSet) {
                 showAlertOneButton(title: "입력 오류", message: "문자를 입력해주세요.", buttonTitle: "확인")
-                return false
-            }
-        } else if textField == registerView.registerPhoneTextField {
-            let intSet = CharacterSet.decimalDigits
-            let replaceIntSet = CharacterSet(charactersIn: input)
-            
-            if !intSet.isSuperset(of: replaceIntSet) {
-                showAlertOneButton(title: "입력 오류", message: "숫자를 입력해주세요.", buttonTitle: "확인")
                 return false
             }
         }

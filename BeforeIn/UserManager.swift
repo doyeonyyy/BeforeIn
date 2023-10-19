@@ -63,6 +63,23 @@ struct UserManager {
             }
         }
     }
+    
+    func findNickname(nickname: String, completion: @escaping (Bool) -> Void) {
+        let userDB = db.collection("User")
+        let query = userDB.whereField("nickname", isEqualTo: nickname)
+        
+        query.getDocuments { (snapShot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+            } else if let qs = snapShot, !qs.documents.isEmpty {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+
 
     
 }
