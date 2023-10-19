@@ -13,7 +13,7 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     private let searchView = SearchView()
-    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "공공장소"]
+    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "운동"]
     var filteredEtiquetteList: [Etiquette] = etiquetteList
     var etiquetteCollectionView: UICollectionView!
     
@@ -123,7 +123,7 @@ class SearchViewController: BaseViewController {
         case 3: // 카테고리 "대중교통"
             filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
         case 4: // 카테고리 "공공장소"
-            filteredEtiquetteList = etiquetteList.filter { $0.category == "공공장소" }
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "운동" }
         default:
             break
         }
@@ -133,18 +133,16 @@ class SearchViewController: BaseViewController {
 // MARK: - etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return etiquetteList.count
         return filteredEtiquetteList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
-        
         let etiquette = filteredEtiquetteList[indexPath.row]
-        
+
         cell.imageView.image = etiquette.mainImage
         cell.titleLabel.text = etiquette.place
-        cell.descriptionLabel.text = etiquette.content.first
+        cell.descriptionLabel.text = etiquette.description
 
         return cell
     }
