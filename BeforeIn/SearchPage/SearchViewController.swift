@@ -13,11 +13,9 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     private let searchView = SearchView()
-    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "교통", "운동"]
-    
-    /// 더미데이터
-    private let dummyEtiquetteTitle: [String] = ["영화관", "도서관", "소개팅", "목욕탕", "찜질방", "반려동물 산책 시"]
-    private let dummyEtiquetteDescription = "설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다설명이이자리에들어옵니다"
+    private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "운동"]
+    var filteredEtiquetteList: [Etiquette] = etiquetteList
+    var etiquetteCollectionView: UICollectionView!
     
     // MARK: - View Life Cycle
     override func loadView() {
@@ -29,6 +27,8 @@ class SearchViewController: BaseViewController {
         setupAddTarget()
         addButtonsToCategoryStackView()
         configureCollectionView()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,13 +39,9 @@ class SearchViewController: BaseViewController {
     }
     
     // MARK: - Methods
-    
-    
     func setupAddTarget(){
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        searchView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        searchView.searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        searchView.searchButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        searchView.searchTextField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
     }
     
     private func addButtonsToCategoryStackView() {
@@ -70,17 +66,38 @@ class SearchViewController: BaseViewController {
         searchView.etiquetteCollectionView.register(EtiquetteCell.self, forCellWithReuseIdentifier: "EtiquetteCell")
         searchView.etiquetteCollectionView.dataSource = self
         searchView.etiquetteCollectionView.delegate = self
+        etiquetteCollectionView = searchView.etiquetteCollectionView
     }
     
     // MARK: - @objc
-    @objc func searchButtonTapped() {
-        print("검색 버튼 터치")
-        // TODO: 검색 버튼 터치시 작업 내용
+    @objc func textFieldDidChanged(_ sender: Any?) {
+        if let searchText = searchView.searchTextField.text, !searchText.isEmpty {
+            searchView.searchButton.setTitle("취소", for: .normal)
+            searchView.searchButton.setTitleColor(.black, for: .normal)
+            searchView.searchButton.setImage(nil, for: .normal)
+
+            filteredEtiquetteList = searchText.isEmpty ? etiquetteList : etiquetteList.filter { $0.place.lowercased().contains(searchText.lowercased()) }
+            self.etiquetteCollectionView.reloadData()
+        } else {
+            cancelButtonTapped()
+        }
     }
     
     @objc func cancelButtonTapped() {
-        print("취소 버튼 터치")
-        // TODO: 취소 버튼 터치시 작업 내용
+        if let categoryButton = searchView.categoryStackView.arrangedSubviews.first as? UIButton {
+            categoryButton.sendActions(for: .touchUpInside)
+        }
+        
+        let image = UIImage(systemName: "magnifyingglass")
+        searchView.searchButton.setImage(image, for: .normal)
+        searchView.searchButton.tintColor = .darkGray
+        searchView.searchButton.setTitle(nil, for: .normal)
+        
+        searchView.searchTextField.text = ""
+        searchView.searchTextField.resignFirstResponder() // 포커스 해제
+        
+        filteredEtiquetteList = etiquetteList
+        self.etiquetteCollectionView.reloadData()
     }
     
     @objc func categoryButtonTapped(_ sender: UIButton) {
@@ -95,44 +112,51 @@ class SearchViewController: BaseViewController {
 
         sender.backgroundColor = UIColor.BeforeInRed
         sender.setTitleColor(.white, for: .normal)
-
-        // TODO: 카테고리 버튼 index 번호에 따른 터치시 작업 내용
+        
         switch sender.tag {
-        case 0:
-            print("에티켓 카테고리 - '전체' 누름")
-        case 1:
-            print("에티켓 카테고리 - '경조사' 누름")
-        case 2:
-            print("에티켓 카테고리 - '일상에서' 누름")
-        case 3:
-            print("에티켓 카테고리 - '교통' 누름")
-        case 4:
-            print("에티켓 카테고리 - '운동' 누름")
+        case 0: // 카테고리 "전체"
+            filteredEtiquetteList = etiquetteList
+        case 1: // 카테고리 "경조사"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "경조사" }
+        case 2: // 카테고리 "일상에서"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "일상에서" }
+        case 3: // 카테고리 "대중교통"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
+        case 4: // 카테고리 "공공장소"
+            filteredEtiquetteList = etiquetteList.filter { $0.category == "운동" }
         default:
             break
         }
-        
+        self.etiquetteCollectionView.reloadData()
     }
 }
 // MARK: - etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyEtiquetteTitle.count
+        return filteredEtiquetteList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
-        cell.titleLabel.text = dummyEtiquetteTitle[indexPath.row]
-        cell.descriptionLabel.text = dummyEtiquetteDescription
+        let etiquette = filteredEtiquetteList[indexPath.row]
+
+        cell.imageView.image = etiquette.mainImage
+        cell.titleLabel.text = etiquette.place
+        cell.descriptionLabel.text = etiquette.description
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? EtiquetteCell {
-            if let title = cell.titleLabel.text {
-                print("컬렉션 뷰 - '\(title)' 셀 누름")
-                navigationController?.pushViewController(DetailViewController(), animated: true) // DetailViewController 작업 확인용
-            }
-        }
+        
+//        let detailViewController = DetailViewController()
+//        detailViewController.selectedIndexPath = indexPath
+//        navigationController?.pushViewController(detailViewController, animated: true)
+        let selectedEtiquette = filteredEtiquetteList[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.selectedEtiquette = selectedEtiquette
+        navigationController?.pushViewController(detailVC, animated: true)
+ 
     }
 }
