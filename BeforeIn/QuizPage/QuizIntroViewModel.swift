@@ -8,10 +8,13 @@
 import Foundation
 
 class QuizIntroViewModel {
-    var user: User? {
+    var user: User {
         didSet{
             self.updateView?()
         }
+    }
+    var name: String {
+        return user.name
     }
     var updateView: (() -> Void)?
     
