@@ -31,9 +31,10 @@ class ProfileView: UIView{
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "아이디"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.text = "userid@.com"
+//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+        label.textColor = UIColor.systemGray
+        label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -138,7 +139,7 @@ class ProfileView: UIView{
         return tableView
     }()
     
-    var profileViewModel: profileViewModel?{
+    var profileViewModel: ProfileViewModel?{
         didSet {
             profileViewModel?.updateView = { [weak self] in
                 self?.updateView()
@@ -260,10 +261,15 @@ class ProfileView: UIView{
     }
     
     private func updateView() {
-        nicknameLabel.text = profileViewModel?.name
+        nicknameLabel.text = profileViewModel?.nickname
         nameBoxLabel.text = profileViewModel?.nameBox
-        level.text = profileViewModel?.level
+        level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
+        circularImageView.image = profileViewModel?.profileImage
+        idLabel.text = profileViewModel?.email
         print("profileView 업데이트")
+        
     }
+
+   
 }
