@@ -12,7 +12,7 @@ import UIKit
 class EtiquetteCell: UICollectionViewCell {
     
     // MARK: - Properties
-    var image = UIImageView().then {
+    var imageView = UIImageView().then {
         $0.backgroundColor = .gray
     }
     
@@ -49,17 +49,19 @@ class EtiquetteCell: UICollectionViewCell {
     private func setupUI() {
         contentView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         contentView.layer.cornerRadius = 8
+        imageView.layer.cornerRadius = 4
+        imageView.layer.masksToBounds = true
         
         
         // addSubview
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(descriptionLabel)
         
-        contentView.addSubview(image)
+        contentView.addSubview(imageView)
         contentView.addSubview(stackView)
         
         // makeConstraints
-        image.snp.makeConstraints {
+        imageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)
             $0.width.equalTo(80)
@@ -67,7 +69,7 @@ class EtiquetteCell: UICollectionViewCell {
         }
         stackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(image.snp.trailing).offset(24)
+            $0.leading.equalTo(imageView.snp.trailing).offset(24)
             $0.trailing.equalToSuperview().offset(-24)
         }
         

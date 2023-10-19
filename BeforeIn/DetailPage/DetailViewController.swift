@@ -11,6 +11,8 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let detailView = DetailView()
+//    var selectedIndexPath: IndexPath?
+    var selectedEtiquette: Etiquette?
     /// 더미데이터
     private let dummyTitle: [String] = ["흰색 의상은 피해주세요.", "굶고 가지 마세요", "춤추지 마세요"]
     private let dummyDescription = "신부의 아름다운 드레스를 위해 참아주세요"
@@ -24,30 +26,30 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
+        setUI()
+        
+//        if let selectedIndexPath = selectedIndexPath {
+//            let selectedEtiquette = etiquetteList[selectedIndexPath.row]
+//            print("인덱스패쓰 \(selectedEtiquette)")
+//        }
+        if let selectedEtiquette = selectedEtiquette {
+            print("선택된 에티켓 ", selectedEtiquette)
+        }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        detailView.secondDetailView.beforeInButton.sendActions(for: .touchUpInside)
-        detailView.thirdDetailView.beforeInButton.sendActions(for: .touchUpInside)
-        configureDontsCollectionView()
+        configureCollectionView()
     }
     
     // MARK: - Methods
     func setupAddTarget(){
         /// firstDetailView
         detailView.firstDetailView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        /// secondDetailView
-        detailView.secondDetailView.beforeInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.afterInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.beforeOutButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        /// thirdDetailView
-        detailView.thirdDetailView.beforeInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
-        detailView.thirdDetailView.afterInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
-        detailView.thirdDetailView.beforeOutButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
     }
     
-    private func configureDontsCollectionView() {
+    private func configureCollectionView() {
         /// secondDetailView
         detailView.secondDetailView.dontsCollectionView.register(EtiquetteDetailCell.self, forCellWithReuseIdentifier: "EtiquetteDetailCell")
         detailView.secondDetailView.dontsCollectionView.dataSource = self
@@ -58,66 +60,24 @@ class DetailViewController: BaseViewController {
         detailView.thirdDetailView.dosCollectionView.delegate = self
     }
     
+    private func setUI() {
+        /// secondDetailView
+        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+        /// thirdDetailView
+        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+    }
+    
     
     // MARK: - @objc
     @objc func backButtonTapped(){
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func dontsContextualButtonTapped(sender: UIButton) {
-        let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
-
-        detailView.secondDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.secondDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.secondDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
-
-        sender.setTitleColor(.BeforeInRed, for: .normal)
-        sender.titleLabel?.font = boldFont
-        
-        switch sender {
-            case detailView.secondDetailView.beforeInButton:
-                print("'들어가기전' 버튼 누름")
-                // TODO: - 들어가기전 버튼 터치시 작업 내용
-            case detailView.secondDetailView.afterInButton:
-                print("'들어가서' 버튼 누름")
-                // TODO: - 들어가서 버튼 터치시 작업 내용
-            case detailView.secondDetailView.beforeOutButton:
-                print("'나오면서' 버튼 누름")
-                // TODO: - 나오면서 버튼 터치시 작업 내용
-            default:
-                break
-        }
-    }
-    
-    @objc func dosContextualButtonTapped(sender: UIButton) {
-        let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
-
-        detailView.thirdDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.thirdDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.thirdDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
-
-        sender.setTitleColor(.BeforeInBlue, for: .normal)
-        sender.titleLabel?.font = boldFont
-        
-        switch sender {
-            case detailView.thirdDetailView.beforeInButton:
-                print("'들어가기전' 버튼 누름")
-                // TODO: - 들어가기전 버튼 터치시 작업 내용
-            case detailView.thirdDetailView.afterInButton:
-                print("'들어가서' 버튼 누름")
-                // TODO: - 들어가서 버튼 터치시 작업 내용
-            case detailView.thirdDetailView.beforeOutButton:
-                print("'나오면서' 버튼 누름")
-                // TODO: - 나오면서 버튼 터치시 작업 내용
-            default:
-                break
-        }
-    }
-    
+   
 }
 
 // MARK: - CollectionView
-extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
@@ -144,5 +104,19 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.descriptionLabel.text = "22\(dummyDescription)"
         }
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == detailView.secondDetailView.dontsCollectionView {
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
+            detailView.secondDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
+        }
+        if scrollView == detailView.thirdDetailView.dosCollectionView {
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
+            detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
+        }
+
     }
 }
