@@ -12,7 +12,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginView = LoginView()
-    let userManager = UserManager()
+    private let userManager = UserManager()
     
     // MARK: - Life Cycle
     override func loadView(){
@@ -89,6 +89,13 @@ class LoginViewController: BaseViewController {
     
     @objc func findPwButtonTapped() {
         print("비밀번호찾기 버튼이 눌렸습니다")
+        Auth.auth().sendPasswordReset(withEmail: loginView.idTextField.text!) { error in
+            if let error = error {
+                print("error: \(error.localizedDescription)")
+            } else {
+                
+            }
+        }
     }
     
     @objc func registerButtonTapped() {

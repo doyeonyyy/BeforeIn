@@ -12,8 +12,8 @@ class RegisterViewController: BaseViewController {
     
     // MARK: - Properties
     private let registerView = RegisterView()
-    let userManager = UserManager()
-    var checkEmail = false
+    private let userManager = UserManager()
+    private var checkEmail = false
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -168,7 +168,6 @@ class RegisterViewController: BaseViewController {
     }
 }
     
-
 
 
 //MARK: - UITextFieldDelegate
