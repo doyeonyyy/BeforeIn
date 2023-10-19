@@ -38,7 +38,10 @@ class MainViewController: BaseViewController {
     }
     
     @objc func quizButtonClick() {
-        self.fetchEtiquetteContent()
+//        self.fetchEtiquetteContent() //에티켓 한마디 추천 함수
+        let quizIntroVC = QuizIntroViewController()
+        quizIntroVC.modalPresentationStyle = .fullScreen
+        present(quizIntroVC, animated: true)
     }
     
     func setupCollectionView() {
