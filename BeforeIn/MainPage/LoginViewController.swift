@@ -12,6 +12,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginView = LoginView()
+    let userManager = UserManager()
     
     // MARK: - Life Cycle
     override func loadView(){
@@ -68,15 +69,19 @@ class LoginViewController: BaseViewController {
                                             buttonTitle: "확인") {
                     }
                     print("로그인 실패 : \(error.localizedDescription)")
-                } else if authResult != nil {
-                    print("로그인 성공")
-                    let tapBarController = TapbarController()
-                    self.transitionToRootView(view: tapBarController)
+                } else {
+                    self.userManager.findUser(email: email) { user in
+                        if let user = user {
+                            currentUser = user
+                            print("로그인 성공")
+                            let tapBarController = TapbarController()
+                            self.transitionToRootView(view: tapBarController)
+                        }
+                    }
                 }
             }
         }
     }
-    
     
     @objc func findIdButtonTapped() {
         print("아이디찾기 버튼이 눌렸습니다")

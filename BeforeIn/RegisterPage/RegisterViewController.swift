@@ -55,7 +55,7 @@ class RegisterViewController: BaseViewController {
         if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces) {
             if !email.isEmpty {
                 userManager.findUser(email: email) { isUsed in
-                    if isUsed {
+                    if isUsed != nil {
                         self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
                         self.registerView.checkIdButton.backgroundColor = .systemGray6
                         self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
