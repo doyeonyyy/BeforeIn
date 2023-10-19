@@ -43,7 +43,7 @@ class SecondDetailView: UIView {
     lazy var etiquetteCountLabel = UILabel().then {
         $0.text = "1"
         $0.font = .systemFont(ofSize: 14)
-        $0.textColor = .beforeInRed
+        $0.textColor = .BeforeInRed
     }
     
     lazy var etiquetteTotalCountLabel = UILabel().then {
