@@ -40,26 +40,16 @@ class SecondDetailView: UIView {
         $0.numberOfLines = 0
     }
     
-    // TODO: - 궁금한점: 결혼식, 장례식 등이 아닌 경우에는 이 버튼들은 안보이게 하는건지..?_?
-    lazy var beforeInButton = UIButton().then {
-        $0.setTitle("들어가기 전", for: .normal)
-        $0.setTitleColor(.lightGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        $0.backgroundColor = .none
+    lazy var etiquetteCountLabel = UILabel().then {
+        $0.text = "1"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .beforeInRed
     }
     
-    lazy var afterInButton = UIButton().then {
-        $0.setTitle("들어가서", for: .normal)
-        $0.setTitleColor(.lightGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        $0.backgroundColor = .none
-    }
-    
-    lazy var beforeOutButton = UIButton().then {
-        $0.setTitle("나오면서", for: .normal)
-        $0.setTitleColor(.lightGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        $0.backgroundColor = .none
+    lazy var etiquetteTotalCountLabel = UILabel().then {
+        $0.text = "(total)"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .darkGray
     }
     
     let layout = UICollectionViewFlowLayout().then {
@@ -95,10 +85,10 @@ class SecondDetailView: UIView {
         addSubview(titleEmoji)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        addSubview(beforeInButton)
-        addSubview(afterInButton)
-        addSubview(beforeOutButton)
+        addSubview(etiquetteCountLabel)
+        addSubview(etiquetteTotalCountLabel)
         addSubview(dontsCollectionView)
+        
     }
     
     func setUI(){
@@ -117,20 +107,16 @@ class SecondDetailView: UIView {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.leading.equalToSuperview().offset(24)
         }
-        beforeInButton.snp.makeConstraints {
+        etiquetteCountLabel.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
-            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalTo(etiquetteTotalCountLabel.snp.leading).offset(0)
         }
-        afterInButton.snp.makeConstraints {
+        etiquetteTotalCountLabel.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
-            $0.leading.equalTo(beforeInButton.snp.trailing).offset(32)
-        }
-        beforeOutButton.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(48)
-            $0.leading.equalTo(afterInButton.snp.trailing).offset(32)
+            $0.trailing.equalToSuperview().offset(-24)
         }
         dontsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(beforeInButton.snp.bottom).offset(19)
+            $0.top.equalTo(etiquetteTotalCountLabel.snp.bottom).offset(19)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(422)
         }
