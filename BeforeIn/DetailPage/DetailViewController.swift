@@ -24,12 +24,11 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
+        setUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        detailView.secondDetailView.beforeInButton.sendActions(for: .touchUpInside)
-        detailView.thirdDetailView.beforeInButton.sendActions(for: .touchUpInside)
         configureDontsCollectionView()
     }
     
@@ -37,14 +36,6 @@ class DetailViewController: BaseViewController {
     func setupAddTarget(){
         /// firstDetailView
         detailView.firstDetailView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        /// secondDetailView
-        detailView.secondDetailView.beforeInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.afterInButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        detailView.secondDetailView.beforeOutButton.addTarget(self, action: #selector(dontsContextualButtonTapped), for: .touchUpInside)
-        /// thirdDetailView
-        detailView.thirdDetailView.beforeInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
-        detailView.thirdDetailView.afterInButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
-        detailView.thirdDetailView.beforeOutButton.addTarget(self, action: #selector(dosContextualButtonTapped), for: .touchUpInside)
     }
     
     private func configureDontsCollectionView() {
@@ -58,60 +49,17 @@ class DetailViewController: BaseViewController {
         detailView.thirdDetailView.dosCollectionView.delegate = self
     }
     
+    private func setUI() {
+        /// secondDetailView
+        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+        /// thirdDetailView
+        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+    }
+    
     
     // MARK: - @objc
     @objc func backButtonTapped(){
         navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func dontsContextualButtonTapped(sender: UIButton) {
-        let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
-
-        detailView.secondDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.secondDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.secondDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
-
-        sender.setTitleColor(.BeforeInRed, for: .normal)
-        sender.titleLabel?.font = boldFont
-        
-        switch sender {
-            case detailView.secondDetailView.beforeInButton:
-                print("'들어가기전' 버튼 누름")
-                // TODO: - 들어가기전 버튼 터치시 작업 내용
-            case detailView.secondDetailView.afterInButton:
-                print("'들어가서' 버튼 누름")
-                // TODO: - 들어가서 버튼 터치시 작업 내용
-            case detailView.secondDetailView.beforeOutButton:
-                print("'나오면서' 버튼 누름")
-                // TODO: - 나오면서 버튼 터치시 작업 내용
-            default:
-                break
-        }
-    }
-    
-    @objc func dosContextualButtonTapped(sender: UIButton) {
-        let boldFont = UIFont.systemFont(ofSize: 20, weight: .black)
-
-        detailView.thirdDetailView.beforeInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.thirdDetailView.afterInButton.setTitleColor(.lightGray, for: .normal)
-        detailView.thirdDetailView.beforeOutButton.setTitleColor(.lightGray, for: .normal)
-
-        sender.setTitleColor(.BeforeInBlue, for: .normal)
-        sender.titleLabel?.font = boldFont
-        
-        switch sender {
-            case detailView.thirdDetailView.beforeInButton:
-                print("'들어가기전' 버튼 누름")
-                // TODO: - 들어가기전 버튼 터치시 작업 내용
-            case detailView.thirdDetailView.afterInButton:
-                print("'들어가서' 버튼 누름")
-                // TODO: - 들어가서 버튼 터치시 작업 내용
-            case detailView.thirdDetailView.beforeOutButton:
-                print("'나오면서' 버튼 누름")
-                // TODO: - 나오면서 버튼 터치시 작업 내용
-            default:
-                break
-        }
     }
     
 }
