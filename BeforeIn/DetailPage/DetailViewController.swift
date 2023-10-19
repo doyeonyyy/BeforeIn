@@ -11,6 +11,8 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let detailView = DetailView()
+//    var selectedIndexPath: IndexPath?
+    var selectedEtiquette: Etiquette?
     /// 더미데이터
     private let dummyTitle: [String] = ["흰색 의상은 피해주세요.", "굶고 가지 마세요", "춤추지 마세요"]
     private let dummyDescription = "신부의 아름다운 드레스를 위해 참아주세요"
@@ -25,7 +27,16 @@ class DetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         setUI()
+        
+//        if let selectedIndexPath = selectedIndexPath {
+//            let selectedEtiquette = etiquetteList[selectedIndexPath.row]
+//            print("인덱스패쓰 \(selectedEtiquette)")
+//        }
+        if let selectedEtiquette = selectedEtiquette {
+            print("선택된 에티켓 ", selectedEtiquette)
+        }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

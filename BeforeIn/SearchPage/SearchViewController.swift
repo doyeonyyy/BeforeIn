@@ -132,6 +132,7 @@ class SearchViewController: BaseViewController {
 }
 // MARK: - etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredEtiquetteList.count
     }
@@ -148,11 +149,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? EtiquetteCell {
-            if let title = cell.titleLabel.text {
-                print("컬렉션 뷰 - '\(title)' 셀 누름")
-                navigationController?.pushViewController(DetailViewController(), animated: true) // DetailViewController 작업 확인용
-            }
-        }
+        
+//        let detailViewController = DetailViewController()
+//        detailViewController.selectedIndexPath = indexPath
+//        navigationController?.pushViewController(detailViewController, animated: true)
+        let selectedEtiquette = filteredEtiquetteList[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.selectedEtiquette = selectedEtiquette
+        navigationController?.pushViewController(detailVC, animated: true)
+ 
     }
 }
