@@ -29,7 +29,7 @@ class DetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureDontsCollectionView()
+        configureCollectionView()
     }
     
     // MARK: - Methods
@@ -38,7 +38,7 @@ class DetailViewController: BaseViewController {
         detailView.firstDetailView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
-    private func configureDontsCollectionView() {
+    private func configureCollectionView() {
         /// secondDetailView
         detailView.secondDetailView.dontsCollectionView.register(EtiquetteDetailCell.self, forCellWithReuseIdentifier: "EtiquetteDetailCell")
         detailView.secondDetailView.dontsCollectionView.dataSource = self
@@ -62,10 +62,11 @@ class DetailViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
+   
 }
 
 // MARK: - CollectionView
-extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
@@ -92,5 +93,19 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.descriptionLabel.text = "22\(dummyDescription)"
         }
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == detailView.secondDetailView.dontsCollectionView {
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
+            detailView.secondDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
+        }
+        if scrollView == detailView.thirdDetailView.dosCollectionView {
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
+            detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
+        }
+
     }
 }
