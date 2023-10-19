@@ -82,7 +82,7 @@ class RegisterViewController: BaseViewController {
         if let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces) {
             if !nickname.isEmpty {
                 userManager.findNickname(nickname: nickname) { isUsed in
-                    if isUsed {
+                    if isUsed != nil {
                         self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 닉네임입니다.", buttonTitle: "확인")
                         self.registerView.checkNicknameButton.backgroundColor = .systemGray6
                         self.registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
