@@ -6,16 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
-class profileViewModel{
+class ProfileViewModel{
     var user: User{
         didSet{
             self.updateView?()
         }
     }
     
-    var name: String {
-        return "\(user.name)님"
+//    var name: String {
+//        return "\(user.name)님"
+//    }
+    
+    var email: String{
+        return user.email
     }
     
     var nameBox: String{
@@ -23,10 +28,18 @@ class profileViewModel{
     }
     
     var nickname: String{
-        return user.nickname
+        return "\(user.nickname)님"
     }
     
-    var level: String{
+    var profileImage: UIImage{
+        return user.profileImage
+    }
+    
+    var level: Int{
+        return user.level
+    }
+    
+    var levelNumberText: String{
         switch user.level{
         case 1: return "Lv 1"
         case 2: return "Lv 2"

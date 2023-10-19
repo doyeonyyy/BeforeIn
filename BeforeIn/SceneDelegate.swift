@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = navigationController
         }
         
-        window.rootViewController = QuizIntroViewController()
+        window.rootViewController = TapbarController()
         window.makeKeyAndVisible()
         self.window = window
         
