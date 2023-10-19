@@ -35,9 +35,15 @@ class MainViewModel {
         }
     }
     var etiquetteContent: String {
-        let contentCount = etiquette?.content.count ?? 1
+        var random = ""
+        switch Int.random(in: 0...1){
+        case 0: random = "good"
+        case 1: random = "bad"
+        default: random = "good"
+        }
+        let contentCount = etiquette?.content[random]?.count ?? 1
         let randomNumber = Int.random(in: 0..<contentCount)
-        let content = (etiquette?.place ?? "로딩실패") + "에서는 " + (etiquette?.content[randomNumber] ?? "로딩실패")
+        let content = (etiquette?.place ?? "로딩실패") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "로딩실패")
         return content
     }
     var updateView: (() -> Void)?
