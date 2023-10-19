@@ -24,16 +24,15 @@ class QuizIntroViewController: BaseViewController {
         super.viewDidLoad()
         let quizIntroViewModel = QuizIntroViewModel(user: self.user)
         quizIntroView.quizIntroViewModel = quizIntroViewModel
-        
-        quizIntroView.skipButton.addTarget(QuizIntroViewController(), action: #selector(skipButtonTapped), for: .touchUpInside)
-        quizIntroView.startButton.addTarget(QuizIntroViewController(), action: #selector(startButtonTapped), for: .touchUpInside)
+
+        quizIntroView.skipButton.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        quizIntroView.startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
     @objc func startButtonTapped(_ button: UIButton) {
-        let rootVC = QuizViewController()
-        
-        rootVC.modalPresentationStyle = .fullScreen
-        self.present(rootVC, animated: true)
+        let startVC = QuizViewController()
+        startVC.modalPresentationStyle = .fullScreen
+        self.present(startVC, animated: true)
     }
     @objc func skipButtonTapped(_ button: UIButton) {
         let skipVC = MainViewController()
