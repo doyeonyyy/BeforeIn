@@ -26,7 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = navigationController
         }
         
-        window.rootViewController = TapbarController()
         window.makeKeyAndVisible()
         self.window = window
         
