@@ -4,12 +4,18 @@
 //
 //  Created by t2023-m079 on 10/11/23.
 //
+import Firebase
 import Foundation
 import UIKit
 import SnapKit
 
 class QuizViewController: UIPageViewController {
-    
+    // Firebase 초기화
+//    FirebaseApp.configure()
+
+    // Firebase 데이터베이스 참조
+//    let ref = Database.database().reference()
+
     private var previousButton: UIButton!
     private var cancelButton: UIButton!
     
@@ -36,6 +42,40 @@ class QuizViewController: UIPageViewController {
         setupLayout()
     }
     
+//    private func setupPage() {
+//        fetchRandomQuizQuestions { quizData in
+//            self.pages.removeAll()
+//
+//            for (index, quiz) in quizData.enumerated() {
+//                let quizPage = QuizContentsViewController(page: "\(index + 1)/\(quizData.count)", content: quiz.question)
+//                self.pages.append(quizPage)
+//            }
+//
+//            self.pageControl.numberOfPages = self.pages.count
+//            self.setViewControllers([self.pages.first!], direction: .forward, animated: true, completion: nil)
+//        }
+//    }
+
+//    func fetchRandomQuizQuestions(completion: @escaping ([Quiz]) -> Void) {
+//        var quizArray: [Quiz] = []
+//
+//        // Firebase 데이터베이스에서 퀴즈 데이터 가져오기
+//        ref.child("Etiquette").observeSingleEvent(of: .value) { (snapshot) in
+//            if let data = snapshot.value as? [String: Bool] {
+//                for (question, answer) in data {
+//                    let quizItem = Quiz(question: question, answer: answer)
+//                    quizArray.append(quizItem)
+//                }
+//
+//                quizArray.shuffle()
+//                let selectedQuiz = Array(quizArray.prefix(10))
+//
+//                completion(selectedQuiz)
+//            }
+//        }
+//    }
+
+    
     private func setupPage() {
         let page1 = QuizContentsViewController(page: "1/n", content: "문제1")
         let page2 = QuizContentsViewController(page: "2/n", content: "문제2")
@@ -44,6 +84,30 @@ class QuizViewController: UIPageViewController {
         pages.append(page2)
         pages.append(page3)
     }
+//
+//    // 퀴즈 데이터 가져오기
+//    func fetchRandomQuizQuestions(completion: @escaping ([Quiz]) -> Void) {
+//        var quizArray: [Quiz] = []
+//
+//        // Firebase 데이터베이스에서 퀴즈 데이터 가져오기
+//        ref.child("quiz").observeSingleEvent(of: .value) { (snapshot) in
+//            if let data = snapshot.value as? [String: Bool] {
+//                for (question, answer) in data {
+//                    // 퀴즈 데이터를 Quiz 모델로 변환
+//                    let quizItem = Quiz(question: question, answer: answer)
+//                    quizArray.append(quizItem)
+//                }
+//
+//                // 랜덤으로 섞고 10개로 제한
+//                quizArray.shuffle()
+//                let selectedQuiz = Array(quizArray.prefix(10))
+//
+//                // 완료 후에 데이터를 반환
+//                completion(selectedQuiz)
+//            }
+//        }
+//    }
+    
     
     private func setupUI() {
         self.dataSource = self
