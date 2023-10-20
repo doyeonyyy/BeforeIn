@@ -9,5 +9,10 @@ import Foundation
 
 struct Quiz {
     let question: String
-    let answer: Bool
+    let answer: String
+}
+
+struct UserAnswer {
+    var isCorrect: Bool
+    var selectedOption: String // "O" 또는 "X"를 저장
 }
