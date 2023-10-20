@@ -83,6 +83,7 @@
 		67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA612AD92E6000EA1DA7 /* DetailView.swift */; };
 		67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FFB4FE2AE0D2F6008108FA /* String.swift */; };
 		67FFB5032AE0D900008108FA /* QuizIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FFB5022AE0D900008108FA /* QuizIntroView.swift */; };
+		B3142AD92AE120CB00B54BB5 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */; };
 		B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */; };
 		B397E30A2ADCCA2C00F3363F /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397E3092ADCCA2C00F3363F /* InfoViewController.swift */; };
 		E718CB792ADA6BB300896ACC /* EtiquetteDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */; };
@@ -135,6 +136,7 @@
 		67E5AA612AD92E6000EA1DA7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		67FFB4FE2AE0D2F6008108FA /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		67FFB5022AE0D900008108FA /* QuizIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizIntroView.swift; sourceTree = "<group>"; };
+		B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		B397E3092ADCCA2C00F3363F /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		E718CB782ADA6BB300896ACC /* EtiquetteDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtiquetteDetailCell.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				1596DCC22AD6B27F00E6D388 /* QuizPage */,
 				1596DCC72AD6B2AB00E6D388 /* SearchPage */,
 				1596DCCA2AD6B2C300E6D388 /* DetailPage */,
+				B3142AD72AE1209E00B54BB5 /* CommunityPage */,
 				1596DCCD2AD6B2E500E6D388 /* ProfilePage */,
 				1596DCAB2AD6B18B00E6D388 /* Assets.xcassets */,
 				1596DCAD2AD6B18B00E6D388 /* LaunchScreen.storyboard */,
@@ -365,6 +368,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3142AD72AE1209E00B54BB5 /* CommunityPage */ = {
+			isa = PBXGroup;
+			children = (
+				B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */,
+			);
+			path = CommunityPage;
 			sourceTree = "<group>";
 		};
 		E718CB772ADA6B8500896ACC /* CustomCell */ = {
@@ -513,6 +524,7 @@
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
 				E7EFDA242AD8FC49000963C8 /* SearchView.swift in Sources */,
+				B3142AD92AE120CB00B54BB5 /* CommunityViewController.swift in Sources */,
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */,
 				673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */,
