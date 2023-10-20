@@ -44,13 +44,15 @@ class TapbarController: UITabBarController {
     private func viewControllerSetting() {
         let vc1 = UINavigationController(rootViewController: MainViewController())
         let vc2 = UINavigationController(rootViewController: SearchViewController())
-        let vc3 = UINavigationController(rootViewController: ProfileViewController())
+        let vc3 = UINavigationController(rootViewController: CommunityViewController())
+        let vc4 = UINavigationController(rootViewController: ProfileViewController())
         vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
-        vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "captions.bubble"), selectedImage: UIImage(systemName: "captions.bubble.fill"))
+        vc4.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
 
 
-        setViewControllers([vc1, vc2, vc3], animated: false)
+        setViewControllers([vc1, vc2, vc3, vc4], animated: false)
 
     }
     
