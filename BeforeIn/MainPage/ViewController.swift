@@ -23,6 +23,10 @@ class MainViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        mainView.mainViewModel?.updateUser(currentUser)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
