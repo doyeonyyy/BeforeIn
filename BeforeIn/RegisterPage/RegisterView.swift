@@ -52,25 +52,25 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     
-    lazy var registerPhoneLabel = UILabel().then {
-        $0.text = "휴대폰번호"
+    lazy var registerNicknameLabel = UILabel().then {
+        $0.text = "닉네임"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
-    lazy var registerPhoneTextField = UITextField().then {
-        $0.placeholder = "휴대폰번호를 입력하세요"
+    lazy var registerNicknameTextField = UITextField().then {
+        $0.placeholder = "닉네임을 입력하세요."
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
         $0.clearsOnBeginEditing = false
     }
-    lazy var registerPhoneBottom = UIView().then {
+    lazy var registerNicknameBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
-    lazy var checkPhoneButton = UIButton().then {
-        $0.setTitle("  휴대폰인증  ", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+    lazy var checkNicknameButton = UIButton().then {
+        $0.setTitle("  중복확인  ", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        $0.backgroundColor = .BeforeInRed
+        $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
@@ -148,10 +148,10 @@ class RegisterView: UIView {
         addSubview(registerNameTextField)
         addSubview(registerNameBottom)
         
-        addSubview(registerPhoneLabel)
-        addSubview(registerPhoneTextField)
-        addSubview(registerPhoneBottom)
-        addSubview(checkPhoneButton)
+        addSubview(registerNicknameLabel)
+        addSubview(registerNicknameTextField)
+        addSubview(registerNicknameBottom)
+        addSubview(checkNicknameButton)
         
         addSubview(registerPwLabel)
         addSubview(registerPwTextField)
@@ -201,27 +201,27 @@ class RegisterView: UIView {
             $0.height.equalTo(1)
         }
         
-        registerPhoneLabel.snp.makeConstraints {
+        registerNicknameLabel.snp.makeConstraints {
             $0.top.equalTo(registerNameBottom.snp.bottom).offset(40)
             $0.left.equalTo(self.snp.left).offset(24)
         }
-        registerPhoneTextField.snp.makeConstraints {
-            $0.top.equalTo(registerPhoneLabel.snp.bottom).offset(17)
+        registerNicknameTextField.snp.makeConstraints {
+            $0.top.equalTo(registerNicknameLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-24)
         }
-        registerPhoneBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerPhoneTextField)
-            $0.bottom.equalTo(registerPhoneTextField.snp.bottom).offset(4)
+        registerNicknameBottom.snp.makeConstraints {
+            $0.left.right.equalTo(registerNicknameTextField)
+            $0.bottom.equalTo(registerNicknameTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
-        checkPhoneButton.snp.makeConstraints{
+        checkNicknameButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
-            $0.bottom.equalTo(registerPhoneBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(registerNicknameBottom.snp.top).offset(-5)
         }
         
         registerPwLabel.snp.makeConstraints {
-            $0.top.equalTo(registerPhoneBottom.snp.bottom).offset(40)
+            $0.top.equalTo(registerNicknameBottom.snp.bottom).offset(40)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerPwTextField.snp.makeConstraints {
