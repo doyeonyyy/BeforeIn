@@ -24,7 +24,7 @@ class SecondDetailView: UIView {
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "이것만은 절대 금지!!"
+        $0.text = "이것만은 절대 금지"
         $0.font = .systemFont(ofSize: 22, weight: .black)
         $0.textColor = .black
         $0.numberOfLines = 0
@@ -32,8 +32,8 @@ class SecondDetailView: UIView {
     
     lazy var descriptionLabel = UILabel().then {
         $0.text = """
-        세상에서 한번 뿐인 행복한 날
-        모두를 위해서 피해야하는 언행을 모았습니다.
+        잠깐!
+        모두를 위해서 피해야 하는 행동을 모았습니다.
         """
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .black
