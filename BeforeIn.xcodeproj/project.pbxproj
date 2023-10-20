@@ -73,6 +73,9 @@
 		63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */; };
 		63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */; };
 		63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */; };
+		673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673609182AE2358B00934690 /* CommunityPageViewController.swift */; };
+		6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091A2AE235A500934690 /* CommunityPageView.swift */; };
+		6736091D2AE2941F00934690 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091C2AE2941F00934690 /* CommentCell.swift */; };
 		673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CD34F2ADF7CD00090C051 /* UserManager.swift */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
@@ -127,6 +130,9 @@
 		63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroViewModel.swift; sourceTree = "<group>"; };
 		63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewModel.swift; sourceTree = "<group>"; };
+		673609182AE2358B00934690 /* CommunityPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageViewController.swift; sourceTree = "<group>"; };
+		6736091A2AE235A500934690 /* CommunityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageView.swift; sourceTree = "<group>"; };
+		6736091C2AE2941F00934690 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		673CD34F2ADF7CD00090C051 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -374,6 +380,9 @@
 			isa = PBXGroup;
 			children = (
 				B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */,
+				673609182AE2358B00934690 /* CommunityPageViewController.swift */,
+				6736091A2AE235A500934690 /* CommunityPageView.swift */,
+				6736091C2AE2941F00934690 /* CommentCell.swift */,
 			);
 			path = CommunityPage;
 			sourceTree = "<group>";
@@ -511,6 +520,7 @@
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
+				6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
 				63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */,
@@ -520,6 +530,7 @@
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
 				67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
+				673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
@@ -535,6 +546,7 @@
 				E718CB792ADA6BB300896ACC /* EtiquetteDetailCell.swift in Sources */,
 				67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */,
 				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
+				6736091D2AE2941F00934690 /* CommentCell.swift in Sources */,
 				67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */,
 				63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
