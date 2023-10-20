@@ -63,6 +63,31 @@ struct UserManager {
             }
         }
     }
+    
+    func findNickname(nickname: String, completion: @escaping (User?) -> Void) {
+        let userDB = db.collection("User")
+        let query = userDB.whereField("nickname", isEqualTo: nickname)
+        query.getDocuments { (snapShot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil)
+            } else if let qs = snapShot, !qs.documents.isEmpty {
+                if let data = qs.documents.first?.data() {
+                    let email = data["email"] as? String ?? ""
+                    let name = data["name"] as? String ?? ""
+                    let nickname = data["nickname"] as? String ?? ""
+                    let level = data["level"] as? Int ?? 0
+                    let phone = data["phone"] as? String ?? ""
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: level, phone: phone)
+                    completion(user)
+                } else {
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
 
     
 }
