@@ -61,9 +61,9 @@ class DetailViewController: BaseViewController {
             detailView.firstDetailView.detailImageView.image = maskedImage
         }
         /// secondDetailView
-        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["good"]?.count ?? 0)"
+        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["bad"]?.count ?? 0)"
         /// thirdDetailView
-        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["bad"]?.count ?? 0)"
+        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["good"]?.count ?? 0)"
 
     }
 
@@ -104,10 +104,10 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
-            return selectedEtiquette?.content["good"]?.count ?? 0
+            return selectedEtiquette?.content["bad"]?.count ?? 0
         } else if collectionView == detailView.thirdDetailView.dosCollectionView {
             /// dosCollectionView 내용
-            return selectedEtiquette?.content["bad"]?.count ?? 0
+            return selectedEtiquette?.content["good"]?.count ?? 0
         }
         return 0
     }
