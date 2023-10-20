@@ -17,6 +17,7 @@ class QuizViewController: UIPageViewController {
     private var previousButton: UIButton!
     private var cancelButton: UIButton!
     private var progressView = UIProgressView(progressViewStyle: .default)
+    
     private var buttonO: UIButton!
     private var buttonX: UIButton!
     private var nextButton: UIButton!
@@ -121,6 +122,7 @@ class QuizViewController: UIPageViewController {
         previousButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+            make.width.height.equalTo(30)
         }
         
         cancelButton.snp.makeConstraints { make in

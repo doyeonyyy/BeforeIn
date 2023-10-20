@@ -12,7 +12,6 @@ class QuizContentsViewController: UIViewController {
     private var stackView: UIStackView!
     
     private var quizPage = UILabel()
-    // progress bar 삽입할 공간
     private var quizContent = UILabel()
     
     override func viewDidLoad() {
