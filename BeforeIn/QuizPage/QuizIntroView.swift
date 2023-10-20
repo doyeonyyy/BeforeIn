@@ -110,4 +110,3 @@ class QuizIntroView: UIView {
         print("View 업데이트")
     }
 }
-

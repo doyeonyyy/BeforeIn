@@ -12,7 +12,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - Properties
     private let loginView = LoginView()
-    let userManager = UserManager()
+    private let userManager = UserManager()
     
     // MARK: - Life Cycle
     override func loadView(){
@@ -84,11 +84,64 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func findIdButtonTapped() {
-        print("아이디찾기 버튼이 눌렸습니다")
+        let alertController = UIAlertController(title: "아이디 찾기", message: "등록한 닉네임을 입력해주세요.", preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "닉네임"
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let findAction = UIAlertAction(title: "찾기", style: .default) { [weak self] _ in
+            if let nickname = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespaces) {
+                if !nickname.isEmpty {
+                    self?.findUserByNickname(nickname)
+                }
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(findAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func findUserByNickname(_ nickname: String) {
+        userManager.findNickname(nickname: nickname) { user in
+            let alertTitle: String
+            let alertMessage: String
+            
+            if let user = user {
+                alertTitle = "아이디 찾기 성공"
+                alertMessage = self.maskEmail(user.email)
+            } else {
+                alertTitle = "아이디 찾기 실패"
+                alertMessage = "해당 닉네임을 가진 사용자를 찾을 수 없습니다."
+            }
+            self.showAlertOneButton(title: alertTitle, message: alertMessage, buttonTitle: "확인")
+        }
     }
     
+    func maskEmail(_ email: String) -> String {
+        let emailArray = Array(email)
+        var maskedEmail = ""
+        for (index, char) in emailArray.enumerated() {
+            if index > 1 && index < 6 && char != "@" {
+                maskedEmail.append("*")
+            } else {
+                maskedEmail.append(char)
+            }
+        }
+        return maskedEmail
+    }
+
     @objc func findPwButtonTapped() {
         print("비밀번호찾기 버튼이 눌렸습니다")
+//        Auth.auth().sendPasswordReset(withEmail: loginView.idTextField.text!) { error in
+//            if let error = error {
+//                print("error: \(error.localizedDescription)")
+//            } else {
+//
+//            }
+//        }
     }
     
     @objc func registerButtonTapped() {

@@ -16,25 +16,12 @@ class SearchView: UIView {
         $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.addLeftPadding(8)
-        $0.rightView = searchButtonContainer
-        $0.rightViewMode = .unlessEditing
     }
     
-    lazy var searchButton = UIButton().then{
-        $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        $0.tintColor = .gray
-    }
-    
-    lazy var searchButtonContainer = UIView().then {
-        $0.addSubview(searchButton)
-        searchButton.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8))
-        }
-    }
-    
-    lazy var cancelButton = UIButton().then {
-        $0.setTitle("취소", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
+    lazy var searchButton = UIButton().then {
+        let image = UIImage(systemName: "magnifyingglass")
+        $0.setImage(image, for: .normal)
+        $0.tintColor = .darkGray
         $0.backgroundColor = .none
     }
     
@@ -83,7 +70,7 @@ class SearchView: UIView {
     func addSubview(){
         scrollView.addSubview(categoryStackView)
         addSubview(searchTextField)
-        addSubview(cancelButton)
+        addSubview(searchButton)
         addSubview(scrollView)
         addSubview(divider)
         addSubview(etiquetteCollectionView)
@@ -95,11 +82,11 @@ class SearchView: UIView {
         searchTextField.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.leading.equalToSuperview().offset(24)
-            $0.trailing.equalTo(cancelButton.snp.leading).offset(-16)
+            $0.trailing.equalTo(searchButton.snp.leading).offset(-16)
             $0.height.equalTo(50)
         }
         
-        cancelButton.snp.makeConstraints {
+        searchButton.snp.makeConstraints {
             $0.centerY.equalTo(searchTextField)
             $0.trailing.equalToSuperview().offset(-24)
             $0.width.equalTo(41)
