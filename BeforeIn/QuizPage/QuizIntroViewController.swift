@@ -37,6 +37,6 @@ class QuizIntroViewController: BaseViewController {
     @objc func skipButtonTapped(_ button: UIButton) {
         let skipVC = MainViewController()
         skipVC.modalPresentationStyle = .fullScreen
-        self.present(skipVC, animated: true)
+        self.dismiss(animated: true)
     }
 }
