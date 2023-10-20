@@ -98,5 +98,4 @@ class QuizResultView: UIView {
         labelD.text = quizResultViewModel?.level
         print("view 업데이트")
     }
-
 }
