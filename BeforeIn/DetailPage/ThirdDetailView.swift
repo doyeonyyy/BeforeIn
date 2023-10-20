@@ -32,8 +32,8 @@ class ThirdDetailView: UIView {
     
     lazy var descriptionLabel = UILabel().then {
         $0.text = """
-        당신의 사소한 배려가 결혼식의 행복을
-        더해줍니다.
+        잘 지켜지고 있나요?
+        당신의 작은 배려가 다른 사람들을 기분좋게 합니다.
         """
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .black

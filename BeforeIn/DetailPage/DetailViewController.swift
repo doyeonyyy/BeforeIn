@@ -23,10 +23,6 @@ class DetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         setUI()
-        
-        if let selectedEtiquette = selectedEtiquette {
-            print("선택된 에티켓 ", selectedEtiquette)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

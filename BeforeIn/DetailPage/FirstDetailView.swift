@@ -22,13 +22,13 @@ class FirstDetailView: UIView {
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "결혼식장 에티켓 알아보기"
+        $0.text = "타이틀"
         $0.font = .boldSystemFont(ofSize: 32)
         $0.textColor = .white
     }
     
     lazy var descriptionLabel = UILabel().then {
-        $0.text = "결혼식장 방문에서 지켜야할 기본 규칙을 알아봅시다"
+        $0.text = "설명"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .white
     }
