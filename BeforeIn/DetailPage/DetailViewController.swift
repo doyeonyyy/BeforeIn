@@ -11,11 +11,7 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let detailView = DetailView()
-//    var selectedIndexPath: IndexPath?
     var selectedEtiquette: Etiquette?
-    /// 더미데이터
-    private let dummyTitle: [String] = ["흰색 의상은 피해주세요.", "굶고 가지 마세요", "춤추지 마세요"]
-    private let dummyDescription = "신부의 아름다운 드레스를 위해 참아주세요"
 
     // MARK: - Life Cycle
     override func loadView(){
@@ -27,16 +23,7 @@ class DetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         setUI()
-        
-//        if let selectedIndexPath = selectedIndexPath {
-//            let selectedEtiquette = etiquetteList[selectedIndexPath.row]
-//            print("인덱스패쓰 \(selectedEtiquette)")
-//        }
-        if let selectedEtiquette = selectedEtiquette {
-            print("선택된 에티켓 ", selectedEtiquette)
-        }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,10 +48,42 @@ class DetailViewController: BaseViewController {
     }
     
     private func setUI() {
+        /// firstDetailView
+        detailView.firstDetailView.titleLabel.text = "\(selectedEtiquette?.place ?? "place") 에티켓 알아보기"
+        detailView.firstDetailView.descriptionLabel.text = "\(selectedEtiquette?.place ?? "place")에서 지켜야할 기본 규칙을 알아봅시다"
+//        detailView.firstDetailView.detailImageView.image = selectedEtiquette?.backgroundImage
+        if let image = selectedEtiquette?.backgroundImage {
+            let maskedImage = applyMask(to: image)
+            detailView.firstDetailView.detailImageView.image = maskedImage
+        }
         /// secondDetailView
-        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+        detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["bad"]?.count ?? 0)"
         /// thirdDetailView
-        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(dummyTitle.count)"
+        detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["good"]?.count ?? 0)"
+
+    }
+
+    private func applyMask(to image: UIImage) -> UIImage {
+        if let cgImage = image.cgImage {
+            let width = cgImage.width
+            let height = cgImage.height
+            let bitsPerComponent = 8
+            let bytesPerRow = 4 * width
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+            let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+
+            if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+                context.clip(to: CGRect(x: 0, y: 0, width: width, height: height))
+                context.setFillColor(UIColor(white: 0, alpha: 0.7).cgColor)
+                context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+
+                if let maskedImage = context.makeImage() {
+                    return UIImage(cgImage: maskedImage)
+                }
+            }
+        }
+        return image
     }
     
     
@@ -81,10 +100,10 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
-            return dummyTitle.count
+            return selectedEtiquette?.content["bad"]?.count ?? 0
         } else if collectionView == detailView.thirdDetailView.dosCollectionView {
             /// dosCollectionView 내용
-            return dummyTitle.count
+            return selectedEtiquette?.content["good"]?.count ?? 0
         }
         return 0
     }
@@ -95,13 +114,19 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
             cell.backgroundColor = .clear
-            cell.titleLabel.text = "11\(dummyTitle[indexPath.row])"
-            cell.descriptionLabel.text = "11\(dummyDescription)"
+            if let etiquette = selectedEtiquette {
+                cell.titleLabel.text = etiquette.content["bad"]?[indexPath.item].mainContent
+                cell.descriptionLabel.text = etiquette.content["bad"]?[indexPath.item].subContent
+                cell.backgroundImage.image = etiquette.content["bad"]?[indexPath.item].contentImage
+            }
         } else if collectionView == detailView.thirdDetailView.dosCollectionView {
             /// dosCollectionView 내용
             cell.backgroundColor = .clear
-            cell.titleLabel.text = "22\(dummyTitle[indexPath.row])"
-            cell.descriptionLabel.text = "22\(dummyDescription)"
+            if let etiquette = selectedEtiquette {
+                cell.titleLabel.text = etiquette.content["good"]?[indexPath.item].mainContent
+                cell.descriptionLabel.text = etiquette.content["good"]?[indexPath.item].subContent
+                cell.backgroundImage.image = etiquette.content["good"]?[indexPath.item].contentImage
+            }
         }
         return cell
     }
@@ -117,6 +142,5 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
-
     }
 }
