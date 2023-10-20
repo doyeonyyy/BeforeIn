@@ -43,7 +43,7 @@ class SearchView: UIView {
     
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
-        $0.minimumLineSpacing = 24
+        $0.minimumLineSpacing = 20
         $0.itemSize = CGSize(width: 345, height: 116)
     }
 
@@ -51,6 +51,8 @@ class SearchView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
+        $0.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+
     }
     
     // MARK: - Life Cycle
@@ -105,13 +107,13 @@ class SearchView: UIView {
         
         divider.snp.makeConstraints {
             $0.top.equalTo(categoryStackView.snp.bottom).offset(16)
-            $0.height.equalTo(3)
+            $0.height.equalTo(1)
             $0.leading.trailing.width.equalToSuperview()
         }
         
         etiquetteCollectionView.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(32)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.top.equalTo(divider.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide)
         }
     }

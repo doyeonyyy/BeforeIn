@@ -47,11 +47,16 @@ class EtiquetteCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        contentView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.1
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        contentView.layer.shadowRadius = 4
+        contentView.layer.masksToBounds = false
+        
         imageView.layer.cornerRadius = 4
         imageView.layer.masksToBounds = true
-        
         
         // addSubview
         stackView.addArrangedSubview(titleLabel)

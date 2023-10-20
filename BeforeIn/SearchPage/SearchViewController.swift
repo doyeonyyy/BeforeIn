@@ -56,7 +56,7 @@ class SearchViewController: BaseViewController {
             // TODO: contentEdgeInsets 대체제 찾기
             button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
             button.layer.cornerRadius = 16.5
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             button.tag = index
             searchView.categoryStackView.addArrangedSubview(button)
         }
@@ -150,9 +150,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        let detailViewController = DetailViewController()
-//        detailViewController.selectedIndexPath = indexPath
-//        navigationController?.pushViewController(detailViewController, animated: true)
         let selectedEtiquette = filteredEtiquetteList[indexPath.row]
         let detailVC = DetailViewController()
         detailVC.selectedEtiquette = selectedEtiquette
