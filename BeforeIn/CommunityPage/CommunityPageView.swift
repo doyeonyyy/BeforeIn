@@ -19,6 +19,18 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .lightGray
     }
     
+    private let editButton = UIButton().then {
+        $0.setTitle("수정", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+    }
+    
+    private let deleteButton = UIButton().then {
+        $0.setTitle("삭제", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+    }
+    
     private let authorLabel = UILabel().then {
         $0.text = "닉네임"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
@@ -112,6 +124,8 @@ class CommunityPageView: UIView {
     // MARK: - Methods
     func addSubview(){
         addSubview(profileImageView)
+        addSubview(editButton)
+        addSubview(deleteButton)
         addSubview(authorLabel)
         addSubview(dateLabel)
         addSubview(titleLabel)
@@ -133,6 +147,16 @@ class CommunityPageView: UIView {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.left.equalTo(self.snp.left).offset(16)
             $0.height.width.equalTo(60)
+        }
+        
+        editButton.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.right.equalTo(deleteButton.snp.left).offset(-2)
+        }
+        
+        deleteButton.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.right.equalTo(self.snp.right).offset(-16)
         }
         
         authorLabel.snp.makeConstraints {
