@@ -12,6 +12,7 @@
 		1586ECA72AE404F500055040 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA62AE404F500055040 /* PostCell.swift */; };
 		1586ECA92AE40FD100055040 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA82AE40FD100055040 /* Date.swift */; };
 		1586ECAB2AE4160000055040 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECAA2AE4160000055040 /* UIImage.swift */; };
+		1586ECAD2AE41F2200055040 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECAC2AE41F2200055040 /* WriteView.swift */; };
 		1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCA22AD6B18A00E6D388 /* AppDelegate.swift */; };
 		1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCA42AD6B18A00E6D388 /* SceneDelegate.swift */; };
 		1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCA62AD6B18A00E6D388 /* ViewController.swift */; };
@@ -108,6 +109,7 @@
 		1586ECA62AE404F500055040 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		1586ECA82AE40FD100055040 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		1586ECAA2AE4160000055040 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		1586ECAC2AE41F2200055040 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		1596DC9F2AD6B18A00E6D388 /* BeforeIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeforeIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1596DCA22AD6B18A00E6D388 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1596DCA42AD6B18A00E6D388 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				B307D7752AE234900027BA10 /* WriteViewController.swift */,
+				1586ECAC2AE41F2200055040 /* WriteView.swift */,
 			);
 			path = CommunityWritePage;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */,
 				E7C8AE0E2AD7DACA00C084A7 /* UITextField.swift in Sources */,
 				6736091D2AE2941F00934690 /* CommentCell.swift in Sources */,
+				1586ECAD2AE41F2200055040 /* WriteView.swift in Sources */,
 				67E5AA622AD92E6000EA1DA7 /* DetailView.swift in Sources */,
 				63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */,
 				1596DCC12AD6B25100E6D388 /* RegisterViewController.swift in Sources */,
