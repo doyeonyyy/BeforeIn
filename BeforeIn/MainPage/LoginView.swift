@@ -12,7 +12,7 @@ import Then
 class LoginView: UIView {
     
     // MARK: - UI Properties
-    lazy var idView = UIView().then {
+   lazy var idView = UIView().then {
         $0.layer.borderColor = UIColor.systemGray2.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 8
