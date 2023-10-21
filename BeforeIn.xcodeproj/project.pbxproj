@@ -80,6 +80,8 @@
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
+		67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -137,6 +139,8 @@
 		673CD34F2ADF7CD00090C051 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
+		67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 		1596DCCD2AD6B2E500E6D388 /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				67CB1BC52AE3E7BE003834B1 /* PasswordEditView */,
 				159B79352ADFB19A00FE210E /* ProfileView */,
 				B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */,
 				B397E3092ADCCA2C00F3363F /* InfoViewController.swift */,
@@ -376,6 +381,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		67CB1BC52AE3E7BE003834B1 /* PasswordEditView */ = {
+			isa = PBXGroup;
+			children = (
+				67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */,
+				67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */,
+			);
+			path = PasswordEditView;
 			sourceTree = "<group>";
 		};
 		B3142AD72AE1209E00B54BB5 /* CommunityPage */ = {
@@ -531,12 +545,14 @@
 				1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */,
 				67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */,
 				1596DCDC2AD79EB700E6D388 /* TabbarController.swift in Sources */,
+				67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */,
 				67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
 				673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,
 				1596DCC42AD6B28D00E6D388 /* QuizIntroViewController.swift in Sources */,
+				67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */,
 				E7EFDA242AD8FC49000963C8 /* SearchView.swift in Sources */,
 				B3142AD92AE120CB00B54BB5 /* CommunityViewController.swift in Sources */,
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
