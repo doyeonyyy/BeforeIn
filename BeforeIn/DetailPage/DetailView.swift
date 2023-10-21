@@ -49,7 +49,6 @@ class DetailView: UIView {
     
     func setUI() {
         scrollView.snp.makeConstraints {
-//            $0.edges.equalTo(self.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
             $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
         }
@@ -74,6 +73,4 @@ class DetailView: UIView {
             $0.bottom.equalTo(scrollView.snp.bottom).offset(-10)
         }
     }
-    
-    
 }

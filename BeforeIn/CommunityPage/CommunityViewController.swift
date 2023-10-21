@@ -224,6 +224,10 @@ class CommunityViewController: UIViewController {
         view.addSubview(shadowView2)
         view.addSubview(plusIcon)
         
+        plusIcon.isUserInteractionEnabled = true
+                let plusIconTapGesture = UITapGestureRecognizer(target: self, action: #selector(plusIconTapped))
+                plusIcon.addGestureRecognizer(plusIconTapGesture)
+        
         customView.snp.makeConstraints { make in
             make.width.equalTo(115)
             make.height.equalTo(32)
@@ -361,6 +365,11 @@ class CommunityViewController: UIViewController {
             make.centerX.centerY.equalTo(circleView)
         }
 
+    }
+    
+    @objc func plusIconTapped() {
+        let writeViewController = WriteViewController()
+        navigationController?.pushViewController(writeViewController, animated: true)
     }
 }
 
