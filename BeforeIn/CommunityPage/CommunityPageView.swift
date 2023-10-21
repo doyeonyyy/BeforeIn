@@ -130,18 +130,18 @@ class CommunityPageView: UIView {
     
     func setUI(){
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(124)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.left.equalTo(self.snp.left).offset(16)
             $0.height.width.equalTo(60)
         }
         
         authorLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             $0.left.equalTo(profileImageView.snp.right).offset(8)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(authorLabel.snp.bottom).offset(0) // 안먹힘??
+            $0.top.equalTo(authorLabel.snp.bottom).offset(8)
             $0.left.equalTo(authorLabel.snp.left)
         }
         
@@ -186,7 +186,6 @@ class CommunityPageView: UIView {
         commentTableView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom)
             $0.left.right.equalToSuperview()
-            $0.height.equalTo(160)
         }
         
         bottomDivider.snp.makeConstraints {

@@ -18,7 +18,7 @@ class CommentCell: UITableViewCell {
     
     let authorLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
     let dateLabel = UILabel().then {
