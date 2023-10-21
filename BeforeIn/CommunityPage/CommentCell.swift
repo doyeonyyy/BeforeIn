@@ -23,6 +23,7 @@ class CommentCell: UITableViewCell {
     
     let dateLabel = UILabel().then {
         $0.text = "10분 전"
+        $0.textColor = .systemGray2
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
@@ -62,7 +63,7 @@ class CommentCell: UITableViewCell {
     
     func setCell(){
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(contentView.snp.top).offset(16)
+            $0.centerY.equalTo(contentView.snp.centerY)
             $0.left.equalTo(contentView.snp.left).offset(16)
             $0.width.height.equalTo(40)
         }
