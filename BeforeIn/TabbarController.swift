@@ -21,8 +21,8 @@ class TapbarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setCurrentUser()
-        print("탭바 viewWillAppear")
+//        self.setCurrentUser()
+//        print("탭바 viewWillAppear")
     }
 
     private func tabBarSetting() {

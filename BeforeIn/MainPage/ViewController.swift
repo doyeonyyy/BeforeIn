@@ -5,6 +5,7 @@
 //  Created by t2023-m079 on 10/11/23.
 //
 
+import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import Gifu
@@ -13,10 +14,10 @@ import Then
 import UIKit
 
 class MainViewController: BaseViewController {
+    private var handle: AuthStateDidChangeListenerHandle?
+    let userManager = UserManager()
     var firebaseDB: DatabaseReference!
     var recommendedEtiquetteCollectionView: UICollectionView!
-    
-    private var user1 = User(email: "lcho3878@naver.com", name: "이찬호", nickname: "lcho3878", profileImage: UIImage(systemName: "person.fill")!, level: 5, phone: "")
     let mainView = MainView()
     
     override func loadView() {
@@ -26,8 +27,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let mainViewModel = MainViewModel(user: self.user1)
-        mainView.mainViewModel = mainViewModel
+        setCurrentUser()
         setupCollectionView()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
@@ -42,6 +42,19 @@ class MainViewController: BaseViewController {
         let quizIntroVC = QuizIntroViewController()
         quizIntroVC.modalPresentationStyle = .fullScreen
         present(quizIntroVC, animated: true)
+    }
+    
+    private func setCurrentUser(){
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user, let email = user.email {
+                self.userManager.findUser(email: email) { findUser in
+                    if let user = findUser {
+                        currentUser = user
+                        self.mainView.mainViewModel = MainViewModel(user: currentUser)
+                    }
+                }
+            }
+        }
     }
     
     func setupCollectionView() {

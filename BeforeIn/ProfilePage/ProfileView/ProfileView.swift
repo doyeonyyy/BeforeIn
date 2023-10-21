@@ -267,8 +267,16 @@ class ProfileView: UIView{
         levelLabel.text = profileViewModel?.levelText
         circularImageView.image = profileViewModel?.profileImage
         idLabel.text = profileViewModel?.email
+        myLevelRectangleUpdate(profileViewModel?.level ?? 1)
         print("profileView 업데이트")
         
+    }
+    
+    private func myLevelRectangleUpdate(_ level: Int) {
+        let newWidth = CGFloat(level * 60)
+        myLevelRectangle.snp.updateConstraints { make in
+            make.width.equalTo(newWidth)
+        }
     }
 
    
