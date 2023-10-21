@@ -205,6 +205,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1586EC9E2AE3F91F00055040 /* CommunityPage */ = {
+			isa = PBXGroup;
+			children = (
+				673609182AE2358B00934690 /* CommunityPageViewController.swift */,
+				6736091A2AE235A500934690 /* CommunityPageView.swift */,
+				6736091C2AE2941F00934690 /* CommentCell.swift */,
+			);
+			path = CommunityPage;
+			sourceTree = "<group>";
+		};
+		1586EC9F2AE3F92900055040 /* CommunityMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */,
+			);
+			path = CommunityMainPage;
+			sourceTree = "<group>";
+		};
+		1586ECA02AE3F93200055040 /* CommunityWritePage */ = {
+			isa = PBXGroup;
+			children = (
+				B307D7752AE234900027BA10 /* WriteViewController.swift */,
+			);
+			path = CommunityWritePage;
+			sourceTree = "<group>";
+		};
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
@@ -395,11 +421,9 @@
 		B3142AD72AE1209E00B54BB5 /* CommunityPage */ = {
 			isa = PBXGroup;
 			children = (
-				B3142AD82AE120CB00B54BB5 /* CommunityViewController.swift */,
-				673609182AE2358B00934690 /* CommunityPageViewController.swift */,
-				6736091A2AE235A500934690 /* CommunityPageView.swift */,
-				6736091C2AE2941F00934690 /* CommentCell.swift */,
-				B307D7752AE234900027BA10 /* WriteViewController.swift */,
+				1586EC9F2AE3F92900055040 /* CommunityMainPage */,
+				1586EC9E2AE3F91F00055040 /* CommunityPage */,
+				1586ECA02AE3F93200055040 /* CommunityWritePage */,
 			);
 			path = CommunityPage;
 			sourceTree = "<group>";
