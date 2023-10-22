@@ -94,7 +94,7 @@ class LoginViewController: BaseViewController {
         let findAction = UIAlertAction(title: "찾기", style: .default) { [weak self] _ in
             if let nickname = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespaces) {
                 if !nickname.isEmpty {
-                    self?.findUserByNickname(nickname)
+                    self?.findIdByNickname(nickname)
                 }
             }
         }
@@ -104,7 +104,7 @@ class LoginViewController: BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func findUserByNickname(_ nickname: String) {
+    func findIdByNickname(_ nickname: String) {
         userManager.findNickname(nickname: nickname) { user in
             let alertTitle: String
             let alertMessage: String
