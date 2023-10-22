@@ -15,7 +15,11 @@ class WriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         writeView.contentTextView.delegate = self
-        
+        writeView.confirmButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
+    }
+    
+    @objc func confirmButtonClick() {
+        print("글올리기 버튼 클릭")
     }
     
 }

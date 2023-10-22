@@ -65,6 +65,11 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     
+    //태그 선택 로직
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tag = tags[indexPath.row]
+        print("\(tag) 선택됨")
+    }
     
 }
 

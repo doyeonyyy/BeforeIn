@@ -17,6 +17,18 @@ class TagCell: UICollectionViewCell {
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                contentView.backgroundColor = .BeforeInRed
+                tagLabel.textColor = .white
+            } else {
+                contentView.backgroundColor = .clear
+                tagLabel.textColor = .BeforeInRed
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
