@@ -6,7 +6,7 @@ import UIKit
 import FirebaseAuth
 import SnapKit
 
-class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: BaseViewController {
     
     let userManager = UserManager()
     let profileView = ProfileView()
@@ -30,7 +30,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         profileView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.tableView.separatorStyle = .none
         profileView.editNicknameButton.addTarget(self, action: #selector(editNicknameButtonTapped), for: .touchUpInside)
-        
+        profileView.editProfileButton.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         //        configureUser()
     }
     
@@ -38,6 +38,20 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         let nicknameEditVC = NicknameEditViewController()
         self.navigationController?.pushViewController(nicknameEditVC, animated: true)
     }
+    
+    @objc func editProfileButtonTapped(){
+        
+        
+    }
+    
+
+    
+
+}
+
+
+// MARK: - UITableViewDelegate
+extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -82,7 +96,11 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         }
     }
     
-    
+}
+
+
+// MARK: - UITableViewDataSource
+extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellData.count
@@ -123,4 +141,5 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         
         return cell
     }
+    
 }
