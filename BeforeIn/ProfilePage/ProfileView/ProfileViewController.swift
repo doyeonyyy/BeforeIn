@@ -29,10 +29,15 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         profileView.tableView.delegate = self
         profileView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.tableView.separatorStyle = .none
+        profileView.editNicknameButton.addTarget(self, action: #selector(editNicknameButtonTapped), for: .touchUpInside)
         
-//        configureUser()
+        //        configureUser()
     }
     
+    @objc func editNicknameButtonTapped() {
+        let nicknameEditVC = NicknameEditViewController()
+        self.navigationController?.pushViewController(nicknameEditVC, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -41,6 +46,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             let displayVC = DisplayViewController()
             present(displayVC, animated: true)
         } else if indexPath.row == 1 {
+            // 비밀번호 변경
             let passwordEditVC = PasswordEditViewController()
             self.navigationController?.pushViewController(passwordEditVC, animated: true)
         } else if indexPath.row == 2 {

@@ -40,6 +40,12 @@ class ProfileView: UIView{
         return label
     }()
     
+    let editNicknameButton = UIButton().then {
+        $0.setTitle("닉네임 수정", for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    }
+    
     private let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -126,8 +132,7 @@ class ProfileView: UIView{
     
     private let line: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
-        view.layer.cornerRadius = 2
+        view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -164,6 +169,7 @@ class ProfileView: UIView{
         addSubview(nicknameLabel)
         addSubview(mentLabel)
         addSubview(idLabel)
+        addSubview(editNicknameButton)
         addSubview(circularImageView)
         addSubview(shadowView)
         addSubview(grayRectangle)
@@ -193,6 +199,11 @@ class ProfileView: UIView{
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
+        editNicknameButton.snp.makeConstraints { make in
+            make.top.equalTo(idLabel.snp.bottom).offset(1)
+            make.leading.equalTo(self.snp.leading).offset(24)
+        }
+        
         circularImageView.snp.makeConstraints { make in
             make.width.equalTo(80)
             make.height.equalTo(80)
@@ -203,7 +214,7 @@ class ProfileView: UIView{
         grayRectangle.snp.makeConstraints { make in
             make.width.equalTo(345)
             make.height.equalTo(200)
-            make.top.equalTo(idLabel.snp.bottom).offset(32)
+            make.top.equalTo(editNicknameButton.snp.bottom).offset(16)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
@@ -242,8 +253,8 @@ class ProfileView: UIView{
         }
         
         line.snp.makeConstraints { make in
-            make.width.equalTo(393)
-            make.height.equalTo(4)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(3)
             make.top.equalTo(grayRectangle.snp.bottom).offset(24)
         }
         

@@ -174,7 +174,6 @@ class PasswordEditView: UIView {
             $0.bottom.equalTo(checkBottom.snp.top).offset(-5)
         }
         
-        
         changePasswordButton.snp.makeConstraints{
             $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
