@@ -16,52 +16,63 @@ class PasswordEditView: UIView {
         $0.text = "기존 비밀번호를 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
     }
-    
-    private let editPasswordTextField = UITextField().then {
+    let editPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
-        $0.backgroundColor = .systemGray6
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        $0.leftViewMode = .always
         $0.layer.cornerRadius = 8
-        
+    }
+    private let editBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    let editPasswordButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
     }
     
     private let newPasswordLabel = UILabel().then {
         $0.text = "변경할 비밀번호를 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
     }
-    
-    private let newPasswordTextField = UITextField().then {
+    let newPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
-        $0.backgroundColor = .systemGray6
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        $0.leftViewMode = .always
         $0.layer.cornerRadius = 8
+    }
+    private let newBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    let newPasswordButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
     }
     
     private let checkPasswordLabel = UILabel().then {
         $0.text = "변경할 비밀번호를 한번 더 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
     }
-    
-    private let checkPasswordTextField = UITextField().then {
+    let checkPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
-        $0.backgroundColor = .systemGray6
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        $0.leftViewMode = .always
         $0.layer.cornerRadius = 8
     }
+    private let checkBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    let checkPasswordButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.tintColor = .black
+    }
     
-    private let changePasswordButton = UIButton().then {
+    let changePasswordButton = UIButton().then {
         $0.setTitle("비밀번호 변경", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -88,46 +99,81 @@ class PasswordEditView: UIView {
     func addSubview() {
         addSubview(editPasswordLabel)
         addSubview(editPasswordTextField)
+        addSubview(editBottom)
+        addSubview(editPasswordButton)
+        
         addSubview(newPasswordLabel)
         addSubview(newPasswordTextField)
-        addSubview(changePasswordButton)
+        addSubview(newBottom)
+        addSubview(newPasswordButton)
+        
         addSubview(checkPasswordLabel)
         addSubview(checkPasswordTextField)
+        addSubview(checkBottom)
+        addSubview(checkPasswordButton)
+        
+        addSubview(changePasswordButton)
     }
     
     func setUI(){
         editPasswordLabel.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(100)
+            $0.top.equalTo(self.snp.top).offset(120)
             $0.left.equalTo(self.snp.left).offset(24)
         }
-        
         editPasswordTextField.snp.makeConstraints {
-            $0.top.equalTo(editPasswordLabel.snp.bottom).offset(12)
+            $0.top.equalTo(editPasswordLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-55)
+        }
+        editBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.height.equalTo(40)
+            $0.bottom.equalTo(editPasswordTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        editPasswordButton.snp.makeConstraints{
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(editBottom.snp.top).offset(-5)
         }
         
         newPasswordLabel.snp.makeConstraints {
-            $0.top.equalTo(editPasswordTextField.snp.bottom).offset(24)
+            $0.top.equalTo(editBottom.snp.bottom).offset(24)
             $0.left.equalTo(self.snp.left).offset(24)
         }
-        
         newPasswordTextField.snp.makeConstraints {
-            $0.top.equalTo(newPasswordLabel.snp.bottom).offset(12)
-            $0.left.right.equalTo(self).inset(24)
-            $0.height.equalTo(40)
+            $0.top.equalTo(newPasswordLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-55)
         }
+        newBottom.snp.makeConstraints {
+            $0.left.right.equalTo(self).inset(24)
+            $0.bottom.equalTo(newPasswordTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        newPasswordButton.snp.makeConstraints {
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(newBottom.snp.top).offset(-5)
+        }
+        
         
         checkPasswordLabel.snp.makeConstraints {
-            $0.top.equalTo(newPasswordTextField.snp.bottom).offset(24)
+            $0.top.equalTo(newBottom.snp.bottom).offset(24)
             $0.left.equalTo(self.snp.left).offset(24)
         }
-        
         checkPasswordTextField.snp.makeConstraints {
-            $0.top.equalTo(checkPasswordLabel.snp.bottom).offset(12)
-            $0.left.right.equalTo(self).inset(24)
-            $0.height.equalTo(40)
+            $0.top.equalTo(checkPasswordLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-55)
         }
+        checkBottom.snp.makeConstraints {
+            $0.left.right.equalTo(self).inset(24)
+            $0.bottom.equalTo(checkPasswordTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        checkPasswordButton.snp.makeConstraints {
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(checkBottom.snp.top).offset(-5)
+        }
+        
         
         changePasswordButton.snp.makeConstraints{
             $0.left.right.equalTo(self).inset(24)

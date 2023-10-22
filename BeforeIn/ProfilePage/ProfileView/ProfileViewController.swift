@@ -12,7 +12,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     let profileView = ProfileView()
     private let cellData: [String] = [
         "디스플레이",
-        "내정보 수정",
+        "비밀번호 변경",
         "로그아웃",
         "회원탈퇴",
         "정보",
@@ -40,12 +40,10 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         if indexPath.row == 0 {
             let displayVC = DisplayViewController()
             present(displayVC, animated: true)
-        }
-        else if indexPath.row == 1 {
-            // 내정보 수정 페이지 연동하세요
-        }
-        
-        else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
+            let passwordEditVC = PasswordEditViewController()
+            self.navigationController?.pushViewController(passwordEditVC, animated: true)
+        } else if indexPath.row == 2 {
             // 로그아웃
             showAlertTwoButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 do {
@@ -72,8 +70,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
                     }
                 }
             }
-        }
-        else if indexPath.row == 4 {
+        } else if indexPath.row == 4 {
             let infoVC = InfoViewController()
             present(infoVC, animated: true)
         }

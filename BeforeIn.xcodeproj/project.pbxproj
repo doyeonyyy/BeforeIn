@@ -316,6 +316,7 @@
 				E7C8AE0D2AD7DACA00C084A7 /* UITextField.swift */,
 				1586ECAA2AE4160000055040 /* UIImage.swift */,
 				1586ECA82AE40FD100055040 /* Date.swift */,
+				67FFB4FE2AE0D2F6008108FA /* String.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -403,7 +404,6 @@
 				159B78C22ADD573B00FE210E /* User.swift */,
 				159B78C42ADD57A700FE210E /* Quiz.swift */,
 				673CD34F2ADF7CD00090C051 /* UserManager.swift */,
-				67FFB4FE2AE0D2F6008108FA /* String.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
