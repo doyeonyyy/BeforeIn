@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProfileView: UIView{
+class ProfileView: UIView {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "000님"
@@ -32,7 +32,6 @@ class ProfileView: UIView{
     private let idLabel: UILabel = {
         let label = UILabel()
         label.text = "userid@.com"
-//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.textColor = UIColor.systemGray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +45,7 @@ class ProfileView: UIView{
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
-    private let circularImageView: UIImageView = {
+    let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 40
@@ -54,6 +53,12 @@ class ProfileView: UIView{
         imageView.clipsToBounds = true
         return imageView
     }()
+    
+    let editProfileButton = UIButton().then {
+        let image = UIImage(systemName: "pencil.circle.fill")
+        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .BeforeInRed!)
+        $0.setImage(resizedImage, for: .normal)
+    }
     
     private let shadowView: UIView = {
         let view = UIView()
@@ -171,6 +176,7 @@ class ProfileView: UIView{
         addSubview(idLabel)
         addSubview(editNicknameButton)
         addSubview(circularImageView)
+        addSubview(editProfileButton)
         addSubview(shadowView)
         addSubview(grayRectangle)
         addSubview(nameBoxLabel)
@@ -209,6 +215,11 @@ class ProfileView: UIView{
             make.height.equalTo(80)
             make.trailing.equalTo(self.snp.trailing).offset(-24)
             make.top.equalTo(self.snp.top).offset(86)
+        }
+        
+        editProfileButton.snp.makeConstraints { make in
+            make.top.equalTo(circularImageView.snp.bottom).offset(-25)
+            make.leading.equalTo(circularImageView.snp.trailing).offset(-20)
         }
         
         grayRectangle.snp.makeConstraints { make in
