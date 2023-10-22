@@ -5,9 +5,12 @@
 import UIKit
 import FirebaseAuth
 import SnapKit
+import PhotosUI
 
 class ProfileViewController: BaseViewController {
     
+    // MARK: - Properties
+    var picker: PHPickerViewController?
     let userManager = UserManager()
     let profileView = ProfileView()
     private let cellData: [String] = [
@@ -18,6 +21,7 @@ class ProfileViewController: BaseViewController {
         "정보",
     ]
     
+    // MARK: - Life Cycle
     override func loadView() {
         view = profileView
     }
@@ -25,28 +29,49 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
+        setPicker()
+        setTableView()
+        addTarget()
+        //        configureUser()
+    }
+    
+    
+    // MARK: - Methods
+    func setTableView(){
         profileView.tableView.dataSource = self
         profileView.tableView.delegate = self
         profileView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         profileView.tableView.separatorStyle = .none
-        profileView.editNicknameButton.addTarget(self, action: #selector(editNicknameButtonTapped), for: .touchUpInside)
-        profileView.editProfileButton.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
-        //        configureUser()
     }
     
+    func setPicker(){
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .images
+        picker = PHPickerViewController(configuration: configuration)
+    }
+    
+    func addTarget(){
+        profileView.editNicknameButton.addTarget(self, action: #selector(editNicknameButtonTapped), for: .touchUpInside)
+        profileView.editProfileButton.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
+    }
+    
+    
+    
+    // MARK: - @objc
     @objc func editNicknameButtonTapped() {
         let nicknameEditVC = NicknameEditViewController()
         self.navigationController?.pushViewController(nicknameEditVC, animated: true)
     }
     
     @objc func editProfileButtonTapped(){
-        
-        
+        if let picker = picker {
+            picker.delegate = self
+            present(picker, animated: true, completion: nil)
+        }
     }
     
-
     
-
 }
 
 
@@ -142,4 +167,20 @@ extension ProfileViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+// MARK: - PHPickerViewControllerDelegate
+extension ProfileViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.sync {
+                    self.profileView.circularImageView.image = image as? UIImage
+                }
+            }
+        }
+    }
 }

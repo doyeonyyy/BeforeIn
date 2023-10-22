@@ -45,7 +45,7 @@ class ProfileView: UIView {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
-    private let circularImageView: UIImageView = {
+    let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 40
