@@ -12,14 +12,10 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     let profileView = ProfileView()
     private let cellData: [String] = [
         "디스플레이",
-        "정보",
+        "내정보 수정",
         "로그아웃",
         "회원탈퇴",
-        "유저 id 변경(leech3878)",
-        "유저 이메일 변경(google)",
-        "유저 레벨 변경(2)",
-        "프로필 이미지 변경",
-        "유저 레벨 변경(4)"
+        "정보",
     ]
     
     override func loadView() {
@@ -45,10 +41,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             let displayVC = DisplayViewController()
             present(displayVC, animated: true)
         }
-        
         else if indexPath.row == 1 {
-            let infoVC = InfoViewController()
-            present(infoVC, animated: true)
+            // 내정보 수정 페이지 연동하세요
         }
         
         else if indexPath.row == 2 {
@@ -80,22 +74,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             }
         }
         else if indexPath.row == 4 {
-            currentUser.nickname = "leech3878"
-            profileView.profileViewModel?.updateUser(currentUser)
-        }
-        else if indexPath.row == 5 {
-            profileView.profileViewModel?.user.email = "lcho3878@google.com"
-        }
-        else if indexPath.row == 6 {
-            currentUser.level = 2
-            profileView.profileViewModel?.updateUser(currentUser)
-        }
-        else if indexPath.row == 7 {
-            profileView.profileViewModel?.user.profileImage = UIImage(systemName: "person.fill")!
-        }
-        else if indexPath.row == 8 {
-            currentUser.level = 4
-            profileView.profileViewModel?.updateUser(currentUser)
+            let infoVC = InfoViewController()
+            present(infoVC, animated: true)
         }
     }
     
