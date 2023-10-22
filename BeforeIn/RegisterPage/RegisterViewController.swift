@@ -48,6 +48,8 @@ class RegisterViewController: BaseViewController {
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
+        registerView.registerIdTextField.addTarget(self, action: #selector(idTextFieldDidChange(_:)), for: .editingChanged)
+        registerView.registerNicknameTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
     }
     
     
@@ -77,7 +79,7 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
-
+    
     @objc func checkNicknameButtonTapped() {
         if let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces) {
             if !nickname.isEmpty {
@@ -98,7 +100,7 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
-        
+    
     @objc func showPwButtonTapped(){
         registerView.showPwButton.isSelected.toggle()
         
@@ -130,7 +132,8 @@ class RegisterViewController: BaseViewController {
            let name = registerView.registerNameTextField.text?.trimmingCharacters(in: .whitespaces),
            let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces),
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
-           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
+           let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces),
+           checkEmail, checkNickname{
             
             if email.isEmpty {
                 showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
@@ -181,8 +184,22 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
-}
     
+    @objc func idTextFieldDidChange(_ textField: UITextField) {
+        registerView.checkIdButton.backgroundColor = .systemGray6
+        registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
+        checkEmail = false
+    }
+    
+    @objc func nicknameTextFieldDidChange(_ textField: UITextField) {
+        registerView.checkNicknameButton.backgroundColor = .systemGray6
+        registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
+        checkNickname = false
+    }
+    
+    
+}
+
 
 
 //MARK: - UITextFieldDelegate
@@ -236,7 +253,7 @@ extension RegisterViewController: UITextFieldDelegate {
         }
         return true
     }
-
-
+    
+    
 }
 
