@@ -131,10 +131,10 @@ class PostCell: UITableViewCell {
     
     func configureUI(_ post: Post) {
         titleLable.text = post.title
-        nickNameLabel.text = "\(post.writer.nickname) • "
+        nickNameLabel.text = "\(post.writerNickName) • "
         postingTimeLabel.text = post.postingTime.toString("M월 d일 h:m:s")
         heartsLabel.text = String(post.likes)
-        commentsLabel.text = String(post.comments)
+        commentsLabel.text = String(post.comments.count)
     }
 
 }

@@ -11,10 +11,12 @@ import UIKit
 var currentUser = User(email: "", name: "", nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 5, phone: "")
 
 struct User {
-    var email: String
-    var name: String
+    let email: String
+    let name: String
     var nickname: String
     var profileImage: UIImage
     var level: Int
-    let phone: String
+    var phone: String
+    var myPost: [Post] = []
+    var myLikePost: [Post] = []
 }

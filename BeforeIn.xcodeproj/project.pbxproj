@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1543EED22AE64E6500AD587B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EED12AE64E6500AD587B /* Post.swift */; };
+		1543EED42AE64E9300AD587B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EED32AE64E9300AD587B /* Comment.swift */; };
 		1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA22AE3FCC300055040 /* CommunityView.swift */; };
 		1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA42AE3FF4C00055040 /* TagCell.swift */; };
 		1586ECA72AE404F500055040 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA62AE404F500055040 /* PostCell.swift */; };
@@ -108,6 +110,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1543EED12AE64E6500AD587B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1543EED32AE64E9300AD587B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1586ECA22AE3FCC300055040 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		1586ECA42AE3FF4C00055040 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		1586ECA62AE404F500055040 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -410,6 +414,8 @@
 				159B78C22ADD573B00FE210E /* User.swift */,
 				159B78C42ADD57A700FE210E /* Quiz.swift */,
 				673CD34F2ADF7CD00090C051 /* UserManager.swift */,
+				1543EED12AE64E6500AD587B /* Post.swift */,
+				1543EED32AE64E9300AD587B /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */,
 				63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */,
+				1543EED22AE64E6500AD587B /* Post.swift in Sources */,
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
@@ -640,6 +647,7 @@
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
 				159B78C52ADD57A700FE210E /* Quiz.swift in Sources */,
 				63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */,
+				1543EED42AE64E9300AD587B /* Comment.swift in Sources */,
 				B397E30A2ADCCA2C00F3363F /* InfoViewController.swift in Sources */,
 				67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */,
 				159B78C32ADD573B00FE210E /* User.swift in Sources */,

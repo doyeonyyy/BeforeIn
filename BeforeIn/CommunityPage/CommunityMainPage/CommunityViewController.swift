@@ -4,20 +4,10 @@
 import UIKit
 import SnapKit
 
-struct Post{
-    let writer: User
-    let title: String
-    let content: String
-    let comments: Int
-    let likes: Int
-    let tags: [String]
-    let postingTime: Date
-}
 
 //더미 데이터
 let user1 = User(email: "", name: "", nickname: "lcho3878", profileImage: UIImage(systemName: "person")!, level: 1, phone: "")
 let user2 = User(email: "", name: "", nickname: "cksgh0910", profileImage: UIImage(systemName: "person")!, level: 1, phone: "")
-let dummypost = Post(writer: user1 ,title: "요즘애들 왜이러나요", content: "내용이다내용", comments: 1, likes: 2, tags: ["요즘 문화", "우리끼리"], postingTime: Date())
 
 class CommunityViewController: UIViewController {
     
@@ -26,9 +16,7 @@ class CommunityViewController: UIViewController {
     
     //더미 데이터
     let tags = ["전체보기", "요즘 문화", "우리끼리", "기타"]
-    let posts = [
-        Post(writer: user1 ,title: "요즘애들 왜이러나요", content: "내용이다내용", comments: 1, likes: 2, tags: ["요즘 문화", "우리끼리"], postingTime: Date()),
-        Post(writer: user2, title: "MZ세대 이거 맞나요" , content: "MZ는 이래서 문제다", comments: 3, likes: 3, tags: ["기타"], postingTime: Date()), dummypost, dummypost, dummypost, dummypost,
+    let posts: [Post] = [
     ]
     
     override func loadView() {
