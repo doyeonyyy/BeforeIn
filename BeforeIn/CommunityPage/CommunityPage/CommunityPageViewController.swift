@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class CommunityPageViewController: BaseViewController {
     
     // MARK: - Properties
     private let communityPageView = CommunityPageView()
-    var comments = ["댓글이다아아ㅣ아", "댓글ㅋㅋ", "댓글이ㅏㄹ어랴ㅓㄴㅇ랴"]
+    var comments = [Comment]()
+    let db = Firestore.firestore()
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -20,6 +22,8 @@ class CommunityPageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        addTarget()
+        loadComments()
     }
     
     
@@ -30,8 +34,71 @@ class CommunityPageViewController: BaseViewController {
         communityPageView.commentTableView.register(CommentCell.self, forCellReuseIdentifier: "CommentCell")
     }
     
+    func addTarget(){
+        communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+    }
+    
+    
+    
+    // MARK: - @objc
+    @objc func sendButtonTapped(){
+        if let commentText = communityPageView.commentTextField.text?.trimmingCharacters(in: .whitespaces) {
+            addComment(comment: commentText)
+        }
+    }
+    
+    // 댓글 fireStore에 저장
+    func addComment(comment: String) {
+        let postingTime = Date()
+        db.collection("Comment").addDocument(data: [
+            "writer": currentUser.email,
+            "writerNickName": currentUser.nickname,
+            "content": comment,
+            "postingTime": postingTime
+        ]) { error in
+            if let error = error {
+                print("Error adding comment: \(error.localizedDescription)")
+            } else {
+                print("Comment added successfully")
+            }
+        }
+    }
+    
+    // 댓글 불러오기
+    func loadComments() {
+        db.collection("Comment")
+            .order(by: "postingTime") 
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print("댓글을 불러오는 중 오류 발생: \(error.localizedDescription)")
+                } else {
+                    var comments = [Comment]()
+                    
+                    if let documents = querySnapshot?.documents {
+                        for document in documents {
+                            let data = document.data()
+                            if let writer = data["writer"] as? String,
+                               let writerNickName = data["writerNickName"] as? String,
+                               let content = data["content"] as? String,
+                               let postingTime = data["postingTime"] as? Timestamp { // Firestore의 Timestamp 타입을 사용
+                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
+                                comments.append(comment)
+                            }
+                        }
+                        self.comments = comments
+                        self.communityPageView.commentTableView.reloadData()
+                        
+                        let indexPath = IndexPath(row: self.comments.count - 1, section: 0)
+                        self.communityPageView.commentTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    }
+                }
+            }
+    }
+
+    
     
 }
+
 
 
 // MARK: - UITableViewDelegate
@@ -50,8 +117,7 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
-        cell.commentLabel.text = comments[indexPath.row]
-        
+        cell.commentLabel.text = comments[indexPath.row].content
         return cell
     }
     
