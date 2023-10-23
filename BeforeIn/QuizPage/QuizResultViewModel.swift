@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class QuizResultViewModel {
 
@@ -17,7 +18,25 @@ class QuizResultViewModel {
     var name: String {
         return user.name
     }
-    var level: String {
+    
+    var level: Int{
+        return user.level
+    }
+    
+    var levelImage: UIImage{
+        var image = UIImage()
+        switch user.level{
+        case 1: image = UIImage(named: "level1")!
+        case 2: image = UIImage(named: "level2")!
+        case 3: image = UIImage(named: "level3")!
+        case 4: image = UIImage(named: "level4")!
+        case 5: image = UIImage(named: "level5")!
+        default: image = UIImage(named: "level1")!
+        }
+        return image
+    }
+    
+    var levelText: String {
         switch user.level {
         case 1: return "검은머리 짐승"
         case 2: return "훈련받은 짐승"

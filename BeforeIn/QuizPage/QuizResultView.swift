@@ -37,6 +37,7 @@ class QuizResultView: UIView {
     }
 
     func setupUI() {
+        backgroundColor = .systemBackground
         addSubview(labelA)
         addSubview(labelB)
         addSubview(labelC)
@@ -78,24 +79,18 @@ class QuizResultView: UIView {
             make.leading.equalTo(safeAreaLayoutGuide).offset(75)
         }
         levelImage.image = UIImage(named: "level1")
-        levelImage.frame = CGRect(x: 0, y: 0, width: 131.25, height: 137)
         
         levelImage.snp.makeConstraints { make in
             make.centerX.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(labelC.snp.bottom)
             make.bottom.equalTo(safeAreaLayoutGuide).inset(240)
-        }
-        labelD.text = "Lv.1 검은머리 짐승"
-        labelD.textColor = .black
-        labelD.font = UIFont(name: "Inter-Regular", size: 14)
-        labelD.snp.makeConstraints { make in
-            make.top.equalTo(labelC.snp.bottom).offset(110)
-            make.centerX.equalTo(safeAreaLayoutGuide)
         }
     }
     
     private func updateView() {
         labelB.text = "\(quizResultViewModel?.name ?? "ㅇㅇㅇ")님은 현재"
-        labelD.text = quizResultViewModel?.level
+        labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")입니다"
+        levelImage.image = quizResultViewModel?.levelImage
         print("view 업데이트")
     }
 }

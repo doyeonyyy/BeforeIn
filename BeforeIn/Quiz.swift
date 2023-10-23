@@ -9,7 +9,7 @@ import Foundation
 
 struct Quiz {
     let question: String
-    let answer: String
+    let answer: Bool
 }
 
 struct UserAnswer {
