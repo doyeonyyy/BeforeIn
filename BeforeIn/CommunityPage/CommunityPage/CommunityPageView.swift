@@ -90,7 +90,7 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .systemGray6
     }
     
-    private let commentTextField = UITextField().then {
+    let commentTextField = UITextField().then {
         $0.placeholder = "댓글을 입력해주세요."
         $0.borderStyle = .roundedRect
         $0.layer.cornerRadius = 15
@@ -98,7 +98,7 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .systemGray6
     }
     
-    private let sendButton = UIButton().then {
+    let sendButton = UIButton().then {
         $0.setTitle("등록", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
