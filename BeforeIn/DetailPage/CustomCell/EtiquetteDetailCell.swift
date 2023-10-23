@@ -25,6 +25,7 @@ class EtiquetteDetailCell: UICollectionViewCell {
     var descriptionLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = .white
+        $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 0
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
        
@@ -60,7 +61,8 @@ class EtiquetteDetailCell: UICollectionViewCell {
         }
         descriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(-21)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-24)
         }
         
     }
