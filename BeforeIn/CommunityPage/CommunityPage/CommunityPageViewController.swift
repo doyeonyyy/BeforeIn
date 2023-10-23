@@ -41,9 +41,12 @@ class CommunityPageViewController: BaseViewController {
     
     
     // MARK: - @objc
-    @objc func sendButtonTapped(){
-        if let commentText = communityPageView.commentTextField.text?.trimmingCharacters(in: .whitespaces) {
+    @objc func sendButtonTapped() {
+        if let commentText = communityPageView.commentTextField.text?.trimmingCharacters(in: .whitespaces), !commentText.isEmpty {
             addComment(comment: commentText)
+            DispatchQueue.main.async {
+                self.communityPageView.commentTextField.text = ""
+            }
         }
     }
     
@@ -67,7 +70,7 @@ class CommunityPageViewController: BaseViewController {
     // 댓글 불러오기
     func loadComments() {
         db.collection("Comment")
-            .order(by: "postingTime") 
+            .order(by: "postingTime")
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("댓글을 불러오는 중 오류 발생: \(error.localizedDescription)")
@@ -88,12 +91,15 @@ class CommunityPageViewController: BaseViewController {
                         self.comments = comments
                         self.communityPageView.commentTableView.reloadData()
                         
-                        let indexPath = IndexPath(row: self.comments.count - 1, section: 0)
-                        self.communityPageView.commentTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        if !comments.isEmpty {
+                            let indexPath = IndexPath(row: self.comments.count - 1, section: 0)
+                            self.communityPageView.commentTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        }
                     }
                 }
             }
     }
+
 
     
     
@@ -117,12 +123,18 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = dateFormatter.string(from: comments[indexPath.row].postingTime)
+        
+        cell.dateLabel.text = dateString
         cell.commentLabel.text = comments[indexPath.row].content
+        cell.authorLabel.text = comments[indexPath.row].writerNickName
         return cell
     }
-    
-    
-    
+
+
     
 }
 
