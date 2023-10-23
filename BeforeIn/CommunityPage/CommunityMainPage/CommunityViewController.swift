@@ -84,11 +84,17 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
         }
         let post = posts[indexPath.row]
         cell.configureUI(post)
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let communityPageVC = CommunityPageViewController()
+        self.navigationController?.pushViewController(communityPageVC, animated: true)
     }
     
 }
