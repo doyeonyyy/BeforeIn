@@ -133,12 +133,12 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == detailView.secondDetailView.dontsCollectionView {
-            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x + 0.5 * scrollView.frame.width
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.secondDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
         if scrollView == detailView.thirdDetailView.dosCollectionView {
-            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x + 0.5 * scrollView.frame.width
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
