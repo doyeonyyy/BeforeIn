@@ -27,6 +27,11 @@ class CommentCell: UITableViewCell {
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
+    let editButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+        $0.tintColor = .black
+    }
+    
     let deleteButton = UIButton().then {
         $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         $0.tintColor = .black
@@ -56,6 +61,7 @@ class CommentCell: UITableViewCell {
         contentView.addSubview(profileImageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(editButton)
         contentView.addSubview(deleteButton)
         contentView.addSubview(commentLabel)
     }
@@ -76,6 +82,11 @@ class CommentCell: UITableViewCell {
         dateLabel.snp.makeConstraints {
             $0.left.equalTo(authorLabel.snp.right).offset(4)
             $0.bottom.equalTo(authorLabel.snp.bottom)
+        }
+        
+        editButton.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.top)
+            $0.right.equalTo(deleteButton.snp.left).offset(-3)
         }
         
         deleteButton.snp.makeConstraints {
