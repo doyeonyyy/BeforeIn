@@ -255,6 +255,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             print("수정 성공")
                         }
                     }
+                    break
                 }
             }
             
@@ -290,6 +291,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             print("삭제 성공")
                         }
                     }
+                    break
                 }
             }
             
