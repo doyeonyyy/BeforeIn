@@ -68,23 +68,6 @@ class LoginView: UIView {
         $0.tintColor = .black
     }
     
-    lazy var maintainLabel = UILabel().then {
-        $0.text = "로그인 상태 유지"
-        $0.font = UIFont.systemFont(ofSize: 16)
-    }
-    
-    lazy var maintainButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "square"), for: .normal)
-        $0.tintColor = .black
-    }
-    
-    lazy var maintainStackView = UIStackView().then {
-        $0.addArrangedSubview(maintainLabel)
-        $0.addArrangedSubview(maintainButton)
-        $0.spacing = 5
-        $0.axis = .horizontal
-    }
-    
     lazy var loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
@@ -139,7 +122,6 @@ class LoginView: UIView {
     func addSubview(){
         addSubview(idView)
         addSubview(pwView)
-        addSubview(maintainStackView)
         addSubview(loginButton)
         addSubview(buttonStackView)
     }
@@ -195,13 +177,8 @@ class LoginView: UIView {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
-        maintainStackView.snp.makeConstraints{
-            $0.top.equalTo(pwView.snp.bottom).offset(17)
-            $0.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(25)
-        }
-        
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(maintainStackView.snp.bottom).offset(40)
+            $0.top.equalTo(pwView.snp.bottom).offset(40)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
             $0.height.equalTo(50)
         }
