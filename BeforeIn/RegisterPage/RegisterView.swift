@@ -84,6 +84,7 @@ class RegisterView: UIView {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.textContentType = .newPassword
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
@@ -104,6 +105,7 @@ class RegisterView: UIView {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.textContentType = .newPassword
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
@@ -121,7 +123,7 @@ class RegisterView: UIView {
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 8
-       // $0.isEnabled = false
+        // $0.isEnabled = false
     }
     
     // MARK: - Life Cycle
@@ -174,10 +176,10 @@ class RegisterView: UIView {
         registerIdTextField.snp.makeConstraints {
             $0.top.equalTo(registerIdLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
+            $0.right.equalTo(self.snp.right).offset(-100)
         }
         registerIdBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerIdTextField)
+            $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(registerIdTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
@@ -208,10 +210,10 @@ class RegisterView: UIView {
         registerNicknameTextField.snp.makeConstraints {
             $0.top.equalTo(registerNicknameLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
+            $0.right.equalTo(self.snp.right).offset(-100)
         }
         registerNicknameBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerNicknameTextField)
+            $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(registerNicknameTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
@@ -227,10 +229,10 @@ class RegisterView: UIView {
         registerPwTextField.snp.makeConstraints {
             $0.top.equalTo(registerPwLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
+            $0.right.equalTo(self.snp.right).offset(-62)
         }
         registerPwBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerPwTextField)
+            $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(registerPwTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
@@ -246,10 +248,10 @@ class RegisterView: UIView {
         registerCheckTextField.snp.makeConstraints {
             $0.top.equalTo(registerCheckLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
+            $0.right.equalTo(self.snp.right).offset(-62)
         }
         registerCheckBottom.snp.makeConstraints {
-            $0.left.right.equalTo(registerCheckTextField)
+            $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(registerCheckTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }

@@ -12,7 +12,7 @@ import Then
 class LoginView: UIView {
     
     // MARK: - UI Properties
-   lazy var idView = UIView().then {
+    lazy var idView = UIView().then {
         $0.layer.borderColor = UIColor.systemGray2.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 8
@@ -66,23 +66,6 @@ class LoginView: UIView {
     lazy var showPwButton = UIButton().then {
         $0.setImage(UIImage(systemName: "eye"), for: .normal)
         $0.tintColor = .black
-    }
-    
-    lazy var maintainLabel = UILabel().then {
-        $0.text = "로그인 상태 유지"
-        $0.font = UIFont.systemFont(ofSize: 16)
-    }
-    
-    lazy var maintainButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "square"), for: .normal)
-        $0.tintColor = .black
-    }
-    
-    lazy var maintainStackView = UIStackView().then {
-        $0.addArrangedSubview(maintainLabel)
-        $0.addArrangedSubview(maintainButton)
-        $0.spacing = 5
-        $0.axis = .horizontal
     }
     
     lazy var loginButton = UIButton().then {
@@ -139,7 +122,6 @@ class LoginView: UIView {
     func addSubview(){
         addSubview(idView)
         addSubview(pwView)
-        addSubview(maintainStackView)
         addSubview(loginButton)
         addSubview(buttonStackView)
     }
@@ -186,7 +168,8 @@ class LoginView: UIView {
         }
         
         pwTextField.snp.makeConstraints {
-            $0.edges.equalTo(pwView)
+            $0.top.bottom.left.equalTo(pwView)
+            $0.right.equalTo(pwView.snp.right).offset(-40)
             $0.height.equalTo(48)
         }
         
@@ -195,13 +178,8 @@ class LoginView: UIView {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
-        maintainStackView.snp.makeConstraints{
-            $0.top.equalTo(pwView.snp.bottom).offset(17)
-            $0.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(25)
-        }
-        
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(maintainStackView.snp.bottom).offset(40)
+            $0.top.equalTo(pwView.snp.bottom).offset(40)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
             $0.height.equalTo(50)
         }
