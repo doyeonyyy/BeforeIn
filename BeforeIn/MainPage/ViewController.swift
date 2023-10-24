@@ -34,7 +34,7 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-//        fetchEtiquetteList()
+        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
     }
@@ -219,6 +219,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedEtiquette = etiquetteList[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.selectedEtiquette = selectedEtiquette
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }

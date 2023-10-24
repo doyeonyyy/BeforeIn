@@ -26,6 +26,10 @@ class ProfileViewController: BaseViewController {
         view = profileView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        profileView.profileViewModel?.updateUser(currentUser)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
