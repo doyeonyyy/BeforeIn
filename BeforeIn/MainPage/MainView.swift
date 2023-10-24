@@ -264,7 +264,7 @@ class MainView: UIView {
     }
     
     private func updateView() {
-        nameLabel.text = "\(mainViewModel?.name ?? "ㅇㅇㅇ")님은 현재"
+        nameLabel.text = "\(mainViewModel?.nickname ?? "ㅇㅇㅇ")님은 현재"
         levelLabel.text = mainViewModel?.level
         etiquetteViewContent.text = "\(mainViewModel?.etiquetteContent ?? "예")"
         print("view 업데이트")

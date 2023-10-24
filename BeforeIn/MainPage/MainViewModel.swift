@@ -24,6 +24,11 @@ class MainViewModel {
     var name: String {
         return user.name
     }
+    
+    var nickname: String{
+        return user.nickname
+    }
+    
     var level: String {
         switch user.level{
         case 1: return "검은머리 짐승"

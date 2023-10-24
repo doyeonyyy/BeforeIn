@@ -13,9 +13,10 @@ class QuizIntroViewModel {
             self.updateView?()
         }
     }
-    var name: String {
-        return user.name
+    var nickname: String {
+        return user.nickname
     }
+    
     var updateView: (() -> Void)?
     
     init(user: User) {

@@ -106,7 +106,7 @@ class QuizIntroView: UIView {
         }
     }
     private func updateView() {
-        labelB.text = "\(quizIntroViewModel?.name ?? "ㅇㅇㅇ")님!"
+        labelB.text = "\(quizIntroViewModel?.nickname ?? "ㅇㅇㅇ")님!"
         print("View 업데이트")
     }
 }
