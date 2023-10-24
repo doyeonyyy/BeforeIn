@@ -66,8 +66,17 @@ class QuizResultView: UIView {
         labelC.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28)
         labelC.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(14)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
+//            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
+            make.centerX.equalToSuperview()
         }
+        levelImage.snp.makeConstraints { make in
+            make.centerX.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(labelC.snp.bottom)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+        }
+        levelImage.image = UIImage(named: "level1")
+        
         startButton.setTitle("비포인 시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = UIColor.BeforeInRed
@@ -75,20 +84,16 @@ class QuizResultView: UIView {
         startButton.snp.makeConstraints { make in
             make.width.equalTo(244)
             make.height.equalTo(51)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(125)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(75)
+//            make.bottom.equalTo(safeAreaLayoutGuide).inset(125)
+            make.top.equalTo(levelImage.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+//            make.leading.equalTo(safeAreaLayoutGuide).offset(75)
         }
-        levelImage.image = UIImage(named: "level1")
         
-        levelImage.snp.makeConstraints { make in
-            make.centerX.equalTo(safeAreaLayoutGuide)
-            make.top.equalTo(labelC.snp.bottom)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(240)
-        }
     }
     
     private func updateView() {
-        labelB.text = "\(quizResultViewModel?.name ?? "ㅇㅇㅇ")님은 현재"
+        labelB.text = "\(quizResultViewModel?.nickname ?? "ㅇㅇㅇ")님은"
         labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")입니다"
         levelImage.image = quizResultViewModel?.levelImage
         print("view 업데이트")

@@ -15,8 +15,8 @@ class QuizResultViewModel {
             self.updateView?()
         }
     }
-    var name: String {
-        return user.name
+    var nickname: String {
+        return user.nickname
     }
     
     var level: Int{

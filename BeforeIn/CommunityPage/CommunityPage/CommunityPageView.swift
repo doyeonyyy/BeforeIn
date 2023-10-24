@@ -192,18 +192,18 @@ class CommunityPageView: UIView {
         
         likeButton.snp.makeConstraints {
             $0.right.equalTo(self.snp.right).offset(-50)
-            $0.bottom.equalTo(contentTextView.snp.bottom).offset(24)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
         }
         
         likeLabel.snp.makeConstraints {
             $0.left.equalTo(likeButton.snp.right).offset(5)
             $0.right.equalTo(self.snp.right).offset(-8)
-            $0.bottom.equalTo(contentTextView.snp.bottom).offset(21)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
         }
         
         categoryButton.snp.makeConstraints {
             $0.left.equalTo(self.snp.left).offset(16)
-            $0.bottom.equalTo(contentTextView.snp.bottom).offset(24)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
         }
         
         divider.snp.makeConstraints {

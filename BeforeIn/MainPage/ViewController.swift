@@ -26,6 +26,7 @@ class MainViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
+        fetchEtiquetteContent()
     }
     
     override func viewDidLoad() {
@@ -33,16 +34,18 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
+//        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
     }
     
     @objc func seeMoreButtonClick() {
-        self.fetchEtiquetteList()
+        if let tabBarController = self.tabBarController{
+            tabBarController.selectedIndex = 1
+        }
     }
     
     @objc func quizButtonClick() {
-//        self.fetchEtiquetteContent() //에티켓 한마디 추천 함수
         let quizIntroVC = QuizIntroViewController()
         quizIntroVC.modalPresentationStyle = .fullScreen
         present(quizIntroVC, animated: true)
@@ -182,6 +185,7 @@ class MainViewController: BaseViewController {
             }
             
             dispatchGroup.notify(queue: .main) {
+                self.fetchEtiquetteContent()
                 self.recommendedEtiquetteCollectionView.reloadData()
             }
             
@@ -215,6 +219,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedEtiquette = etiquetteList[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.selectedEtiquette = selectedEtiquette
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }

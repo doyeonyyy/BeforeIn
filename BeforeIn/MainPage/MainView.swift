@@ -31,6 +31,16 @@ class MainView: UIView {
         $0.font = UIFont.systemFont(ofSize: 16)
     }
     
+    private let level: UILabel = {
+        let label = UILabel()
+        label.text = "Lv l"
+        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+    
     private let profileImageView = UIImageView().then {
         $0.image = UIImage(systemName: "person")
         $0.layer.cornerRadius = 30
@@ -157,6 +167,7 @@ class MainView: UIView {
         contentView.addSubview(nameLabel)
         contentView.addSubview(levelLabel)
         contentView.addSubview(subLabel)
+        contentView.addSubview(level)
         contentView.addSubview(profileImageView)
         contentView.addSubview(quizButton)
         contentView.addSubview(divider)
@@ -194,6 +205,10 @@ class MainView: UIView {
         subLabel.snp.makeConstraints { make in
             make.centerY.equalTo(levelLabel).offset(4)
             make.leading.equalTo(levelLabel.snp.trailing).offset(8)
+        }
+        level.snp.makeConstraints { make in
+            make.bottom.equalTo(subLabel.snp.bottom)
+            make.leading.equalTo(subLabel.snp.trailing).offset(16)
         }
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -264,11 +279,12 @@ class MainView: UIView {
     }
     
     private func updateView() {
-        nameLabel.text = "\(mainViewModel?.name ?? "ㅇㅇㅇ")님은 현재"
+        nameLabel.text = "\(mainViewModel?.nickname ?? "ㅇㅇㅇ")님은 현재"
         levelLabel.text = mainViewModel?.level
         etiquetteViewContent.text = "\(mainViewModel?.etiquetteContent ?? "예")"
+        level.text = mainViewModel?.levelNumberText
         print("view 업데이트")
-    }
+    }//
 
 }
 

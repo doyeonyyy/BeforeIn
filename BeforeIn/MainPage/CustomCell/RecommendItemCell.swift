@@ -13,6 +13,8 @@ class RecommendItemCell: UICollectionViewCell {
     
     var contentImageView = UIImageView().then {
         $0.backgroundColor = .black
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     var mainLabel = UILabel().then {
         $0.text = "소개팅 꿀팁 에티켓"

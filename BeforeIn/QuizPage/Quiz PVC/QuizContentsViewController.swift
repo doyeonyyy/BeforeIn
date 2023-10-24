@@ -59,14 +59,27 @@ class NewQuizContentViewController: UIViewController {
         }
         
         let buttonO = UIButton().then {
-            $0.setImage(UIImage(named: "O"), for: .normal)
-            $0.setImage(UIImage(named: "inactiveO"), for: .selected)
+            let configuration = UIImage.SymbolConfiguration(scale: .large)
+            let normalImage = UIImage(named: "O")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "inactiveO")?.withConfiguration(configuration)
+            
+            $0.configuration = .filled()
+            $0.showsMenuAsPrimaryAction = false
+            $0.setImage(normalImage, for: .normal)
+            $0.setImage(selectedImage, for: .selected)
             $0.addTarget(self, action: #selector(oButtonClick), for: .touchUpInside)
+            
             self.buttonO = $0
         }
         let buttonX = UIButton().then {
-            $0.setImage(UIImage(named: "X"), for: .normal)
-            $0.setImage(UIImage(named: "inactiveX"), for: .selected)
+            let configuration = UIImage.SymbolConfiguration(scale: .large)
+            let normalImage = UIImage(named: "X")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "inactiveX")?.withConfiguration(configuration)
+            
+            $0.configuration = .filled()
+            $0.showsMenuAsPrimaryAction = false
+            $0.setImage(normalImage, for: .normal)
+            $0.setImage(selectedImage, for: .selected)
             $0.addTarget(self, action: #selector(xButtonClick), for: .touchUpInside)
             self.buttonX = $0
         }
