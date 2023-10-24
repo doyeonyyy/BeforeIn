@@ -62,7 +62,7 @@ class ThirdDetailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
-        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     // MARK: - Life Cycle

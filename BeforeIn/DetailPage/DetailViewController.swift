@@ -86,7 +86,37 @@ class DetailViewController: BaseViewController {
         return image
     }
     
-    
+    private func applyGradientMask(to image: UIImage) -> UIImage {
+        if let cgImage = image.cgImage {
+                let width = cgImage.width
+                let height = cgImage.height
+                let bitsPerComponent = 8
+                let bytesPerRow = 4 * width
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+
+                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
+                    context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+                    let gradientColors: [CGFloat] = [0, 0, 0, 0.9,  
+                                                     0, 0, 0, 0,
+                                                    ]
+                    let gradientLocations: [CGFloat] = [0.0, 0.5]
+                    if let gradient = CGGradient(colorSpace: colorSpace, colorComponents: gradientColors, locations: gradientLocations, count: 2) {
+                        let startPoint = CGPoint(x: 0, y: 0)
+                        let endPoint = CGPoint(x: 0, y: height)
+
+                        context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+
+                        if let maskedImage = context.makeImage() {
+                            return UIImage(cgImage: maskedImage)
+                        }
+                    }
+                }
+            }
+            return image
+    }
+
     // MARK: - @objc
     @objc func backButtonTapped(){
         navigationController?.popViewController(animated: true)
@@ -117,7 +147,10 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             if let etiquette = selectedEtiquette {
                 cell.titleLabel.text = etiquette.content["bad"]?[indexPath.item].mainContent
                 cell.descriptionLabel.text = etiquette.content["bad"]?[indexPath.item].subContent
-                cell.backgroundImage.image = etiquette.content["bad"]?[indexPath.item].contentImage
+                if let image = etiquette.content["bad"]?[indexPath.item].contentImage {
+                    let maskedImage = applyGradientMask(to: image)
+                    cell.backgroundImage.image = maskedImage
+                }
             }
         } else if collectionView == detailView.thirdDetailView.dosCollectionView {
             /// dosCollectionView 내용
@@ -125,7 +158,10 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             if let etiquette = selectedEtiquette {
                 cell.titleLabel.text = etiquette.content["good"]?[indexPath.item].mainContent
                 cell.descriptionLabel.text = etiquette.content["good"]?[indexPath.item].subContent
-                cell.backgroundImage.image = etiquette.content["good"]?[indexPath.item].contentImage
+                if let image = etiquette.content["good"]?[indexPath.item].contentImage {
+                    let maskedImage = applyGradientMask(to: image)
+                    cell.backgroundImage.image = maskedImage
+                }
             }
         }
         return cell
@@ -133,12 +169,12 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == detailView.secondDetailView.dontsCollectionView {
-            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x + 0.5 * scrollView.frame.width
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.secondDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
         if scrollView == detailView.thirdDetailView.dosCollectionView {
-            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x
+            let collectionViewCenterX = scrollView.center.x + scrollView.contentOffset.x + 0.5 * scrollView.frame.width
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
