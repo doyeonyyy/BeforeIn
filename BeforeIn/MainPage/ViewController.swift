@@ -34,7 +34,7 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-//        fetchEtiquetteList()
+        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
     }
