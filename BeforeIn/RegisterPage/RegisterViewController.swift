@@ -118,10 +118,10 @@ class RegisterViewController: BaseViewController {
         
         if registerView.showCheckButton.isSelected {
             registerView.showCheckButton.setImage(UIImage(systemName: "eye"), for: .normal)
-            registerView.registerCheckTextField.isSecureTextEntry = true
+            registerView.registerPwTextField.isSecureTextEntry = true
         } else {
             registerView.showCheckButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-            registerView.registerCheckTextField.isSecureTextEntry = false
+            registerView.registerPwTextField.isSecureTextEntry = false
         }
     }
     

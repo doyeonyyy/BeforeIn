@@ -84,6 +84,7 @@ class RegisterView: UIView {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.textContentType = .newPassword
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
@@ -104,6 +105,7 @@ class RegisterView: UIView {
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
+        $0.textContentType = .newPassword
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
     }
@@ -121,7 +123,7 @@ class RegisterView: UIView {
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 8
-       // $0.isEnabled = false
+        // $0.isEnabled = false
     }
     
     // MARK: - Life Cycle
