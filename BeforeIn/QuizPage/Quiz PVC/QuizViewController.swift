@@ -105,17 +105,20 @@ extension NewQuizViewController: UIPageViewControllerDelegate, UIPageViewControl
     func goToNextPage() {
         if let currentViewController = viewControllers?.first,
            let nextViewController = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) {
-            setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
-        }
-        else {
-//            self.dismiss(animated: true)
+            currentViewController.view.isHidden = true
+            setViewControllers([nextViewController], direction: .forward, animated: true) { [weak self] _ in
+                currentViewController.view.isHidden = false
+            }
         }
     }
     
     func goToPreviousPage() {
         if let currentViewController = viewControllers?.first,
            let previousViewController = dataSource?.pageViewController(self, viewControllerBefore: currentViewController) {
-            setViewControllers([previousViewController], direction: .reverse, animated: true, completion: nil)
+            currentViewController.view.isHidden = true
+            setViewControllers([previousViewController], direction: .reverse, animated: true) { [weak self] _ in
+                currentViewController.view.isHidden = false
+            }
         }
     }
     
