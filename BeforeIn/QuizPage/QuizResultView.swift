@@ -66,7 +66,8 @@ class QuizResultView: UIView {
         labelC.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28)
         labelC.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(14)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
+//            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
+            make.centerX.equalToSuperview()
         }
         levelImage.snp.makeConstraints { make in
             make.centerX.equalTo(safeAreaLayoutGuide)
@@ -92,7 +93,7 @@ class QuizResultView: UIView {
     }
     
     private func updateView() {
-        labelB.text = "\(quizResultViewModel?.nickname ?? "ㅇㅇㅇ")님은 현재"
+        labelB.text = "\(quizResultViewModel?.nickname ?? "ㅇㅇㅇ")님은"
         labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")입니다"
         levelImage.image = quizResultViewModel?.levelImage
         print("view 업데이트")
