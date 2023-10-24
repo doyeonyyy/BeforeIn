@@ -12,7 +12,7 @@ import Then
 class LoginView: UIView {
     
     // MARK: - UI Properties
-   lazy var idView = UIView().then {
+    lazy var idView = UIView().then {
         $0.layer.borderColor = UIColor.systemGray2.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 8
@@ -168,7 +168,8 @@ class LoginView: UIView {
         }
         
         pwTextField.snp.makeConstraints {
-            $0.edges.equalTo(pwView)
+            $0.top.bottom.left.equalTo(pwView)
+            $0.right.equalTo(pwView.snp.right).offset(-40)
             $0.height.equalTo(48)
         }
         
