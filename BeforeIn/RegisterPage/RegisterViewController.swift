@@ -47,6 +47,7 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        registerView.registerPwTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerIdTextField.addTarget(self, action: #selector(idTextFieldDidChange(_:)), for: .editingChanged)
         registerView.registerNicknameTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
@@ -118,10 +119,10 @@ class RegisterViewController: BaseViewController {
         
         if registerView.showCheckButton.isSelected {
             registerView.showCheckButton.setImage(UIImage(systemName: "eye"), for: .normal)
-            registerView.registerPwTextField.isSecureTextEntry = true
+            registerView.registerCheckTextField.isSecureTextEntry = true
         } else {
             registerView.showCheckButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-            registerView.registerPwTextField.isSecureTextEntry = false
+            registerView.registerCheckTextField.isSecureTextEntry = false
         }
     }
     
@@ -133,8 +134,8 @@ class RegisterViewController: BaseViewController {
            let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces),
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
            let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces),
-           checkEmail, checkNickname{
-            
+           checkEmail, checkNickname {
+            let validPw = password.isValidPassword()
             if email.isEmpty {
                 showAlertOneButton(title: "이메일", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             } else if name.isEmpty {
@@ -147,6 +148,8 @@ class RegisterViewController: BaseViewController {
                 showAlertOneButton(title: "비밀번호 확인", message: "비밀번호를 다시 한번 입력하세요.", buttonTitle: "확인")
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
+            } else if !validPw {
+                showAlertOneButton(title: "비밀번호 형식 오류", message: "비밀번호 형식에 맞게 입력해주세요. (대소문자, 특수문자, 숫자 포함 8자이상)", buttonTitle: "확인")
             } else {
                 let newUser = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: 1, phone: "")
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -167,11 +170,9 @@ class RegisterViewController: BaseViewController {
            let nickname = registerView.registerNicknameTextField.text?.trimmingCharacters(in: .whitespaces),
            let password = registerView.registerPwTextField.text?.trimmingCharacters(in: .whitespaces),
            let checkPassword = registerView.registerCheckTextField.text?.trimmingCharacters(in: .whitespaces) {
-            
-            let vaildEmail = email.isValidEmail()
-            let vaildPW = password.isValidPassword()
-            let isFormValid = !email.isEmpty && !name.isEmpty && !nickname.isEmpty && !password.isEmpty && !checkPassword.isEmpty && checkEmail && checkNickname && vaildEmail && vaildPW
-            
+            let validEmail = email.isValidEmail()
+            let isFormValid = !email.isEmpty && !name.isEmpty && !nickname.isEmpty && !password.isEmpty && !checkPassword.isEmpty && checkEmail && checkNickname && validEmail
+
             UIView.animate(withDuration: 0.3) {
                 if isFormValid {
                     self.registerView.registerButton.backgroundColor = .BeforeInRed
@@ -184,6 +185,7 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
+    
     
     @objc func idTextFieldDidChange(_ textField: UITextField) {
         registerView.checkIdButton.backgroundColor = .systemGray6
