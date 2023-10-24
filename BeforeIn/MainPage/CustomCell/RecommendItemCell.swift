@@ -47,7 +47,8 @@ class RecommendItemCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = 16
         contentView.clipsToBounds = true
-        
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray4.cgColor
         
         contentView.addSubview(contentImageView)
         contentView.addSubview(mainLabel)
