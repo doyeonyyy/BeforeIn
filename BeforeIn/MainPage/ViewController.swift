@@ -200,7 +200,7 @@ class MainViewController: BaseViewController {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.recentlyEtiquetteCollectionView {
-            return 6
+            return 0
         }
         else {
             return etiquetteList.count
