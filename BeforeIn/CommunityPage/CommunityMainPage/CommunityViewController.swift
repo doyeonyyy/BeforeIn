@@ -3,6 +3,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 
 //더미 데이터
@@ -12,15 +13,21 @@ let user2 = User(email: "", name: "", nickname: "cksgh0910", profileImage: UIIma
 class CommunityViewController: UIViewController {
     
     let communityMainView = CommunityView()
-    
+    var postTableView: UITableView!
     
     //더미 데이터
     let tags = ["전체보기", "요즘 문화", "우리끼리", "기타"]
-    let posts: [Post] = [
-    ]
+    var posts: [Post] = []
+//    var posts: [String] = []
+    var count = 0
     
     override func loadView() {
         view = communityMainView
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        postTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -31,7 +38,9 @@ class CommunityViewController: UIViewController {
         communityMainView.postTableView.dataSource = self
         communityMainView.postTableView.delegate = self
         communityMainView.postTableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
+        postTableView = communityMainView.postTableView
         communityMainView.plusButton.addTarget(self, action: #selector(plusButtonClick), for: .touchUpInside)
+        fetchPosts()
     }
     
     @objc func plusButtonClick() {
@@ -59,6 +68,98 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         print("\(tag) 선택됨")
     }
     
+    func fetchPosts() {
+        let db = Firestore.firestore()
+        let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
+            if error == nil && snapshot != nil {
+                
+                // 변화가 있는것만 가져올 수 있다.
+                for change in snapshot!.documentChanges {
+                    // change type remove, modified 일때도 로직 추가 예정
+                    if change.type == .added {
+                        let addDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
+                            if error == nil && snapshot != nil && snapshot?.data() != nil {
+                                let data = snapshot!.data()!
+                                let category = data["category"] as! String
+                                let content = data["content"] as! String
+                                let likes = data["likes"] as! Int
+                                let postingTime = data["postingTime"] as! Timestamp
+                                let postingID = data["postingID"] as! String
+                                let title = data["title"] as! String
+                                let writer = data["writer"] as! String
+                                let writerNickName = data["writerNickName"] as! String
+                                var comments: [Comment] = []
+                                let commentsData = data["comments"] as? [[String: Any]]
+                                for comment in commentsData! {
+                                    if let commentWriter = comment["writer"] as? String,
+                                       let commentPostingTime = comment["postingTime"] as? Timestamp,
+                                       let commentContent = comment["content"] as? String,
+                                       let commentWriterNickName = comment["writerNickName"] as? String{
+                                        let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue())
+                                        comments.append(newComment)
+                                    }
+                                       
+                                }
+                                let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
+                                self.posts.append(addPost)
+                                self.postTableView.reloadData()
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    else if change.type == .removed {
+                        for i in 0..<self.posts.count {
+                            if self.posts[i].postID == change.document.documentID {
+                                self.posts.remove(at: i)
+                                break
+                            }
+                        }
+                    }
+                    else {
+                        let modifyDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
+                            if error == nil && snapshot != nil && snapshot?.data() != nil {
+                                let data = snapshot!.data()!
+                                let category = data["category"] as! String
+                                let content = data["content"] as! String
+                                let likes = data["likes"] as! Int
+                                let postingTime = data["postingTime"] as! Timestamp
+                                let postingID = data["postingID"] as! String
+                                let title = data["title"] as! String
+                                let writer = data["writer"] as! String
+                                let writerNickName = data["writerNickName"] as! String
+                                var comments: [Comment] = []
+                                let commentsData = data["comments"] as? [[String: Any]]
+                                for comment in commentsData! {
+                                    if let commentWriter = comment["writer"] as? String,
+                                       let commentPostingTime = comment["postingTime"] as? Timestamp,
+                                       let commentContent = comment["content"] as? String,
+                                       let commentWriterNickName = comment["writerNickName"] as? String{
+                                        let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue())
+                                        comments.append(newComment)
+                                    }
+                                       
+                                }
+                                let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
+                                for i in 0..<self.posts.count {
+                                    if self.posts[i].postID == change.document.documentID {
+                                        self.posts[i] = modifyPost
+                                        break
+                                    }
+                                }
+                                self.postTableView.reloadData()
+                            }
+                            
+                        }
+                    }
+                    self.postTableView.reloadData()
+                }
+            } else {
+                // error. do something
+            }
+        }
+    }
 }
 
 extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
@@ -81,7 +182,9 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
         let communityPageVC = CommunityPageViewController()
+        communityPageVC.post = post
         self.navigationController?.pushViewController(communityPageVC, animated: true)
     }
     

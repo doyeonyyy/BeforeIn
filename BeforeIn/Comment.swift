@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Comment {
+struct Comment: Equatable {
     
     let writer: String
     let writerNickName: String
-    let content: String
+    var content: String
     let postingTime: Date
     
 }

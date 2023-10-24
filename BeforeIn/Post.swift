@@ -13,7 +13,7 @@ struct Post{
     let postID: String
     let title: String
     let content: String
-    let comments: [Comment]
+    var comments: [Comment]
     let likes: Int
     let category: String
     let postingTime: Date

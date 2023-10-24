@@ -18,13 +18,13 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .lightGray
     }
     
-    private let editButton = UIButton().then {
+    let editButton = UIButton().then {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
-    private let deleteButton = UIButton().then {
+    let deleteButton = UIButton().then {
         $0.setTitle("삭제", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -52,6 +52,7 @@ class CommunityPageView: UIView {
         // $0.backgroundColor = .systemGray6
         $0.font = UIFont.systemFont(ofSize: 17)
         $0.isEditable = false
+        $0.isSelectable = false
     }
     
     private let likeButton = UIButton().then {
@@ -104,6 +105,15 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .BeforeInRed
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.layer.cornerRadius = 16.5
+    }
+    
+    var communityPageViewModel: CommunityPageViewModel? {
+        didSet {
+            communityPageViewModel?.updateView = { [weak self] in
+                self?.updateView()
+            }
+            updateView()
+        }
     }
 
     
@@ -171,6 +181,7 @@ class CommunityPageView: UIView {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(32)
             $0.left.right.equalTo(self).inset(16)
+            $0.height.equalTo(48)
         }
         
         contentTextView.snp.makeConstraints {
@@ -233,6 +244,16 @@ class CommunityPageView: UIView {
         }
         
         
+    }
+    
+    private func updateView() {
+        titleLabel.text = communityPageViewModel?.title
+        contentTextView.text = communityPageViewModel?.content
+        authorLabel.text = communityPageViewModel?.nickname
+        dateLabel.text = communityPageViewModel?.postingTime
+        categoryButton.setTitle(communityPageViewModel?.category, for: .normal)
+        likeLabel.text = communityPageViewModel?.likes
+        print("커뮤니티 디테일view 업데이트")
     }
     
     
