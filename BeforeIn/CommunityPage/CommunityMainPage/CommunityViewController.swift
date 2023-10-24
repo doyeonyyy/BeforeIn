@@ -101,7 +101,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                        
                                 }
                                 let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
-                                self.posts.append(addPost)
+                                self.posts.insert(addPost, at: 0)
                                 self.postTableView.reloadData()
                             }
                             
