@@ -3,6 +3,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class WriteViewController: UIViewController {
     
@@ -19,7 +20,32 @@ class WriteViewController: UIViewController {
     }
     
     @objc func confirmButtonClick() {
-        print("글올리기 버튼 클릭")
+        let db = Firestore.firestore()
+        
+        guard let title = writeView.mainTextField.text else {
+            return
+        }
+        guard let content = writeView.contentTextView.text else {
+            return
+        }
+        let writer = currentUser.email
+        let writerNickName = currentUser.nickname
+        let likes = 0
+        let category = "질문"
+        let postingTime = Date()
+        let mydoc = db.collection("Post").document()
+        let postingID = mydoc.documentID
+        mydoc.setData(["writer": writer,
+                       "writerNickName": writerNickName,
+                       "title": title,
+                       "content": content,
+                       "comments": [],
+                       "likes": likes,
+                       "category": category,
+                       "postingTime": postingTime,
+                       "postingID": postingID,
+                      ])
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
