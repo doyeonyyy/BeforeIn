@@ -163,7 +163,7 @@ class WriteView: UIView {
         }
 
         confirmButton.snp.makeConstraints { make in
-            make.top.equalTo(contentsCustomView.snp.bottom).offset(150)
+            make.top.equalTo(contentsCustomView.snp.bottom).offset(140)
             make.height.equalTo(50)
             make.trailing.leading.equalToSuperview().inset(24)
         }

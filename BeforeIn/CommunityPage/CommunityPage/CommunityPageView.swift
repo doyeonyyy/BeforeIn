@@ -66,12 +66,12 @@ class CommunityPageView: UIView {
     }
     
     private let categoryButton = UIButton().then {
-        $0.setTitle("우리끼리", for: .normal)
+        $0.setTitle("", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
         $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
     }
     
     private let divider = UIView().then {
