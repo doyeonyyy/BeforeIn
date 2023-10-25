@@ -32,6 +32,7 @@ class NewQuizViewController: UIPageViewController {
         self.delegate = self
         fetchQuizList()
         setupUI()
+        disableGesture()
     }
     
     private func setupUI() {
@@ -72,6 +73,14 @@ class NewQuizViewController: UIPageViewController {
             }
             print("작업완료")
         })
+    }
+    
+    private func disableGesture() {
+        for gesture in self.gestureRecognizers {
+            if let gesture = gesture as? UIPanGestureRecognizer {
+                gesture.isEnabled = false
+            }
+        }
     }
     
     
