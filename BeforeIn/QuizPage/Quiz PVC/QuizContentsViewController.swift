@@ -60,27 +60,30 @@ class NewQuizContentViewController: UIViewController {
         
         let buttonO = UIButton().then {
             let configuration = UIImage.SymbolConfiguration(scale: .large)
-            let normalImage = UIImage(named: "O")?.withConfiguration(configuration)
-            let selectedImage = UIImage(named: "inactiveO")?.withConfiguration(configuration)
-            
+            let normalImage = UIImage(named: "QuizActiveO")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "QuizInactiveO")?.withConfiguration(configuration)
+
             $0.configuration = .filled()
             $0.showsMenuAsPrimaryAction = false
             $0.setImage(normalImage, for: .normal)
             $0.setImage(selectedImage, for: .selected)
             $0.addTarget(self, action: #selector(oButtonClick), for: .touchUpInside)
+            $0.tintColor = .clear
             
             self.buttonO = $0
         }
         let buttonX = UIButton().then {
             let configuration = UIImage.SymbolConfiguration(scale: .large)
-            let normalImage = UIImage(named: "X")?.withConfiguration(configuration)
-            let selectedImage = UIImage(named: "inactiveX")?.withConfiguration(configuration)
-            
+            let normalImage = UIImage(named: "QuizActiveX")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "QuizInactiveX")?.withConfiguration(configuration)
+
             $0.configuration = .filled()
             $0.showsMenuAsPrimaryAction = false
             $0.setImage(normalImage, for: .normal)
             $0.setImage(selectedImage, for: .selected)
             $0.addTarget(self, action: #selector(xButtonClick), for: .touchUpInside)
+            $0.tintColor = .clear
+            
             self.buttonX = $0
         }
         
