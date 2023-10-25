@@ -36,7 +36,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1)
+        view.backgroundColor = .systemGray6
         view.addSubview(infoCancelButton)
         view.addSubview(tableView)
         view.addSubview(infoDoneButton)

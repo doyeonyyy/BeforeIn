@@ -33,20 +33,19 @@ class MainView: UIView {
     
     private let level: UILabel = {
         let label = UILabel()
-        label.text = "Lv l"
-        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.text = "Lvl"
+        label.textColor = .BeforeInRed
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
     }()
     
     private let profileImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "person")
-        $0.layer.cornerRadius = 30
+        $0.image = UIImage(systemName: "person.fill")
+        $0.layer.cornerRadius = 40
         $0.clipsToBounds = true
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.backgroundColor = .systemGray6
     }
     
     let quizButton = UIButton().then{
@@ -185,7 +184,7 @@ class MainView: UIView {
     
     private func setupConstraint() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(self.snp.top)
             make.leading.trailing.equalTo(self)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
@@ -193,9 +192,9 @@ class MainView: UIView {
             make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
         }
-        
+
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(31)
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
@@ -211,8 +210,8 @@ class MainView: UIView {
             make.leading.equalTo(subLabel.snp.trailing).offset(16)
         }
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.height.equalTo(60)
+            make.top.equalToSuperview().offset(27)
+            make.width.height.equalTo(80)
             make.trailing.equalToSuperview().inset(24)
         }
         quizButton.snp.makeConstraints { make in

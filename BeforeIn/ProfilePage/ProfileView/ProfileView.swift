@@ -47,7 +47,7 @@ class ProfileView: UIView {
     
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .systemGray6
         imageView.layer.cornerRadius = 40
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
@@ -102,8 +102,8 @@ class ProfileView: UIView {
     private let level: UILabel = {
         let label = UILabel()
         label.text = "Lv l"
-        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.textColor = .BeforeInRed
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
