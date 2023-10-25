@@ -13,13 +13,12 @@ import FirebaseFirestore
 struct UserManager {
     let db = Firestore.firestore()
     
-    // 생성할때는 기본이미지로 생성(이미지 URL저장), 마이페이지에서 수정하면 업데이트
     func addUser(user: User) {
         db.collection("User").addDocument(data: [
             "email": user.email,
             "name": user.name,
             "nickname": user.nickname,
-           // "profileImage": user.profileImage,
+            "profileImage": user.profileImage,
             "level": user.level,
             "phone": user.phone
         ])
@@ -53,7 +52,7 @@ struct UserManager {
                     let nickname = data["nickname"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: level, phone: phone)
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: "", level: level, phone: phone)
                     completion(user)
                 } else {
                     completion(nil)
@@ -78,7 +77,7 @@ struct UserManager {
                     let nickname = data["nickname"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: level, phone: phone)
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: "", level: level, phone: phone)
                     completion(user)
                 } else {
                     completion(nil)

@@ -65,6 +65,7 @@ class MainViewController: BaseViewController {
         }
     }
     
+    
     func setupCollectionView() {
         mainView.recentlyEtiquetteCollectionView.delegate = self
         mainView.recentlyEtiquetteCollectionView.dataSource = self

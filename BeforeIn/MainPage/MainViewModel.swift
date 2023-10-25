@@ -63,6 +63,7 @@ class MainViewModel {
         let content = (etiquette?.place ?? "로딩실패") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "로딩실패")
         return content
     }
+    
     var updateView: (() -> Void)?
     
     

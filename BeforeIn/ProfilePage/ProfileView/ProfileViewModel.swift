@@ -15,9 +15,9 @@ class ProfileViewModel{
         }
     }
     
-//    var name: String {
-//        return "\(user.name)님"
-//    }
+    //    var name: String {
+    //        return "\(user.name)님"
+    //    }
     
     var email: String{
         return user.email
@@ -31,9 +31,13 @@ class ProfileViewModel{
         return "\(user.nickname)님"
     }
     
-    var profileImage: UIImage{
-        return user.profileImage
+    var profileImage: UIImage {
+        return #imageLiteral(resourceName: "profilePlaceholder")
     }
+    
+//    var profileImage: UIImage {
+//        return user.profileImage
+//    }
     
     var level: Int{
         return user.level
@@ -60,7 +64,7 @@ class ProfileViewModel{
         default: return "레벨 정보 없음"
         }
     }
-
+    
     var updateView: (() -> Void)?
     
     
@@ -72,5 +76,5 @@ class ProfileViewModel{
         print("profileView모델 user 업데이트")
         self.user = user
     }
-
+    
 }

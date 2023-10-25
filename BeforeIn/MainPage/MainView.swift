@@ -11,7 +11,6 @@ import Then
 
 class MainView: UIView {
     
-    
     private let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
     }
@@ -42,7 +41,7 @@ class MainView: UIView {
     }()
     
     private let profileImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "person.fill")
+        $0.image = #imageLiteral(resourceName: "profilePlaceholder")
         $0.layer.cornerRadius = 40
         $0.clipsToBounds = true
         $0.backgroundColor = .systemGray6
@@ -100,7 +99,6 @@ class MainView: UIView {
         $0.text = "최근 본 에티켓"
         $0.font = UIFont.boldSystemFont(ofSize: 22)
     }
-    
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
