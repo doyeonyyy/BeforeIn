@@ -79,10 +79,11 @@ class QuizIntroView: UIView {
             make.leading.equalTo(labelC.snp.leading).offset(24)
         }
         imageView.image = UIImage(named: "QuizIntroImage")
-        imageView.frame = CGRect(x: 0, y: 0, width: 276, height: 276)
         imageView.snp.makeConstraints { make in
             make.centerX.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(171)
+            make.centerY.equalToSuperview().offset(120)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(imageView.snp.width).multipliedBy(imageView.image!.size.height / imageView.image!.size.width)
         }
         skipButton.setTitle("건너뛰기", for: .normal)
         skipButton.setTitleColor(UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1), for: .normal)
