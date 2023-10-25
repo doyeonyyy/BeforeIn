@@ -76,13 +76,12 @@ class NewQuizViewController: UIPageViewController {
     }
     
     private func disableGesture() {
-        for gesture in self.gestureRecognizers {
-            if let gesture = gesture as? UIPanGestureRecognizer {
+        if let gestureRecognizers = self.view.gestureRecognizers {
+            for gesture in gestureRecognizers {
                 gesture.isEnabled = false
             }
         }
     }
-    
     
 }
 
