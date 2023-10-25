@@ -56,7 +56,7 @@ class ProfileView: UIView {
     
     let editProfileButton = UIButton().then {
         let image = UIImage(systemName: "pencil.circle.fill")
-        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .BeforeInRed!)
+        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .black)
         $0.setImage(resizedImage, for: .normal)
     }
     
@@ -146,6 +146,7 @@ class ProfileView: UIView {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
