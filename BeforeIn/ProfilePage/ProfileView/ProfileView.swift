@@ -42,7 +42,7 @@ class ProfileView: UIView {
     let editNicknameButton = UIButton().then {
         $0.setTitle("닉네임 수정", for: .normal)
         $0.setTitleColor(.systemGray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
     }
     
     let circularImageView: UIImageView = {
@@ -103,7 +103,7 @@ class ProfileView: UIView {
         let label = UILabel()
         label.text = "Lv l"
         label.textColor = .BeforeInRed
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -179,6 +179,7 @@ class ProfileView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -249,7 +250,7 @@ class ProfileView: UIView {
         }
         
         editNicknameButton.snp.makeConstraints { make in
-            make.top.equalTo(idLabel.snp.bottom).offset(1)
+            make.top.equalTo(idLabel.snp.bottom).offset(4)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
@@ -267,7 +268,7 @@ class ProfileView: UIView {
         grayRectangle.snp.makeConstraints { make in
             make.width.equalTo(345)
             make.height.equalTo(200)
-            make.top.equalTo(editNicknameButton.snp.bottom).offset(16)
+            make.top.equalTo(circularImageView.snp.bottom).offset(24)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         

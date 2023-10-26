@@ -142,7 +142,7 @@ extension ProfileViewController: UITableViewDataSource {
         let text = cellData[indexPath.row]
         
         cell.textLabel?.text = text
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         
         let line = UIView()
         line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
