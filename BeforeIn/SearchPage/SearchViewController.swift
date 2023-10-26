@@ -56,7 +56,7 @@ class SearchViewController: BaseViewController {
             // TODO: contentEdgeInsets 대체제 찾기
             button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
             button.layer.cornerRadius = 16.5
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            button.titleLabel?.font = UIFont.myBoldSystemFont(ofSize: 16)
             button.tag = index
             searchView.categoryStackView.addArrangedSubview(button)
         }
