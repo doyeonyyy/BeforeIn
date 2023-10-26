@@ -11,9 +11,11 @@ class QuizResultView: UIView {
     let labelA = UILabel()
     let labelB = UILabel()
     let labelC = UILabel()
+    let labelD = UILabel()
+    let stackViewForLabelCD = UIStackView()
     let startButton = UIButton()
     let levelImage = UIImageView()
-    let labelD = UILabel()
+
 
     var quizResultViewModel: QuizResultViewModel? {
         didSet {
@@ -40,38 +42,45 @@ class QuizResultView: UIView {
         backgroundColor = .systemBackground
         addSubview(labelA)
         addSubview(labelB)
-        addSubview(labelC)
+        addSubview(stackViewForLabelCD)
+        stackViewForLabelCD.addArrangedSubview(labelC)
+        stackViewForLabelCD.addArrangedSubview(labelD)
         addSubview(startButton)
         addSubview(levelImage)
-        addSubview(labelD)
     }
     
     func setupLayout() {
         labelA.text = "검사결과"
         labelA.textColor = .black
-        labelA.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 20)
+        labelA.font = UIFont.systemFont(ofSize: 24)
         labelA.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(169)
+            make.top.equalTo(safeAreaLayoutGuide).offset(106)
             make.leading.equalTo(safeAreaLayoutGuide).offset(76)
         }
         labelB.text = "000님은"
         labelB.textColor = .black
-        labelB.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 32)
+        labelB.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         labelB.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(158)
-            make.leading.equalTo(labelA.snp.trailing).offset(4)
+            make.bottom.equalTo(labelA.snp.bottom)
+            make.leading.equalTo(labelA.snp.trailing).offset(8)
         }
         labelC.text = "Lv.1 검은머리 짐승입니다"
-        labelC.textColor = .black
-        labelC.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 28)
-        labelC.snp.makeConstraints { make in
+        labelC.textColor = .beforeInRed
+        labelC.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+
+        labelD.text = "입니다"
+        labelD.textColor = .black
+        labelD.font = UIFont.systemFont(ofSize: 24)
+
+        stackViewForLabelCD.axis = .horizontal
+        stackViewForLabelCD.alignment = .center
+        stackViewForLabelCD.spacing = 4
+        stackViewForLabelCD.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(14)
-//            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
             make.centerX.equalToSuperview()
         }
         levelImage.snp.makeConstraints { make in
-            make.centerX.equalTo(safeAreaLayoutGuide)
-            make.top.equalTo(labelC.snp.bottom)
+            make.centerX.centerY.equalTo(safeAreaLayoutGuide)
             make.width.equalTo(200)
             make.height.equalTo(200)
         }
@@ -84,17 +93,16 @@ class QuizResultView: UIView {
         startButton.snp.makeConstraints { make in
             make.width.equalTo(244)
             make.height.equalTo(51)
-//            make.bottom.equalTo(safeAreaLayoutGuide).inset(125)
-            make.top.equalTo(levelImage.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().offset(-80)
             make.centerX.equalToSuperview()
-//            make.leading.equalTo(safeAreaLayoutGuide).offset(75)
+
         }
         
     }
     
     private func updateView() {
         labelB.text = "\(quizResultViewModel?.nickname ?? "ㅇㅇㅇ")님은"
-        labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")입니다"
+        labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")"
         levelImage.image = quizResultViewModel?.levelImage
         print("view 업데이트")
     }

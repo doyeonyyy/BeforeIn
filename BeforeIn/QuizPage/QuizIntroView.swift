@@ -13,6 +13,7 @@ class QuizIntroView: UIView {
     private var labelB = UILabel()
     let labelC = UILabel()
     let labelD = UILabel()
+    let labelE = UILabel()
     let imageView = UIImageView()
     let skipButton = UIButton()
     let startButton = UIButton()
@@ -43,6 +44,7 @@ class QuizIntroView: UIView {
         addSubview(labelB)
         addSubview(labelC)
         addSubview(labelD)
+        addSubview(labelE)
         addSubview(imageView)
         addSubview(skipButton)
         addSubview(startButton)
@@ -51,38 +53,45 @@ class QuizIntroView: UIView {
     func setupLayout() {
         labelA.text = "반가워요"
         labelA.textColor = .black
-        labelA.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 24)
+        labelA.font = UIFont.systemFont(ofSize: 24)
         labelA.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(136)
+            make.top.equalTo(safeAreaLayoutGuide).offset(106)
             make.leading.equalTo(safeAreaLayoutGuide).offset(24)
         }
         
         labelB.textColor = .black
-        labelB.font = UIFont.boldSystemFont(ofSize: 38)
+        labelB.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         labelB.snp.makeConstraints { make in
             make.leading.equalTo(labelA.snp.trailing).offset(8)
             make.bottom.equalTo(labelA.snp.bottom)
         }
-        labelC.text = "내                    을 확인해볼까요?"
+        labelC.text = "내"
         labelC.textColor = .black
-        labelC.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 24)
+        labelC.font = UIFont.systemFont(ofSize: 24)
         labelC.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(8)
             make.leading.equalTo(safeAreaLayoutGuide).offset(24)
-            make.trailing.equalTo(safeAreaLayoutGuide).offset(50)
         }
         labelD.text = "에티켓 레벨"
         labelD.textColor = .black
-        labelD.font = UIFont.boldSystemFont(ofSize: 27)
+        labelD.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         labelD.snp.makeConstraints { make in
-            make.bottom.equalTo(labelC.snp.bottom)
-            make.leading.equalTo(labelC.snp.leading).offset(24)
+            make.top.equalTo(labelA.snp.bottom).offset(8)
+            make.leading.equalTo(labelC.snp.trailing).offset(6)
+        }
+        labelE.text = "을 확인해볼까요?"
+        labelE.textColor = .black
+        labelE.font = UIFont.systemFont(ofSize: 24)
+        labelE.snp.makeConstraints { make in
+            make.top.equalTo(labelA.snp.bottom).offset(8)
+            make.leading.equalTo(labelD.snp.trailing)
         }
         imageView.image = UIImage(named: "QuizIntroImage")
-        imageView.frame = CGRect(x: 0, y: 0, width: 276, height: 276)
         imageView.snp.makeConstraints { make in
             make.centerX.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(171)
+            make.centerY.equalToSuperview().offset(120)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(imageView.snp.width).multipliedBy(imageView.image!.size.height / imageView.image!.size.width)
         }
         skipButton.setTitle("건너뛰기", for: .normal)
         skipButton.setTitleColor(UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1), for: .normal)
@@ -91,7 +100,7 @@ class QuizIntroView: UIView {
         skipButton.snp.makeConstraints { make in
             make.width.equalTo(138)
             make.height.equalTo(51)
-            make.top.equalTo(safeAreaLayoutGuide).offset(655)
+            make.bottom.equalToSuperview().offset(-80)
             make.leading.equalTo(safeAreaLayoutGuide).offset(32)
         }
         startButton.setTitle("Get Start!!", for: .normal)
@@ -101,7 +110,7 @@ class QuizIntroView: UIView {
         startButton.snp.makeConstraints { make in
             make.width.equalTo(skipButton.snp.width)
             make.height.equalTo(skipButton.snp.height)
-            make.top.equalTo(safeAreaLayoutGuide).offset(655)
+            make.bottom.equalToSuperview().offset(-80)
             make.leading.equalTo(safeAreaLayoutGuide).offset(223)
         }
     }

@@ -199,12 +199,12 @@ class MainView: UIView {
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.top.equalTo(profileImageView.snp.centerY).offset(-2)
             make.leading.equalToSuperview().offset(24)
         }
         subLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(levelLabel).offset(4)
-            make.leading.equalTo(levelLabel.snp.trailing).offset(8)
+            make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
+            make.leading.equalTo(levelLabel.snp.trailing).offset(4)
         }
 //        level.snp.makeConstraints { make in
 //            make.bottom.equalTo(subLabel.snp.bottom)
@@ -223,7 +223,7 @@ class MainView: UIView {
         }
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(3)
+            make.height.equalTo(1)
             make.top.equalTo(quizButton.snp.bottom).offset(24)
         }
         etiquetteLabel.snp.makeConstraints { make in
