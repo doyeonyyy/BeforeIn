@@ -185,9 +185,15 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
         }
         selectedImage.loadObject(ofClass: UIImage.self) { [weak self] image, error in
             guard let self = self, let image = image as? UIImage, error == nil else { return }
-            
             userManager.uploadImage(image)
+            self.updateProfileImage(image)
         }
     }
+    
+    func updateProfileImage(_ image: UIImage) {
+         DispatchQueue.main.async {
+             self.profileView.circularImageView.image = image
+         }
+     }
     
 }
