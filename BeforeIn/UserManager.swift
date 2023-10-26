@@ -151,7 +151,7 @@ struct UserManager {
     }
     
     // 이미지파싱
-    func downloadImageFromFirebaseStorage(url: URL, completion: @escaping (UIImage?) -> Void) {
+    func parseImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 // 네트워크 오류 발생
@@ -159,12 +159,9 @@ struct UserManager {
                 completion(nil)
                 return
             }
-            
             if let data = data, let image = UIImage(data: data) {
-                // 이미지 다운로드 및 파싱 성공
                 completion(image)
             } else {
-                // 이미지 다운로드 또는 파싱 오류
                 print("이미지 다운로드 또는 파싱 오류")
                 completion(nil)
             }

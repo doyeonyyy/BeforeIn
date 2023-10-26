@@ -9,11 +9,14 @@ import Foundation
 
 class MainViewModel {
     
-    var user: User{
-        didSet{
-            self.updateView?()
-        }
-    }
+    let userManager = UserManager()
+    
+    var user: User {
+         didSet {
+             self.updateProfileImage?()
+             self.updateView?()
+         }
+     }
     
     var etiquette: Etiquette?{
         didSet{
@@ -69,6 +72,7 @@ class MainViewModel {
     }
     
     var updateView: (() -> Void)?
+    var updateProfileImage: (() -> Void)?
     
     
     init(user: User) {

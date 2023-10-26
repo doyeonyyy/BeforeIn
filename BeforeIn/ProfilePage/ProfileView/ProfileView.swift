@@ -155,9 +155,13 @@ class ProfileView: UIView {
             profileViewModel?.updateView = { [weak self] in
                 self?.updateView()
             }
+            profileViewModel?.updateView = { [weak self] in
+                self?.updateView()
+            }
             updateView()
         }
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -287,13 +291,25 @@ class ProfileView: UIView {
         nameBoxLabel.text = profileViewModel?.nameBox
         level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
-        circularImageView.image = profileViewModel?.profileImage
+     //   circularImageView.image = profileViewModel?.profileImage
         idLabel.text = profileViewModel?.email
         myLevelRectangleUpdate(profileViewModel?.level ?? 1)
         print("profileView 업데이트")
         
     }
     
+    func updateProfileImage() {
+        if let imageURL = URL(string: profileViewModel?.imageURL ?? "") {
+            profileViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
+                if let image = image {
+                    DispatchQueue.main.async {
+                        self?.circularImageView.image = image
+                    }
+                }
+            }
+        }
+    }
+
     private func myLevelRectangleUpdate(_ level: Int) {
         let newWidth = CGFloat(level * 60)
         myLevelRectangle.snp.updateConstraints { make in

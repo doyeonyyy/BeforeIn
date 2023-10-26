@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class ProfileViewModel{
+    
+    let userManager = UserManager()
+    
     var user: User{
         didSet{
             self.updateView?()
@@ -31,13 +34,9 @@ class ProfileViewModel{
         return "\(user.nickname)님"
     }
     
-    var profileImage: UIImage {
-        return #imageLiteral(resourceName: "profilePlaceholder")
+    var imageURL: String {
+        return user.profileImage
     }
-    
-//    var profileImage: UIImage {
-//        return user.profileImage
-//    }
     
     var level: Int{
         return user.level

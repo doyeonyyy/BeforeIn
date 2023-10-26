@@ -23,10 +23,10 @@ class MainViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
-     //   fetchEtiquetteContent()
+       // fetchEtiquetteContent()
     }
     
     override func viewDidLoad() {
@@ -60,12 +60,11 @@ class MainViewController: BaseViewController {
                         currentUser = user
                         self.mainView.mainViewModel = MainViewModel(user: currentUser)
                         if let imageURL = URL(string: user.profileImage) {
-                            self.userManager.downloadImageFromFirebaseStorage(url: imageURL) { image in
+                            self.userManager.parseImage(url: imageURL) { image in
                                 if let image = image {
-                                    // 이미지를 표시할 이미지 뷰에 설정
                                     DispatchQueue.main.async {
                                         self.mainView.profileImageView.image = image
-                                    }
+                                   }
                                 }
                             }
                         }
@@ -141,7 +140,7 @@ class MainViewController: BaseViewController {
                             print("컨텐츠 이미지 다운 완료")
                             let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: image!)
                             good.append(etiquetteContent)
-                     }
+                        }
                         dispatchGroup.leave() // Leave the dispatch group
                     }
                 }
@@ -203,8 +202,8 @@ class MainViewController: BaseViewController {
             
         }
     }
-
-
+    
+    
 }
 
 

@@ -28,6 +28,7 @@ class ProfileViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         profileView.profileViewModel?.updateUser(currentUser)
+        profileView.updateProfileImage()
     }
     
     override func viewDidLoad() {
@@ -73,6 +74,7 @@ class ProfileViewController: BaseViewController {
             picker.delegate = self
             present(picker, animated: true, completion: nil)
         }
+        profileView.updateProfileImage()
     }
     
     
@@ -177,6 +179,7 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
         guard let selectedImage = results.first?.itemProvider, selectedImage.canLoadObject(ofClass: UIImage.self) else {
             return
         }
@@ -185,7 +188,6 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
             
             userManager.uploadImage(image)
         }
-        picker.dismiss(animated: true)
     }
     
 }
