@@ -100,7 +100,7 @@ class QuizIntroView: UIView {
         skipButton.snp.makeConstraints { make in
             make.width.equalTo(138)
             make.height.equalTo(51)
-            make.top.equalTo(safeAreaLayoutGuide).offset(655)
+            make.bottom.equalToSuperview().offset(-80)
             make.leading.equalTo(safeAreaLayoutGuide).offset(32)
         }
         startButton.setTitle("Get Start!!", for: .normal)
@@ -110,7 +110,7 @@ class QuizIntroView: UIView {
         startButton.snp.makeConstraints { make in
             make.width.equalTo(skipButton.snp.width)
             make.height.equalTo(skipButton.snp.height)
-            make.top.equalTo(safeAreaLayoutGuide).offset(655)
+            make.bottom.equalToSuperview().offset(-80)
             make.leading.equalTo(safeAreaLayoutGuide).offset(223)
         }
     }
