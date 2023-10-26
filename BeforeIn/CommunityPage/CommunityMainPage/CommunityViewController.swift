@@ -7,8 +7,8 @@ import FirebaseFirestore
 
 
 //더미 데이터
-let user1 = User(email: "", name: "", nickname: "lcho3878", profileImage: UIImage(systemName: "person")!, level: 1, phone: "")
-let user2 = User(email: "", name: "", nickname: "cksgh0910", profileImage: UIImage(systemName: "person")!, level: 1, phone: "")
+let user1 = User(email: "", name: "", nickname: "lcho3878", profileImage: "", level: 1, phone: "")
+let user2 = User(email: "", name: "", nickname: "cksgh0910", profileImage: "", level: 1, phone: "")
 
 class CommunityViewController: UIViewController {
     

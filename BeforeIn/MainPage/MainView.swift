@@ -11,7 +11,6 @@ import Then
 
 class MainView: UIView {
     
-    
     private let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
     }
@@ -33,17 +32,17 @@ class MainView: UIView {
     
     private let level: UILabel = {
         let label = UILabel()
-        label.text = "Lv l"
-        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        label.text = "Lvl"
+        label.textColor = .BeforeInRed
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
     }()
     
-    private let profileImageView = UIImageView().then {
-        $0.image = UIImage()
-        $0.layer.cornerRadius = 40
+    let profileImageView = UIImageView().then {
+        $0.image = #imageLiteral(resourceName: "profilePlaceholder")
+        $0.layer.cornerRadius = 50
         $0.clipsToBounds = true
         $0.backgroundColor = .systemGray6
     }
@@ -100,7 +99,6 @@ class MainView: UIView {
         $0.text = "최근 본 에티켓"
         $0.font = UIFont.boldSystemFont(ofSize: 22)
     }
-    
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -140,6 +138,9 @@ class MainView: UIView {
     
     var mainViewModel: MainViewModel? {
         didSet {
+            mainViewModel?.updateProfileImage = { [weak self] in
+                self?.updateProfileImage()
+            }
             mainViewModel?.updateView = { [weak self] in
                 self?.updateView()
             }
@@ -166,7 +167,7 @@ class MainView: UIView {
         contentView.addSubview(nameLabel)
         contentView.addSubview(levelLabel)
         contentView.addSubview(subLabel)
-        contentView.addSubview(level)
+        //contentView.addSubview(level)
         contentView.addSubview(profileImageView)
         contentView.addSubview(quizButton)
         contentView.addSubview(divider)
@@ -184,7 +185,7 @@ class MainView: UIView {
     
     private func setupConstraint() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(self.snp.top)
             make.leading.trailing.equalTo(self)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
@@ -192,9 +193,9 @@ class MainView: UIView {
             make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
         }
-        
+
         nameLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(profileImageView.snp.centerY).offset(-4)
+            make.top.equalToSuperview().offset(31)
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
@@ -205,13 +206,13 @@ class MainView: UIView {
             make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
             make.leading.equalTo(levelLabel.snp.trailing).offset(4)
         }
-        level.snp.makeConstraints { make in
-            make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
-            make.leading.equalTo(subLabel.snp.trailing).offset(16)
-        }
+//        level.snp.makeConstraints { make in
+//            make.bottom.equalTo(subLabel.snp.bottom)
+//            make.leading.equalTo(subLabel.snp.trailing).offset(16)
+//        }
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.height.equalTo(80)
+            make.top.equalToSuperview().offset(27)
+            make.width.height.equalTo(100)
             make.trailing.equalToSuperview().inset(24)
         }
         quizButton.snp.makeConstraints { make in
@@ -283,7 +284,20 @@ class MainView: UIView {
         etiquetteViewContent.text = "\(mainViewModel?.etiquetteContent ?? "예")"
         level.text = mainViewModel?.levelNumberText
         print("view 업데이트")
-    }//
+    }
 
-}
+    private func updateProfileImage() {
+          // 프로필 이미지를 업데이트하는 로직을 구현
+          if let imageURL = URL(string: mainViewModel?.profileImageURL ?? "") {
+              mainViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
+                  if let image = image {
+                      DispatchQueue.main.async {
+                          self?.profileImageView.image = image
+                      }
+                  }
+              }
+          }
+      }
+  }
+
 

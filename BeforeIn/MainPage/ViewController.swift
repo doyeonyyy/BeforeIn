@@ -23,10 +23,10 @@ class MainViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
-        fetchEtiquetteContent()
+       // fetchEtiquetteContent()
     }
     
     override func viewDidLoad() {
@@ -34,9 +34,10 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-        fetchEtiquetteList()
+      //  fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
+        navigationController?.isNavigationBarHidden = true
     }
     
     @objc func seeMoreButtonClick() {
@@ -58,11 +59,21 @@ class MainViewController: BaseViewController {
                     if let user = findUser {
                         currentUser = user
                         self.mainView.mainViewModel = MainViewModel(user: currentUser)
+                        if let imageURL = URL(string: user.profileImage) {
+                            self.userManager.parseImage(url: imageURL) { image in
+                                if let image = image {
+                                    DispatchQueue.main.async {
+                                        self.mainView.profileImageView.image = image
+                                   }
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
+    
     
     func setupCollectionView() {
         mainView.recentlyEtiquetteCollectionView.delegate = self
@@ -129,7 +140,7 @@ class MainViewController: BaseViewController {
                             print("컨텐츠 이미지 다운 완료")
                             let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: image!)
                             good.append(etiquetteContent)
-                     }
+                        }
                         dispatchGroup.leave() // Leave the dispatch group
                     }
                 }
@@ -191,8 +202,8 @@ class MainViewController: BaseViewController {
             
         }
     }
-
-
+    
+    
 }
 
 

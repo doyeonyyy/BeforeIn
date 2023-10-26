@@ -50,7 +50,7 @@ class DisplayViewController: UIViewController {
         let label = UILabel()
         label.text = "라이트 모드"
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 22)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -59,24 +59,23 @@ class DisplayViewController: UIViewController {
         let label = UILabel()
         label.text = "다크 모드"
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 22)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let lightModeCircle: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        view.layer.cornerRadius = 18
-        view.layer.borderWidth = 1
+        view.backgroundColor = .BeforeInRed
+        view.layer.cornerRadius = 13
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     let darkModeCircle: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
-        view.layer.cornerRadius = 18
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 13
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -106,16 +105,12 @@ class DisplayViewController: UIViewController {
             isDarkMode = false
         }
         if isDarkMode == true {
-            lightModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
-            lightModeCircle.layer.borderWidth = 0
-            darkModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-            darkModeCircle.layer.borderWidth = 1
+            lightModeCircle.backgroundColor = .systemGray6
+            darkModeCircle.backgroundColor = .BeforeInRed
         }
         else {
-            lightModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-            lightModeCircle.layer.borderWidth = 1
-            darkModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
-            darkModeCircle.layer.borderWidth = 0
+            lightModeCircle.backgroundColor = .BeforeInRed
+            darkModeCircle.backgroundColor = .systemGray6
         }
     }
     
@@ -124,22 +119,18 @@ class DisplayViewController: UIViewController {
             isDarkMode = true
         }
         if isDarkMode == false {
-            lightModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-            lightModeCircle.layer.borderWidth = 1
-            darkModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
-            darkModeCircle.layer.borderWidth = 0
+            lightModeCircle.backgroundColor = .BeforeInRed
+            darkModeCircle.backgroundColor = .systemGray6
         }
         else {
-            lightModeCircle.backgroundColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1)
-            lightModeCircle.layer.borderWidth = 0
-            darkModeCircle.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-            darkModeCircle.layer.borderWidth = 1
+            lightModeCircle.backgroundColor = .systemGray6
+            darkModeCircle.backgroundColor = .BeforeInRed
         }
     }
     
     private func setupUI() {
         
-        view.backgroundColor = UIColor(red: 0.929, green: 0.929, blue: 0.929, alpha: 1)
+        view.backgroundColor = .systemGray6
         view.addSubview(disCancelButton)
         view.addSubview(doneButton)
         view.addSubview(customView)
@@ -196,15 +187,13 @@ class DisplayViewController: UIViewController {
         }
         
         lightModeCircle.snp.makeConstraints { make in
-            make.width.equalTo(36)
-            make.height.equalTo(36)
+            make.width.height.equalTo(26)
             make.centerX.equalTo(lightModeLabel.snp.centerX)
             make.top.equalTo(lightModeLabel.snp.bottom).offset(16)
         }
         
         darkModeCircle.snp.makeConstraints { make in
-            make.width.equalTo(36)
-            make.height.equalTo(36)
+            make.width.height.equalTo(26)
             make.centerX.equalTo(darkModeLabel.snp.centerX)
             make.top.equalTo(darkModeLabel.snp.bottom).offset(16)
         }

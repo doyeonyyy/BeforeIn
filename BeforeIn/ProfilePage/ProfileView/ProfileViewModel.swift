@@ -9,15 +9,18 @@ import Foundation
 import UIKit
 
 class ProfileViewModel{
+    
+    let userManager = UserManager()
+    
     var user: User{
         didSet{
             self.updateView?()
         }
     }
     
-//    var name: String {
-//        return "\(user.name)님"
-//    }
+    //    var name: String {
+    //        return "\(user.name)님"
+    //    }
     
     var email: String{
         return user.email
@@ -31,7 +34,7 @@ class ProfileViewModel{
         return "\(user.nickname)님"
     }
     
-    var profileImage: UIImage{
+    var imageURL: String {
         return user.profileImage
     }
     
@@ -60,7 +63,7 @@ class ProfileViewModel{
         default: return "레벨 정보 없음"
         }
     }
-
+    
     var updateView: (() -> Void)?
     
     
@@ -72,5 +75,5 @@ class ProfileViewModel{
         print("profileView모델 user 업데이트")
         self.user = user
     }
-
+    
 }
