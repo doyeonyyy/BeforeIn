@@ -164,7 +164,7 @@ class MainView: UIView {
         contentView.addSubview(nameLabel)
         contentView.addSubview(levelLabel)
         contentView.addSubview(subLabel)
-        contentView.addSubview(level)
+        //contentView.addSubview(level)
         contentView.addSubview(profileImageView)
         contentView.addSubview(quizButton)
         contentView.addSubview(divider)
@@ -203,10 +203,10 @@ class MainView: UIView {
             make.centerY.equalTo(levelLabel).offset(4)
             make.leading.equalTo(levelLabel.snp.trailing).offset(8)
         }
-        level.snp.makeConstraints { make in
-            make.bottom.equalTo(subLabel.snp.bottom)
-            make.leading.equalTo(subLabel.snp.trailing).offset(16)
-        }
+//        level.snp.makeConstraints { make in
+//            make.bottom.equalTo(subLabel.snp.bottom)
+//            make.leading.equalTo(subLabel.snp.trailing).offset(16)
+//        }
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(27)
             make.width.height.equalTo(100)

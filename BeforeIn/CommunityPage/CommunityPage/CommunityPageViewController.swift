@@ -30,6 +30,7 @@ class CommunityPageViewController: BaseViewController {
         communityPageView.communityPageViewModel = CommunityPageViewModel(post: post)
         setTableView()
         addTarget()
+        setTextField()
 //        loadComments()
     }
     
@@ -45,6 +46,10 @@ class CommunityPageViewController: BaseViewController {
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         communityPageView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         communityPageView.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+    }
+    
+    func setTextField(){
+        communityPageView.commentTextField.delegate = self
     }
     
     
@@ -306,3 +311,18 @@ extension CommunityPageViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITextFieldDelegate
+extension CommunityPageViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == communityPageView.commentTextField {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -330
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+}

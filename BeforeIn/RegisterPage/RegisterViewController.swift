@@ -227,7 +227,7 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == registerView.registerCheckTextField {
             UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -180
+                self.view.frame.origin.y = -190
             }
         } else {
             UIView.animate(withDuration: 0.3) {
