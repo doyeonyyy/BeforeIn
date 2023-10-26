@@ -53,7 +53,7 @@ struct UserManager {
                     let nickname = data["nickname"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: UIImage(systemName: "person.fill")!, level: level, phone: phone)
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: UIImage(), level: level, phone: phone)
                     completion(user)
                 } else {
                     completion(nil)
