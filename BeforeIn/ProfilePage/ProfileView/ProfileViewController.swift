@@ -173,6 +173,10 @@ extension ProfileViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
+        return tableView.bounds.height / CGFloat(numberOfCells)
+    }
 }
 
 // MARK: - PHPickerViewControllerDelegate
