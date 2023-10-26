@@ -140,11 +140,11 @@ class NewQuizContentViewController: UIViewController {
         }
         previousButton.snp.makeConstraints { make in
             make.centerX.equalTo(buttonO)
-            make.top.equalTo(buttonX.snp.bottom).offset(190)
+            make.bottom.equalToSuperview().offset(-80)
         }
         nextButton.snp.makeConstraints { make in
             make.centerX.equalTo(buttonX)
-            make.top.equalTo(buttonX.snp.bottom).offset(190)
+            make.bottom.equalToSuperview().offset(-80)
         }
         
     }
