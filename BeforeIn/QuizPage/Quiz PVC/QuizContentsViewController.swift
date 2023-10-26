@@ -42,14 +42,16 @@ class NewQuizContentViewController: UIViewController {
     private func setupUI() {
         
         let cancelButton = UIButton().then {
-            $0.setTitle("취소하기", for: .normal)
+            $0.setTitle("돌아가기", for: .normal)
             $0.setTitleColor(.black, for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             $0.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         }
         
         let progressLabel = UILabel().then {
             $0.text = "\(self.index)/10"
             $0.textColor = .black
+            $0.font = UIFont.systemFont(ofSize: 12)
         }
         
         let quizLabel = UILabel().then {
@@ -89,7 +91,7 @@ class NewQuizContentViewController: UIViewController {
         
         let nextButton = UIButton().then {
             $0.setTitle("다음", for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             $0.setTitleColor(.black, for: .normal)
             $0.addTarget(self, action: #selector(nextButtonClick), for: .touchUpInside)
             self.nextButton = $0
@@ -97,7 +99,7 @@ class NewQuizContentViewController: UIViewController {
         
         let previousButton = UIButton().then {
             $0.setTitle("이전", for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             $0.setTitleColor(.black, for: .normal)
             $0.addTarget(self, action: #selector(previousButtonClick), for: .touchUpInside)
             self.previousButton = $0
@@ -113,8 +115,8 @@ class NewQuizContentViewController: UIViewController {
         
         
         cancelButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalToSuperview().inset(24)
         }
         
         progressLabel.snp.makeConstraints { make in
@@ -129,14 +131,14 @@ class NewQuizContentViewController: UIViewController {
             make.trailing.equalToSuperview().inset(24)
         }
         buttonO.snp.makeConstraints { make in
-            make.top.equalTo(quizLabel.snp.bottom).offset(100)
+            make.centerY.equalToSuperview().offset(60)
             make.width.height.equalTo(92)
-            make.leading.equalToSuperview().offset(40)
+            make.leading.equalToSuperview().offset(50)
         }
         buttonX.snp.makeConstraints { make in
-            make.top.equalTo(quizLabel.snp.bottom).offset(100)
+            make.centerY.equalToSuperview().offset(60)
             make.width.height.equalTo(92)
-            make.trailing.equalToSuperview().inset(40)
+            make.trailing.equalToSuperview().inset(50)
         }
         previousButton.snp.makeConstraints { make in
             make.centerX.equalTo(buttonO)
@@ -154,7 +156,7 @@ class NewQuizContentViewController: UIViewController {
             previousButton.isHidden = true
             nextButton.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
-                make.top.equalTo(buttonX.snp.bottom).offset(190)
+                make.bottom.equalToSuperview().offset(-80)
             }
         }
         if index == 10 {
