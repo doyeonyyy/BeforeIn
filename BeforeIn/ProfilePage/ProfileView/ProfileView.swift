@@ -48,7 +48,7 @@ class ProfileView: UIView {
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemGray6
-        imageView.layer.cornerRadius = 40
+        imageView.layer.cornerRadius = 50
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         return imageView
@@ -212,8 +212,7 @@ class ProfileView: UIView {
         }
         
         circularImageView.snp.makeConstraints { make in
-            make.width.equalTo(80)
-            make.height.equalTo(80)
+            make.width.height.equalTo(100)
             make.trailing.equalTo(self.snp.trailing).offset(-24)
             make.top.equalTo(self.snp.top).offset(86)
         }

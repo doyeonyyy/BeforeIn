@@ -29,6 +29,10 @@ class MainViewModel {
         return user.nickname
     }
     
+    var profileImageURL: String {
+        return user.profileImage
+    }
+    
     var level: String {
         switch user.level{
         case 1: return "검은머리 짐승"

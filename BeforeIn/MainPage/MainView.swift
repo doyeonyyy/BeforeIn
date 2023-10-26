@@ -40,9 +40,9 @@ class MainView: UIView {
         return label
     }()
     
-    private let profileImageView = UIImageView().then {
+    let profileImageView = UIImageView().then {
         $0.image = #imageLiteral(resourceName: "profilePlaceholder")
-        $0.layer.cornerRadius = 40
+        $0.layer.cornerRadius = 50
         $0.clipsToBounds = true
         $0.backgroundColor = .systemGray6
     }
@@ -209,7 +209,7 @@ class MainView: UIView {
         }
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(27)
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(100)
             make.trailing.equalToSuperview().inset(24)
         }
         quizButton.snp.makeConstraints { make in

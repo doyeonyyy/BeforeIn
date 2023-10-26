@@ -59,6 +59,16 @@ class MainViewController: BaseViewController {
                     if let user = findUser {
                         currentUser = user
                         self.mainView.mainViewModel = MainViewModel(user: currentUser)
+                        if let imageURL = URL(string: user.profileImage) {
+                            self.userManager.downloadImageFromFirebaseStorage(url: imageURL) { image in
+                                if let image = image {
+                                    // 이미지를 표시할 이미지 뷰에 설정
+                                    DispatchQueue.main.async {
+                                        self.mainView.profileImageView.image = image
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
