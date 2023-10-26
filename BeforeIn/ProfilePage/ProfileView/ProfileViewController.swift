@@ -175,16 +175,17 @@ extension ProfileViewController: UITableViewDataSource {
 
 // MARK: - PHPickerViewControllerDelegate
 extension ProfileViewController: PHPickerViewControllerDelegate {
+    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true, completion: nil)
-        let itemProvider = results.first?.itemProvider
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                DispatchQueue.main.sync {
-                    self.profileView.circularImageView.image = image as? UIImage
-                }
-            }
+        guard let selectedImage = results.first?.itemProvider, selectedImage.canLoadObject(ofClass: UIImage.self) else {
+            return
         }
+        selectedImage.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+            guard let self = self, let image = image as? UIImage, error == nil else { return }
+            
+            userManager.uploadImage(image)
+        }
+        picker.dismiss(animated: true)
     }
+    
 }

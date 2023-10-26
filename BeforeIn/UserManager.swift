@@ -8,11 +8,13 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 
 struct UserManager {
     let db = Firestore.firestore()
     
+    // 유저 생성
     func addUser(user: User) {
         db.collection("User").addDocument(data: [
             "email": user.email,
@@ -24,6 +26,7 @@ struct UserManager {
         ])
     }
     
+    // 유저 삭제
     func deleteUser(user: FirebaseAuth.User){
         if let email = user.email {
             db.collection("User").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
@@ -38,6 +41,7 @@ struct UserManager {
         }
     }
     
+    // 유저 찾기
     func findUser(email: String, completion: @escaping (User?) -> Void) {
         let userDB = db.collection("User")
         let query = userDB.whereField("email", isEqualTo: email)
@@ -50,9 +54,10 @@ struct UserManager {
                     let email = data["email"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     let nickname = data["nickname"] as? String ?? ""
+                    let profileImage = data["profileImage"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: "", level: level, phone: phone)
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: profileImage, level: level, phone: phone)
                     completion(user)
                 } else {
                     completion(nil)
@@ -63,6 +68,7 @@ struct UserManager {
         }
     }
     
+    // 닉네임 찾기
     func findNickname(nickname: String, completion: @escaping (User?) -> Void) {
         let userDB = db.collection("User")
         let query = userDB.whereField("nickname", isEqualTo: nickname)
@@ -75,9 +81,10 @@ struct UserManager {
                     let email = data["email"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     let nickname = data["nickname"] as? String ?? ""
+                    let profileImage = data["profileImage"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: "", level: level, phone: phone)
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: profileImage, level: level, phone: phone)
                     completion(user)
                 } else {
                     completion(nil)
@@ -88,5 +95,60 @@ struct UserManager {
         }
     }
 
+    // 이미지 업로드
+    func uploadImage(_ image: UIImage) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("이미지 데이터를 생성하는데 실패했습니다.")
+            return
+        }
+        let imageName = UUID().uuidString + String(Date().timeIntervalSince1970)
+        let path = "ProfileImages/\(imageName)"
+        let storageRef = Storage.storage().reference().child(path)
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+            if let error = error {
+                print("Storage 업로드 오류: \(error.localizedDescription)")
+            } else {
+                print("Storage 업로드 성공")
+                
+                storageRef.downloadURL { (url, error) in
+                    if let downloadURL = url {
+                        self.saveImageURL(imageURL: downloadURL.absoluteString)
+                        print("이미지 다운로드 URL 가져오기 성공")
+                    } else if let error = error {
+                        print("다운로드 URL 가져오기 오류: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    // 이미지URL 저장
+    func saveImageURL(imageURL: String) {
+        if let userEmail = Auth.auth().currentUser?.email {
+            let userCollection = Firestore.firestore().collection("User")
+            userCollection.whereField("email", isEqualTo: userEmail).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("에러: \(error.localizedDescription)")
+                } else if let documents = querySnapshot?.documents, !documents.isEmpty {
+                    let userDocument = documents[0]
+                    userDocument.reference.updateData(["profileImage": imageURL]) { error in
+                        if let error = error {
+                            print("이미지 저장 실패: \(error.localizedDescription)")
+                        } else {
+                            print("이미지 저장 성공")
+                            currentUser.profileImage = imageURL
+                        }
+                    }
+                }
+            }
+        } else {
+            print("사용자 이메일을 가져올 수 없음.")
+        }
+    }
+    
     
 }
