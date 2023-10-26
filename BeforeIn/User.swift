@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-var currentUser = User(email: "", name: "", nickname: "", profileImage: UIImage(systemName: "person.fill")!, level: 5, phone: "")
+var currentUser = User(email: "", name: "", nickname: "", profileImage: "", level: 5, phone: "")
 
 struct User {
     let email: String
     let name: String
     var nickname: String
-    var profileImage: UIImage
+    var profileImage: String
     var level: Int
     var phone: String
     var myPost: [Post] = []

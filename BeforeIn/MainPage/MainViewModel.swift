@@ -9,11 +9,14 @@ import Foundation
 
 class MainViewModel {
     
-    var user: User{
-        didSet{
-            self.updateView?()
-        }
-    }
+    let userManager = UserManager()
+    
+    var user: User {
+         didSet {
+             self.updateProfileImage?()
+             self.updateView?()
+         }
+     }
     
     var etiquette: Etiquette?{
         didSet{
@@ -27,6 +30,10 @@ class MainViewModel {
     
     var nickname: String{
         return user.nickname
+    }
+    
+    var profileImageURL: String {
+        return user.profileImage
     }
     
     var level: String {
@@ -63,7 +70,9 @@ class MainViewModel {
         let content = (etiquette?.place ?? "로딩실패") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "로딩실패")
         return content
     }
+    
     var updateView: (() -> Void)?
+    var updateProfileImage: (() -> Void)?
     
     
     init(user: User) {

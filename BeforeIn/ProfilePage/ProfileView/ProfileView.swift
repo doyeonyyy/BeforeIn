@@ -47,8 +47,8 @@ class ProfileView: UIView {
     
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 40
+        imageView.backgroundColor = .systemGray6
+        imageView.layer.cornerRadius = 50
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         return imageView
@@ -56,7 +56,7 @@ class ProfileView: UIView {
     
     let editProfileButton = UIButton().then {
         let image = UIImage(systemName: "pencil.circle.fill")
-        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .BeforeInRed!)
+        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .black)
         $0.setImage(resizedImage, for: .normal)
     }
     
@@ -102,8 +102,8 @@ class ProfileView: UIView {
     private let level: UILabel = {
         let label = UILabel()
         label.text = "Lv l"
-        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.textColor = .BeforeInRed
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -146,6 +146,7 @@ class ProfileView: UIView {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
@@ -154,9 +155,13 @@ class ProfileView: UIView {
             profileViewModel?.updateView = { [weak self] in
                 self?.updateView()
             }
+            profileViewModel?.updateView = { [weak self] in
+                self?.updateView()
+            }
             updateView()
         }
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -211,8 +216,7 @@ class ProfileView: UIView {
         }
         
         circularImageView.snp.makeConstraints { make in
-            make.width.equalTo(80)
-            make.height.equalTo(80)
+            make.width.height.equalTo(100)
             make.trailing.equalTo(self.snp.trailing).offset(-24)
             make.top.equalTo(self.snp.top).offset(86)
         }
@@ -287,13 +291,25 @@ class ProfileView: UIView {
         nameBoxLabel.text = profileViewModel?.nameBox
         level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
-        circularImageView.image = profileViewModel?.profileImage
+     //   circularImageView.image = profileViewModel?.profileImage
         idLabel.text = profileViewModel?.email
         myLevelRectangleUpdate(profileViewModel?.level ?? 1)
         print("profileView 업데이트")
         
     }
     
+    func updateProfileImage() {
+        if let imageURL = URL(string: profileViewModel?.imageURL ?? "") {
+            profileViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
+                if let image = image {
+                    DispatchQueue.main.async {
+                        self?.circularImageView.image = image
+                    }
+                }
+            }
+        }
+    }
+
     private func myLevelRectangleUpdate(_ level: Int) {
         let newWidth = CGFloat(level * 60)
         myLevelRectangle.snp.updateConstraints { make in

@@ -31,7 +31,7 @@ class WriteViewController: UIViewController {
         let writer = currentUser.email
         let writerNickName = currentUser.nickname
         let likes = 0
-        let category = "질문"
+        let category = "질문답변"
         let postingTime = Date()
         let mydoc = db.collection("Post").document()
         let postingID = mydoc.documentID
