@@ -83,7 +83,7 @@ class ProfileView: UIView {
         let label = UILabel()
         label.text = "000님은 현재"
         label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -93,17 +93,7 @@ class ProfileView: UIView {
         let label = UILabel()
         label.text = "검은머리 짐승"
         label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let level: UILabel = {
-        let label = UILabel()
-        label.text = "Lv l"
-        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -113,12 +103,53 @@ class ProfileView: UIView {
         let label = UILabel()
         label.text = "입니다"
         label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
     }()
     
+    private let level: UILabel = {
+        let label = UILabel()
+        label.text = "Lv 1"
+        label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+    private let levelImageStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private let levelImage1: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "level1")
+        return imageView
+    }()
+    private let levelImage2: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "level2")
+        return imageView
+    }()
+    private let levelImage3: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "level3")
+        return imageView
+    }()
+    private let levelImage4: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "level4")
+        return imageView
+    }()
+    private let levelImage5: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "level5")
+        return imageView
+    }()
     private let levelRectangle: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
@@ -181,8 +212,14 @@ class ProfileView: UIView {
         addSubview(grayRectangle)
         addSubview(nameBoxLabel)
         addSubview(levelLabel)
-        addSubview(level)
         addSubview(mentBoxLabel)
+        addSubview(level)
+        addSubview(levelImageStackView)
+        levelImageStackView.addArrangedSubview(levelImage1)
+        levelImageStackView.addArrangedSubview(levelImage2)
+        levelImageStackView.addArrangedSubview(levelImage3)
+        levelImageStackView.addArrangedSubview(levelImage4)
+        levelImageStackView.addArrangedSubview(levelImage5)
         addSubview(levelRectangle)
         addSubview(myLevelRectangle)
         addSubview(line)
@@ -239,33 +276,56 @@ class ProfileView: UIView {
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
         
+        mentBoxLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameBoxLabel.snp.bottom).offset(14)
+            make.leading.equalTo(levelLabel.snp.trailing).offset(6)
+        }
+        
         level.snp.makeConstraints { make in
             make.top.equalTo(nameBoxLabel.snp.bottom).offset(8)
             make.trailing.equalTo(grayRectangle.snp.trailing).offset(-24)
         }
         
-        mentBoxLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameBoxLabel.snp.bottom).offset(14)
-            make.leading.equalTo(levelLabel.snp.trailing).offset(4)
+        levelImageStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(levelRectangle.snp.top)
+            make.height.equalTo(72)
+            make.leading.equalTo(levelRectangle).offset(4)
+            make.width.equalTo(levelRectangle)
         }
+        levelImage1.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        levelImage2.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        levelImage3.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        levelImage4.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        levelImage5.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        
         
         levelRectangle.snp.makeConstraints { make in
             make.width.equalTo(313)
-            make.height.equalTo(12)
+            make.height.equalTo(4)
             make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
         
         myLevelRectangle.snp.makeConstraints { make in
             make.width.equalTo(62)
-            make.height.equalTo(12)
+            make.height.equalTo(4)
             make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
             make.leading.equalTo(grayRectangle.snp.leading).offset(16)
         }
         
         line.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(3)
+            make.height.equalTo(1)
             make.top.equalTo(grayRectangle.snp.bottom).offset(24)
         }
         
