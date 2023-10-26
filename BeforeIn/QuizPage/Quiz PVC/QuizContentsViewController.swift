@@ -60,8 +60,8 @@ class NewQuizContentViewController: UIViewController {
         
         let buttonO = UIButton().then {
             let configuration = UIImage.SymbolConfiguration(scale: .large)
-            let normalImage = UIImage(named: "QuizActiveO")?.withConfiguration(configuration)
-            let selectedImage = UIImage(named: "QuizInactiveO")?.withConfiguration(configuration)
+            let normalImage = UIImage(named: "QuizInactiveO")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "QuizActiveO")?.withConfiguration(configuration)
 
             $0.configuration = .filled()
             $0.showsMenuAsPrimaryAction = false
@@ -74,8 +74,8 @@ class NewQuizContentViewController: UIViewController {
         }
         let buttonX = UIButton().then {
             let configuration = UIImage.SymbolConfiguration(scale: .large)
-            let normalImage = UIImage(named: "QuizActiveX")?.withConfiguration(configuration)
-            let selectedImage = UIImage(named: "QuizInactiveX")?.withConfiguration(configuration)
+            let normalImage = UIImage(named: "QuizInactiveX")?.withConfiguration(configuration)
+            let selectedImage = UIImage(named: "QuizActiveX")?.withConfiguration(configuration)
 
             $0.configuration = .filled()
             $0.showsMenuAsPrimaryAction = false
