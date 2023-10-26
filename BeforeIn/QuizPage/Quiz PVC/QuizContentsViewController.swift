@@ -55,9 +55,9 @@ class NewQuizContentViewController: UIViewController {
         }
         
         let quizLabel = UILabel().then {
-            $0.text = "\(self.question) 정답 : \(self.answer)"
+            $0.text = "\(self.question) \n(정답 : \(self.answer))"
             $0.numberOfLines = 0
-            $0.font = UIFont.systemFont(ofSize: 24)
+            $0.font = UIFont(name: "SUITE-Medium", size: 24)
         }
         
         let buttonO = UIButton().then {
@@ -92,7 +92,7 @@ class NewQuizContentViewController: UIViewController {
         let nextButton = UIButton().then {
             $0.setTitle("다음", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            $0.setTitleColor(.black, for: .normal)
+            $0.setTitleColor(.lightGray, for: .normal)
             $0.addTarget(self, action: #selector(nextButtonClick), for: .touchUpInside)
             self.nextButton = $0
         }
@@ -175,9 +175,11 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = true
+            nextButton.setTitleColor(.black, for: .normal)
         }
         else {
             userAnswer = nil
+            nextButton.setTitleColor(.lightGray, for: .normal)
         }
     }
     
@@ -188,9 +190,11 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = false
+            nextButton.setTitleColor(.black, for: .normal)
         }
         else {
             userAnswer = nil
+            nextButton.setTitleColor(.lightGray, for: .normal)
         }
     }
     
@@ -214,6 +218,18 @@ class NewQuizContentViewController: UIViewController {
         }
         else {
             isCorrect = nil
+            UIView.animate(withDuration: 0.05, animations: {
+                self.buttonX.transform = CGAffineTransform(translationX: -10, y: 0)
+                self.buttonO.transform = CGAffineTransform(translationX: -10, y: 0)
+            }) { _ in
+                UIView.animate(withDuration: 0.05, animations: {
+                    self.buttonX.transform = CGAffineTransform(translationX: 20, y: 0)
+                    self.buttonO.transform = CGAffineTransform(translationX: 20, y: 0)
+                }) { _ in
+                    self.buttonX.transform = .identity
+                    self.buttonO.transform = .identity
+                }
+            }
             print("선택안함")
         }
     }
