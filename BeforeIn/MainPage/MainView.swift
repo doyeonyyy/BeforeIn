@@ -35,18 +35,17 @@ class MainView: UIView {
         let label = UILabel()
         label.text = "Lv l"
         label.textColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
     }()
     
     private let profileImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "person")
-        $0.layer.cornerRadius = 30
+        $0.image = UIImage()
+        $0.layer.cornerRadius = 40
         $0.clipsToBounds = true
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.backgroundColor = .systemGray6
     }
     
     let quizButton = UIButton().then{
@@ -195,24 +194,24 @@ class MainView: UIView {
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.bottom.equalTo(profileImageView.snp.centerY).offset(-4)
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.top.equalTo(profileImageView.snp.centerY).offset(-2)
             make.leading.equalToSuperview().offset(24)
         }
         subLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(levelLabel).offset(4)
-            make.leading.equalTo(levelLabel.snp.trailing).offset(8)
+            make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
+            make.leading.equalTo(levelLabel.snp.trailing).offset(4)
         }
         level.snp.makeConstraints { make in
-            make.bottom.equalTo(subLabel.snp.bottom)
+            make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
             make.leading.equalTo(subLabel.snp.trailing).offset(16)
         }
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(80)
             make.trailing.equalToSuperview().inset(24)
         }
         quizButton.snp.makeConstraints { make in
@@ -223,7 +222,7 @@ class MainView: UIView {
         }
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(3)
+            make.height.equalTo(1)
             make.top.equalTo(quizButton.snp.bottom).offset(24)
         }
         etiquetteLabel.snp.makeConstraints { make in
