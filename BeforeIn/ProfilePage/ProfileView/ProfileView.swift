@@ -336,9 +336,9 @@ class ProfileView: UIView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(line.snp.bottom)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
         
         shadowView.addSubview(grayRectangle)
