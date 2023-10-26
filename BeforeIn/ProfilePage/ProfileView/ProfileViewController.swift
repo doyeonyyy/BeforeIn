@@ -18,7 +18,7 @@ class ProfileViewController: BaseViewController {
         "비밀번호 변경",
         "로그아웃",
         "회원탈퇴",
-        "정보",
+        "약관 및 정책",
     ]
     
     // MARK: - Life Cycle

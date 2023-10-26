@@ -32,7 +32,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }()
     
     let cellIdentifier = "InfoCell"
-    let tableData = ["리더", "부리더", "팀원 1", "팀원 2", "팀원 3"]
+    let tableData = ["서비스 이용약관", "개인정보 처리방침", "위치기반서비스 이용약관"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
