@@ -4,14 +4,13 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Pretendard-Black.otf</string>
-		<string>Pretendard-Bold.otf</string>
-		<string>Pretendard-ExtraBold.otf</string>
-		<string>Pretendard-Light.otf</string>
-		<string>Pretendard-Medium.otf</string>
-		<string>Pretendard-Regular.otf</string>
-		<string>Pretendard-SemiBold.otf</string>
-		<string>Pretendard-Thin.otf</string>
+		<string>SUITE-Light.otf</string>
+		<string>SUITE-Regular.otf</string>
+		<string>SUITE-Medium.otf</string>
+		<string>SUITE-SemiBold.otf</string>
+		<string>SUITE-Bold.otf</string>
+		<string>SUITE-ExtraBold.otf</string>
+		<string>SUITE-Heavy.otf</string>
 		<string>JeonjuCraftGoR.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
