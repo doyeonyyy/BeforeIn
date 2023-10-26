@@ -65,7 +65,7 @@ class QuizResultView: UIView {
             make.leading.equalTo(labelA.snp.trailing).offset(8)
         }
         labelC.text = "Lv.1 검은머리 짐승입니다"
-        labelC.textColor = .beforeInRed
+        labelC.textColor = .BeforeInRed
         labelC.font = UIFont.systemFont(ofSize: 24, weight: .bold)
 
         labelD.text = "입니다"

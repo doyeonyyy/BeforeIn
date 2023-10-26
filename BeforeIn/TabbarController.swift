@@ -51,7 +51,11 @@ class TapbarController: UITabBarController {
         vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "captions.bubble"), selectedImage: UIImage(systemName: "captions.bubble.fill"))
         vc4.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
 
-
+        vc1.navigationBar.tintColor = .systemGray2
+        vc2.navigationBar.tintColor = .systemGray2
+        vc3.navigationBar.tintColor = .systemGray2
+        vc4.navigationBar.tintColor = .systemGray2
+        
         setViewControllers([vc1, vc2, vc3, vc4], animated: false)
 
     }
