@@ -25,7 +25,7 @@ class ThirdDetailView: UIView {
     
     lazy var titleLabel = UILabel().then {
         $0.text = "이것만 지켜도 Good"
-        $0.font = .systemFont(ofSize: 22, weight: .black)
+        $0.font = UIFont(name: "SUITE-ExtraBold", size: 24)
         $0.textColor = .black
         $0.numberOfLines = 0
     }
