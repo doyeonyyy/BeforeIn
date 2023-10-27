@@ -154,6 +154,7 @@ class CommunityPageViewController: BaseViewController {
                 }
             }
     }
+    
     func fetchPost() {
         db.collection("Post").document(post.postID).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
@@ -314,6 +315,10 @@ extension CommunityPageViewController: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         view.endEditing(true)
+     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == communityPageView.commentTextField {
             UIView.animate(withDuration: 0.3) {
@@ -325,4 +330,13 @@ extension CommunityPageViewController: UITextFieldDelegate {
             }
         }
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    
+    
 }
