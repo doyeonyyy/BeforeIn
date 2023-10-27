@@ -106,21 +106,8 @@ extension ProfileViewController: UITableViewDelegate {
                 }
             }
         } else if indexPath.row == 3 {
-            // 회원탈퇴
-            showAlertTwoButton(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", button1Title: "확인", button2Title: "취소") {
-                if let user = Auth.auth().currentUser {
-                    self.userManager.deleteUser(user: user)
-                    user.delete { error in
-                        if let error = error {
-                            print("Firebase Error: \(error)")
-                        } else {
-                            print("회원탈퇴 성공")
-                            let loginViewController = LoginViewController()
-                            self.transitionToRootView(view: UINavigationController(rootViewController: loginViewController))
-                        }
-                    }
-                }
-            }
+            let userAccountDeletionVC = UserAccountDeletionViewController()
+            self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
         } else if indexPath.row == 4 {
             let infoVC = InfoViewController()
             present(infoVC, animated: true)
@@ -195,9 +182,9 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
     }
     
     func updateProfileImage(_ image: UIImage) {
-         DispatchQueue.main.async {
-             self.profileView.circularImageView.image = image
-         }
-     }
+        DispatchQueue.main.async {
+            self.profileView.circularImageView.image = image
+        }
+    }
     
 }

@@ -13,7 +13,7 @@ class PasswordEditView: UIView {
     
     // MARK: - UI Properties
     private let editPasswordLabel = UILabel().then {
-        $0.text = "기존 비밀번호를 입력하세요."
+        $0.text = "현재 비밀번호를 입력하세요."
         $0.font = UIFont.systemFont(ofSize: 18)
     }
     let editPasswordTextField = UITextField().then {

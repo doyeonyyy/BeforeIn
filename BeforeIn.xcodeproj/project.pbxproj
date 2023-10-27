@@ -84,6 +84,7 @@
 		63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */; };
 		63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */; };
 		63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */; };
+		67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */; };
 		673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673609182AE2358B00934690 /* CommunityPageViewController.swift */; };
 		6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091A2AE235A500934690 /* CommunityPageView.swift */; };
 		6736091D2AE2941F00934690 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091C2AE2941F00934690 /* CommentCell.swift */; };
@@ -166,6 +167,7 @@
 		63AB9D6A2ADFD557008E85BA /* QuizIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIntroViewModel.swift; sourceTree = "<group>"; };
 		63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewModel.swift; sourceTree = "<group>"; };
+		67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDeletionViewController.swift; sourceTree = "<group>"; };
 		673609182AE2358B00934690 /* CommunityPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageViewController.swift; sourceTree = "<group>"; };
 		6736091A2AE235A500934690 /* CommunityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageView.swift; sourceTree = "<group>"; };
 		6736091C2AE2941F00934690 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				B397E3072ADCCA1D00F3363F /* DisplayViewController.swift */,
 				B397E3092ADCCA2C00F3363F /* InfoViewController.swift */,
 				67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */,
+				67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */,
 			);
 			path = ProfilePage;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
 				159B78C52ADD57A700FE210E /* Quiz.swift in Sources */,
+				67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */,
 				1543EED62AE68AD700AD587B /* CommunityPageViewModel.swift in Sources */,
 				63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */,
 				1543EED42AE64E9300AD587B /* Comment.swift in Sources */,
