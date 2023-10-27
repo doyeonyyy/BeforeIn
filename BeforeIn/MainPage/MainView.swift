@@ -13,6 +13,7 @@ class MainView: UIView {
     
     private let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = false
     }
     
     private let contentView = UIView()
@@ -50,7 +51,7 @@ class MainView: UIView {
     let quizButton = UIButton().then{
         $0.setTitle("퀴즈 다시 풀러가기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
@@ -62,7 +63,7 @@ class MainView: UIView {
     
     private let etiquetteLabel = UILabel().then{
         $0.text = "알아두면 쓸모있는 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 22)
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     
     private let etiquetteView = UIView().then{
@@ -97,7 +98,7 @@ class MainView: UIView {
     
     private let recentlyEtiquette = UILabel().then{
         $0.text = "최근 본 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 22)
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
@@ -114,14 +115,14 @@ class MainView: UIView {
     
     private let recommendLabel = UILabel().then {
         $0.text = "장소별 상황 추천"
-        $0.font = UIFont.boldSystemFont(ofSize: 22)
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     
     var recommendEtiquetteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
-        layout.itemSize = CGSize(width: 183, height: 224)
+        layout.itemSize = CGSize(width: 183, height: 210)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
@@ -131,7 +132,7 @@ class MainView: UIView {
     
     let seeMoreButton = UIButton().then{
         $0.setTitle("더보기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         $0.setTitleColor(.black, for: .normal)
         
     }
@@ -195,7 +196,7 @@ class MainView: UIView {
         }
 
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(31)
+            make.bottom.equalTo(levelLabel.snp.top).offset(-10)
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
@@ -216,10 +217,10 @@ class MainView: UIView {
             make.trailing.equalToSuperview().inset(24)
         }
         quizButton.snp.makeConstraints { make in
-            make.top.equalTo(levelLabel.snp.bottom).offset(32)
+            make.top.equalTo(levelLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(24)
-            make.width.equalTo(183)
-            make.height.equalTo(40)
+            make.width.equalTo(160)
+            make.height.equalTo(36)
         }
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -227,7 +228,7 @@ class MainView: UIView {
             make.top.equalTo(quizButton.snp.bottom).offset(24)
         }
         etiquetteLabel.snp.makeConstraints { make in
-            make.top.equalTo(divider.snp.bottom).offset(38)
+            make.top.equalTo(divider.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(26)
         }
         etiquetteView.snp.makeConstraints { make in
@@ -252,7 +253,7 @@ class MainView: UIView {
             make.height.equalTo(44)
         }
         recentlyEtiquette.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteView.snp.bottom).offset(33)
+            make.top.equalTo(etiquetteView.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(24)
         }
         recentlyEtiquetteCollectionView.snp.makeConstraints { make in
@@ -262,7 +263,7 @@ class MainView: UIView {
             make.height.equalTo(100)
         }
         recommendLabel.snp.makeConstraints { make in
-            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(31)
+            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(24)
             make.leading.equalToSuperview().inset(24)
         }
         recommendEtiquetteCollectionView.snp.makeConstraints { make in
@@ -273,7 +274,7 @@ class MainView: UIView {
             make.bottom.equalToSuperview().offset(-20)
         }
         seeMoreButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(24)
             make.centerY.equalTo(recommendLabel)
         }
     }

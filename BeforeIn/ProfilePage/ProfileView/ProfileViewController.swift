@@ -18,7 +18,7 @@ class ProfileViewController: BaseViewController {
         "비밀번호 변경",
         "로그아웃",
         "회원탈퇴",
-        "정보",
+        "약관 및 정책",
     ]
     
     // MARK: - Life Cycle
@@ -142,7 +142,7 @@ extension ProfileViewController: UITableViewDataSource {
         let text = cellData[indexPath.row]
         
         cell.textLabel?.text = text
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         
         let line = UIView()
         line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
@@ -173,6 +173,10 @@ extension ProfileViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
+        return tableView.bounds.height / CGFloat(numberOfCells)
+    }
 }
 
 // MARK: - PHPickerViewControllerDelegate

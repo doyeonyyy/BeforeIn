@@ -35,7 +35,11 @@ class TapbarController: UITabBarController {
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundEffect = nil
-        appearance.shadowColor = nil
+        appearance.shadowColor = .systemGray3
+   
+        let attributes = [NSAttributedString.Key.font: UIFont(name: "SUITE-Regular", size: 9)!]
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = attributes
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = attributes
 
         self.tabBar.standardAppearance = appearance
         self.tabBar.scrollEdgeAppearance = appearance
@@ -46,10 +50,10 @@ class TapbarController: UITabBarController {
         let vc2 = UINavigationController(rootViewController: SearchViewController())
         let vc3 = UINavigationController(rootViewController: CommunityViewController())
         let vc4 = UINavigationController(rootViewController: ProfileViewController())
-        vc1.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
-        vc2.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
-        vc3.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "captions.bubble"), selectedImage: UIImage(systemName: "captions.bubble.fill"))
-        vc4.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        vc1.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        vc2.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
+        vc3.tabBarItem = UITabBarItem(title: "커뮤니티", image: UIImage(systemName: "captions.bubble"), selectedImage: UIImage(systemName: "captions.bubble.fill"))
+        vc4.tabBarItem = UITabBarItem(title: "내 정보", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
 
         vc1.navigationBar.tintColor = .systemGray2
         vc2.navigationBar.tintColor = .systemGray2

@@ -59,7 +59,7 @@ class QuizResultView: UIView {
         }
         labelB.text = "000님은"
         labelB.textColor = .black
-        labelB.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        labelB.font = UIFont(name: "SUITE-SemiBold", size: 24)
         labelB.snp.makeConstraints { make in
             make.bottom.equalTo(labelA.snp.bottom)
             make.leading.equalTo(labelA.snp.trailing).offset(8)

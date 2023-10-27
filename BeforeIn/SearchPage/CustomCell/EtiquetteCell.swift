@@ -26,14 +26,14 @@ class EtiquetteCell: UICollectionViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .black
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = UIFont(name: "SUITE-Bold", size: 20)
     }
     
     var descriptionLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = .black
         $0.numberOfLines = 2
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.font = UIFont(name: "SUITE-Regular", size: 16)
        
     }
     override init(frame: CGRect) {
