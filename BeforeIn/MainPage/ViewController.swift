@@ -26,7 +26,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
-       // fetchEtiquetteContent()
+        fetchEtiquetteContent()
     }
     
     override func viewDidLoad() {
@@ -34,9 +34,10 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-      //  fetchEtiquetteList()
+        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
+        mainView.randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -50,6 +51,10 @@ class MainViewController: BaseViewController {
         let quizIntroVC = QuizIntroViewController()
         quizIntroVC.modalPresentationStyle = .fullScreen
         present(quizIntroVC, animated: true)
+    }
+    
+    @objc func randomButtonClick(){
+        fetchEtiquetteContent()
     }
     
     private func setCurrentUser(){
