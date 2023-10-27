@@ -6,7 +6,6 @@ import SnapKit
 
 class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
     let infoCancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("취소", for: .normal)

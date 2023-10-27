@@ -96,6 +96,7 @@ class MainView: UIView {
     }
     
     private let etiquetteViewContent = UILabel().then{
+        $0.backgroundColor = .systemPink
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.numberOfLines = 0
         $0.textAlignment = .center
@@ -248,19 +249,17 @@ class MainView: UIView {
             make.height.equalTo(116)
         }
         quotes1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(13)
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(3)
         }
         quotes2.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(13)
-            make.bottom.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(3)
+            make.bottom.equalToSuperview().inset(10)
         }
         etiquetteViewContent.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(37)
-            make.bottom.equalToSuperview().inset(35)
-            make.width.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().inset(10)
             make.trailing.leading.equalToSuperview().inset(16)
-            make.height.equalTo(44)
         }
         recentlyEtiquette.snp.makeConstraints { make in
             make.top.equalTo(etiquetteView.snp.bottom).offset(20)
