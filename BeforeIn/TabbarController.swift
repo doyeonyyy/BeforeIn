@@ -35,7 +35,7 @@ class TapbarController: UITabBarController {
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundEffect = nil
-        appearance.shadowColor = nil
+        appearance.shadowColor = .systemGray3
    
         let attributes = [NSAttributedString.Key.font: UIFont(name: "SUITE-Regular", size: 9)!]
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = attributes
