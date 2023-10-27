@@ -31,13 +31,15 @@ class QuizIntroViewController: BaseViewController {
     
     @objc func startButtonTapped(_ button: UIButton) {
         let startVC = NewQuizViewController()
-//        let startVC = QuizViewController()
         startVC.modalPresentationStyle = .fullScreen
         self.present(startVC, animated: true)
     }
+    
     @objc func skipButtonTapped(_ button: UIButton) {
-//        let skipVC = MainViewController()
-//        skipVC.modalPresentationStyle = .fullScreen
         self.dismiss(animated: true)
+        let tapBarVC = TapbarController()
+        transitionToRootView(view: tapBarVC)
     }
+    
+    
 }

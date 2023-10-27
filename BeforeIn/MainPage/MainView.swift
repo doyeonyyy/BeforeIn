@@ -96,7 +96,6 @@ class MainView: UIView {
     }
     
     private let etiquetteViewContent = UILabel().then{
-        $0.backgroundColor = .systemPink
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.numberOfLines = 0
         $0.textAlignment = .center

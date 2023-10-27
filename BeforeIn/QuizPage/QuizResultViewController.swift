@@ -8,7 +8,7 @@ import SnapKit
 import Then
 import UIKit
 
-class QuizResultViewController: UIViewController {
+class QuizResultViewController: BaseViewController {
 
     
     let quizResultView = QuizResultView()
@@ -28,8 +28,8 @@ class QuizResultViewController: UIViewController {
     }
     
     @objc func startButtonClick() {
-        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-            rootViewController.dismiss(animated: true, completion: nil)
-        }
+        self.dismiss(animated: true)
+        let tapBarVC = TapbarController()
+        transitionToRootView(view: tapBarVC)
     }
 }
