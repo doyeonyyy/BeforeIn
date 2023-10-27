@@ -22,7 +22,7 @@ class RecommendItemCell: UICollectionViewCell {
     }
     var descriptionLabel = UILabel().then {
         $0.text = "\"너가 그래서 솔로\"...이것만 알면 너도 올해는 커플!"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .systemGray
         $0.numberOfLines = 0
     }
@@ -48,7 +48,7 @@ class RecommendItemCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 16
         contentView.clipsToBounds = true
         contentView.layer.borderWidth = 0.5
-        contentView.layer.borderColor = UIColor.systemGray4.cgColor
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
         
         contentView.addSubview(contentImageView)
         contentView.addSubview(mainLabel)

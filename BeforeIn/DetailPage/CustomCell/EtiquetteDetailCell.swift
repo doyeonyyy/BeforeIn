@@ -19,7 +19,7 @@ class EtiquetteDetailCell: UICollectionViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .white
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = UIFont(name: "SUITE-Bold", size: 20)
     }
     
     var descriptionLabel = UILabel().then {
@@ -27,7 +27,7 @@ class EtiquetteDetailCell: UICollectionViewCell {
         $0.textColor = .white
         $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 0
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.font = UIFont(name: "SUITE-Regular", size: 16)
        
     }
     

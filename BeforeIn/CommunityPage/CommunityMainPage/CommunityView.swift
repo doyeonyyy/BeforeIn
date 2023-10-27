@@ -31,8 +31,8 @@ class CommunityView: UIView {
     
     
     let plusButton = UIButton().then{
-        $0.backgroundColor = UIColor(red: 255/255, green: 129/255, blue: 129/255, alpha: 1.0)
-        $0.layer.cornerRadius = 35
+        $0.backgroundColor = .BeforeInRed?.withAlphaComponent(0.7)
+        $0.layer.cornerRadius = 30
         $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.tintColor = .white
     }
@@ -69,7 +69,7 @@ class CommunityView: UIView {
             make.bottom.equalToSuperview().inset(50)
         }
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(70)
+            make.width.height.equalTo(60)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(40)
             make.trailing.equalToSuperview().inset(16)
         }
