@@ -10,6 +10,7 @@ import SnapKit
 
 class TermsAndPolicyViewController: UIViewController {
     
+    // MARK: - Properties
     let TermsAndPolicyCellList = ["서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -17,12 +18,14 @@ class TermsAndPolicyViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         setTableView()
     }
 
+    // MARK: - Methods
     private func configureUI() {
         view.backgroundColor = .systemBackground
         self.title = "약관 및 정책"
