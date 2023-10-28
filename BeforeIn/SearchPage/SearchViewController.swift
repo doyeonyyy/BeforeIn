@@ -15,6 +15,7 @@ class SearchViewController: BaseViewController {
     private let searchView = SearchView()
     private let etiquetteCategories: [String] = ["전체", "경조사", "일상에서", "대중교통", "운동"]
     var filteredEtiquetteList: [Etiquette] = etiquetteList
+    var categoryCollectionView: UICollectionView!
     var etiquetteCollectionView: UICollectionView!
     
     // MARK: - View Life Cycle
@@ -25,7 +26,6 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddTarget()
-        addButtonsToCategoryStackView()
         configureCollectionView()
         
         
@@ -33,9 +33,10 @@ class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let categoryButton = searchView.categoryStackView.arrangedSubviews.first as? UIButton {
-            categoryButton.sendActions(for: .touchUpInside)
-        }
+
+        let indexPath = IndexPath(item: 0, section: 0)
+        searchView.categoryCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(searchView.categoryCollectionView, didSelectItemAt: indexPath)
     }
     
     // MARK: - Methods
@@ -44,28 +45,16 @@ class SearchViewController: BaseViewController {
         searchView.searchTextField.addTarget(self, action: #selector(textFieldDidChanged), for: .editingChanged)
     }
     
-    private func addButtonsToCategoryStackView() {
-        for (index, category) in etiquetteCategories.enumerated() {
-            let button = UIButton()
-            button.setTitle(category, for: .normal)
-            button.setTitleColor(.BeforeInRed, for: .normal)
-            button.backgroundColor = .white
-            button.layer.borderColor = UIColor.BeforeInRed?.cgColor
-            button.layer.borderWidth = 1
-            button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
-            // TODO: contentEdgeInsets 대체제 찾기
-            button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
-            button.layer.cornerRadius = 16.5
-            button.titleLabel?.font = UIFont.myBoldSystemFont(ofSize: 16)
-            button.tag = index
-            searchView.categoryStackView.addArrangedSubview(button)
-        }
-    }
-    
     private func configureCollectionView() {
+        searchView.categoryCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
+        searchView.categoryCollectionView.dataSource = self
+        searchView.categoryCollectionView.delegate = self
+
         searchView.etiquetteCollectionView.register(EtiquetteCell.self, forCellWithReuseIdentifier: "EtiquetteCell")
         searchView.etiquetteCollectionView.dataSource = self
         searchView.etiquetteCollectionView.delegate = self
+        
+        categoryCollectionView = searchView.categoryCollectionView
         etiquetteCollectionView = searchView.etiquetteCollectionView
     }
     
@@ -84,9 +73,9 @@ class SearchViewController: BaseViewController {
     }
     
     @objc func cancelButtonTapped() {
-        if let categoryButton = searchView.categoryStackView.arrangedSubviews.first as? UIButton {
-            categoryButton.sendActions(for: .touchUpInside)
-        }
+        let indexPath = IndexPath(item: 0, section: 0)
+        searchView.categoryCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(searchView.categoryCollectionView, didSelectItemAt: indexPath)
         
         let image = UIImage(systemName: "magnifyingglass")
         searchView.searchButton.setImage(image, for: .normal)
@@ -94,66 +83,70 @@ class SearchViewController: BaseViewController {
         searchView.searchButton.setTitle(nil, for: .normal)
         
         searchView.searchTextField.text = ""
-        searchView.searchTextField.resignFirstResponder() // 포커스 해제
+        searchView.searchTextField.resignFirstResponder()
         
         filteredEtiquetteList = etiquetteList
         self.etiquetteCollectionView.reloadData()
     }
     
-    @objc func categoryButtonTapped(_ sender: UIButton) {
-        for subview in searchView.categoryStackView.arrangedSubviews {
-            if let button = subview as? UIButton {
-                button.setTitleColor(.BeforeInRed, for: .normal)
-                button.backgroundColor = .white
-                button.layer.borderColor = UIColor.BeforeInRed?.cgColor
-                button.layer.borderWidth = 1
-            }
-        }
-
-        sender.backgroundColor = UIColor.BeforeInRed
-        sender.setTitleColor(.white, for: .normal)
-        
-        switch sender.tag {
-        case 0: // 카테고리 "전체"
-            filteredEtiquetteList = etiquetteList
-        case 1: // 카테고리 "경조사"
-            filteredEtiquetteList = etiquetteList.filter { $0.category == "경조사" }
-        case 2: // 카테고리 "일상에서"
-            filteredEtiquetteList = etiquetteList.filter { $0.category == "일상에서" }
-        case 3: // 카테고리 "대중교통"
-            filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
-        case 4: // 카테고리 "공공장소"
-            filteredEtiquetteList = etiquetteList.filter { $0.category == "운동" }
-        default:
-            break
-        }
-        self.etiquetteCollectionView.reloadData()
-    }
 }
-// MARK: - etiquetteCollectionView
+// MARK: - categoryCollectionView / etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredEtiquetteList.count
+        if collectionView == categoryCollectionView {
+            return etiquetteCategories.count
+        } else if collectionView == etiquetteCollectionView {
+            return filteredEtiquetteList.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
-        let etiquette = filteredEtiquetteList[indexPath.row]
+        if collectionView == categoryCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else {
+                return UICollectionViewCell()
+            }
+            cell.categoryLabel.text = etiquetteCategories[indexPath.row]
+            return cell
+        } else if collectionView == etiquetteCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
+            let etiquette = filteredEtiquetteList[indexPath.row]
 
-        cell.imageView.image = etiquette.mainImage
-        cell.titleLabel.text = etiquette.place
-        cell.descriptionLabel.text = etiquette.description
+            cell.imageView.image = etiquette.mainImage
+            cell.titleLabel.text = etiquette.place
+            cell.descriptionLabel.text = etiquette.description
 
-        return cell
+            return cell
+        }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let selectedEtiquette = filteredEtiquetteList[indexPath.row]
-        let detailVC = DetailViewController()
-        detailVC.selectedEtiquette = selectedEtiquette
-        navigationController?.pushViewController(detailVC, animated: true)
- 
+        if collectionView == categoryCollectionView {
+            let selectedCategory = etiquetteCategories[indexPath.row]
+            switch selectedCategory {
+                case "전체":
+                    filteredEtiquetteList = etiquetteList
+                case "경조사":
+                    filteredEtiquetteList = etiquetteList.filter { $0.category == "경조사" }
+                case "일상에서":
+                    filteredEtiquetteList = etiquetteList.filter { $0.category == "일상에서" }
+                case "대중교통":
+                    filteredEtiquetteList = etiquetteList.filter { $0.category == "대중교통" }
+                case "운동":
+                    filteredEtiquetteList = etiquetteList.filter { $0.category == "운동" }
+                default:
+                    break
+            }
+            
+            self.etiquetteCollectionView.reloadData()
+            
+        } else if collectionView == etiquetteCollectionView {
+            let selectedEtiquette = filteredEtiquetteList[indexPath.row]
+            let detailVC = DetailViewController()
+            detailVC.selectedEtiquette = selectedEtiquette
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }

@@ -25,16 +25,17 @@ class SearchView: UIView {
         $0.backgroundColor = .none
     }
     
-    lazy var categoryStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 8
-        $0.alignment = .leading
-        $0.distribution = .fill
+    let categoryCollectionViewLayout = UICollectionViewFlowLayout().then{
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 8
+        $0.itemSize = CGSize(width: 115, height: 32)
     }
-    
-    let scrollView = UIScrollView().then {
+
+    lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryCollectionViewLayout).then{
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
-        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
     
     let divider = UIView().then {
@@ -70,10 +71,9 @@ class SearchView: UIView {
     
     // MARK: - Methods
     func addSubview(){
-        scrollView.addSubview(categoryStackView)
         addSubview(searchTextField)
         addSubview(searchButton)
-        addSubview(scrollView)
+        addSubview(categoryCollectionView)
         addSubview(divider)
         addSubview(etiquetteCollectionView)
     }
@@ -94,19 +94,15 @@ class SearchView: UIView {
             $0.width.equalTo(41)
         }
         
-        scrollView.snp.makeConstraints {
+        categoryCollectionView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(24)
             $0.leading.equalToSuperview()
             $0.trailing.equalTo(self)
             $0.height.equalTo(35)
         }
         
-        categoryStackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.height.centerY.equalTo(scrollView)
-        }
-        
         divider.snp.makeConstraints {
-            $0.top.equalTo(categoryStackView.snp.bottom).offset(16)
+            $0.top.equalTo(categoryCollectionView.snp.bottom).offset(16)
             $0.height.equalTo(1)
             $0.leading.trailing.width.equalToSuperview()
         }
