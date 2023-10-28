@@ -33,6 +33,9 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
         setPicker()
         setTableView()
@@ -109,8 +112,8 @@ extension ProfileViewController: UITableViewDelegate {
             let userAccountDeletionVC = UserAccountDeletionViewController()
             self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
         } else if indexPath.row == 4 {
-            let infoVC = InfoViewController()
-            present(infoVC, animated: true)
+            let TermsAndPolicyVC = TermsAndPolicyViewController()
+            self.navigationController?.pushViewController(TermsAndPolicyVC, animated: true)
         }
     }
     
