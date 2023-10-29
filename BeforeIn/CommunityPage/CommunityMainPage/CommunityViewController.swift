@@ -16,7 +16,7 @@ class CommunityViewController: UIViewController {
     var postTableView: UITableView!
     
     //더미 데이터
-    let tags = ["전체보기", "요즘 문화", "우리끼리", "기타"]
+    let tags = ["전체보기", "일상잡담", "요즘문화", "궁금해요", "기타"]
     var posts: [Post] = []
 //    var posts: [String] = []
     var count = 0
@@ -164,6 +164,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
 
 extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+ 
         return posts.count
     }
     

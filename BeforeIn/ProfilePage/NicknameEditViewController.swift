@@ -72,6 +72,9 @@ class NicknameEditViewController: BaseViewController {
     }
     
     func setUI() {
+        
+        setNavigationBar()
+        
         editNicknameLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.snp.top).offset(120)
             $0.left.equalTo(self.view.snp.left).offset(24)
@@ -101,6 +104,13 @@ class NicknameEditViewController: BaseViewController {
         }
     }
     
+    func setNavigationBar() {
+        view.backgroundColor = .systemBackground
+        self.title = "닉네임 수정"
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+    }
+
     func addTarget(){
         checkNicknameButton.addTarget(self, action: #selector(checkNicknameButtonTapped), for: .touchUpInside)
         changeNicknameButton.addTarget(self, action: #selector(changeNicknameButtonTapped), for: .touchUpInside)

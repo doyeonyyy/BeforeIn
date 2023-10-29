@@ -20,12 +20,20 @@ class PasswordEditViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         setTextField()
         setupAddTarget()
     }
     
     
     // MARK: - Methods
+    func setNavigationBar() {
+        view.backgroundColor = .systemBackground
+        self.title = "비밀번호 변경"
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+    }
+    
     func setTextField() {
         passwordEditView.editPasswordTextField.delegate = self
         passwordEditView.newPasswordTextField.delegate = self

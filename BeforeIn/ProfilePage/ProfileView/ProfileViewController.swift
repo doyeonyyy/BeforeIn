@@ -14,7 +14,7 @@ class ProfileViewController: BaseViewController {
     let userManager = UserManager()
     let profileView = ProfileView()
     private let cellData: [String] = [
-        "디스플레이",
+        "화면 설정",
         "비밀번호 변경",
         "로그아웃",
         "회원탈퇴",
@@ -33,6 +33,9 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
         setPicker()
         setTableView()
@@ -89,7 +92,7 @@ extension ProfileViewController: UITableViewDelegate {
         
         if indexPath.row == 0 {
             let displayVC = DisplayViewController()
-            present(displayVC, animated: true)
+            self.navigationController?.pushViewController(displayVC, animated: true)
         } else if indexPath.row == 1 {
             // 비밀번호 변경
             let passwordEditVC = PasswordEditViewController()
@@ -109,8 +112,8 @@ extension ProfileViewController: UITableViewDelegate {
             let userAccountDeletionVC = UserAccountDeletionViewController()
             self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
         } else if indexPath.row == 4 {
-            let infoVC = InfoViewController()
-            present(infoVC, animated: true)
+            let termsAndPolicyVC = TermsAndPolicyViewController()
+            self.navigationController?.pushViewController(termsAndPolicyVC, animated: true)
         }
     }
     

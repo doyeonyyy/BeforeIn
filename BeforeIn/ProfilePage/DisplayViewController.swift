@@ -1,175 +1,98 @@
-
-
-
+//
+//  DisplayViewController.swift
+//  BeforeIn
+//
 import UIKit
 import SnapKit
+import Then
 
 class DisplayViewController: UIViewController {
-        
-    let disCancelButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("취소", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
-    let doneButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    // MARK: - Properties
+    private var isDarkMode = false
     
-    let customView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 4, green: 1, blue: 1, alpha: 1)
-        view.layer.cornerRadius = 16
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let customView = UIView().then {
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 16
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    let lightrectangleView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.917, green: 0.917, blue: 0.917, alpha: 1)
-        view.layer.cornerRadius = 5
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let darkrectangleView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0, green: 0.036, blue: 0.358, alpha: 1)
-        view.layer.cornerRadius = 5
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let lightModePreviewImage = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    let lightModeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "라이트 모드"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let darkModePreviewImage = UIView().then {
+        $0.backgroundColor = .darkGray
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    let darkModeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "다크 모드"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let lightModeLabel = UILabel().then {
+        $0.text = "라이트 모드"
+        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    let lightModeCircle: UIView = {
-        let view = UIView()
-        view.backgroundColor = .BeforeInRed
-        view.layer.cornerRadius = 13
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    let darkModeCircle: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 13
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let darkModeLabel = UILabel().then {
+        $0.text = "다크 모드"
+        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    var isDarkMode = false
+    private let lightModeCheckButton = UIImageView().then {
+        $0.image = UIImage(systemName: "circle")
+        $0.tintColor = .systemGray
+    }
     
+    private let darkModeCheckButton = UIImageView().then {
+        $0.image = UIImage(systemName: "circle")
+        $0.tintColor = .systemGray
+    }
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
-        disCancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-        
-        
-        
-        let lightModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(lightModeTapped))
-        lightModeCircle.addGestureRecognizer(lightModeTapGesture)
-        lightModeCircle.isUserInteractionEnabled = true
-        
-        let darkModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(darkModeTapped))
-        darkModeCircle.addGestureRecognizer(darkModeTapGesture)
-        darkModeCircle.isUserInteractionEnabled = true
+        userInterfaceStyleDetection()
+        setTapGesture()
     }
     
-    @objc func lightModeTapped() {
-        if isDarkMode == true {
-            isDarkMode = false
-        }
-        if isDarkMode == true {
-            lightModeCircle.backgroundColor = .systemGray6
-            darkModeCircle.backgroundColor = .BeforeInRed
-        }
-        else {
-            lightModeCircle.backgroundColor = .BeforeInRed
-            darkModeCircle.backgroundColor = .systemGray6
-        }
-    }
     
-    @objc func darkModeTapped() {
-        if isDarkMode == false {
-            isDarkMode = true
-        }
-        if isDarkMode == false {
-            lightModeCircle.backgroundColor = .BeforeInRed
-            darkModeCircle.backgroundColor = .systemGray6
-        }
-        else {
-            lightModeCircle.backgroundColor = .systemGray6
-            darkModeCircle.backgroundColor = .BeforeInRed
-        }
-    }
-    
+    // MARK: - Methods
     private func setupUI() {
         
-        view.backgroundColor = .systemGray6
-        view.addSubview(disCancelButton)
-        view.addSubview(doneButton)
+        view.backgroundColor = .systemBackground
+        self.title = "화면 설정"
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+        
+        /// addSubview
         view.addSubview(customView)
-        view.addSubview(lightrectangleView)
-        view.addSubview(darkrectangleView)
+        view.addSubview(lightModePreviewImage)
+        view.addSubview(darkModePreviewImage)
         view.addSubview(lightModeLabel)
         view.addSubview(darkModeLabel)
-        view.addSubview(lightModeCircle)
-        view.addSubview(darkModeCircle)
+        view.addSubview(lightModeCheckButton)
+        view.addSubview(darkModeCheckButton)
         
-        disCancelButton.snp.makeConstraints { make in
-            make.width.equalTo(41)
-            make.height.equalTo(27)
-            make.leading.equalTo(view.snp.leading).offset(24)
-            make.top.equalTo(view.snp.top).offset(24)
-        }
-        
-        doneButton.snp.makeConstraints { make in
-            make.width.equalTo(41)
-            make.height.equalTo(27)
-            make.trailing.equalTo(view.snp.trailing).offset(-24)
-            make.top.equalTo(view.snp.top).offset(24)
-        }
-                
+        /// makeConstraints
         customView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.width.equalTo(345)
             make.height.equalTo(333)
             make.leading.equalTo(view.snp.leading).offset(24)
-            make.top.equalTo(view.snp.top).offset(88)
         }
         
-        lightrectangleView.snp.makeConstraints { make in
+        lightModePreviewImage.snp.makeConstraints { make in
             make.width.equalTo(88)
             make.height.equalTo(180)
             make.leading.equalTo(view.snp.leading).offset(69)
             make.top.equalTo(customView.snp.top).offset(32)
         }
-
-        darkrectangleView.snp.makeConstraints { make in
+        
+        darkModePreviewImage.snp.makeConstraints { make in
             make.width.equalTo(88)
             make.height.equalTo(180)
             make.trailing.equalTo(view.snp.trailing).offset(-69)
@@ -177,33 +100,78 @@ class DisplayViewController: UIViewController {
         }
         
         lightModeLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(lightrectangleView.snp.centerX)
-            make.top.equalTo(lightrectangleView.snp.bottom).offset(16)
+            make.centerX.equalTo(lightModePreviewImage.snp.centerX)
+            make.top.equalTo(lightModePreviewImage.snp.bottom).offset(16)
         }
         
         darkModeLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(darkrectangleView.snp.centerX)
-            make.top.equalTo(darkrectangleView.snp.bottom).offset(16)
+            make.centerX.equalTo(darkModePreviewImage.snp.centerX)
+            make.top.equalTo(darkModePreviewImage.snp.bottom).offset(16)
         }
         
-        lightModeCircle.snp.makeConstraints { make in
+        lightModeCheckButton.snp.makeConstraints { make in
             make.width.height.equalTo(26)
             make.centerX.equalTo(lightModeLabel.snp.centerX)
             make.top.equalTo(lightModeLabel.snp.bottom).offset(16)
         }
         
-        darkModeCircle.snp.makeConstraints { make in
+        darkModeCheckButton.snp.makeConstraints { make in
             make.width.height.equalTo(26)
             make.centerX.equalTo(darkModeLabel.snp.centerX)
             make.top.equalTo(darkModeLabel.snp.bottom).offset(16)
         }
     }
     
-    @objc func cancelButtonTapped() {
-        dismiss(animated: true, completion: nil)
+    private func userInterfaceStyleDetection() {
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        switch userInterfaceStyle {
+        case .light:
+            lightModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
+            darkModeCheckButton.image = UIImage(systemName: "circle")
+        case .dark:
+            lightModeCheckButton.image = UIImage(systemName: "circle")
+            darkModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
+        default:
+            break
+        }
     }
     
-    @objc func doneButtonTapped() {
-        dismiss(animated: true, completion: nil)
+    private func setTapGesture() {
+        let lightModePreviewImageTapped = UITapGestureRecognizer(target: self, action: #selector(lightModeTapped))
+        lightModePreviewImage.addGestureRecognizer(lightModePreviewImageTapped)
+        lightModePreviewImage.isUserInteractionEnabled = true
+        let lightModeLabelTapped = UITapGestureRecognizer(target: self, action: #selector(lightModeTapped))
+        lightModeLabel.addGestureRecognizer(lightModeLabelTapped)
+        lightModeLabel.isUserInteractionEnabled = true
+        let lightModeCheckButtonTapped = UITapGestureRecognizer(target: self, action: #selector(lightModeTapped))
+        lightModeCheckButton.addGestureRecognizer(lightModeCheckButtonTapped)
+        lightModeCheckButton.isUserInteractionEnabled = true
+        
+        let darkModePreviewImageTapped = UITapGestureRecognizer(target: self, action: #selector(darkModeTapped))
+        darkModePreviewImage.addGestureRecognizer(darkModePreviewImageTapped)
+        darkModePreviewImage.isUserInteractionEnabled = true
+        let darkModeLabelTapped = UITapGestureRecognizer(target: self, action: #selector(darkModeTapped))
+        darkModeLabel.addGestureRecognizer(darkModeLabelTapped)
+        darkModeLabel.isUserInteractionEnabled = true
+        let darkModeCheckButtonTapped = UITapGestureRecognizer(target: self, action: #selector(darkModeTapped))
+        darkModeCheckButton.addGestureRecognizer(darkModeCheckButtonTapped)
+        darkModeCheckButton.isUserInteractionEnabled = true
+    }
+    
+    // MARK: - @objc
+    @objc func lightModeTapped() {
+        isDarkMode = false
+        self.view.window?.overrideUserInterfaceStyle = .light
+
+        lightModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
+        darkModeCheckButton.image = UIImage(systemName: "circle")
+    }
+    
+    @objc func darkModeTapped() {
+        isDarkMode = true
+        self.view.window?.overrideUserInterfaceStyle = .dark
+
+        lightModeCheckButton.image = UIImage(systemName: "circle")
+        darkModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
     }
 }
