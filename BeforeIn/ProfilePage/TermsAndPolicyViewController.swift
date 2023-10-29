@@ -27,11 +27,8 @@ class TermsAndPolicyViewController: UIViewController {
 
     // MARK: - Methods
     private func configureUI() {
-        view.backgroundColor = .systemBackground
-        self.title = "약관 및 정책"
         
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
-                
+        setNavigationBar()
         
         // addSubView
         view.addSubview(tableView)
@@ -43,6 +40,14 @@ class TermsAndPolicyViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
     }
+    
+    private func setNavigationBar() {
+        view.backgroundColor = .systemBackground
+        self.title = "약관 및 정책"
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+    }
+    
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
