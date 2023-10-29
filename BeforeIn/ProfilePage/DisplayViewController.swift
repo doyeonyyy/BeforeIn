@@ -43,10 +43,12 @@ class DisplayViewController: UIViewController {
     
     private let lightModeCheckButton = UIImageView().then {
         $0.image = UIImage(systemName: "circle")
+        $0.tintColor = .systemGray
     }
     
     private let darkModeCheckButton = UIImageView().then {
         $0.image = UIImage(systemName: "circle")
+        $0.tintColor = .systemGray
     }
     
     // MARK: - View Life Cycle
