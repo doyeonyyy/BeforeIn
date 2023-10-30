@@ -227,6 +227,7 @@ class RegisterViewController: BaseViewController {
         registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
         registerView.authCodeButton.backgroundColor = .systemGray6
         registerView.authCodeButton.setTitleColor(UIColor.black, for: .normal)
+        userAuthCode = 9876
         checkEmail = false
     }
     
