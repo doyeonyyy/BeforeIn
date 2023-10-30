@@ -14,7 +14,7 @@ class LoginView: UIView {
     // MARK: - UI Properties
     lazy var beforeInLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.boldSystemFont(ofSize: 40)
+        $0.font = UIFont(name: "JeonjuCraftGoR", size: 40)
         $0.textColor = .BeforeInRed
     }
     
