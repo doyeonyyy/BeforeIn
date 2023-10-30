@@ -45,9 +45,17 @@ class UserAccountDeletionViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         addSubview()
         setUI()
         addTarget()
+    }
+    
+    func setNavigationBar() {
+        view.backgroundColor = .systemBackground
+        self.title = "회원탈퇴"
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
     }
     
     func addSubview(){

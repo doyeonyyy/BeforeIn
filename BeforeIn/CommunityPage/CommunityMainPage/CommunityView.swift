@@ -22,6 +22,7 @@ class CommunityView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
+        $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
     
     let postTableView = UITableView().then{
@@ -58,7 +59,7 @@ class CommunityView: UIView {
     private func setupConstraint() {
         tagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview()
             make.height.equalTo(32)
         }
