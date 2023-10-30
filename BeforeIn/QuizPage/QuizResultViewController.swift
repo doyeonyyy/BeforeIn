@@ -28,8 +28,21 @@ class QuizResultViewController: BaseViewController {
     }
     
     @objc func startButtonClick() {
-        self.dismiss(animated: true)
-        let tapBarVC = TapbarController()
-        transitionToRootView(view: tapBarVC)
+        print("startButtonClick")
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            print(rootViewController)
+            if let tabBarController = rootViewController as? UITabBarController {
+                // 루트뷰가 탭 바 컨트롤러인 경우
+                tabBarController.dismiss(animated: true, completion: nil)
+            } else if let loginViewController = rootViewController as? UINavigationController {
+                // 루트뷰가 로그인 뷰 컨트롤러인 경우
+                self.dismiss(animated: true)
+                let tapBarController = TapbarController()
+                transitionToRootView(view: tapBarController)
+            }
+        }
     }
+    
+
+
 }
