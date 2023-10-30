@@ -68,16 +68,18 @@ class RegisterViewController: BaseViewController {
             self.seconds -= 1
             let min = self.seconds / 60
             let sec = self.seconds % 60
-
+            
             if self.seconds > 0 {
                 self.registerView.timerLabel.text = "\(min):\(sec)"
             } else {
                 self.registerView.timerLabel.text = "시간만료"
+                self.registerView.authCodeButton.backgroundColor = .systemGray6
+                self.registerView.authCodeButton.setTitleColor(UIColor.black, for: .normal)
                 self.userAuthCode = 9876
             }
         }
     }
-
+    
     
     
     // MARK: - @objc
@@ -101,9 +103,9 @@ class RegisterViewController: BaseViewController {
                 self.checkEmail = false
             } else {
                 if let timer = self.timer, timer.isValid {
-                timer.invalidate()
-                self.seconds = 11 // 181로 변경
-            }
+                    timer.invalidate()
+                    self.seconds = 11 // 181로 변경
+                }
                 self.showAlertOneButton(title: "인증 메일 발송", message: "인증 메일을 발송했습니다.", buttonTitle: "확인")
                 { [weak self] in self?.setTimer() }
                 self.registerView.authIdButton.backgroundColor = .BeforeInRed
@@ -129,6 +131,8 @@ class RegisterViewController: BaseViewController {
             showAlertOneButton(title: "인증 성공", message: "인증 성공했습니다.", buttonTitle: "확인")
             registerView.authCodeButton.backgroundColor = .BeforeInRed
             registerView.authCodeButton.setTitleColor(UIColor.white, for: .normal)
+            timer?.invalidate()
+            registerView.timerLabel.isHidden = true
             checkEmail = true
         } else {
             showAlertOneButton(title: "인증 실패", message: "인증 실패했습니다. 다시 시도해주세요.", buttonTitle: "확인")
@@ -221,6 +225,8 @@ class RegisterViewController: BaseViewController {
     @objc func idTextFieldDidChange(_ textField: UITextField) {
         registerView.authIdButton.backgroundColor = .systemGray6
         registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authCodeButton.backgroundColor = .systemGray6
+        registerView.authCodeButton.setTitleColor(UIColor.black, for: .normal)
         checkEmail = false
     }
     
