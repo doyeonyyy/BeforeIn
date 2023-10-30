@@ -51,6 +51,11 @@ class RegisterView: UIView {
     lazy var authCodeBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
+    lazy var timerLabel = UILabel().then {
+        $0.text = ""
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.textColor = .BeforeInRed
+    }
     lazy var authCodeButton = UIButton().then {
         $0.setTitle("  인증확인  ", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
@@ -171,6 +176,7 @@ class RegisterView: UIView {
         addSubview(authCodeLabel)
         addSubview(authCodeTextField)
         addSubview(authCodeBottom)
+        addSubview(timerLabel)
         addSubview(authCodeButton)
         
         addSubview(registerNameLabel)
@@ -222,12 +228,16 @@ class RegisterView: UIView {
         authCodeTextField.snp.makeConstraints {
             $0.top.equalTo(authCodeLabel.snp.bottom).offset(17)
             $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-24)
+            $0.right.equalTo(self.snp.right).offset(-150)
         }
         authCodeBottom.snp.makeConstraints {
-            $0.left.right.equalTo(authCodeTextField)
+            $0.left.right.equalTo(self).inset(24)
             $0.bottom.equalTo(authCodeTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
+        }
+        timerLabel.snp.makeConstraints {
+            $0.right.equalTo(authCodeButton.snp.left).offset(-5)
+            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-8)
         }
         authCodeButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
