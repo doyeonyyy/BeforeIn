@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import FirebaseAuth
+import FirebaseFirestore
 
 class NewQuizContentViewController: UIViewController {
     
@@ -252,7 +254,8 @@ class NewQuizContentViewController: UIViewController {
             case 3: currentUser.level = 4
             default: currentUser.level = 5
             }
-            
+            changeUserLevel(currentUser.level)
+                        
             let resultVC = QuizResultViewController()
             resultVC.modalPresentationStyle = .fullScreen
             present(resultVC, animated: true)
@@ -260,6 +263,27 @@ class NewQuizContentViewController: UIViewController {
         else {
             if let parentViewController = parent as? NewQuizViewController {
                 parentViewController.goToNextPage()
+            }
+        }
+    }
+    
+    private func changeUserLevel(_ count: Int) {
+        let userEmail = Auth.auth().currentUser?.email
+        let userCollection = Firestore.firestore().collection("User")
+        userCollection.whereField("email", isEqualTo: userEmail).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("에러: \(error.localizedDescription)")
+            } else if let documents = querySnapshot?.documents, !documents.isEmpty {
+                let userDocument = documents[0]
+                userDocument.reference.updateData(["level": count]) { error in
+                    if let error = error {
+                        print("레벨 변경 실패: \(error.localizedDescription)")
+                    } else {
+                        print("레벨 변경 성공: \(count)")
+                        currentUser.level = count
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
             }
         }
         

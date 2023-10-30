@@ -87,9 +87,16 @@ class LoginViewController: BaseViewController {
                         if let user = user {
                             currentUser = user
                             print("로그인 성공")
-                            let quizIntroVC = QuizIntroViewController()
-                            quizIntroVC.modalPresentationStyle = .fullScreen
-                            self.present(quizIntroVC, animated: true)
+                            if currentUser.level == 0 {
+                                let quizIntroVC = QuizIntroViewController()
+                                quizIntroVC.modalPresentationStyle = .fullScreen
+                                self.present(quizIntroVC, animated: true)
+                            }
+                            else {
+                                let mainVC = TapbarController()
+                                self.transitionToRootView(view: mainVC)
+                            }
+                            
                         }
                     }
                 }

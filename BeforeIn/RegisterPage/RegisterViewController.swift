@@ -151,7 +151,7 @@ class RegisterViewController: BaseViewController {
             } else if !validPw {
                 showAlertOneButton(title: "비밀번호 형식 오류", message: "비밀번호 형식에 맞게 입력해주세요. (대소문자, 특수문자, 숫자 포함 8자이상)", buttonTitle: "확인")
             } else {
-                let newUser = User(email: email, name: name, nickname: nickname, profileImage: "", level: 1, phone: "")
+                let newUser = User(email: email, name: name, nickname: nickname, profileImage: "", level: 0, phone: "")
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.showAlertOneButton(title: "오류", message: e.localizedDescription, buttonTitle: "확인")
