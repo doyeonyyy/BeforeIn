@@ -12,6 +12,12 @@ import Then
 class LoginView: UIView {
     
     // MARK: - UI Properties
+    lazy var beforeInLabel = UILabel().then {
+        $0.text = ""
+        $0.font = UIFont.boldSystemFont(ofSize: 40)
+        $0.textColor = .BeforeInRed
+    }
+    
     lazy var idView = UIView().then {
         $0.layer.borderColor = UIColor.systemGray2.cgColor
         $0.layer.borderWidth = 1
@@ -120,6 +126,7 @@ class LoginView: UIView {
     
     // MARK: - Methods
     func addSubview(){
+        addSubview(beforeInLabel)
         addSubview(idView)
         addSubview(pwView)
         addSubview(loginButton)
@@ -139,6 +146,11 @@ class LoginView: UIView {
     func setUI(){
         idLabel.translatesAutoresizingMaskIntoConstraints = false
         pwLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        beforeInLabel.snp.makeConstraints {
+            $0.bottom.equalTo(idView.snp.top).offset(-80)
+            $0.centerX.equalToSuperview()
+        }
         
         idLabel.snp.makeConstraints { make in
             make.left.equalTo(idView.snp.left).offset(8)
