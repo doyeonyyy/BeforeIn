@@ -52,6 +52,16 @@ class DisplayViewController: UIViewController {
     }
     
     // MARK: - View Life Cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.view.window?.overrideUserInterfaceStyle == .dark {
+            isDarkMode = true
+        } else {
+            isDarkMode = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
