@@ -24,12 +24,7 @@ class SMTPManager {
     
     APP에서 인증번호를 입력해주세요.
     """
-    let mail = Mail(
-      from: fromUser,
-      to: [toUser],
-      subject: "이메일 인증 안내",
-      text: emailContent
-    )
+    let mail = Mail(from: fromUser, to: [toUser], subject: "이메일 인증 안내", text: emailContent)
     hostSMTP.send([mail], completion: { _, fail in
       if let error = (fail.first?.1 as? NSError) {
         print(error)

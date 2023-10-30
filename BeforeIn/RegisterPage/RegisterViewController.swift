@@ -36,6 +36,7 @@ class RegisterViewController: BaseViewController {
     
     // MARK: - Methods
     func setTextField(){
+        registerView.authCodeTextField.delegate = self
         registerView.registerIdTextField.delegate = self
         registerView.registerNameTextField.delegate = self
         registerView.registerNicknameTextField.delegate = self
@@ -54,6 +55,10 @@ class RegisterViewController: BaseViewController {
         registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerIdTextField.addTarget(self, action: #selector(idTextFieldDidChange(_:)), for: .editingChanged)
         registerView.registerNicknameTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    private func isValidAuthCode(_ enteredCode: String) -> Bool {
+        return enteredCode == String(userAuthCode)
     }
     
     
@@ -80,8 +85,6 @@ class RegisterViewController: BaseViewController {
             self.showAlertOneButton(title: "인증 메일 발송", message: "인증 메일을 발송했습니다.", buttonTitle: "확인")
             self.registerView.authIdButton.backgroundColor = .BeforeInRed
             self.registerView.authIdButton.setTitleColor(UIColor.white, for: .normal)
-            // self.checkEmail = true
-            // self.writingComplete()
             // 이메일 인증 코드 전송
             DispatchQueue.global().async {
               self.smtpManager.sendAuth(userEmail: email) { [weak self] (authCode, success) in
@@ -97,8 +100,16 @@ class RegisterViewController: BaseViewController {
       }
     
     @objc func authCodeButtonTapped(){
-    print("버튼눌림")
+        guard let enteredCode = registerView.authCodeTextField.text else { return }
         
+        if isValidAuthCode(enteredCode) {
+            showAlertOneButton(title: "인증 성공", message: "인증 성공했습니다.", buttonTitle: "확인")
+            registerView.authCodeButton.backgroundColor = .BeforeInRed
+            registerView.authCodeButton.setTitleColor(UIColor.white, for: .normal)
+            checkEmail = true
+        } else {
+            showAlertOneButton(title: "인증 실패", message: "인증 실패했습니다. 다시 시도해주세요.", buttonTitle: "확인")
+        }
     }
     
     @objc func checkNicknameButtonTapped() {
@@ -264,18 +275,27 @@ extension RegisterViewController: UITextFieldDelegate {
     
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString input: String) -> Bool {
-        if textField == registerView.registerNameTextField {
-            let stringSet = CharacterSet.letters
+        if textField == registerView.authCodeTextField {
+            let numbersSet = CharacterSet(charactersIn: "0123456789")
             let replaceStringSet = CharacterSet(charactersIn: input)
             
-            if !stringSet.isSuperset(of: replaceStringSet) {
+            if !numbersSet.isSuperset(of: replaceStringSet) {
+                showAlertOneButton(title: "입력 오류", message: "숫자를 입력해주세요.", buttonTitle: "확인")
+                return false
+            }
+        } else if textField == registerView.registerNameTextField {
+            let lettersSet = CharacterSet.letters
+            let replaceStringSet = CharacterSet(charactersIn: input)
+            
+            if !lettersSet.isSuperset(of: replaceStringSet) {
                 showAlertOneButton(title: "입력 오류", message: "문자를 입력해주세요.", buttonTitle: "확인")
                 return false
             }
         }
+        
         return true
     }
-    
+
     
 }
 
