@@ -13,6 +13,8 @@ class RegisterViewController: BaseViewController {
     // MARK: - Properties
     private let registerView = RegisterView()
     private let userManager = UserManager()
+    private var smtpManager = SMTPManager()
+    private var userAuthCode = 0
     private var checkEmail = false
     private var checkNickname = false
     
@@ -42,7 +44,8 @@ class RegisterViewController: BaseViewController {
     }
     
     func setupAddTarget(){
-        registerView.checkIdButton.addTarget(self, action: #selector(checkIdButtonTapped), for: .touchUpInside)
+        registerView.authIdButton.addTarget(self, action: #selector(authIdButtonTapped), for: .touchUpInside)
+        registerView.authCodeButton.addTarget(self, action: #selector(authCodeButtonTapped), for: .touchUpInside)
         registerView.checkNicknameButton.addTarget(self, action: #selector(checkNicknameButtonTapped), for: .touchUpInside)
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
@@ -55,30 +58,47 @@ class RegisterViewController: BaseViewController {
     
     
     // MARK: - @objc
-    // 아이디 중복확인
-    @objc func checkIdButtonTapped() {
-        if let email = registerView.registerIdTextField.text?.trimmingCharacters(in: .whitespaces) {
-            if !email.isEmpty {
-                if email.isValidEmail() {
-                    userManager.findUser(email: email) { isUsed in
-                        if isUsed != nil {
-                            self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
-                            self.registerView.checkIdButton.backgroundColor = .systemGray6
-                            self.registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
-                            self.checkEmail = false
-                        } else {
-                            self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 아이디입니다.", buttonTitle: "확인")
-                            self.registerView.checkIdButton.backgroundColor = .BeforeInRed
-                            self.registerView.checkIdButton.setTitleColor(UIColor.white, for: .normal)
-                            self.checkEmail = true
-                            self.writingComplete()
-                        }
-                    }
-                } else {
-                    showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
-                }
-            }
+    @objc func authIdButtonTapped() {
+        guard let email = registerView.registerIdTextField.text else { return }
+        // 이메일 유효성 검사
+        if email.isEmpty {
+          showAlertOneButton(title: "이메일 형식 오류", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
+          return
+        } else if !email.isValidEmail() {
+          showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
+          return
         }
+        // 이메일 중복 확인
+        userManager.findUser(email: email) { [weak self] isUsed in
+          guard let self = self else { return }
+          if isUsed != nil {
+            self.showAlertOneButton(title: "사용 불가능", message: "이미 사용중인 아이디입니다.", buttonTitle: "확인")
+            self.registerView.authIdButton.backgroundColor = .systemGray6
+            self.registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
+            self.checkEmail = false
+          } else {
+            self.showAlertOneButton(title: "인증 메일 발송", message: "인증 메일을 발송했습니다.", buttonTitle: "확인")
+            self.registerView.authIdButton.backgroundColor = .BeforeInRed
+            self.registerView.authIdButton.setTitleColor(UIColor.white, for: .normal)
+            // self.checkEmail = true
+            // self.writingComplete()
+            // 이메일 인증 코드 전송
+            DispatchQueue.global().async {
+              self.smtpManager.sendAuth(userEmail: email) { [weak self] (authCode, success) in
+                guard let self = self else { return }
+                  
+                if authCode >= 10000 && authCode <= 99999 && success {
+                  userAuthCode = authCode
+                }
+              }
+            }
+          }
+        }
+      }
+    
+    @objc func authCodeButtonTapped(){
+    print("버튼눌림")
+        
     }
     
     @objc func checkNicknameButtonTapped() {
@@ -188,8 +208,8 @@ class RegisterViewController: BaseViewController {
     
     
     @objc func idTextFieldDidChange(_ textField: UITextField) {
-        registerView.checkIdButton.backgroundColor = .systemGray6
-        registerView.checkIdButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authIdButton.backgroundColor = .systemGray6
+        registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
         checkEmail = false
     }
     
@@ -227,7 +247,7 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == registerView.registerCheckTextField {
             UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -190
+                self.view.frame.origin.y = -230
             }
         } else {
             UIView.animate(withDuration: 0.3) {

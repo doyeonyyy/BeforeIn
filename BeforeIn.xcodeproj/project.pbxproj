@@ -89,6 +89,8 @@
 		6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091A2AE235A500934690 /* CommunityPageView.swift */; };
 		6736091D2AE2941F00934690 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091C2AE2941F00934690 /* CommentCell.swift */; };
 		673CD3502ADF7CD00090C051 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CD34F2ADF7CD00090C051 /* UserManager.swift */; };
+		674452462AEFCA5C00AED764 /* SMTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674452452AEFCA5C00AED764 /* SMTPManager.swift */; };
+		674452492AEFCB1000AED764 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 674452482AEFCB1000AED764 /* SwiftSMTP */; };
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -173,6 +175,7 @@
 		6736091A2AE235A500934690 /* CommunityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageView.swift; sourceTree = "<group>"; };
 		6736091C2AE2941F00934690 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		673CD34F2ADF7CD00090C051 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		674452452AEFCA5C00AED764 /* SMTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTPManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 				159B791A2ADE6DE600FE210E /* FirebaseFirestoreSwift in Frameworks */,
 				159B79322ADE6DE600FE210E /* FirebaseStorageCombine-Community in Frameworks */,
 				159B79122ADE6DE600FE210E /* FirebaseDatabaseSwift in Frameworks */,
+				674452492AEFCB1000AED764 /* SwiftSMTP in Frameworks */,
 				159B792C2ADE6DE600FE210E /* FirebaseRemoteConfig in Frameworks */,
 				159B79002ADE6DE600FE210E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				159B790E2ADE6DE600FE210E /* FirebaseCrashlytics in Frameworks */,
@@ -457,6 +461,7 @@
 				673CD34F2ADF7CD00090C051 /* UserManager.swift */,
 				1543EED12AE64E6500AD587B /* Post.swift */,
 				1543EED32AE64E9300AD587B /* Comment.swift */,
+				674452452AEFCA5C00AED764 /* SMTPManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -587,6 +592,7 @@
 				159B792D2ADE6DE600FE210E /* FirebaseRemoteConfigSwift */,
 				159B792F2ADE6DE600FE210E /* FirebaseStorage */,
 				159B79312ADE6DE600FE210E /* FirebaseStorageCombine-Community */,
+				674452482AEFCB1000AED764 /* SwiftSMTP */,
 			);
 			productName = BeforeIn;
 			productReference = 1596DC9F2AD6B18A00E6D388 /* BeforeIn.app */;
@@ -621,6 +627,7 @@
 				1596DCD52AD6B32900E6D388 /* XCRemoteSwiftPackageReference "Then" */,
 				1596DCD82AD6B33700E6D388 /* XCRemoteSwiftPackageReference "Gifu" */,
 				159B78C62ADE10DD00FE210E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				674452472AEFCB1000AED764 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 			);
 			productRefGroup = 1596DCA02AD6B18A00E6D388 /* Products */;
 			projectDirPath = "";
@@ -691,6 +698,7 @@
 				67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */,
 				E7EFDA242AD8FC49000963C8 /* SearchView.swift in Sources */,
 				E7B26FEA2AED3CF50055930E /* TermsAndPolicyViewController.swift in Sources */,
+				674452462AEFCA5C00AED764 /* SMTPManager.swift in Sources */,
 				B3142AD92AE120CB00B54BB5 /* CommunityViewController.swift in Sources */,
 				675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */,
 				B397E3082ADCCA1D00F3363F /* DisplayViewController.swift in Sources */,
@@ -972,6 +980,14 @@
 				minimumVersion = 10.16.0;
 			};
 		};
+		674452472AEFCB1000AED764 /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/Swift-SMTP";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1122,6 +1138,11 @@
 		159B79312ADE6DE600FE210E /* FirebaseStorageCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		674452482AEFCB1000AED764 /* SwiftSMTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 674452472AEFCB1000AED764 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
+			productName = SwiftSMTP;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

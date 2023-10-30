@@ -28,8 +28,31 @@ class RegisterView: UIView {
     lazy var registerIdBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
-    lazy var checkIdButton = UIButton().then {
-        $0.setTitle("  중복확인  ", for: .normal)
+    lazy var authIdButton = UIButton().then {
+        $0.setTitle("  인증메일전송  ", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        $0.backgroundColor = .systemGray6
+        $0.layer.cornerRadius = 15
+        $0.layer.masksToBounds = true
+    }
+    
+    lazy var authCodeLabel = UILabel().then {
+        $0.text = "인증번호"
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
+    }
+    lazy var authCodeTextField = UITextField().then {
+        $0.placeholder = "받으신 인증번호를 입력하세요."
+        $0.autocapitalizationType = .none
+        $0.autocorrectionType = .no
+        $0.spellCheckingType = .no
+        $0.clearsOnBeginEditing = false
+    }
+    lazy var authCodeBottom = UIView().then {
+        $0.backgroundColor = .systemGray2
+    }
+    lazy var authCodeButton = UIButton().then {
+        $0.setTitle("  인증확인  ", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         $0.backgroundColor = .systemGray6
@@ -123,7 +146,6 @@ class RegisterView: UIView {
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 8
-        // $0.isEnabled = false
     }
     
     // MARK: - Life Cycle
@@ -144,7 +166,12 @@ class RegisterView: UIView {
         addSubview(registerIdLabel)
         addSubview(registerIdTextField)
         addSubview(registerIdBottom)
-        addSubview(checkIdButton)
+        addSubview(authIdButton)
+        
+        addSubview(authCodeLabel)
+        addSubview(authCodeTextField)
+        addSubview(authCodeBottom)
+        addSubview(authCodeButton)
         
         addSubview(registerNameLabel)
         addSubview(registerNameTextField)
@@ -170,7 +197,7 @@ class RegisterView: UIView {
     
     func setUI(){
         registerIdLabel.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(125)
+            $0.top.equalTo(self.snp.top).offset(120)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerIdTextField.snp.makeConstraints {
@@ -183,13 +210,32 @@ class RegisterView: UIView {
             $0.bottom.equalTo(registerIdTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
-        checkIdButton.snp.makeConstraints{
+        authIdButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
             $0.bottom.equalTo(registerIdBottom.snp.top).offset(-5)
         }
         
+        authCodeLabel.snp.makeConstraints {
+            $0.top.equalTo(registerIdBottom.snp.bottom).offset(30)
+            $0.left.equalTo(self.snp.left).offset(24)
+        }
+        authCodeTextField.snp.makeConstraints {
+            $0.top.equalTo(authCodeLabel.snp.bottom).offset(17)
+            $0.left.equalTo(self.snp.left).offset(24)
+            $0.right.equalTo(self.snp.right).offset(-24)
+        }
+        authCodeBottom.snp.makeConstraints {
+            $0.left.right.equalTo(authCodeTextField)
+            $0.bottom.equalTo(authCodeTextField.snp.bottom).offset(4)
+            $0.height.equalTo(1)
+        }
+        authCodeButton.snp.makeConstraints{
+            $0.right.equalTo(self.snp.right).offset(-25)
+            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-5)
+        }
+        
         registerNameLabel.snp.makeConstraints {
-            $0.top.equalTo(registerIdBottom.snp.bottom).offset(40)
+            $0.top.equalTo(authCodeBottom.snp.bottom).offset(30)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerNameTextField.snp.makeConstraints {
@@ -204,7 +250,7 @@ class RegisterView: UIView {
         }
         
         registerNicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(registerNameBottom.snp.bottom).offset(40)
+            $0.top.equalTo(registerNameBottom.snp.bottom).offset(30)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerNicknameTextField.snp.makeConstraints {
@@ -223,7 +269,7 @@ class RegisterView: UIView {
         }
         
         registerPwLabel.snp.makeConstraints {
-            $0.top.equalTo(registerNicknameBottom.snp.bottom).offset(40)
+            $0.top.equalTo(registerNicknameBottom.snp.bottom).offset(30)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerPwTextField.snp.makeConstraints {
@@ -242,7 +288,7 @@ class RegisterView: UIView {
         }
         
         registerCheckLabel.snp.makeConstraints {
-            $0.top.equalTo(registerPwBottom.snp.bottom).offset(40)
+            $0.top.equalTo(registerPwBottom.snp.bottom).offset(30)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerCheckTextField.snp.makeConstraints {
