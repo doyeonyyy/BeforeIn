@@ -66,6 +66,11 @@ class MainView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     
+    let randomButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "arrow.counterclockwise"), for: .normal)
+        $0.tintColor = .black
+    }
+    
     private let etiquetteView = UIView().then{
         $0.backgroundColor = .systemBackground
         $0.layer.cornerRadius = 16
@@ -173,6 +178,7 @@ class MainView: UIView {
         contentView.addSubview(quizButton)
         contentView.addSubview(divider)
         contentView.addSubview(etiquetteLabel)
+        contentView.addSubview(randomButton)
         contentView.addSubview(etiquetteView)
         etiquetteView.addSubview(quotes1)
         etiquetteView.addSubview(quotes2)
@@ -225,11 +231,15 @@ class MainView: UIView {
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalTo(1)
-            make.top.equalTo(quizButton.snp.bottom).offset(24)
+            make.top.equalTo(quizButton.snp.bottom).offset(20)
         }
         etiquetteLabel.snp.makeConstraints { make in
-            make.top.equalTo(divider.snp.bottom).offset(24)
+            make.top.equalTo(divider.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(26)
+        }
+        randomButton.snp.makeConstraints { make in
+            make.top.equalTo(etiquetteLabel.snp.top)
+            make.leading.equalTo(etiquetteLabel.snp.trailing).offset(5)
         }
         etiquetteView.snp.makeConstraints { make in
             make.top.equalTo(etiquetteLabel.snp.bottom).offset(15)
@@ -238,22 +248,20 @@ class MainView: UIView {
             make.height.equalTo(116)
         }
         quotes1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(13)
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(3)
         }
         quotes2.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(13)
-            make.bottom.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(3)
+            make.bottom.equalToSuperview().inset(10)
         }
         etiquetteViewContent.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(37)
-            make.bottom.equalToSuperview().inset(35)
-            make.width.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().inset(10)
             make.trailing.leading.equalToSuperview().inset(16)
-            make.height.equalTo(44)
         }
         recentlyEtiquette.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteView.snp.bottom).offset(24)
+            make.top.equalTo(etiquetteView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
         }
         recentlyEtiquetteCollectionView.snp.makeConstraints { make in
@@ -263,7 +271,7 @@ class MainView: UIView {
             make.height.equalTo(100)
         }
         recommendLabel.snp.makeConstraints { make in
-            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(24)
+            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(24)
         }
         recommendEtiquetteCollectionView.snp.makeConstraints { make in

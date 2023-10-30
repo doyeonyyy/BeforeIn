@@ -21,6 +21,7 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTitle()
         setTextField()
         setupAddTarget()
     }
@@ -31,6 +32,18 @@ class LoginViewController: BaseViewController {
     
     
     // MARK: - Methods
+    func setTitle(){
+        let titleText = " 비포인 "
+        var characterIndex = 0.0
+        for title in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.1 * Double(characterIndex), repeats:
+                                    false) { timer in
+                self.loginView.beforeInLabel.text?.append(title)
+            }
+            characterIndex += 1
+        }
+    }
+    
     func setTextField(){
         loginView.idTextField.delegate = self
         loginView.pwTextField.delegate = self
@@ -74,8 +87,9 @@ class LoginViewController: BaseViewController {
                         if let user = user {
                             currentUser = user
                             print("로그인 성공")
-                            let tapBarController = TapbarController()
-                            self.transitionToRootView(view: tapBarController)
+                            let quizIntroVC = QuizIntroViewController()
+                            quizIntroVC.modalPresentationStyle = .fullScreen
+                            self.present(quizIntroVC, animated: true)
                         }
                     }
                 }
@@ -103,7 +117,7 @@ class LoginViewController: BaseViewController {
         alertController.addAction(findAction)
         present(alertController, animated: true, completion: nil)
     }
-
+    
     func findIdByNickname(_ nickname: String) {
         userManager.findNickname(nickname: nickname) { user in
             let alertTitle: String
@@ -132,16 +146,16 @@ class LoginViewController: BaseViewController {
         }
         return maskedEmail
     }
-
+    
     @objc func findPwButtonTapped() {
         print("비밀번호찾기 버튼이 눌렸습니다")
-//        Auth.auth().sendPasswordReset(withEmail: loginView.idTextField.text!) { error in
-//            if let error = error {
-//                print("error: \(error.localizedDescription)")
-//            } else {
-//
-//            }
-//        }
+        //        Auth.auth().sendPasswordReset(withEmail: loginView.idTextField.text!) { error in
+        //            if let error = error {
+        //                print("error: \(error.localizedDescription)")
+        //            } else {
+        //
+        //            }
+        //        }
     }
     
     @objc func registerButtonTapped() {

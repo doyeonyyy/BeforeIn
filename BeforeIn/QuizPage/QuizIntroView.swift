@@ -26,6 +26,7 @@ class QuizIntroView: UIView {
             updateView()
         }
     }
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,7 +104,7 @@ class QuizIntroView: UIView {
             make.bottom.equalToSuperview().offset(-80)
             make.leading.equalTo(safeAreaLayoutGuide).offset(32)
         }
-        startButton.setTitle("Get Start!!", for: .normal)
+        startButton.setTitle("퀴즈풀기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = UIColor.BeforeInRed
         startButton.layer.cornerRadius = 25

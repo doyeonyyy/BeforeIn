@@ -47,6 +47,7 @@ class ProfileView: UIView {
     
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "profilePlaceholder")
         imageView.backgroundColor = .systemGray6
         imageView.layer.cornerRadius = 50
         imageView.translatesAutoresizingMaskIntoConstraints = false
