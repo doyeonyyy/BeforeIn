@@ -53,10 +53,10 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        registerView.registerPwTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
-        registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerIdTextField.addTarget(self, action: #selector(idTextFieldDidChange(_:)), for: .editingChanged)
         registerView.registerNicknameTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
+        registerView.registerPwTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
+        registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
     }
     
     func isValidAuthCode(_ enteredCode: String) -> Bool {
@@ -87,10 +87,10 @@ class RegisterViewController: BaseViewController {
     @objc func authIdButtonTapped() {
         guard let email = registerView.registerIdTextField.text else { return }
         if email.isEmpty {
-            showAlertOneButton(title: "이메일 형식 오류", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
+            showAlertOneButton(title: "이메일 오류", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             return
         } else if !email.isValidEmail() {
-            showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
+            showAlertOneButton(title: "이메일 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
             return
         }
         

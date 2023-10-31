@@ -16,15 +16,15 @@ class SMTPManager {
     let toUser = Mail.User(email: userEmail)
     let verificationCode = String(code)
     let emailContent = """
-    [BeforeIn]
+    [비포인]
     
-    E-MAIL VERIFICATION
+    비포인 인증 메일
     
-    Certification Number : [\(verificationCode)]
+    인증번호 : [\(verificationCode)]
     
     APP에서 인증번호를 입력해주세요.
     """
-    let mail = Mail(from: fromUser, to: [toUser], subject: "이메일 인증 안내", text: emailContent)
+    let mail = Mail(from: fromUser, to: [toUser], subject: "비포인 인증 안내", text: emailContent)
     hostSMTP.send([mail], completion: { _, fail in
       if let error = (fail.first?.1 as? NSError) {
         print(error)
