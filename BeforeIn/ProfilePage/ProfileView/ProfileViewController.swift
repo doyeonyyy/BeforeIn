@@ -18,7 +18,7 @@ class ProfileViewController: BaseViewController {
         "비밀번호 변경",
         "로그아웃",
         "회원탈퇴",
-        "약관 및 정책",
+        "앱 정보",
     ]
     
     // MARK: - Life Cycle
@@ -112,8 +112,8 @@ extension ProfileViewController: UITableViewDelegate {
             let userAccountDeletionVC = UserAccountDeletionViewController()
             self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
         } else if indexPath.row == 4 {
-            let termsAndPolicyVC = TermsAndPolicyViewController()
-            self.navigationController?.pushViewController(termsAndPolicyVC, animated: true)
+            let appInfoVC = AppInfoViewController()
+            self.navigationController?.pushViewController(appInfoVC, animated: true)
         }
     }
     
