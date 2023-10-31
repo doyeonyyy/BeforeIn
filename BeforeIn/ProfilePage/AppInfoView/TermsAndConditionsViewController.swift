@@ -6,25 +6,45 @@
 //
 
 import UIKit
+import SnapKit
 import WebKit
 
-class TermsAndConditionsViewController: UIViewController {
-    var webView: WKWebView!
+class TermsAndConditionsViewController: UIViewController, WKNavigationDelegate {
+    // MARK: - Properties
+    private let webView = WKWebView().then {
+        $0.backgroundColor = .white
+    }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        webView = WKWebView()
+        view.backgroundColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backTapped))
+        
         webView.navigationDelegate = self
-        view = webView
    
         if let url = URL(string: "https://chalk-fir-f36.notion.site/e052b9126c154a2f8cee6e6428eefc46?pvs=4") {
             let request = URLRequest(url: url)
             webView.load(request)
         }
+        configureUI()
     }
-}
-
-extension TermsAndConditionsViewController: WKNavigationDelegate {
-
+    
+    // MARK: - Methods
+    private func configureUI() {
+        // addSubView
+        view.addSubview(webView)
+        
+        // makeConstraints
+        webView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    @objc private func backTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
 }
