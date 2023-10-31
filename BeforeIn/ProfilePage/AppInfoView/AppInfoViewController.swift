@@ -7,11 +7,12 @@
 
 import UIKit
 import SnapKit
+import MessageUI
 
 class AppInfoViewController: BaseViewController {
     
     // MARK: - Properties
-    let AppInfoCellList = ["앱 버전", "공지사항", "서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
+    let AppInfoCellList = ["앱 버전 1.0", "공지사항", "서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -55,7 +56,7 @@ class AppInfoViewController: BaseViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AppInfoCell")
     }
-
+    
     
     
 }
@@ -87,15 +88,17 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 1 {
-           let NoticeVC = NoticeViewController()
-           self.navigationController?.pushViewController(NoticeVC, animated: true)
-       } else if indexPath.row == 2 {
-           let TermsAndConditionsVC = TermsAndConditionsViewController()
-           self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
-       } else if indexPath.row == 3 {
-           let PrivacyPolicyVC = PrivacyPolicyViewController()
-           self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
-       }
+            let NoticeVC = NoticeViewController()
+            self.navigationController?.pushViewController(NoticeVC, animated: true)
+        } else if indexPath.row == 2 {
+            let TermsAndConditionsVC = TermsAndConditionsViewController()
+            self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
+        } else if indexPath.row == 3 {
+            let PrivacyPolicyVC = PrivacyPolicyViewController()
+            self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
+        } else if indexPath.row == 4 {
+            setMail()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,4 +106,59 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
+// MARK: - MFMailComposeViewControllerDelegat
+extension AppInfoViewController: MFMailComposeViewControllerDelegate {
+    
+    func setMail() {
+        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
+        
+        if MFMailComposeViewController.canSendMail() {
+            
+            let compseVC = MFMailComposeViewController()
+            compseVC.mailComposeDelegate = self
+            
+            compseVC.setToRecipients([Secret.email])
+            compseVC.setSubject("비포인 오류 및 문의사항")
+            compseVC.setMessageBody("""
+                                       앱을 사용하면서 발생한 오류 및 문의사항을 입력해주세요.
+                                       
+                                       App Version: \(appVersion)
+                                       Device: \(UIDevice.iPhoneModel)
+                                       OS: \(UIDevice.iOSVersion)
+                                       
+                                       사용자 아이디: "사용중이신 아이디를 입력해주세요."
+                                       
+                                       오류 및 문의사항: "오류 및 문의사항을 입력해주세요."
+                                       
+                                       """, isHTML: false)
+            
+            self.present(compseVC, animated: true, completion: nil)
+            
+        }
+        else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func showSendMailErrorAlert() {
+        let message = """
+        이메일 설정을 확인하고 다시 시도해주세요.
+        아이폰 설정 > Mail > 계정 > 계정추가
+        """
+        
+        let sendMailErrorAlert = UIAlertController(title: "메일 전송 실패", message: message, preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { (action) in
+        }
+        
+        sendMailErrorAlert.addAction(confirmAction)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    
+    @objc func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+}

@@ -8,10 +8,8 @@
 import UIKit
 
 extension UIDevice {
-    // iOS Version
     static let iOSVersion = "\(current.systemName) \(current.systemVersion)"
     
-    // iPhone Model
     private static var hardwareString: String {
         var systemInfo = utsname()
         uname(&systemInfo)
