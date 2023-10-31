@@ -96,6 +96,7 @@
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
 		67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */; };
+		67DAFBFD2AF089FC00803A84 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFBFC2AF089FC00803A84 /* Secret.swift */; };
 		67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */; };
 		67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4862AE52F6800594C7C /* UIButton.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
@@ -180,6 +181,7 @@
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
+		67DAFBFC2AF089FC00803A84 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewController.swift; sourceTree = "<group>"; };
 		67DBB4862AE52F6800594C7C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
+				67DAFBFC2AF089FC00803A84 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -690,6 +693,7 @@
 				1586ECA72AE404F500055040 /* PostCell.swift in Sources */,
 				1543EEDE2AE7464200AD587B /* ModifyView.swift in Sources */,
 				1596DCA32AD6B18A00E6D388 /* AppDelegate.swift in Sources */,
+				67DAFBFD2AF089FC00803A84 /* Secret.swift in Sources */,
 				673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */,
 				1596DCC92AD6B2BD00E6D388 /* SearchViewController.swift in Sources */,
 				1596DCC62AD6B2A300E6D388 /* QuizViewController.swift in Sources */,

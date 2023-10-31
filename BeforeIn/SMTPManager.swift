@@ -9,14 +9,14 @@ import Foundation
 import SwiftSMTP
 
 class SMTPManager {
-  private let hostSMTP = SMTP(hostname: "smtp.naver.com", email: "beforein@naver.com", password: "passW0rd!")
+    private let hostSMTP = SMTP(hostname: "smtp.naver.com", email: Secret.email, password: Secret.password)
   func sendAuth(userEmail: String, completion: @escaping (Int, Bool) -> Void) {
     let code = Int.random(in: 10000...99999)
-    let fromUser = Mail.User(email: "beforein@naver.com")
+    let fromUser = Mail.User(email: Secret.email)
     let toUser = Mail.User(email: userEmail)
     let verificationCode = String(code)
     let emailContent = """
-        [BeforeIn]
+    [BeforeIn]
     
     E-MAIL VERIFICATION
     

@@ -15,7 +15,7 @@ class RegisterViewController: BaseViewController {
     private let userManager = UserManager()
     private var smtpManager = SMTPManager()
     private var userAuthCode = 0
-    private var seconds = 11 //181로 바꾸기
+    private var seconds = 181
     private var timer: Timer?
     private var checkEmail = false
     private var checkNickname = false
@@ -85,7 +85,6 @@ class RegisterViewController: BaseViewController {
     // MARK: - @objc
     @objc func authIdButtonTapped() {
         guard let email = registerView.registerIdTextField.text else { return }
-        // 이메일 유효성 검사
         if email.isEmpty {
             showAlertOneButton(title: "이메일 형식 오류", message: "이메일 주소를 입력하세요.", buttonTitle: "확인")
             return
@@ -93,7 +92,7 @@ class RegisterViewController: BaseViewController {
             showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
             return
         }
-        // 이메일 중복 확인
+
         userManager.findUser(email: email) { [weak self] isUsed in
             guard let self = self else { return }
             if isUsed != nil {
@@ -104,13 +103,13 @@ class RegisterViewController: BaseViewController {
             } else {
                 if let timer = self.timer, timer.isValid {
                     timer.invalidate()
-                    self.seconds = 11 // 181로 변경
+                    self.seconds = 181
                 }
                 self.showAlertOneButton(title: "인증 메일 발송", message: "인증 메일을 발송했습니다.", buttonTitle: "확인")
                 { [weak self] in self?.setTimer() }
                 self.registerView.authIdButton.backgroundColor = .BeforeInRed
                 self.registerView.authIdButton.setTitleColor(UIColor.white, for: .normal)
-                // 이메일 인증 코드 전송
+
                 DispatchQueue.global().async {
                     self.smtpManager.sendAuth(userEmail: email) { [weak self] (authCode, success) in
                         guard let self = self else { return }
