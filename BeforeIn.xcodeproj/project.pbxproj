@@ -97,6 +97,8 @@
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
 		67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */; };
 		67DAFBFF2AF08FF200803A84 /* PasswordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */; };
+		67DAFC2A2AF0C18700803A84 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFC292AF0C18700803A84 /* Secret.swift */; };
+		67DAFC2C2AF0C4F700803A84 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */; };
 		67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */; };
 		67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4862AE52F6800594C7C /* UIButton.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
@@ -185,6 +187,8 @@
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
 		67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFindViewController.swift; sourceTree = "<group>"; };
+		67DAFC292AF0C18700803A84 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewController.swift; sourceTree = "<group>"; };
 		67DBB4862AE52F6800594C7C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
+				67DAFC292AF0C18700803A84 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -376,6 +381,7 @@
 				1586ECA82AE40FD100055040 /* Date.swift */,
 				67FFB4FE2AE0D2F6008108FA /* String.swift */,
 				67DBB4862AE52F6800594C7C /* UIButton.swift */,
+				67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */,
 				E7B26FD52AEA92900055930E /* UIFont.swift */,
 				E7B26FC02AEA8E200055930E /* Fonts */,
 			);
@@ -746,9 +752,11 @@
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
 				159B78C52ADD57A700FE210E /* Quiz.swift in Sources */,
+				67DAFC2A2AF0C18700803A84 /* Secret.swift in Sources */,
 				67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */,
 				1543EED62AE68AD700AD587B /* CommunityPageViewModel.swift in Sources */,
 				63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */,
+				67DAFC2C2AF0C4F700803A84 /* UIDevice.swift in Sources */,
 				1543EED42AE64E9300AD587B /* Comment.swift in Sources */,
 				1543EEDB2AE693AE00AD587B /* ModifyViewController.swift in Sources */,
 				67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */,
