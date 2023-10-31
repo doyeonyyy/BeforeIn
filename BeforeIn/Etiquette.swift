@@ -11,7 +11,7 @@ import UIKit
 struct Etiquette {
     let category: String
     let place: String
-    let content: [String: [EtiquetteContent]] //content = ["good","bad"]
+    var content: [String: [EtiquetteContent]] //content = ["good","bad"]
     let backgroundImage: UIImage
     let mainImage: UIImage
     let description: String
@@ -20,7 +20,16 @@ struct Etiquette {
 var etiquetteList: [Etiquette] = []
 
 struct EtiquetteContent {
-    let mainContent: String
+    var mainContent: String
     let subContent: String
-    let contentImage: UIImage
+    var contentImage: UIImage?
+    let contentImageLink: String
+    
+    init(mainContent: String, subContent: String, contentImage: UIImage?, contentImageLink: String) {
+        self.mainContent = mainContent
+        self.subContent = subContent
+        self.contentImage = contentImage
+        self.contentImageLink = contentImageLink
+    }
+
 }

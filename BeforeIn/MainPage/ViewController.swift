@@ -26,7 +26,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
-        //fetchEtiquetteContent()
+        fetchEtiquetteContent()
     }
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-       // fetchEtiquetteList()
+//        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
         mainView.randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
@@ -134,20 +134,10 @@ class MainViewController: BaseViewController {
                     let imageReference = storage.reference(forURL: imageLink)
                     
                     dispatchGroup.enter() // Enter the dispatch group
+                    let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: nil, contentImageLink: imageLink)
+                    good.append(etiquetteContent)
+                    dispatchGroup.leave() // Leave the dispatch group
                     
-                    imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                        if let error = error {
-                            // Handle error
-                            print("컨텐츠 이미지 다운 실패")
-                        } else {
-                            // Data for "images/island.jpg" is returned
-                            let image = UIImage(data: data!)
-                            print("컨텐츠 이미지 다운 완료")
-                            let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: image!)
-                            good.append(etiquetteContent)
-                        }
-                        dispatchGroup.leave() // Leave the dispatch group
-                    }
                 }
                 
                 for content in badContent {
@@ -158,19 +148,11 @@ class MainViewController: BaseViewController {
                     
                     dispatchGroup.enter() // Enter the dispatch group
                     
-                    imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                        if let error = error {
-                            // Handle error
-                            print("컨텐츠 이미지 다운 실패")
-                        } else {
-                            // Data for "images/island.jpg" is returned
-                            let image = UIImage(data: data!)
-                            print("컨텐츠 이미지 다운 완료")
-                            let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: image!)
-                            bad.append(etiquetteContent)
-                        }
-                        dispatchGroup.leave() // Leave the dispatch group
-                    }
+                    let etiquetteContent = EtiquetteContent(mainContent: mainContent, subContent: subContent, contentImage: nil, contentImageLink: imageLink)
+                    bad.append(etiquetteContent)
+                    
+                    dispatchGroup.leave() // Leave the dispatch group
+                    //
                 }
                 
                 let gsLink = etiquette["gsReference"] as! String
