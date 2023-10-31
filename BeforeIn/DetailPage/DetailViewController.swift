@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class DetailViewController: BaseViewController {
     
@@ -23,6 +24,7 @@ class DetailViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         setUI()
+        loadContentImages()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,5 +180,56 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             let centerCellIndex = Int(collectionViewCenterX / scrollView.frame.width)
             detailView.thirdDetailView.etiquetteCountLabel.text = String(centerCellIndex + 1)
         }
+    }
+    
+    private func loadContentImages() {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        guard let goodContent = selectedEtiquette?.content["good"] else {
+            return
+        }
+        guard let badContent = selectedEtiquette?.content["bad"] else {
+            return
+        }
+        let dispatchGroup = DispatchGroup()
+        for var (index, content) in goodContent.enumerated(){
+            let imageLink = content.contentImageLink
+            let imageReference = storage.reference(forURL: imageLink)
+            dispatchGroup.enter()
+            imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("컨텐츠 이미지 다운 실패")
+                } else {
+                    let image = UIImage(data: data!)
+                    print("\(content.mainContent) 이미지 다운 완료")
+                    self.selectedEtiquette?.content["good"]?[index].contentImage = image
+                    
+                }
+                dispatchGroup.leave()
+            }
+        }
+        for var (index, content) in badContent.enumerated(){
+            let imageLink = content.contentImageLink
+            let imageReference = storage.reference(forURL: imageLink)
+            dispatchGroup.enter()
+            imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("컨텐츠 이미지 다운 실패")
+                } else {
+                    let image = UIImage(data: data!)
+                    print("\(content.mainContent) 이미지 다운 완료")
+                    self.selectedEtiquette?.content["bad"]?[index].contentImage = image
+                    
+                }
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            print("컬렉션뷰 리로드")
+            self.detailView.secondDetailView.dontsCollectionView.reloadData()
+            self.detailView.thirdDetailView.dosCollectionView.reloadData()
+        }
+        
     }
 }
