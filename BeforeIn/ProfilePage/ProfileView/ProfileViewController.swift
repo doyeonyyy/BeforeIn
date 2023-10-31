@@ -181,6 +181,7 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
             guard let self = self, let image = image as? UIImage, error == nil else { return }
             userManager.uploadImage(image)
             self.updateProfileImage(image)
+            showAlertOneButton(title: "프로필 이미지 변경", message: "프로필 이미지가 변경되었습니다.", buttonTitle: "확인")
         }
     }
     
