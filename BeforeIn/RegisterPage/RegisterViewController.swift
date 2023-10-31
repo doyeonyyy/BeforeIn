@@ -70,7 +70,7 @@ class RegisterViewController: BaseViewController {
             let sec = self.seconds % 60
             
             if self.seconds > 0 {
-                self.registerView.timerLabel.text = "\(min):\(sec)"
+                self.registerView.timerLabel.text = String(format: "%d:%02d", min, sec)
             } else {
                 self.registerView.timerLabel.text = "시간만료"
                 self.registerView.authCodeButton.backgroundColor = .systemGray6
@@ -79,6 +79,7 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
+    
     
     
     
@@ -92,7 +93,7 @@ class RegisterViewController: BaseViewController {
             showAlertOneButton(title: "이메일 형식 오류", message: "올바른 이메일 주소를 입력하세요.", buttonTitle: "확인")
             return
         }
-
+        
         userManager.findUser(email: email) { [weak self] isUsed in
             guard let self = self else { return }
             if isUsed != nil {
@@ -106,10 +107,13 @@ class RegisterViewController: BaseViewController {
                     self.seconds = 181
                 }
                 self.showAlertOneButton(title: "인증 메일 발송", message: "인증 메일을 발송했습니다.", buttonTitle: "확인")
-                { [weak self] in self?.setTimer() }
+                { [weak self] in
+                    self?.setTimer()
+                    self?.registerView.timerLabel.isHidden = false
+                }
                 self.registerView.authIdButton.backgroundColor = .BeforeInRed
                 self.registerView.authIdButton.setTitleColor(UIColor.white, for: .normal)
-
+                
                 DispatchQueue.global().async {
                     self.smtpManager.sendAuth(userEmail: email) { [weak self] (authCode, success) in
                         guard let self = self else { return }
