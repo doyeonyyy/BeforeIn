@@ -37,6 +37,7 @@ class PasswordEditView: UIView {
         $0.font = UIFont.systemFont(ofSize: 18)
     }
     let newPasswordTextField = UITextField().then {
+        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -57,6 +58,7 @@ class PasswordEditView: UIView {
         $0.font = UIFont.systemFont(ofSize: 18)
     }
     let checkPasswordTextField = UITextField().then {
+        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no

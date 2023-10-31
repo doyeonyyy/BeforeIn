@@ -155,14 +155,8 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func findPwButtonTapped() {
-        print("비밀번호찾기 버튼이 눌렸습니다")
-        //        Auth.auth().sendPasswordReset(withEmail: loginView.idTextField.text!) { error in
-        //            if let error = error {
-        //                print("error: \(error.localizedDescription)")
-        //            } else {
-        //
-        //            }
-        //        }
+        let passwordFindVC = PasswordFindViewController()
+        self.navigationController?.pushViewController(passwordFindVC, animated: true)
     }
     
     @objc func registerButtonTapped() {
