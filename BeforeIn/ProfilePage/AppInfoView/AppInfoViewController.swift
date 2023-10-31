@@ -86,13 +86,13 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
            let NoticeVC = NoticeViewController()
            self.navigationController?.pushViewController(NoticeVC, animated: true)
-       } else if indexPath.row == 1 {
+       } else if indexPath.row == 2 {
            let TermsAndConditionsVC = TermsAndConditionsViewController()
            self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
-       } else if indexPath.row == 2 {
+       } else if indexPath.row == 3 {
            let PrivacyPolicyVC = PrivacyPolicyViewController()
            self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
        }
