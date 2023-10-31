@@ -1,5 +1,5 @@
 //
-//  TermsAndPolicyViewController.swift
+//  AppInfoViewController.swift
 //  BeforeIn
 //
 //  Created by Sanghun K. on 10/28/23.
@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-class TermsAndPolicyViewController: UIViewController {
+class AppInfoViewController: UIViewController {
     
     // MARK: - Properties
-    let TermsAndPolicyCellList = ["서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
+    let AppInfoCellList = ["공지사항","서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class TermsAndPolicyViewController: UIViewController {
     
     private func setNavigationBar() {
         view.backgroundColor = .systemBackground
-        self.title = "약관 및 정책"
+        self.title = "앱 정보"
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
     }
@@ -51,20 +51,20 @@ class TermsAndPolicyViewController: UIViewController {
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TermsAndPolicyCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AppInfoCell")
     }
     
 }
 
-extension TermsAndPolicyViewController: UITableViewDataSource, UITableViewDelegate {
+extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TermsAndPolicyCellList.count
+        return AppInfoCellList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TermsAndPolicyCell", for: indexPath)
-        cell.textLabel?.text = TermsAndPolicyCellList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AppInfoCell", for: indexPath)
+        cell.textLabel?.text = AppInfoCellList[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         cell.accessoryType = .disclosureIndicator
 
@@ -73,6 +73,13 @@ extension TermsAndPolicyViewController: UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+           let TermsAndConditionsVC = TermsAndConditionsViewController()
+           self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
+       } else if indexPath.row == 1 {
+           let PrivacyPolicyVC = PrivacyPolicyViewController()
+           self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
+       }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
