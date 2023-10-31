@@ -74,9 +74,12 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+           let NoticeVC = NoticeViewController()
+           self.navigationController?.pushViewController(NoticeVC, animated: true)
+       } else if indexPath.row == 1 {
            let TermsAndConditionsVC = TermsAndConditionsViewController()
            self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
-       } else if indexPath.row == 1 {
+       } else if indexPath.row == 2 {
            let PrivacyPolicyVC = PrivacyPolicyViewController()
            self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
        }
