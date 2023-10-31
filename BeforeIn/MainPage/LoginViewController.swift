@@ -33,7 +33,7 @@ class LoginViewController: BaseViewController {
     
     // MARK: - Methods
     func setTitle(){
-        let titleText = " 비포인 "
+        let titleText = " 비포인"
         var characterIndex = 0.0
         for title in titleText {
             Timer.scheduledTimer(withTimeInterval: 0.1 * Double(characterIndex), repeats:
