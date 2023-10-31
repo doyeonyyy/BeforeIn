@@ -68,30 +68,30 @@ class UserAccountDeletionViewController: BaseViewController {
     
     func setUI() {
         checkPasswordLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.snp.top).offset(120)
-            $0.left.equalTo(self.view.snp.left).offset(24)
+            $0.top.equalTo(view.snp.top).offset(120)
+            $0.left.equalTo(view.snp.left).offset(24)
         }
         
         checkPasswordTextField.snp.makeConstraints {
             $0.top.equalTo(checkPasswordLabel.snp.bottom).offset(17)
-            $0.left.equalTo(self.view.snp.left).offset(24)
-            $0.right.equalTo(self.view.snp.right).offset(-70)
+            $0.left.equalTo(view.snp.left).offset(24)
+            $0.right.equalTo(view.snp.right).offset(-70)
         }
         
         checkBottom.snp.makeConstraints {
-            $0.left.right.equalTo(self.view).inset(24)
+            $0.left.right.equalTo(view).inset(24)
             $0.bottom.equalTo(checkPasswordTextField.snp.bottom).offset(4)
             $0.height.equalTo(1)
         }
         
         checkPasswordButton.snp.makeConstraints {
-            $0.right.equalTo(self.view.snp.right).offset(-25)
+            $0.right.equalTo(view.snp.right).offset(-25)
             $0.bottom.equalTo(checkBottom.snp.top).offset(-5)
         }
         
         userDeletionButton.snp.makeConstraints{
-            $0.left.right.equalTo(self.view).inset(24)
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            $0.left.right.equalTo(view).inset(24)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.height.equalTo(50)
         }
         

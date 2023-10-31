@@ -210,7 +210,7 @@ class RegisterViewController: BaseViewController {
             } else if password != checkPassword {
                 showAlertOneButton(title: "비밀번호 불일치", message: "비밀번호가 일치하지 않습니다.", buttonTitle: "확인")
             } else if !validPw {
-                showAlertOneButton(title: "비밀번호 형식 오류", message: "비밀번호 형식에 맞게 입력해주세요. (대소문자, 특수문자, 숫자 포함 8자이상)", buttonTitle: "확인")
+                showAlertOneButton(title: "유효하지 않은 비밀번호", message: "비밀번호는 대소문자, 특수문자, 숫자 8자 이상이여야합니다.", buttonTitle: "확인")
             } else {
                 let newUser = User(email: email, name: name, nickname: nickname, profileImage: "", level: 0, phone: "")
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in

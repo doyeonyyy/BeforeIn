@@ -129,7 +129,7 @@ class RegisterView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     lazy var registerCheckTextField = UITextField().then {
-        $0.placeholder = "비밀번호를 다시 입력하세요."
+        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
