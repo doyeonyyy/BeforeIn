@@ -14,15 +14,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
-    
-    // 앱 버전
-    var appVersion: String {
-         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-             return version
-         }
-         return ""
-     }
-    
+
     // Alert
     func showAlertOneButton(title: String, message: String?, buttonTitle: String, completion: (() -> Void)? = nil) {
         
