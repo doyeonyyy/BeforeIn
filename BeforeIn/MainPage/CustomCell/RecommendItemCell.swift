@@ -61,11 +61,11 @@ class RecommendItemCell: UICollectionViewCell {
         }
         mainLabel.snp.makeConstraints { make in
             make.top.equalTo(contentImageView.snp.bottom).offset(22)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(18)
+            make.leading.trailing.equalToSuperview().inset(12)
         }
         
         

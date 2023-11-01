@@ -63,7 +63,7 @@ class MainView: UIView {
     
     private let etiquetteLabel = UILabel().then{
         $0.text = "알아두면 쓸모있는 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
     let randomButton = UIButton().then {
@@ -103,7 +103,7 @@ class MainView: UIView {
     
     private let recentlyEtiquette = UILabel().then{
         $0.text = "최근 본 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
@@ -120,7 +120,7 @@ class MainView: UIView {
     
     private let recommendLabel = UILabel().then {
         $0.text = "장소별 상황 추천"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
     var recommendEtiquetteCollectionView: UICollectionView = {
