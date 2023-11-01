@@ -14,7 +14,7 @@ class CategoryCell: UICollectionViewCell {
     var categoryLabel = UILabel().then{
         $0.text = "카테고리 레이블"
         $0.textColor = .BeforeInRed
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 15)
     }
     
     override var isSelected: Bool {

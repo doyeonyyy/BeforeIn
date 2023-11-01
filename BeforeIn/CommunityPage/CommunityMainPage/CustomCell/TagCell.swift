@@ -14,7 +14,7 @@ class TagCell: UICollectionViewCell {
     var tagLabel = UILabel().then{
         $0.text = "태그 레이블"
         $0.textColor = .BeforeInRed
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 15)
     }
     
     override var isSelected: Bool {
