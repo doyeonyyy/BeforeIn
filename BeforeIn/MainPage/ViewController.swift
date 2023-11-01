@@ -142,15 +142,9 @@ class MainViewController: BaseViewController {
                 var mainImage = UIImage(systemName: "person.fill")
                 
                 dispatchGroup.enter()
-                if let cachedImage = loadCachedImage(gsLink) {
-                    mainImage = cachedImage
-                    print("캐시에 저장된 사진 로드")
-                    dispatchGroup.leave()
-                }
-                else {
-                    downloadAndCacheImage(gsLink) { cachedImage in
-                        mainImage = cachedImage
-                        print("새로운 이미지 다운로드")
+                loadImageFromCacheOrDownload(gsLink) { image in
+                    if let image = image {
+                        mainImage = image
                         dispatchGroup.leave()
                     }
                 }
@@ -186,13 +180,14 @@ class MainViewController: BaseViewController {
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
+                    self.recommendedEtiquetteCollectionView.reloadData()
                     print("에티켓 리스트 업데이트 됨")
                 }
             }
             
             dispatchGroup.notify(queue: .main) {
                 self.fetchEtiquetteContent()
-                self.recommendedEtiquetteCollectionView.reloadData()
+                
             }
             
         }

@@ -196,33 +196,33 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             let imageLink = content.contentImageLink
             let imageReference = storage.reference(forURL: imageLink)
             dispatchGroup.enter()
-            imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if let error = error {
-                    print("컨텐츠 이미지 다운 실패")
-                } else {
-                    let image = UIImage(data: data!)
+            loadImageFromCacheOrDownload(imageLink) { image in
+                if let image = image {
                     print("\(content.mainContent) 이미지 다운 완료")
                     self.selectedEtiquette?.content["good"]?[index].contentImage = image
-                    
+                    dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
+                else {
+                    print("컨텐츠 이미지 다운 실패")
+                }
             }
+
         }
         for var (index, content) in badContent.enumerated(){
             let imageLink = content.contentImageLink
             let imageReference = storage.reference(forURL: imageLink)
             dispatchGroup.enter()
-            imageReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if let error = error {
-                    print("컨텐츠 이미지 다운 실패")
-                } else {
-                    let image = UIImage(data: data!)
+            loadImageFromCacheOrDownload(imageLink) { image in
+                if let image = image {
                     print("\(content.mainContent) 이미지 다운 완료")
                     self.selectedEtiquette?.content["bad"]?[index].contentImage = image
-                    
+                    dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
+                else {
+                    print("컨텐츠 이미지 다운 실패")
+                }
             }
+
         }
         
         dispatchGroup.notify(queue: .main) {

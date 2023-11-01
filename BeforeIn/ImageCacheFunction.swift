@@ -35,6 +35,7 @@ func downloadAndCacheImage(_ imageLink: String, completion: @escaping (UIImage?)
             } else if let data = data, let image = UIImage(data: data) {
                 do {
                     try data.write(to: fileURL)
+                    print("캐시에 이미지 저장완료")
                     completion(image)
                 } catch {
                     print("Failed to save image to cache: \(error)")
@@ -55,6 +56,7 @@ func loadCachedImage(_ imageLink: String) -> UIImage? {
     
     if let filename = filename, let fileURL = imageCacheDirectoryURL?.appendingPathComponent(filename) {
         if fileManager.fileExists(atPath: fileURL.path), let imageData = try? Data(contentsOf: fileURL) {
+            print("캐시에 있는 이미지 가져옴")
             return UIImage(data: imageData)
         }
     }

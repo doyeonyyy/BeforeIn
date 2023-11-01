@@ -67,7 +67,7 @@ class MainViewModel {
         }
         let contentCount = etiquette?.content[random]?.count ?? 1
         let randomNumber = Int.random(in: 0..<contentCount)
-        let content = (etiquette?.place ?? "로딩실패") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "로딩실패")
+        let content = (etiquette?.place ?? "결혼식장") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "밝은 옷은 피해주세요")
         return content
     }
     
