@@ -12,6 +12,7 @@ class QuizResultView: UIView {
     let labelB = UILabel()
     let labelC = UILabel()
     let labelD = UILabel()
+    let stackViewForLabelAB = UIStackView()
     let stackViewForLabelCD = UIStackView()
     let startButton = UIButton()
     let levelImage = UIImageView()
@@ -40,8 +41,9 @@ class QuizResultView: UIView {
 
     func setupUI() {
         backgroundColor = .systemBackground
-        addSubview(labelA)
-        addSubview(labelB)
+        addSubview(stackViewForLabelAB)
+        stackViewForLabelAB.addArrangedSubview(labelA)
+        stackViewForLabelAB.addArrangedSubview(labelB)
         addSubview(stackViewForLabelCD)
         stackViewForLabelCD.addArrangedSubview(labelC)
         stackViewForLabelCD.addArrangedSubview(labelD)
@@ -52,25 +54,27 @@ class QuizResultView: UIView {
     func setupLayout() {
         labelA.text = "검사결과"
         labelA.textColor = .black
-        labelA.font = UIFont.systemFont(ofSize: 24)
-        labelA.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(106)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(76)
-        }
+        labelA.font = UIFont.systemFont(ofSize: 22)
+
         labelB.text = "000님은"
         labelB.textColor = .black
         labelB.font = UIFont(name: "SUITE-SemiBold", size: 24)
-        labelB.snp.makeConstraints { make in
-            make.bottom.equalTo(labelA.snp.bottom)
-            make.leading.equalTo(labelA.snp.trailing).offset(8)
-        }
-        labelC.text = "Lv.1 검은머리 짐승입니다"
+    
+        labelC.text = "Lv.1 검은머리 짐승"
         labelC.textColor = .BeforeInRed
-        labelC.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        labelC.font = UIFont.systemFont(ofSize: 22, weight: .bold)
 
         labelD.text = "입니다"
         labelD.textColor = .black
-        labelD.font = UIFont.systemFont(ofSize: 24)
+        labelD.font = UIFont.systemFont(ofSize: 22)
+        
+        stackViewForLabelAB.axis = .horizontal
+        stackViewForLabelAB.alignment = .center
+        stackViewForLabelAB.spacing = 4
+        stackViewForLabelAB.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(106)
+            make.centerX.equalToSuperview()
+        }
 
         stackViewForLabelCD.axis = .horizontal
         stackViewForLabelCD.alignment = .center

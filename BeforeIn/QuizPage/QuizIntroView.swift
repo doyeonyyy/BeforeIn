@@ -54,35 +54,35 @@ class QuizIntroView: UIView {
     func setupLayout() {
         labelA.text = "반가워요"
         labelA.textColor = .black
-        labelA.font = UIFont.systemFont(ofSize: 24)
+        labelA.font = UIFont.systemFont(ofSize: 20)
         labelA.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(106)
             make.leading.equalTo(safeAreaLayoutGuide).offset(24)
         }
         
         labelB.textColor = .black
-        labelB.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        labelB.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         labelB.snp.makeConstraints { make in
             make.leading.equalTo(labelA.snp.trailing).offset(8)
             make.bottom.equalTo(labelA.snp.bottom)
         }
         labelC.text = "내"
         labelC.textColor = .black
-        labelC.font = UIFont.systemFont(ofSize: 24)
+        labelC.font = UIFont.systemFont(ofSize: 20)
         labelC.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(8)
             make.leading.equalTo(safeAreaLayoutGuide).offset(24)
         }
         labelD.text = "에티켓 레벨"
         labelD.textColor = .black
-        labelD.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        labelD.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         labelD.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(8)
             make.leading.equalTo(labelC.snp.trailing).offset(6)
         }
         labelE.text = "을 확인해볼까요?"
         labelE.textColor = .black
-        labelE.font = UIFont.systemFont(ofSize: 24)
+        labelE.font = UIFont.systemFont(ofSize: 20)
         labelE.snp.makeConstraints { make in
             make.top.equalTo(labelA.snp.bottom).offset(8)
             make.leading.equalTo(labelD.snp.trailing)
@@ -112,7 +112,7 @@ class QuizIntroView: UIView {
             make.width.equalTo(skipButton.snp.width)
             make.height.equalTo(skipButton.snp.height)
             make.bottom.equalToSuperview().offset(-80)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(223)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-32)
         }
     }
     private func updateView() {

@@ -57,9 +57,9 @@ class NewQuizContentViewController: UIViewController {
         }
         
         let quizLabel = UILabel().then {
-            $0.text = "\(self.question) \n(정답 : \(self.answer))"
+            $0.text = "\(self.question). \n(정답 : \(self.answer))"
             $0.numberOfLines = 0
-            $0.font = UIFont(name: "SUITE-Medium", size: 24)
+            $0.font = UIFont(name: "SUITE-Medium", size: 18)
         }
         
         let buttonO = UIButton().then {
