@@ -323,6 +323,11 @@ extension RegisterViewController: UITextFieldDelegate {
                 showAlertOneButton(title: "입력 오류", message: "문자를 입력해주세요.", buttonTitle: "확인")
                 return false
             }
+        } else if textField == registerView.registerNicknameTextField {
+            let currentText = textField.text ?? ""
+            let textCount = currentText.count + input.count
+            
+            return textCount <= 8
         }
         return true
     }

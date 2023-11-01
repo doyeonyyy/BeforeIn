@@ -23,6 +23,7 @@ class NicknameEditViewController: BaseViewController {
     }
     
     private let editNicknameTextField = UITextField().then {
+        $0.placeholder = "8자 이하 닉네임을 입력하세요."
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -58,6 +59,7 @@ class NicknameEditViewController: BaseViewController {
         super.viewDidLoad()
         addSubview()
         setUI()
+        setTextField()
         addTarget()
     }
     
@@ -109,6 +111,10 @@ class NicknameEditViewController: BaseViewController {
         self.title = "닉네임 수정"
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]
+    }
+    
+    func setTextField(){
+        editNicknameTextField.delegate = self
     }
 
     func addTarget(){
@@ -182,7 +188,15 @@ extension NicknameEditViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString input: String) -> Bool {
+        if textField == editNicknameTextField {
+            let currentText = textField.text ?? ""
+            let textCount = currentText.count + input.count
+            
+            return textCount <= 8
+        }
+        return true
+    }
 }
 
 

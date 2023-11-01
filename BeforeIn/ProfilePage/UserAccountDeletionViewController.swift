@@ -48,6 +48,7 @@ class UserAccountDeletionViewController: BaseViewController {
         setNavigationBar()
         addSubview()
         setUI()
+        setTextField()
         addTarget()
     }
     
@@ -95,6 +96,10 @@ class UserAccountDeletionViewController: BaseViewController {
             $0.height.equalTo(50)
         }
         
+    }
+    
+    func setTextField(){
+        checkPasswordTextField.delegate = self
     }
     
     func addTarget(){

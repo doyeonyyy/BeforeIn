@@ -85,7 +85,7 @@ class RegisterView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     lazy var registerNicknameTextField = UITextField().then {
-        $0.placeholder = "닉네임을 입력하세요."
+        $0.placeholder = "8자 이하 닉네임을 입력하세요."
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -108,7 +108,7 @@ class RegisterView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     lazy var registerPwTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
+        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자 이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -129,7 +129,7 @@ class RegisterView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 20)
     }
     lazy var registerCheckTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
+        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자 이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
