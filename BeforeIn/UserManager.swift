@@ -101,9 +101,9 @@ struct UserManager {
             print("이미지 데이터를 생성하는데 실패했습니다.")
             return
         }
-        let imageName = UUID().uuidString + String(Date().timeIntervalSince1970)
-        let path = "ProfileImages/\(imageName)"
-        let storageRef = Storage.storage().reference().child(path)
+        
+        let userId = currentUser.email
+        let storageRef = Storage.storage().reference().child("profileImages/\(userId).jpg")
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"

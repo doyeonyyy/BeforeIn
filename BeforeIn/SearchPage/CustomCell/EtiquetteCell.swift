@@ -26,14 +26,14 @@ class EtiquetteCell: UICollectionViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .black
-        $0.font = UIFont(name: "SUITE-Bold", size: 16)
+        $0.font = UIFont(name: "SUITE-Bold", size: 18)
     }
     
     var descriptionLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = .black
         $0.numberOfLines = 2
-        $0.font = UIFont(name: "SUITE-Regular", size: 12)
+        $0.font = UIFont(name: "SUITE-Regular", size: 14)
        
     }
     override init(frame: CGRect) {
@@ -73,8 +73,8 @@ class EtiquetteCell: UICollectionViewCell {
             $0.height.equalTo(80)
         }
         stackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(imageView.snp.trailing).offset(24)
+            $0.top.equalTo(imageView.snp.top).offset(5)
+            $0.leading.equalTo(imageView.snp.trailing).offset(12)
             $0.trailing.equalToSuperview().offset(-24)
         }
         
