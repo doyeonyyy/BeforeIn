@@ -28,7 +28,7 @@ class SearchView: UIView {
     let categoryCollectionViewLayout = UICollectionViewFlowLayout().then{
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 8
-        $0.itemSize = CGSize(width: 115, height: 32)
+        $0.itemSize = CGSize(width: 82, height: 30)
     }
 
     lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: categoryCollectionViewLayout).then{
