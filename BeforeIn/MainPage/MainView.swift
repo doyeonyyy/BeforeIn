@@ -127,11 +127,12 @@ class MainView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
-        layout.itemSize = CGSize(width: 183, height: 210)
+        layout.itemSize = CGSize(width: 183, height: 200)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         return collectionView
     }()
     
@@ -275,8 +276,8 @@ class MainView: UIView {
             make.leading.equalToSuperview().inset(24)
         }
         recommendEtiquetteCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(recommendLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(8)
+            make.top.equalTo(recommendLabel.snp.bottom)
+            make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(240)
             make.bottom.equalToSuperview().offset(-20)

@@ -17,7 +17,7 @@ class RecommendItemCell: UICollectionViewCell {
         $0.clipsToBounds = true
     }
     var mainLabel = UILabel().then {
-        $0.text = "소개팅 꿀팁 에티켓"
+        $0.text = "XXX 권장 에티켓"
         $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     var descriptionLabel = UILabel().then {
@@ -39,7 +39,7 @@ class RecommendItemCell: UICollectionViewCell {
     
     func configureUI(_ etiquette: Etiquette) {
         contentImageView.image = etiquette.mainImage
-        mainLabel.text = "\(etiquette.place) 꿀팁 에티켓"
+        mainLabel.text = "\(etiquette.place) 권장 에티켓"
         descriptionLabel.text = etiquette.description
     }
     
@@ -56,16 +56,16 @@ class RecommendItemCell: UICollectionViewCell {
         
         contentImageView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(90)
+            make.height.equalTo(95)
             make.top.leading.trailing.equalToSuperview()
         }
         mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentImageView.snp.bottom).offset(22)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.equalTo(contentImageView.snp.bottom).offset(18)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(12)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
         
