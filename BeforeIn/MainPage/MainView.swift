@@ -218,7 +218,7 @@ class MainView: UIView {
 //            make.leading.equalTo(subLabel.snp.trailing).offset(16)
 //        }
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(27)
+            make.top.equalToSuperview().offset(30)
             make.width.height.equalTo(100)
             make.trailing.equalToSuperview().inset(24)
         }

@@ -27,11 +27,11 @@ class ProfileViewModel{
     }
     
     var nameBox: String{
-        return "\(user.name)님은 현재"
+        return "\(user.name)"
     }
     
     var nickname: String{
-        return "\(user.nickname)님"
+        return "\(user.nickname)님은 현재"
     }
     
     var imageURL: String {
@@ -49,7 +49,7 @@ class ProfileViewModel{
         case 3: return "Lv 3"
         case 4: return "Lv 4"
         case 5: return "Lv 5"
-        default: return "레벨 정보 없음"
+        default: return "Lv 1"
         }
     }
     
@@ -60,7 +60,7 @@ class ProfileViewModel{
         case 3: return "이족보행 단계"
         case 4: return "인간"
         case 5: return "지성인"
-        default: return "레벨 정보 없음"
+        default: return "검은머리 짐승"
         }
     }
     
