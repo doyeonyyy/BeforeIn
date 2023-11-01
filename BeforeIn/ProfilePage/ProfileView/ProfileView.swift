@@ -11,19 +11,8 @@ import UIKit
 class ProfileView: UIView {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "000님"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let mentLabel: UILabel = {
-        let label = UILabel()
-        label.text = "의 프로필 입니다"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -31,9 +20,9 @@ class ProfileView: UIView {
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "userid@.com"
+        label.text = ""
         label.textColor = UIColor.systemGray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -42,9 +31,9 @@ class ProfileView: UIView {
     let editNicknameButton = UIButton().then {
         $0.setTitle("닉네임 수정", for: .normal)
         $0.setTitleColor(.systemGray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
-    
+
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "profilePlaceholder")
@@ -211,7 +200,6 @@ class ProfileView: UIView {
     
     private func addSubViews() {
         addSubview(nicknameLabel)
-        addSubview(mentLabel)
         addSubview(idLabel)
         addSubview(editNicknameButton)
         addSubview(circularImageView)
@@ -236,22 +224,17 @@ class ProfileView: UIView {
     
     private func defineLayoutConstraints() {
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(90)
+            make.top.equalTo(self.snp.top).offset(100)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
-        mentLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(94)
-            make.leading.equalTo(nicknameLabel.snp.trailing).offset(2)
-        }
-        
         idLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(5)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
         editNicknameButton.snp.makeConstraints { make in
-            make.top.equalTo(idLabel.snp.bottom).offset(4)
+            make.top.equalTo(idLabel.snp.bottom).offset(12)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
@@ -270,7 +253,7 @@ class ProfileView: UIView {
             make.width.equalTo(345)
             make.height.equalTo(200)
             make.top.equalTo(circularImageView.snp.bottom).offset(24)
-            make.leading.equalTo(self.snp.leading).offset(24)
+            make.centerX.equalToSuperview()
         }
         
         nameBoxLabel.snp.makeConstraints { make in
@@ -350,8 +333,8 @@ class ProfileView: UIView {
     }
     
     private func updateView() {
-        nicknameLabel.text = profileViewModel?.nickname
-        nameBoxLabel.text = profileViewModel?.nameBox
+        nicknameLabel.text = profileViewModel?.nameBox
+        nameBoxLabel.text = profileViewModel?.nickname
         level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
      //   circularImageView.image = profileViewModel?.profileImage

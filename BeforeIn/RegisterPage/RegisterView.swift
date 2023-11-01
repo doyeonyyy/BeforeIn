@@ -15,10 +15,10 @@ class RegisterView: UIView {
     // MARK: - UI Properties
     lazy var registerIdLabel = UILabel().then {
         $0.text = "아이디"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerIdTextField = UITextField().then {
-        $0.placeholder = "이메일 주소를 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "이메일 주소를 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -39,10 +39,10 @@ class RegisterView: UIView {
     
     lazy var authCodeLabel = UILabel().then {
         $0.text = "인증번호"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var authCodeTextField = UITextField().then {
-        $0.placeholder = "받으신 인증번호를 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "받으신 인증번호를 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -67,10 +67,10 @@ class RegisterView: UIView {
     
     lazy var registerNameLabel = UILabel().then {
         $0.text = "이름"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerNameTextField = UITextField().then {
-        $0.placeholder = "실명을 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "실명을 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -82,10 +82,10 @@ class RegisterView: UIView {
     
     lazy var registerNicknameLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerNicknameTextField = UITextField().then {
-        $0.placeholder = "닉네임을 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "8자 이하 닉네임을 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -105,10 +105,10 @@ class RegisterView: UIView {
     
     lazy var registerPwLabel = UILabel().then {
         $0.text = "비밀번호"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerPwTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
+        $0.setPlaceholderFontSize(size: 14, text: "대소문자, 특수문자, 숫자 포함 8자 이상")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -126,10 +126,10 @@ class RegisterView: UIView {
     
     lazy var registerCheckLabel = UILabel().then {
         $0.text = "비밀번호 확인"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerCheckTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
+        $0.setPlaceholderFontSize(size: 14, text: "대소문자, 특수문자, 숫자 포함 8자 이상")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no

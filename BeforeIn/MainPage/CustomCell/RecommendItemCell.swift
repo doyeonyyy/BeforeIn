@@ -18,7 +18,7 @@ class RecommendItemCell: UICollectionViewCell {
     }
     var mainLabel = UILabel().then {
         $0.text = "소개팅 꿀팁 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     var descriptionLabel = UILabel().then {
         $0.text = "\"너가 그래서 솔로\"...이것만 알면 너도 올해는 커플!"
@@ -61,11 +61,11 @@ class RecommendItemCell: UICollectionViewCell {
         }
         mainLabel.snp.makeConstraints { make in
             make.top.equalTo(contentImageView.snp.bottom).offset(22)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(18)
+            make.leading.trailing.equalToSuperview().inset(12)
         }
         
         

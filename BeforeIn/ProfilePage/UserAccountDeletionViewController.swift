@@ -15,7 +15,7 @@ class UserAccountDeletionViewController: BaseViewController {
     // MARK: - UI Properties
     private let checkPasswordLabel = UILabel().then {
         $0.text = "현재 비밀번호를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     let checkPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
@@ -37,7 +37,7 @@ class UserAccountDeletionViewController: BaseViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
     
@@ -48,6 +48,7 @@ class UserAccountDeletionViewController: BaseViewController {
         setNavigationBar()
         addSubview()
         setUI()
+        setTextField()
         addTarget()
     }
     
@@ -97,6 +98,10 @@ class UserAccountDeletionViewController: BaseViewController {
         
     }
     
+    func setTextField(){
+        checkPasswordTextField.delegate = self
+    }
+    
     func addTarget(){
         checkPasswordButton.addTarget(self, action: #selector(checkPasswordButtonTapped), for: .touchUpInside)
         userDeletionButton.addTarget(self, action: #selector(userDeletionButtonTapped), for: .touchUpInside)
@@ -143,6 +148,17 @@ class UserAccountDeletionViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    
+    
+}
+
+// MARK: - UITextFieldDelegate
+extension UserAccountDeletionViewController: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     

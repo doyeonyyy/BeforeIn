@@ -14,4 +14,14 @@ extension UITextField {
         self.leftView = paddingView
         self.leftViewMode = ViewMode.always
   }
+    
+    func setPlaceholderFontSize(size: CGFloat, text: String) {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: size)
+        ]
+        self.attributedPlaceholder = NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    
 }
+

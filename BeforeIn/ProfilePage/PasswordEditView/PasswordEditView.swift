@@ -14,7 +14,7 @@ class PasswordEditView: UIView {
     // MARK: - UI Properties
     private let editPasswordLabel = UILabel().then {
         $0.text = "현재 비밀번호를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     let editPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
@@ -34,17 +34,19 @@ class PasswordEditView: UIView {
     
     private let newPasswordLabel = UILabel().then {
         $0.text = "변경할 비밀번호를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     let newPasswordTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
         $0.isSecureTextEntry = true
         $0.clearsOnBeginEditing = false
         $0.layer.cornerRadius = 8
+        $0.setPlaceholderFontSize(size: 14, text: "대소문자, 특수문자, 숫자 포함 8자 이상")
     }
+
+
     private let newBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
@@ -55,10 +57,10 @@ class PasswordEditView: UIView {
     
     private let checkPasswordLabel = UILabel().then {
         $0.text = "변경할 비밀번호를 한번 더 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     let checkPasswordTextField = UITextField().then {
-        $0.placeholder = "대소문자, 특수문자, 숫자 포함 8자이상"
+        $0.setPlaceholderFontSize(size: 14, text: "대소문자, 특수문자, 숫자 포함 8자 이상")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -79,7 +81,7 @@ class PasswordEditView: UIView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
     

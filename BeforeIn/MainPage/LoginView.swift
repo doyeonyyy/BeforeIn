@@ -39,7 +39,7 @@ class LoginView: UIView {
     
     lazy var idLabel = UILabel().then {
         $0.text = "아이디를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.textColor = .systemGray2
     }
     
@@ -65,7 +65,7 @@ class LoginView: UIView {
     
     lazy var pwLabel = UILabel().then {
         $0.text = "비밀번호를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.textColor = .systemGray2
     }
     
@@ -77,7 +77,7 @@ class LoginView: UIView {
     lazy var loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 8
     }
@@ -85,19 +85,19 @@ class LoginView: UIView {
     lazy var findIdButton = UIButton().then {
         $0.setTitle("아이디 찾기", for: .normal)
         $0.setTitleColor(.systemGray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
     lazy var findPwButton = UIButton().then {
         $0.setTitle("비밀번호 찾기", for: .normal)
         $0.setTitleColor(.systemGray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
     lazy var registerButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(.systemGray, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
     lazy var buttonStackView = UIStackView().then {

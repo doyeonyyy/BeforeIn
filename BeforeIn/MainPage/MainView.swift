@@ -19,7 +19,7 @@ class MainView: UIView {
     private let contentView = UIView()
     
     private let nameLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     
     private let levelLabel = UILabel().then {
@@ -53,7 +53,7 @@ class MainView: UIView {
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 6
         $0.clipsToBounds = true
     }
     
@@ -63,7 +63,7 @@ class MainView: UIView {
     
     private let etiquetteLabel = UILabel().then{
         $0.text = "알아두면 쓸모있는 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     let randomButton = UIButton().then {
@@ -96,14 +96,14 @@ class MainView: UIView {
     }
     
     private let etiquetteViewContent = UILabel().then{
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     
     private let recentlyEtiquette = UILabel().then{
         $0.text = "최근 본 에티켓"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
@@ -120,7 +120,7 @@ class MainView: UIView {
     
     private let recommendLabel = UILabel().then {
         $0.text = "장소별 상황 추천"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     var recommendEtiquetteCollectionView: UICollectionView = {
@@ -218,7 +218,7 @@ class MainView: UIView {
 //            make.leading.equalTo(subLabel.snp.trailing).offset(16)
 //        }
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(27)
+            make.top.equalToSuperview().offset(30)
             make.width.height.equalTo(100)
             make.trailing.equalToSuperview().inset(24)
         }
