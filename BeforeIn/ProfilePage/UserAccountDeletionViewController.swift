@@ -15,7 +15,7 @@ class UserAccountDeletionViewController: BaseViewController {
     // MARK: - UI Properties
     private let checkPasswordLabel = UILabel().then {
         $0.text = "현재 비밀번호를 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     let checkPasswordTextField = UITextField().then {
         $0.autocapitalizationType = .none
@@ -37,7 +37,7 @@ class UserAccountDeletionViewController: BaseViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
     

@@ -98,6 +98,7 @@ class QuizIntroView: UIView {
         skipButton.setTitleColor(UIColor(red: 0.63, green: 0.63, blue: 0.63, alpha: 1), for: .normal)
         skipButton.backgroundColor = UIColor(red: 0.93, green: 0.93, blue: 0.93, alpha: 1)
         skipButton.layer.cornerRadius = 25
+        skipButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         skipButton.snp.makeConstraints { make in
             make.width.equalTo(138)
             make.height.equalTo(51)
@@ -108,6 +109,7 @@ class QuizIntroView: UIView {
         startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = UIColor.BeforeInRed
         startButton.layer.cornerRadius = 25
+        startButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         startButton.snp.makeConstraints { make in
             make.width.equalTo(skipButton.snp.width)
             make.height.equalTo(skipButton.snp.height)

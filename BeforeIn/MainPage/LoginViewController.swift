@@ -200,13 +200,13 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == loginView.idTextField {
             if loginView.idTextField.text == "" {
-                loginView.idLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.idLabel.font = UIFont.systemFont(ofSize: 16)
                 loginView.idLabelCenterY.constant = 0
             }
         }
         if textField == loginView.pwTextField {
             if loginView.pwTextField.text == ""{
-                loginView.pwLabel.font = UIFont.systemFont(ofSize: 18)
+                loginView.pwLabel.font = UIFont.systemFont(ofSize: 16)
                 loginView.pwLabelCenterY.constant = 0
             }
         }

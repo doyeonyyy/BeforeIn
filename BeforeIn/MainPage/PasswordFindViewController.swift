@@ -21,10 +21,10 @@ class PasswordFindViewController: BaseViewController {
     // MARK: - UI Properties
     lazy var registerIdLabel = UILabel().then {
         $0.text = "아이디"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var registerIdTextField = UITextField().then {
-        $0.placeholder = "이메일 주소를 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "가입하신 이메일 주소를 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -45,10 +45,10 @@ class PasswordFindViewController: BaseViewController {
     
     lazy var authCodeLabel = UILabel().then {
         $0.text = "인증번호"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     lazy var authCodeTextField = UITextField().then {
-        $0.placeholder = "받으신 인증번호를 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "받으신 인증번호를 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no

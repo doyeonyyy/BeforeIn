@@ -19,11 +19,11 @@ class NicknameEditViewController: BaseViewController {
     // MARK: - UI Properties
     private let editNicknameLabel = UILabel().then {
         $0.text = "변경할 닉네임을 입력하세요."
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     
     private let editNicknameTextField = UITextField().then {
-        $0.placeholder = "8자 이하 닉네임을 입력하세요."
+        $0.setPlaceholderFontSize(size: 14, text: "8자 이하 닉네임을 입력하세요.")
         $0.autocapitalizationType = .none
         $0.autocorrectionType = .no
         $0.spellCheckingType = .no
@@ -49,7 +49,7 @@ class NicknameEditViewController: BaseViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
     

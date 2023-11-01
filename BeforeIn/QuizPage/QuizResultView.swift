@@ -93,10 +93,11 @@ class QuizResultView: UIView {
         startButton.setTitle("비포인 시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = UIColor.BeforeInRed
-        startButton.layer.cornerRadius = 25
+        startButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        startButton.layer.cornerRadius = 8
         startButton.snp.makeConstraints { make in
-            make.width.equalTo(244)
-            make.height.equalTo(51)
+            make.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(50)
             make.bottom.equalToSuperview().offset(-80)
             make.centerX.equalToSuperview()
 

@@ -23,7 +23,7 @@ class FirstDetailView: UIView {
     
     lazy var titleLabel = UILabel().then {
         $0.text = "타이틀"
-        $0.font = .boldSystemFont(ofSize: 32)
+        $0.font = .boldSystemFont(ofSize: 25)
         $0.textColor = .white
     }
     

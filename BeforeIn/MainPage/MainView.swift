@@ -53,7 +53,7 @@ class MainView: UIView {
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.backgroundColor = .BeforeInRed
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 6
         $0.clipsToBounds = true
     }
     
@@ -96,7 +96,7 @@ class MainView: UIView {
     }
     
     private let etiquetteViewContent = UILabel().then{
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }

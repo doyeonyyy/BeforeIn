@@ -25,7 +25,7 @@ class SecondDetailView: UIView {
     
     lazy var titleLabel = UILabel().then {
         $0.text = "이것만은 절대 금지"
-        $0.font = UIFont(name: "SUITE-ExtraBold", size: 24)
+        $0.font = UIFont(name: "SUITE-ExtraBold", size: 20)
         $0.textColor = .black
         $0.numberOfLines = 0
     }
