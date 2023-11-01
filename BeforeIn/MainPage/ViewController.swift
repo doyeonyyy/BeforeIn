@@ -18,6 +18,7 @@ class MainViewController: BaseViewController {
     let userManager = UserManager()
     var firebaseDB: DatabaseReference!
     var recommendedEtiquetteCollectionView: UICollectionView!
+    var recommendedEtiquetteList: [Etiquette] = []
     let mainView = MainView()
     
     override func loadView() {
@@ -180,16 +181,29 @@ class MainViewController: BaseViewController {
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
-                    self.recommendedEtiquetteCollectionView.reloadData()
-                    print("에티켓 리스트 업데이트 됨")
+//                    self.recommendedEtiquetteCollectionView.reloadData()
+//                    print("에티켓 리스트 업데이트 됨")
                 }
             }
             
             dispatchGroup.notify(queue: .main) {
                 self.fetchEtiquetteContent()
-                
+                self.fetchRecommendedEtiquetteList()
+                self.recommendedEtiquetteCollectionView.reloadData()
             }
             
+        }
+    }
+ 
+    private func fetchRecommendedEtiquetteList() {
+        let groupedEtiquettes = Dictionary(grouping: etiquetteList, by: { $0.category })
+        for (_, etiquettes) in groupedEtiquettes {
+            var shuffledEtiquettes = etiquettes.shuffled()
+            if shuffledEtiquettes.count >= 2 {
+                recommendedEtiquetteList.append(contentsOf: Array(shuffledEtiquettes.prefix(2)))
+            } else {
+                recommendedEtiquetteList.append(contentsOf: shuffledEtiquettes)
+            }
         }
     }
     
@@ -203,7 +217,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return 0
         }
         else {
-            return etiquetteList.count
+            return recommendedEtiquetteList.count
         }
     }
     
