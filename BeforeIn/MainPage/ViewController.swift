@@ -34,7 +34,7 @@ class MainViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setCurrentUser()
         setupCollectionView()
-//        fetchEtiquetteList()
+        fetchEtiquetteList()
         mainView.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonClick), for: .touchUpInside)
         mainView.quizButton.addTarget(self, action: #selector(quizButtonClick), for: .touchUpInside)
         mainView.randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
@@ -114,6 +114,18 @@ class MainViewController: BaseViewController {
             etiquetteList = []
             let data = snapshot?.value as! [String: Any]
             let dispatchGroup = DispatchGroup() // Create a DispatchGroup
+            let fileManager = FileManager.default
+            let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+            let imageCacheDirectoryURL = documentsURL?.appendingPathComponent("ImageCache")
+            if !fileManager.fileExists(atPath: imageCacheDirectoryURL!.path) {
+                do {
+                    try fileManager.createDirectory(at: imageCacheDirectoryURL!, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    print("Error creating image cache directory: \(error)")
+                    return
+                }
+            }
+            
             
             for key in data.keys {
                 var good: [EtiquetteContent] = []
@@ -126,6 +138,16 @@ class MainViewController: BaseViewController {
                 let contentData = etiquette["content"] as! [String: Any]
                 let goodContent = contentData["good"] as! [[String: String]]
                 let badContent = contentData["bad"] as! [[String: String]]
+                let gsLink = etiquette["gsReference"] as! String
+                var mainImage = UIImage(systemName: "person.fill")
+                
+                dispatchGroup.enter()
+                loadImageFromCacheOrDownload(gsLink) { image in
+                    if let image = image {
+                        mainImage = image
+                        dispatchGroup.leave()
+                    }
+                }
                 
                 for content in goodContent {
                     let mainContent = content["mainContent"] as! String
@@ -155,41 +177,21 @@ class MainViewController: BaseViewController {
                     //
                 }
                 
-                let gsLink = etiquette["gsReference"] as! String
-                var mainImage = UIImage(systemName: "person.fill")
-                let gsReference = storage.reference(forURL: gsLink)
-                
-                dispatchGroup.enter() // Enter the dispatch group
-                
-                gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                    if let error = error {
-                        // Handle error
-                    } else {
-                        // Data for "images/island.jpg" is returned
-                        let image = UIImage(data: data!)
-                        print("\(place) 사진 로드 성공")
-                        mainImage = image
-                    }
-                    dispatchGroup.leave() // Leave the dispatch group
-                    
-                    // Create and update the Etiquette object after image is loaded
-                    
-                }
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
+                    self.recommendedEtiquetteCollectionView.reloadData()
                     print("에티켓 리스트 업데이트 됨")
                 }
             }
             
             dispatchGroup.notify(queue: .main) {
                 self.fetchEtiquetteContent()
-                self.recommendedEtiquetteCollectionView.reloadData()
+                
             }
             
         }
     }
-    
     
 }
 
