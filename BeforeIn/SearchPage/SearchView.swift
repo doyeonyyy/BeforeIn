@@ -95,10 +95,10 @@ class SearchView: UIView {
         }
         
         categoryCollectionView.snp.makeConstraints {
-            $0.top.equalTo(searchTextField.snp.bottom).offset(24)
+            $0.top.equalTo(searchTextField.snp.bottom).offset(18)
             $0.leading.equalToSuperview()
             $0.trailing.equalTo(self)
-            $0.height.equalTo(35)
+            $0.height.equalTo(30)
         }
         
         divider.snp.makeConstraints {
