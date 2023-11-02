@@ -114,7 +114,7 @@ class MainView: UIView {
     
     let recentlyEtiquetteLabel = UILabel().then {
         $0.text = "에티켓을 확인해보세요 🧐"
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .systemGray
     }
 
