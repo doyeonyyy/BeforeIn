@@ -53,11 +53,9 @@ class QuizResultView: UIView {
     
     func setupLayout() {
         labelA.text = "검사결과"
-        labelA.textColor = .black
         labelA.font = UIFont.systemFont(ofSize: 22)
 
         labelB.text = "000님은"
-        labelB.textColor = .black
         labelB.font = UIFont(name: "SUITE-SemiBold", size: 24)
     
         labelC.text = "Lv.1 검은머리 짐승"
@@ -65,7 +63,6 @@ class QuizResultView: UIView {
         labelC.font = UIFont.systemFont(ofSize: 22, weight: .bold)
 
         labelD.text = "입니다"
-        labelD.textColor = .black
         labelD.font = UIFont.systemFont(ofSize: 22)
         
         stackViewForLabelAB.axis = .horizontal
