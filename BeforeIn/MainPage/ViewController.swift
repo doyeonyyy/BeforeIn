@@ -185,7 +185,6 @@ class MainViewController: BaseViewController {
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
-                    self.mainView.indicator.stopAnimating()
 //                    self.recommendedEtiquetteCollectionView.reloadData()
 //                    print("에티켓 리스트 업데이트 됨")
                 }
@@ -195,6 +194,7 @@ class MainViewController: BaseViewController {
                 self.fetchEtiquetteContent()
                 self.fetchRecommendedEtiquetteList()
                 self.recommendedEtiquetteCollectionView.reloadData()
+                self.mainView.indicator.stopAnimating()
             }
             
         }
