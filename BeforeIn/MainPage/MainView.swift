@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 import SnapKit
 import Then
 
@@ -17,6 +18,11 @@ class MainView: UIView {
     }
     
     private let contentView = UIView()
+    
+    let indicator = NVActivityIndicatorView(frame: CGRect(x: 162, y: 100, width: 50, height: 50),
+                                            type: .lineSpinFadeLoader,
+                                            color: .BeforeInRed,
+                                            padding: 0)
     
     private let nameLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -171,6 +177,7 @@ class MainView: UIView {
     private func setupSubviews() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(indicator)
         contentView.addSubview(nameLabel)
         contentView.addSubview(levelLabel)
         contentView.addSubview(subLabel)
@@ -201,6 +208,10 @@ class MainView: UIView {
             make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
         }
+        
+        indicator.snp.makeConstraints {
+               $0.center.equalToSuperview()
+           }
 
         nameLabel.snp.makeConstraints { make in
             make.bottom.equalTo(levelLabel.snp.top).offset(-10)

@@ -35,6 +35,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        mainView.indicator.startAnimating()
         setCurrentUser()
         setupCollectionView()
         fetchEtiquetteList()
@@ -184,6 +185,7 @@ class MainViewController: BaseViewController {
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
+                    self.mainView.indicator.stopAnimating()
 //                    self.recommendedEtiquetteCollectionView.reloadData()
 //                    print("에티켓 리스트 업데이트 됨")
                 }
