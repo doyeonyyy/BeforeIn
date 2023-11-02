@@ -35,6 +35,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        mainView.indicator.startAnimating()
         setCurrentUser()
         setupCollectionView()
         fetchEtiquetteList()
@@ -193,6 +194,7 @@ class MainViewController: BaseViewController {
                 self.fetchEtiquetteContent()
                 self.fetchRecommendedEtiquetteList()
                 self.recommendedEtiquetteCollectionView.reloadData()
+                self.mainView.indicator.stopAnimating()
             }
             
         }
