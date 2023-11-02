@@ -46,7 +46,8 @@ class RecentItemCell: UICollectionViewCell {
         
     }
     
-    func configureUI(_ image: UIImage) {
-        imageView.image = image
+    func configureUI(_ etiquette: Etiquette) {
+        imageView.image = etiquette.mainImage
+        spaceLabe.text = etiquette.place
     }
 }

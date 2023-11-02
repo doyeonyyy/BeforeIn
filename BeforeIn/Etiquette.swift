@@ -17,6 +17,14 @@ struct Etiquette {
     let description: String
 }
 
+extension Etiquette: Equatable {
+    static func == (lhs: Etiquette, rhs: Etiquette) -> Bool {
+        return lhs.category == rhs.category && lhs.place == rhs.place
+    }
+    
+    
+}
+
 var etiquetteList: [Etiquette] = []
 
 struct EtiquetteContent {

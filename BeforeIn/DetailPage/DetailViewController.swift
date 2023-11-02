@@ -198,7 +198,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             dispatchGroup.enter()
             loadImageFromCacheOrDownload(imageLink) { image in
                 if let image = image {
-                    print("\(content.mainContent) 이미지 다운 완료")
                     self.selectedEtiquette?.content["good"]?[index].contentImage = image
                     dispatchGroup.leave()
                 }
@@ -214,7 +213,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             dispatchGroup.enter()
             loadImageFromCacheOrDownload(imageLink) { image in
                 if let image = image {
-                    print("\(content.mainContent) 이미지 다운 완료")
                     self.selectedEtiquette?.content["bad"]?[index].contentImage = image
                     dispatchGroup.leave()
                 }
@@ -226,7 +224,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         }
         
         dispatchGroup.notify(queue: .main) {
-            print("컬렉션뷰 리로드")
             self.detailView.secondDetailView.dontsCollectionView.reloadData()
             self.detailView.thirdDetailView.dosCollectionView.reloadData()
         }
