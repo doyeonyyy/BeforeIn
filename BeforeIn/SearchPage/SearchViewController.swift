@@ -112,7 +112,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         } else if collectionView == etiquetteCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteCell", for: indexPath) as! EtiquetteCell
             let etiquette = filteredEtiquetteList[indexPath.row]
-
             cell.imageView.image = etiquette.mainImage
             cell.titleLabel.text = etiquette.place
             cell.descriptionLabel.text = etiquette.description
