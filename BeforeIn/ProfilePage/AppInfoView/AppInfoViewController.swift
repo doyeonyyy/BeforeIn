@@ -12,7 +12,8 @@ import MessageUI
 class AppInfoViewController: BaseViewController {
     
     // MARK: - Properties
-    let AppInfoCellList = ["앱 버전 1.0", "공지사항", "서비스 이용약관", "개인정보 처리방침", "피드백 남기기"]
+    let AppInfoCellList = ["공지사항", "서비스 이용약관", "개인정보 처리방침", "피드백 남기기", "앱 버전"]
+    let AppVersion = "1.0"
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -74,8 +75,13 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = AppInfoCellList[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         
-        if indexPath.row == 0 {
-            cell.accessoryType = .none
+        if indexPath.row == AppInfoCellList.count - 1 {
+            let appVersionLabel = UILabel()
+            appVersionLabel.text = AppVersion
+            appVersionLabel.textAlignment = .center
+            appVersionLabel.font = UIFont.systemFont(ofSize: 16)
+            appVersionLabel.sizeToFit()
+            cell.accessoryView = appVersionLabel
         } else {
             cell.textLabel?.text = AppInfoCellList[indexPath.row]
             cell.accessoryType = .disclosureIndicator
@@ -87,16 +93,16 @@ extension AppInfoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             let NoticeVC = NoticeViewController()
             self.navigationController?.pushViewController(NoticeVC, animated: true)
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
             let TermsAndConditionsVC = TermsAndConditionsViewController()
             self.navigationController?.pushViewController(TermsAndConditionsVC, animated: true)
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             let PrivacyPolicyVC = PrivacyPolicyViewController()
             self.navigationController?.pushViewController(PrivacyPolicyVC, animated: true)
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 3 {
             setMail()
         }
     }
