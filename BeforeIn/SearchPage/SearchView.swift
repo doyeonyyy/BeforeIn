@@ -52,7 +52,7 @@ class SearchView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
-        $0.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 30, right: 0)
 
     }
     
