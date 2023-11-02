@@ -13,7 +13,7 @@ class SecondDetailView: UIView {
     
     // MARK: - UI Properties
     lazy var detailImageView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
     }
     
     lazy var titleEmoji = UILabel().then {
@@ -26,7 +26,7 @@ class SecondDetailView: UIView {
     lazy var titleLabel = UILabel().then {
         $0.text = "이것만은 절대 금지"
         $0.font = UIFont(name: "SUITE-ExtraBold", size: 20)
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.numberOfLines = 0
     }
     
@@ -36,7 +36,7 @@ class SecondDetailView: UIView {
         모두를 위해서 피해야 하는 행동을 모았습니다.
         """
         $0.font = .systemFont(ofSize: 16)
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.numberOfLines = 0
     }
     

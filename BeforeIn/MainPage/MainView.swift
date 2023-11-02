@@ -74,7 +74,7 @@ class MainView: UIView {
     
     let randomButton = UIButton().then {
         $0.setImage(UIImage(systemName: "arrow.counterclockwise"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = .systemBlack
     }
     
     private let etiquetteView = UIView().then{

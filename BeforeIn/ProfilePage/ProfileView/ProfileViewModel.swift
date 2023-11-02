@@ -72,7 +72,7 @@ class ProfileViewModel{
     }
     
     func updateUser(_ user: User) {
-        print("profileView모델 user 업데이트")
+//        print("profileView모델 user 업데이트")
         self.user = user
     }
     
