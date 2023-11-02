@@ -13,7 +13,7 @@ class ThirdDetailView: UIView {
     
     // MARK: - UI Properties
     lazy var detailImageView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
     }
     
     lazy var titleEmoji = UILabel().then {
@@ -26,7 +26,7 @@ class ThirdDetailView: UIView {
     lazy var titleLabel = UILabel().then {
         $0.text = "이것만 지켜도 Good"
         $0.font = UIFont(name: "SUITE-ExtraBold", size: 20)
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.numberOfLines = 0
     }
     
@@ -36,7 +36,7 @@ class ThirdDetailView: UIView {
         당신의 작은 배려가 다른 사람들을 기분좋게 합니다.
         """
         $0.font = .systemFont(ofSize: 16)
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.numberOfLines = 0
     }
     

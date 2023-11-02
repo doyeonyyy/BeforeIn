@@ -46,33 +46,37 @@ class ProfileView: UIView {
     
     let editProfileButton = UIButton().then {
         let image = UIImage(systemName: "pencil.circle.fill")
-        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .black)
+        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .systemGray4)
         $0.setImage(resizedImage, for: .normal)
     }
     
     private let shadowView: UIView = {
         let view = UIView()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowRadius = 18
-        view.translatesAutoresizingMaskIntoConstraints = false
+        
+//        view.layer.shadowColor = UIColor.black.cgColor
+//        view.layer.shadowOpacity = 0.1
+//        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        view.layer.shadowRadius = 18
+//        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let grayRectangle: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 18
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.systemGray5.cgColor
+        view.layer.borderWidth = 0.5
+        view.clipsToBounds = true
         return view
     }()
     
     private let nameBoxLabel: UILabel = {
         let label = UILabel()
         label.text = "000님은 현재"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -82,7 +86,7 @@ class ProfileView: UIView {
     private let levelLabel: UILabel = {
         let label = UILabel()
         label.text = "검은머리 짐승"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -102,7 +106,7 @@ class ProfileView: UIView {
     private let mentBoxLabel: UILabel = {
         let label = UILabel()
         label.text = "입니다"
-        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -204,20 +208,22 @@ class ProfileView: UIView {
         addSubview(editNicknameButton)
         addSubview(circularImageView)
         addSubview(editProfileButton)
-        addSubview(shadowView)
         addSubview(grayRectangle)
-        addSubview(nameBoxLabel)
-        addSubview(levelLabel)
-        addSubview(mentBoxLabel)
-        addSubview(level)
-        addSubview(levelImageStackView)
+        
+        grayRectangle.addSubview(nameBoxLabel)
+        grayRectangle.addSubview(levelLabel)
+        grayRectangle.addSubview(mentBoxLabel)
+        grayRectangle.addSubview(level)
+        grayRectangle.addSubview(levelRectangle)
+        levelRectangle.addSubview(myLevelRectangle)
+        
+        grayRectangle.addSubview(levelImageStackView)
         levelImageStackView.addArrangedSubview(levelImage1)
         levelImageStackView.addArrangedSubview(levelImage2)
         levelImageStackView.addArrangedSubview(levelImage3)
         levelImageStackView.addArrangedSubview(levelImage4)
         levelImageStackView.addArrangedSubview(levelImage5)
-        addSubview(levelRectangle)
-        addSubview(myLevelRectangle)
+
         addSubview(line)
         addSubview(tableView)
     }
@@ -250,20 +256,20 @@ class ProfileView: UIView {
         }
         
         grayRectangle.snp.makeConstraints { make in
-            make.width.equalTo(345)
+            make.width.equalToSuperview().inset(8)
             make.height.equalTo(200)
             make.top.equalTo(circularImageView.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
         }
         
         nameBoxLabel.snp.makeConstraints { make in
-            make.top.equalTo(grayRectangle.snp.top).offset(16)
-            make.leading.equalTo(grayRectangle.snp.leading).offset(16)
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
         }
         
         levelLabel.snp.makeConstraints { make in
             make.top.equalTo(nameBoxLabel.snp.bottom).offset(8)
-            make.leading.equalTo(grayRectangle.snp.leading).offset(16)
+            make.leading.equalToSuperview().offset(16)
         }
         
         mentBoxLabel.snp.makeConstraints { make in
@@ -273,44 +279,27 @@ class ProfileView: UIView {
         
         level.snp.makeConstraints { make in
             make.top.equalTo(nameBoxLabel.snp.bottom).offset(8)
-            make.trailing.equalTo(grayRectangle.snp.trailing).offset(-24)
+            make.trailing.equalToSuperview().offset(-24)
         }
         
         levelImageStackView.snp.makeConstraints { make in
             make.bottom.equalTo(levelRectangle.snp.top)
             make.height.equalTo(72)
-            make.leading.equalTo(levelRectangle).offset(4)
-            make.width.equalTo(levelRectangle)
+            make.leading.trailing.equalToSuperview()
+//            make.width.equalTo(levelRectangle)
         }
-        levelImage1.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
-        }
-        levelImage2.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
-        }
-        levelImage3.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
-        }
-        levelImage4.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
-        }
-        levelImage5.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
-        }
-        
         
         levelRectangle.snp.makeConstraints { make in
-            make.width.equalTo(313)
+            make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(4)
-            make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
-            make.leading.equalTo(grayRectangle.snp.leading).offset(16)
+            make.bottom.equalToSuperview().offset(-16)
         }
         
         myLevelRectangle.snp.makeConstraints { make in
-            make.width.equalTo(62)
-            make.height.equalTo(4)
-            make.bottom.equalTo(grayRectangle.snp.bottom).offset(-16)
-            make.leading.equalTo(grayRectangle.snp.leading).offset(16)
+            make.width.equalTo(currentUser.level * 60)
+            make.height.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
         }
         
         line.snp.makeConstraints { make in
@@ -325,23 +314,16 @@ class ProfileView: UIView {
             make.trailing.equalToSuperview()
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
-        
-        shadowView.addSubview(grayRectangle)
-        grayRectangle.snp.makeConstraints { make in
-            make.edges.equalTo(shadowView)
-        }
     }
     
     private func updateView() {
+        myLevelRectangleUpdate(profileViewModel?.level ?? 1)
         nicknameLabel.text = profileViewModel?.nameBox
         nameBoxLabel.text = profileViewModel?.nickname
         level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
      //   circularImageView.image = profileViewModel?.profileImage
         idLabel.text = profileViewModel?.email
-        myLevelRectangleUpdate(profileViewModel?.level ?? 1)
-        print("profileView 업데이트")
-        
     }
     
     func updateProfileImage() {
@@ -357,9 +339,10 @@ class ProfileView: UIView {
     }
 
     private func myLevelRectangleUpdate(_ level: Int) {
-        let newWidth = CGFloat(level * 60)
-        myLevelRectangle.snp.updateConstraints { make in
-            make.width.equalTo(newWidth)
+        if levelRectangle.bounds.width != 0 {
+            myLevelRectangle.snp.updateConstraints { make in
+                make.width.equalTo(levelRectangle.bounds.width / 5 * CGFloat(level))
+            }
         }
     }
 

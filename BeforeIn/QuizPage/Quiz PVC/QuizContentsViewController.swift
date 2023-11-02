@@ -22,6 +22,7 @@ class NewQuizContentViewController: UIViewController {
     private var buttonX: UIButton!
     var nextButton: UIButton!
     var previousButton: UIButton!
+    let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     
     override func viewDidLoad() {
@@ -45,14 +46,12 @@ class NewQuizContentViewController: UIViewController {
         
         let cancelButton = UIButton().then {
             $0.setTitle("돌아가기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             $0.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         }
         
         let progressLabel = UILabel().then {
             $0.text = "\(self.index)/10"
-            $0.textColor = .black
             $0.font = UIFont.systemFont(ofSize: 12)
         }
         
@@ -94,7 +93,7 @@ class NewQuizContentViewController: UIViewController {
         let nextButton = UIButton().then {
             $0.setTitle("다음", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            $0.setTitleColor(.lightGray, for: .normal)
+            $0.setTitleColor(.systemGray, for: .normal)
             $0.addTarget(self, action: #selector(nextButtonClick), for: .touchUpInside)
             self.nextButton = $0
         }
@@ -102,7 +101,13 @@ class NewQuizContentViewController: UIViewController {
         let previousButton = UIButton().then {
             $0.setTitle("이전", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            $0.setTitleColor(.black, for: .normal)
+            if isDarkMode {
+                $0.setTitleColor(.white, for: .normal)
+            }
+            else {
+                $0.setTitleColor(.black, for: .normal)
+            }
+            
             $0.addTarget(self, action: #selector(previousButtonClick), for: .touchUpInside)
             self.previousButton = $0
         }
@@ -177,7 +182,13 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = true
-            nextButton.setTitleColor(.black, for: .normal)
+            if isDarkMode {
+                nextButton.setTitleColor(.white, for: .normal)
+            }
+            else {
+                nextButton.setTitleColor(.black, for: .normal)
+            }
+           
         }
         else {
             userAnswer = nil
@@ -192,7 +203,12 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = false
-            nextButton.setTitleColor(.black, for: .normal)
+            if isDarkMode {
+                nextButton.setTitleColor(.white, for: .normal)
+            }
+            else {
+                nextButton.setTitleColor(.black, for: .normal)
+            }
         }
         else {
             userAnswer = nil

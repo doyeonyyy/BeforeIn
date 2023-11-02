@@ -25,13 +25,13 @@ class EtiquetteCell: UICollectionViewCell {
     
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.font = UIFont(name: "SUITE-Bold", size: 18)
     }
     
     var descriptionLabel = UILabel().then {
         $0.text = "설명"
-        $0.textColor = .black
+//        $0.textColor = .black
         $0.numberOfLines = 2
         $0.font = UIFont(name: "SUITE-Regular", size: 14)
        
@@ -47,16 +47,18 @@ class EtiquetteCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        contentView.backgroundColor = .white
+//        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.1
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        contentView.layer.shadowRadius = 4
-        contentView.layer.masksToBounds = false
-        
-        imageView.layer.cornerRadius = 4
-        imageView.layer.masksToBounds = true
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 0.1
+//        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        contentView.layer.shadowRadius = 4
+//        contentView.layer.masksToBounds = false
+//        
+//        imageView.layer.cornerRadius = 4
+//        imageView.layer.masksToBounds = true
         
         // addSubview
         stackView.addArrangedSubview(titleLabel)

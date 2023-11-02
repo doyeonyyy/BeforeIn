@@ -13,7 +13,8 @@ class SearchView: UIView {
     lazy var searchTextField = UITextField().then {
         $0.placeholder = "검색어를 입력하세요"
         $0.borderStyle = .none
-        $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+//        $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+        $0.backgroundColor = .systemGray5
         $0.layer.cornerRadius = 10
         $0.addLeftPadding(8)
     }
