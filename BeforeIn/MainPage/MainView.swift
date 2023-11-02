@@ -111,6 +111,12 @@ class MainView: UIView {
         $0.text = "최근 본 에티켓"
         $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
+    
+    let recentlyEtiquetteLabel = UILabel().then {
+        $0.text = "에티켓을 확인해보세요 🧐"
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.textColor = .systemGray
+    }
 
     var recentlyEtiquetteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -192,6 +198,7 @@ class MainView: UIView {
         etiquetteView.addSubview(quotes2)
         etiquetteView.addSubview(etiquetteViewContent)
         contentView.addSubview(recentlyEtiquette)
+        contentView.addSubview(recentlyEtiquetteLabel)
         contentView.addSubview(recentlyEtiquetteCollectionView)
         contentView.addSubview(recommendLabel)
         contentView.addSubview(recommendEtiquetteCollectionView)
@@ -275,6 +282,10 @@ class MainView: UIView {
         recentlyEtiquette.snp.makeConstraints { make in
             make.top.equalTo(etiquetteView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
+        }
+        recentlyEtiquetteLabel.snp.makeConstraints { make in
+            make.top.equalTo(recentlyEtiquette.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
         }
         recentlyEtiquetteCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recentlyEtiquette.snp.bottom).offset(16)

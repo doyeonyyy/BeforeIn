@@ -29,6 +29,7 @@ class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
         fetchEtiquetteContent()
+        setRecentlyLabel()
         recentlyEtiquetteCollectionView.reloadData()
     }
     
@@ -59,6 +60,14 @@ class MainViewController: BaseViewController {
     
     @objc func randomButtonClick(){
         fetchEtiquetteContent()
+    }
+    
+    func setRecentlyLabel() {
+        if !EtiquetteManager.shared.recentlyEtiquetteList.isEmpty {
+            mainView.recentlyEtiquetteLabel.isHidden = true
+        } else {
+            mainView.recentlyEtiquetteLabel.isHidden = false
+        }
     }
     
     private func setCurrentUser(){
