@@ -20,7 +20,6 @@ class MainViewController: BaseViewController {
     var recommendedEtiquetteCollectionView: UICollectionView!
     var recentlyEtiquetteCollectionView: UICollectionView!
     var recommendedEtiquetteList: [Etiquette] = []
-    var recentlyEtiquetteList: [Etiquette] = []
     let mainView = MainView()
     
     override func loadView() {
@@ -210,23 +209,6 @@ class MainViewController: BaseViewController {
             }
         }
     }
-    
-    func fetchRecentlyEtiquetteList(_ selectEtiquette: Etiquette) {
-        if recentlyEtiquetteList.contains(selectEtiquette) {
-            recentlyEtiquetteList.remove(at: recentlyEtiquetteList.firstIndex(of: selectEtiquette)!)
-            recentlyEtiquetteList.insert(selectEtiquette, at: 0)
-        }
-        else {
-            if recentlyEtiquetteList.count < 5 {
-                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
-            }
-            else {
-                recentlyEtiquetteList.remove(at: recentlyEtiquetteList.endIndex - 1)
-                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
-            }
-        }
-    }
-    
 }
 
 
@@ -234,7 +216,7 @@ class MainViewController: BaseViewController {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.recentlyEtiquetteCollectionView {
-            return recentlyEtiquetteList.count
+            return EtiquetteManager.shared.recentlyEtiquetteList.count
         }
         else {
             return recommendedEtiquetteList.count
@@ -244,7 +226,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mainView.recentlyEtiquetteCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemCell", for: indexPath) as? RecentItemCell else { return UICollectionViewCell()}
-            let etiquette = recentlyEtiquetteList[indexPath.row]
+            let etiquette = EtiquetteManager.shared.recentlyEtiquetteList[indexPath.row]
             cell.configureUI(etiquette)
             return cell
         }
@@ -260,11 +242,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var selectedEtiquette: Etiquette
         if collectionView == mainView.recentlyEtiquetteCollectionView {
-            selectedEtiquette = recentlyEtiquetteList[indexPath.row]
+            selectedEtiquette = EtiquetteManager.shared.recentlyEtiquetteList[indexPath.row]
         } else {
             selectedEtiquette = recommendedEtiquetteList[indexPath.row]
         }
-        fetchRecentlyEtiquetteList(selectedEtiquette)
+        EtiquetteManager.shared.fetchRecentlyEtiquetteList(selectedEtiquette)
         let detailVC = DetailViewController()
         detailVC.selectedEtiquette = selectedEtiquette
         navigationController?.pushViewController(detailVC, animated: true)

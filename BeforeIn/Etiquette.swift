@@ -41,3 +41,24 @@ struct EtiquetteContent {
     }
 
 }
+
+class EtiquetteManager {
+    static let shared = EtiquetteManager()
+    var recentlyEtiquetteList: [Etiquette] = []
+    
+    func fetchRecentlyEtiquetteList(_ selectEtiquette: Etiquette) {
+        if recentlyEtiquetteList.contains(selectEtiquette) {
+            recentlyEtiquetteList.remove(at: recentlyEtiquetteList.firstIndex(of: selectEtiquette)!)
+            recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+        }
+        else {
+            if recentlyEtiquetteList.count < 5 {
+                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+            }
+            else {
+                recentlyEtiquetteList.remove(at: recentlyEtiquetteList.endIndex - 1)
+                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+            }
+        }
+    }
+}
