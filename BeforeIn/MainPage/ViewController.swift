@@ -18,6 +18,8 @@ class MainViewController: BaseViewController {
     let userManager = UserManager()
     var firebaseDB: DatabaseReference!
     var recommendedEtiquetteCollectionView: UICollectionView!
+    var recentlyEtiquetteCollectionView: UICollectionView!
+    var recommendedEtiquetteList: [Etiquette] = []
     let mainView = MainView()
     
     override func loadView() {
@@ -27,6 +29,7 @@ class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
         fetchEtiquetteContent()
+        recentlyEtiquetteCollectionView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -88,6 +91,7 @@ class MainViewController: BaseViewController {
         mainView.recommendEtiquetteCollectionView.dataSource = self
         mainView.recommendEtiquetteCollectionView.register(RecommendItemCell.self, forCellWithReuseIdentifier: "RecommendItemCell")
         recommendedEtiquetteCollectionView = mainView.recommendEtiquetteCollectionView
+        recentlyEtiquetteCollectionView = mainView.recentlyEtiquetteCollectionView
     }
     
     func fetchEtiquetteContent() {
@@ -180,19 +184,31 @@ class MainViewController: BaseViewController {
                 dispatchGroup.notify(queue: .main) {
                     let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
                     etiquetteList.append(newEtiquette)
-                    self.recommendedEtiquetteCollectionView.reloadData()
-                    print("에티켓 리스트 업데이트 됨")
+//                    self.recommendedEtiquetteCollectionView.reloadData()
+//                    print("에티켓 리스트 업데이트 됨")
                 }
             }
             
             dispatchGroup.notify(queue: .main) {
                 self.fetchEtiquetteContent()
-                
+                self.fetchRecommendedEtiquetteList()
+                self.recommendedEtiquetteCollectionView.reloadData()
             }
             
         }
     }
-    
+ 
+    private func fetchRecommendedEtiquetteList() {
+        let groupedEtiquettes = Dictionary(grouping: etiquetteList, by: { $0.category })
+        for (_, etiquettes) in groupedEtiquettes {
+            var shuffledEtiquettes = etiquettes.shuffled()
+            if shuffledEtiquettes.count >= 2 {
+                recommendedEtiquetteList.append(contentsOf: Array(shuffledEtiquettes.prefix(2)))
+            } else {
+                recommendedEtiquetteList.append(contentsOf: shuffledEtiquettes)
+            }
+        }
+    }
 }
 
 
@@ -200,21 +216,23 @@ class MainViewController: BaseViewController {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.recentlyEtiquetteCollectionView {
-            return 0
+            return EtiquetteManager.shared.recentlyEtiquetteList.count
         }
         else {
-            return etiquetteList.count
+            return recommendedEtiquetteList.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mainView.recentlyEtiquetteCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemCell", for: indexPath) as? RecentItemCell else { return UICollectionViewCell()}
+            let etiquette = EtiquetteManager.shared.recentlyEtiquetteList[indexPath.row]
+            cell.configureUI(etiquette)
             return cell
         }
         else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendItemCell", for: indexPath) as? RecommendItemCell else { return UICollectionViewCell()}
-            let etiquette = etiquetteList[indexPath.row]
+            let etiquette = recommendedEtiquetteList[indexPath.row]
             cell.configureUI(etiquette)
             return cell
         }
@@ -222,7 +240,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedEtiquette = etiquetteList[indexPath.row]
+        var selectedEtiquette: Etiquette
+        if collectionView == mainView.recentlyEtiquetteCollectionView {
+            selectedEtiquette = EtiquetteManager.shared.recentlyEtiquetteList[indexPath.row]
+        } else {
+            selectedEtiquette = recommendedEtiquetteList[indexPath.row]
+        }
+        EtiquetteManager.shared.fetchRecentlyEtiquetteList(selectedEtiquette)
         let detailVC = DetailViewController()
         detailVC.selectedEtiquette = selectedEtiquette
         navigationController?.pushViewController(detailVC, animated: true)

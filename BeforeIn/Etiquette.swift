@@ -17,6 +17,14 @@ struct Etiquette {
     let description: String
 }
 
+extension Etiquette: Equatable {
+    static func == (lhs: Etiquette, rhs: Etiquette) -> Bool {
+        return lhs.category == rhs.category && lhs.place == rhs.place
+    }
+    
+    
+}
+
 var etiquetteList: [Etiquette] = []
 
 struct EtiquetteContent {
@@ -32,4 +40,25 @@ struct EtiquetteContent {
         self.contentImageLink = contentImageLink
     }
 
+}
+
+class EtiquetteManager {
+    static let shared = EtiquetteManager()
+    var recentlyEtiquetteList: [Etiquette] = []
+    
+    func fetchRecentlyEtiquetteList(_ selectEtiquette: Etiquette) {
+        if recentlyEtiquetteList.contains(selectEtiquette) {
+            recentlyEtiquetteList.remove(at: recentlyEtiquetteList.firstIndex(of: selectEtiquette)!)
+            recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+        }
+        else {
+            if recentlyEtiquetteList.count < 6 {
+                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+            }
+            else {
+                recentlyEtiquetteList.remove(at: recentlyEtiquetteList.endIndex - 1)
+                recentlyEtiquetteList.insert(selectEtiquette, at: 0)
+            }
+        }
+    }
 }
