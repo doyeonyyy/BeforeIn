@@ -40,38 +40,42 @@ class NewQuizViewController: UIPageViewController {
     }
     
     @objc func nextButtonClick() {
-//        goToNextPage()
+        //        goToNextPage()
         print("다음 버튼 눌림")
     }
     
     func fetchQuizList() {
         ref = Database.database().reference()
         ref.child("SavedData/QuizData/").getData(completion:  { error, snapshot in
-          guard error == nil else {
-            print(error!.localizedDescription)
-            return
-          }
-            self.quizList = []
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            var availableQuizzes: [Quiz] = []
             let data = snapshot?.value as! [String: Any]
-            var count = 0
-        loop: for key in data.keys{
-            let quizJson = data[key] as! [String: Any]
+        loop: for place in data.keys{
+            let quizJson = data[place] as! [String: Any]
             let quizContent = quizJson["content"] as! [String: Bool]
             for quiz in quizContent.keys{
                 let quiz = quiz
                 let answer = quizContent[quiz] as! Bool
-                self.quizList.append(Quiz(question: quiz, answer: answer))
-                count += 1
-                print("퀴즈 추가됨 현재 퀴즈 개수: \(count)개")
-                if count == 10 {
-                    break loop
-                }
+                availableQuizzes.append(Quiz(question: quiz, answer: answer))
             }
         }
+            
+            let numberofQuiz = 10
+            if availableQuizzes.count > 10 {
+                let randomIndexes = Array(0..<availableQuizzes.count).shuffled().prefix(numberofQuiz)
+                self.quizList = randomIndexes.map { availableQuizzes[$0] }
+            }
+            else {
+                self.quizList = availableQuizzes
+            }
+            
             if let firstViewController = self.orderedViewControllers.first {
                 self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
             }
-            print("작업완료")
+            print("\(self.quizList.count)")
         })
     }
     
