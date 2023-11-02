@@ -9,7 +9,7 @@ import Then
 class DisplayViewController: UIViewController {
     
     // MARK: - Properties
-    private var isDarkMode = false
+    private var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     private let customView = UIView().then {
         $0.backgroundColor = .systemGray6
@@ -54,12 +54,6 @@ class DisplayViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if self.view.window?.overrideUserInterfaceStyle == .dark {
-            isDarkMode = true
-        } else {
-            isDarkMode = false
-        }
     }
     
     override func viewDidLoad() {
@@ -133,12 +127,11 @@ class DisplayViewController: UIViewController {
     }
     
     private func userInterfaceStyleDetection() {
-        let userInterfaceStyle = traitCollection.userInterfaceStyle
-        switch userInterfaceStyle {
-        case .light:
+        switch isDarkMode {
+        case false:
             lightModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
             darkModeCheckButton.image = UIImage(systemName: "circle")
-        case .dark:
+        case true:
             lightModeCheckButton.image = UIImage(systemName: "circle")
             darkModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
         default:
@@ -171,14 +164,16 @@ class DisplayViewController: UIViewController {
     // MARK: - @objc
     @objc func lightModeTapped() {
         isDarkMode = false
+        UserDefaults.standard.setValue(isDarkMode, forKey: "isDarkMode")
         self.view.window?.overrideUserInterfaceStyle = .light
-
+        
         lightModeCheckButton.image = UIImage(systemName: "checkmark.circle.fill")
         darkModeCheckButton.image = UIImage(systemName: "circle")
     }
     
     @objc func darkModeTapped() {
         isDarkMode = true
+        UserDefaults.standard.setValue(isDarkMode, forKey: "isDarkMode")
         self.view.window?.overrideUserInterfaceStyle = .dark
 
         lightModeCheckButton.image = UIImage(systemName: "circle")
