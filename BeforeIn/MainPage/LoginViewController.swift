@@ -63,7 +63,7 @@ class LoginViewController: BaseViewController {
         loginView.showPwButton.isSelected.toggle()
         
         if loginView.showPwButton.isSelected {
-            loginView.showPwButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            loginView.showPwButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             loginView.pwTextField.isSecureTextEntry = true
         } else {
             loginView.showPwButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)

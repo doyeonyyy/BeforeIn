@@ -67,7 +67,7 @@ class PasswordEditViewController: BaseViewController {
         passwordEditView.editPasswordButton.isSelected.toggle()
         
         if passwordEditView.editPasswordButton.isSelected {
-            passwordEditView.editPasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            passwordEditView.editPasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             passwordEditView.editPasswordTextField.isSecureTextEntry = true
         } else {
             passwordEditView.editPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
@@ -79,7 +79,7 @@ class PasswordEditViewController: BaseViewController {
         passwordEditView.newPasswordButton.isSelected.toggle()
         
         if passwordEditView.newPasswordButton.isSelected {
-            passwordEditView.newPasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            passwordEditView.newPasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             passwordEditView.newPasswordTextField.isSecureTextEntry = true
         } else {
             passwordEditView.newPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
@@ -91,7 +91,7 @@ class PasswordEditViewController: BaseViewController {
         passwordEditView.checkPasswordButton.isSelected.toggle()
         
         if passwordEditView.checkPasswordButton.isSelected {
-            passwordEditView.checkPasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            passwordEditView.checkPasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             passwordEditView.checkPasswordTextField.isSecureTextEntry = true
         } else {
             passwordEditView.checkPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)

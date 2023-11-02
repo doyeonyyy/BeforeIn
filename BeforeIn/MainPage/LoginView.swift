@@ -70,8 +70,8 @@ class LoginView: UIView {
     }
     
     lazy var showPwButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
-        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        $0.tintColor = .systemGray2
     }
     
     lazy var loginButton = UIButton().then {

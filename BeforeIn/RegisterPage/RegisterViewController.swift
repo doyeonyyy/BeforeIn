@@ -167,7 +167,7 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.isSelected.toggle()
         
         if registerView.showPwButton.isSelected {
-            registerView.showPwButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            registerView.showPwButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             registerView.registerPwTextField.isSecureTextEntry = true
         } else {
             registerView.showPwButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
@@ -179,7 +179,7 @@ class RegisterViewController: BaseViewController {
         registerView.showCheckButton.isSelected.toggle()
         
         if registerView.showCheckButton.isSelected {
-            registerView.showCheckButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            registerView.showCheckButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             registerView.registerCheckTextField.isSecureTextEntry = true
         } else {
             registerView.showCheckButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)

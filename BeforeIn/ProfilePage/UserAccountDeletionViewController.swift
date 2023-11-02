@@ -29,8 +29,8 @@ class UserAccountDeletionViewController: BaseViewController {
         $0.backgroundColor = .systemGray2
     }
     let checkPasswordButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
-        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        $0.tintColor = .systemGray2
     }
     private let userDeletionButton = UIButton().then {
         $0.setTitle("회원탈퇴", for: .normal)
@@ -114,7 +114,7 @@ class UserAccountDeletionViewController: BaseViewController {
         checkPasswordButton.isSelected.toggle()
         
         if checkPasswordButton.isSelected {
-            checkPasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            checkPasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             checkPasswordTextField.isSecureTextEntry = true
         } else {
             checkPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)

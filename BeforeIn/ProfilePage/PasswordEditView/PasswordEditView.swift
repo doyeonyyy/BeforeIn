@@ -28,8 +28,8 @@ class PasswordEditView: UIView {
         $0.backgroundColor = .systemGray2
     }
     let editPasswordButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
-        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        $0.tintColor = .systemGray2
     }
     
     private let newPasswordLabel = UILabel().then {
@@ -51,8 +51,8 @@ class PasswordEditView: UIView {
         $0.backgroundColor = .systemGray2
     }
     let newPasswordButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
-        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        $0.tintColor = .systemGray2
     }
     
     private let checkPasswordLabel = UILabel().then {
@@ -72,8 +72,8 @@ class PasswordEditView: UIView {
         $0.backgroundColor = .systemGray2
     }
     let checkPasswordButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
-        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        $0.tintColor = .systemGray2
     }
     
     let changePasswordButton = UIButton().then {
