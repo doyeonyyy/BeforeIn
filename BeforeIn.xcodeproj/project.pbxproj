@@ -79,7 +79,6 @@
 		159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79332ADE75DC00FE210E /* MainViewModel.swift */; };
 		159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79362ADFBAD200FE210E /* ProfileView.swift */; };
 		159B79392ADFBB3400FE210E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79382ADFBB3400FE210E /* ProfileViewModel.swift */; };
-		15B0F6C22AF221490072457C /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B0F6C12AF221490072457C /* Secret.swift */; };
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
@@ -96,6 +95,8 @@
 		675F21732AD7B6F800C4BD37 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21722AD7B6F800C4BD37 /* LoginView.swift */; };
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		678D2C552AF3877C00B42226 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678D2C542AF3877C00B42226 /* Secret.swift */; };
+		678D2C582AF387A700B42226 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 678D2C572AF387A700B42226 /* NVActivityIndicatorView */; };
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
 		67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */; };
 		67DAFBFF2AF08FF200803A84 /* PasswordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */; };
@@ -172,7 +173,6 @@
 		159B79332ADE75DC00FE210E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		159B79362ADFBAD200FE210E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		159B79382ADFBB3400FE210E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		15B0F6C12AF221490072457C /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +187,7 @@
 		674452452AEFCA5C00AED764 /* SMTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTPManager.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		678D2C542AF3877C00B42226 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
 		67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFindViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 				159B79002ADE6DE600FE210E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				159B790E2ADE6DE600FE210E /* FirebaseCrashlytics in Frameworks */,
 				1596DCDA2AD6B33700E6D388 /* Gifu in Frameworks */,
+				678D2C582AF387A700B42226 /* NVActivityIndicatorView in Frameworks */,
 				159B792E2ADE6DE600FE210E /* FirebaseRemoteConfigSwift in Frameworks */,
 				159B78FE2ADE6DE600FE210E /* FirebaseAnalytics in Frameworks */,
 				159B79302ADE6DE600FE210E /* FirebaseStorage in Frameworks */,
@@ -322,7 +324,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				15B0F6C12AF221490072457C /* Secret.swift */,
+				678D2C542AF3877C00B42226 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -622,6 +624,7 @@
 				159B792F2ADE6DE600FE210E /* FirebaseStorage */,
 				159B79312ADE6DE600FE210E /* FirebaseStorageCombine-Community */,
 				674452482AEFCB1000AED764 /* SwiftSMTP */,
+				678D2C572AF387A700B42226 /* NVActivityIndicatorView */,
 			);
 			productName = BeforeIn;
 			productReference = 1596DC9F2AD6B18A00E6D388 /* BeforeIn.app */;
@@ -657,6 +660,7 @@
 				1596DCD82AD6B33700E6D388 /* XCRemoteSwiftPackageReference "Gifu" */,
 				159B78C62ADE10DD00FE210E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				674452472AEFCB1000AED764 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+				678D2C562AF387A700B42226 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = 1596DCA02AD6B18A00E6D388 /* Products */;
 			projectDirPath = "";
@@ -695,7 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */,
-				15B0F6C22AF221490072457C /* Secret.swift in Sources */,
+				678D2C552AF3877C00B42226 /* Secret.swift in Sources */,
 				159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */,
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */,
@@ -1024,6 +1028,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		678D2C562AF387A700B42226 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1179,6 +1191,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 674452472AEFCB1000AED764 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		678D2C572AF387A700B42226 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 678D2C562AF387A700B42226 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
