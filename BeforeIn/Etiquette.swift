@@ -52,7 +52,7 @@ class EtiquetteManager {
             recentlyEtiquetteList.insert(selectEtiquette, at: 0)
         }
         else {
-            if recentlyEtiquetteList.count < 5 {
+            if recentlyEtiquetteList.count < 6 {
                 recentlyEtiquetteList.insert(selectEtiquette, at: 0)
             }
             else {
