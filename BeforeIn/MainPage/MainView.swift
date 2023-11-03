@@ -127,6 +127,7 @@ class MainView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
         return collectionView
     }()
     
@@ -144,7 +145,7 @@ class MainView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
         return collectionView
     }()
     
@@ -289,8 +290,7 @@ class MainView: UIView {
         }
         recentlyEtiquetteCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recentlyEtiquette.snp.bottom).offset(16)
-            make.leading.equalToSuperview().inset(8)
-            make.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(100)
         }
         recommendLabel.snp.makeConstraints { make in
@@ -299,8 +299,7 @@ class MainView: UIView {
         }
         recommendEtiquetteCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recommendLabel.snp.bottom)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(240)
             make.bottom.equalToSuperview().offset(-20)
         }
