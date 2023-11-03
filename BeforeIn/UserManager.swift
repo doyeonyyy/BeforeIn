@@ -101,12 +101,10 @@ struct UserManager {
             print("이미지 데이터를 생성하는데 실패했습니다.")
             return
         }
-        
-        let userId = currentUser.email
-        let storageRef = Storage.storage().reference().child("profileImages/\(userId).jpg")
+        let storageRef = Storage.storage().reference().child("profileImages/\(currentUser.email).jpg")
         
         let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
+        StorageMetadata().contentType = "image/jpeg"
         
         storageRef.putData(imageData, metadata: metadata) { (metadata, error) in
             if let error = error {
@@ -116,8 +114,16 @@ struct UserManager {
                 
                 storageRef.downloadURL { (url, error) in
                     if let downloadURL = url {
-                        self.saveImageURL(imageURL: downloadURL.absoluteString)
-                        print("이미지 다운로드 URL 가져오기 성공")
+                        let stringURL = downloadURL.absoluteString
+                        currentUser.profileImage = stringURL
+                        self.saveImageURL(imageURL: stringURL)
+                        
+                        ImageCacheManager.shared.setObject(image, forKey: "\(downloadURL)" as NSString)
+                        if ImageCacheManager.shared.object(forKey: "\(downloadURL)" as NSString) != nil {
+                            print("프로필 이미지 캐싱 성공")
+                        } else {
+                            print("프로필 이미지 캐싱 실패")
+                        }
                     } else if let error = error {
                         print("다운로드 URL 가져오기 오류: \(error.localizedDescription)")
                     }
@@ -151,20 +157,20 @@ struct UserManager {
     }
     
     // 이미지파싱
-    func parseImage(url: URL, completion: @escaping (UIImage?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                // 네트워크 오류 발생
-                print("네트워크 오류: \(error.localizedDescription)")
-                completion(nil)
-                return
-            }
-            if let data = data, let image = UIImage(data: data) {
-                completion(image)
-            } else {
-                print("이미지 다운로드 또는 파싱 오류")
-                completion(nil)
-            }
-        }.resume()
-    }
+//    func parseImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            if let error = error {
+//                // 네트워크 오류 발생
+//                print("네트워크 오류: \(error.localizedDescription)")
+//                completion(nil)
+//                return
+//            }
+//            if let data = data, let image = UIImage(data: data) {
+//                completion(image)
+//            } else {
+//                print("이미지 다운로드 또는 파싱 오류")
+//                completion(nil)
+//            }
+//        }.resume()
+//    }
 }

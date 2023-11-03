@@ -74,7 +74,7 @@ class MainView: UIView {
     
     let randomButton = UIButton().then {
         $0.setImage(UIImage(systemName: "arrow.counterclockwise"), for: .normal)
-        $0.tintColor = .systemBlack
+        $0.tintColor = .SystemBlack
     }
     
     private let etiquetteView = UIView().then{
@@ -150,7 +150,7 @@ class MainView: UIView {
     
     let seeMoreButton = UIButton().then{
         $0.setTitle("더보기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         $0.setTitleColor(.black, for: .normal)
         
     }
@@ -294,7 +294,7 @@ class MainView: UIView {
             make.height.equalTo(100)
         }
         recommendLabel.snp.makeConstraints { make in
-            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(20)
+            make.top.equalTo(recentlyEtiquetteCollectionView.snp.bottom).offset(30)
             make.leading.equalToSuperview().inset(24)
         }
         recommendEtiquetteCollectionView.snp.makeConstraints { make in
@@ -317,19 +317,14 @@ class MainView: UIView {
         level.text = mainViewModel?.levelNumberText
         print("view 업데이트")
     }
-
+    
     private func updateProfileImage() {
-          // 프로필 이미지를 업데이트하는 로직을 구현
-          if let imageURL = URL(string: mainViewModel?.profileImageURL ?? "") {
-              mainViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
-                  if let image = image {
-                      DispatchQueue.main.async {
-                          self?.profileImageView.image = image
-                      }
-                  }
-              }
-          }
-      }
+        if let imageURL = URL(string: mainViewModel?.profileImageURL ?? "") {
+            self.profileImageView.setImageUrl(imageURL.absoluteString)
+        }
+    }
+    
+    
   }
 
 

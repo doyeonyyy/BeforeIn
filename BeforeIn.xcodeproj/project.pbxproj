@@ -79,7 +79,6 @@
 		159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79332ADE75DC00FE210E /* MainViewModel.swift */; };
 		159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79362ADFBAD200FE210E /* ProfileView.swift */; };
 		159B79392ADFBB3400FE210E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79382ADFBB3400FE210E /* ProfileViewModel.swift */; };
-		15BC328C2AF38C0800CBEC82 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC328B2AF38C0800CBEC82 /* Secret.swift */; };
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
@@ -103,6 +102,9 @@
 		67DAFC2C2AF0C4F700803A84 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */; };
 		67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */; };
 		67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4862AE52F6800594C7C /* UIButton.swift */; };
+		67DDA4C32AF47EEF0047DBAA /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C22AF47EEF0047DBAA /* Secret.swift */; };
+		67DDA4C52AF48E6B0047DBAA /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */; };
+		67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C62AF48EED0047DBAA /* UIImageView.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -173,7 +175,6 @@
 		159B79332ADE75DC00FE210E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		159B79362ADFBAD200FE210E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		159B79382ADFBB3400FE210E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		15BC328B2AF38C0800CBEC82 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +195,9 @@
 		67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewController.swift; sourceTree = "<group>"; };
 		67DBB4862AE52F6800594C7C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		67DDA4C22AF47EEF0047DBAA /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		67DDA4C62AF48EED0047DBAA /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
@@ -324,7 +328,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				15BC328B2AF38C0800CBEC82 /* Secret.swift */,
+				67DDA4C22AF47EEF0047DBAA /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -387,6 +391,7 @@
 				67DBB4862AE52F6800594C7C /* UIButton.swift */,
 				67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */,
 				E7B26FD52AEA92900055930E /* UIFont.swift */,
+				67DDA4C62AF48EED0047DBAA /* UIImageView.swift */,
 				E7B26FC02AEA8E200055930E /* Fonts */,
 			);
 			name = Extension;
@@ -482,6 +487,7 @@
 				1543EED32AE64E9300AD587B /* Comment.swift */,
 				674452452AEFCA5C00AED764 /* SMTPManager.swift */,
 				1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */,
+				67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -699,7 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */,
-				15BC328C2AF38C0800CBEC82 /* Secret.swift in Sources */,
+				67DDA4C32AF47EEF0047DBAA /* Secret.swift in Sources */,
 				159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */,
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */,
@@ -710,6 +716,7 @@
 				E779C6312AD7998500702D60 /* UIColor.swift in Sources */,
 				6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */,
 				67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */,
+				67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
 				1586ECA92AE40FD100055040 /* Date.swift in Sources */,
@@ -760,6 +767,7 @@
 				1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,
 				1596DCA52AD6B18A00E6D388 /* SceneDelegate.swift in Sources */,
+				67DDA4C52AF48E6B0047DBAA /* ImageCacheManager.swift in Sources */,
 				159B78C52ADD57A700FE210E /* Quiz.swift in Sources */,
 				67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */,
 				1543EED62AE68AD700AD587B /* CommunityPageViewModel.swift in Sources */,

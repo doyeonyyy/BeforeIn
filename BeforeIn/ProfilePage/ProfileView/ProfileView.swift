@@ -298,13 +298,7 @@ class ProfileView: UIView {
     
     func updateProfileImage() {
         if let imageURL = URL(string: profileViewModel?.imageURL ?? "") {
-            profileViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
-                if let image = image {
-                    DispatchQueue.main.async {
-                        self?.circularImageView.image = image
-                    }
-                }
-            }
+            self.circularImageView.setImageUrl(imageURL.absoluteString)
         }
     }
 
