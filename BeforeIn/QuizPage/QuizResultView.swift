@@ -106,6 +106,5 @@ class QuizResultView: UIView {
         labelB.text = "\(quizResultViewModel?.nickname ?? "ㅇㅇㅇ")님은"
         labelC.text = "Lv .\(quizResultViewModel?.level ?? 1) \(quizResultViewModel?.levelText ?? "검은머리 짐승")"
         levelImage.image = quizResultViewModel?.levelImage
-        print("view 업데이트")
     }
 }

@@ -24,7 +24,6 @@ class QuizIntroViewModel {
     }
     
     func updateUser(_ user: User) {
-        print("ViewModel user 업데이트")
         self.user = user
     }
 }

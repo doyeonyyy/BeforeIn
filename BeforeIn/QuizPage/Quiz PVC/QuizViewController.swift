@@ -75,7 +75,6 @@ class NewQuizViewController: UIPageViewController {
             if let firstViewController = self.orderedViewControllers.first {
                 self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
             }
-            print("\(self.quizList.count)")
         })
     }
     
