@@ -94,6 +94,9 @@ class PasswordFindViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "비밀번호 찾기"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(backTapped))
+        
         addSubview()
         setUI()
         setTextField()
@@ -288,7 +291,11 @@ class PasswordFindViewController: BaseViewController {
         userAuthCode = 9876
         checkEmail = false
     }
-    
+    @objc private func backTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
 }
 
 
