@@ -227,16 +227,16 @@ class RegisterViewController: BaseViewController {
     
     @objc func idTextFieldDidChange(_ textField: UITextField) {
         registerView.authIdButton.backgroundColor = .systemGray6
-        registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authIdButton.setTitleColor(.darkGray, for: .normal)
         registerView.authCodeButton.backgroundColor = .systemGray6
-        registerView.authCodeButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authCodeButton.setTitleColor(.darkGray, for: .normal)
         userAuthCode = 9876
         checkEmail = false
     }
     
     @objc func nicknameTextFieldDidChange(_ textField: UITextField) {
         registerView.checkNicknameButton.backgroundColor = .systemGray6
-        registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.checkNicknameButton.setTitleColor(.darkGray, for: .normal)
         checkNickname = false
     }
     
