@@ -78,13 +78,7 @@ class MainViewController: BaseViewController {
                         currentUser = user
                         self.mainView.mainViewModel = MainViewModel(user: currentUser)
                         if let imageURL = URL(string: user.profileImage) {
-                            self.userManager.parseImage(url: imageURL) { image in
-                                if let image = image {
-                                    DispatchQueue.main.async {
-                                        self.mainView.profileImageView.image = image
-                                   }
-                                }
-                            }
+                            self.mainView.profileImageView.setImageUrl(imageURL.absoluteString)
                         }
                     }
                 }

@@ -317,19 +317,14 @@ class MainView: UIView {
         level.text = mainViewModel?.levelNumberText
         print("view 업데이트")
     }
-
+    
     private func updateProfileImage() {
-          // 프로필 이미지를 업데이트하는 로직을 구현
-          if let imageURL = URL(string: mainViewModel?.profileImageURL ?? "") {
-              mainViewModel?.userManager.parseImage(url: imageURL) { [weak self] image in
-                  if let image = image {
-                      DispatchQueue.main.async {
-                          self?.profileImageView.image = image
-                      }
-                  }
-              }
-          }
-      }
+        if let imageURL = URL(string: mainViewModel?.profileImageURL ?? "") {
+            self.profileImageView.setImageUrl(imageURL.absoluteString)
+        }
+    }
+    
+    
   }
 
 
