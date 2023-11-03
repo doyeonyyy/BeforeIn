@@ -12,7 +12,7 @@ import MessageUI
 class AppInfoViewController: BaseViewController {
     
     // MARK: - Properties
-    let AppInfoCellList = ["공지사항", "서비스 이용약관", "개인정보 처리방침", "피드백 남기기", "앱 버전"]
+    let AppInfoCellList = ["공지사항", "서비스 이용약관", "개인정보 처리방침", "문의하기", "앱 버전"]
     let AppVersion = "1.0"
     
     let tableView: UITableView = {
