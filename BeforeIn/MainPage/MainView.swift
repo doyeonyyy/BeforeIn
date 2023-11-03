@@ -78,17 +78,17 @@ class MainView: UIView {
     }
     
     private let etiquetteView = UIView().then{
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .orange
         $0.layer.cornerRadius = 16
         
         // 그림자
-//        $0.layer.borderWidth = 1
-//        $0.layer.borderColor = UIColor.systemBackground.cgColor
-//        $0.layer.shadowOpacity = 0.5
-//        $0.layer.shadowColor = UIColor.systemGray4.cgColor
-//        $0.layer.masksToBounds = false
-//        $0.layer.shadowOffset = CGSize(width: 4, height: 8)
-//        $0.layer.shadowRadius = 1
+        //        $0.layer.borderWidth = 1
+        //        $0.layer.borderColor = UIColor.systemBackground.cgColor
+        //        $0.layer.shadowOpacity = 0.5
+        //        $0.layer.shadowColor = UIColor.systemGray4.cgColor
+        //        $0.layer.masksToBounds = false
+        //        $0.layer.shadowOffset = CGSize(width: 4, height: 8)
+        //        $0.layer.shadowRadius = 1
     }
     
     private let quotes1 = UILabel().then{
@@ -108,14 +108,16 @@ class MainView: UIView {
     }
     
     private let etiquetteViewMainContent = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
-//        $0.textAlignment = .center
+        $0.textAlignment = .center
     }
     
     private let etiquetteViewSubContent = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.sizeToFit()
     }
     
     private let recentlyEtiquette = UILabel().then{
@@ -128,7 +130,7 @@ class MainView: UIView {
         $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .systemGray
     }
-
+    
     var recentlyEtiquetteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -178,7 +180,7 @@ class MainView: UIView {
             updateView()
         }
     }
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -205,12 +207,12 @@ class MainView: UIView {
         contentView.addSubview(divider)
         contentView.addSubview(etiquetteLabel)
         contentView.addSubview(randomButton)
-        contentView.addSubview(etiquetteView)
-        etiquetteView.addSubview(quotes1)
-        etiquetteView.addSubview(quotes2)
-        etiquetteView.addSubview(etiquetteViewPlace)
-        etiquetteView.addSubview(etiquetteViewMainContent)
-        etiquetteView.addSubview(etiquetteViewSubContent)
+       // contentView.addSubview(etiquetteView)
+        contentView.addSubview(quotes1)
+        contentView.addSubview(quotes2)
+        contentView.addSubview(etiquetteViewPlace)
+        contentView.addSubview(etiquetteViewMainContent)
+        contentView.addSubview(etiquetteViewSubContent)
         contentView.addSubview(recentlyEtiquette)
         contentView.addSubview(recentlyEtiquetteLabel)
         contentView.addSubview(recentlyEtiquetteCollectionView)
@@ -220,6 +222,9 @@ class MainView: UIView {
     }
     
     private func setupConstraint() {
+        etiquetteViewMainContent.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        etiquetteViewSubContent.setContentHuggingPriority(.defaultLow, for: .vertical)
+        
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalTo(self)
@@ -231,9 +236,9 @@ class MainView: UIView {
         }
         
         indicator.snp.makeConstraints {
-               $0.center.equalToSuperview()
-           }
-
+            $0.center.equalToSuperview()
+        }
+        
         nameLabel.snp.makeConstraints { make in
             make.bottom.equalTo(levelLabel.snp.top).offset(-10)
             make.leading.equalToSuperview().offset(24)
@@ -246,10 +251,10 @@ class MainView: UIView {
             make.bottom.equalTo(levelLabel.snp.bottom).offset(-2)
             make.leading.equalTo(levelLabel.snp.trailing).offset(4)
         }
-//        level.snp.makeConstraints { make in
-//            make.bottom.equalTo(subLabel.snp.bottom)
-//            make.leading.equalTo(subLabel.snp.trailing).offset(16)
-//        }
+        //        level.snp.makeConstraints { make in
+        //            make.bottom.equalTo(subLabel.snp.bottom)
+        //            make.leading.equalTo(subLabel.snp.trailing).offset(16)
+        //        }
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(30)
             make.width.height.equalTo(100)
@@ -274,39 +279,35 @@ class MainView: UIView {
             make.top.equalTo(etiquetteLabel.snp.top)
             make.leading.equalTo(etiquetteLabel.snp.trailing).offset(5)
         }
-        etiquetteView.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteLabel.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().inset(24)
-            make.height.equalTo(160)
-        }
-        etiquetteViewPlace.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview()
-        }
+//        etiquetteView.snp.makeConstraints { make in
+//            make.top.equalTo(etiquetteLabel.snp.bottom).offset(30)
+//            make.width.equalToSuperview()
+//            make.height.equalTo(160)
+//        }
+//        etiquetteViewPlace.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalToSuperview()
+//        }
         quotes1.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteViewPlace.snp.bottom)
-            make.leading.equalToSuperview().offset(3)
+            make.top.equalTo(etiquetteLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(30)
         }
         quotes2.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(3)
-            make.bottom.equalToSuperview().inset(10)
+            make.top.equalTo(etiquetteViewSubContent.snp.bottom).offset(20)
+            make.trailing.equalToSuperview().inset(30)
         }
         etiquetteViewMainContent.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(quotes1.snp.bottom)
+            make.top.equalTo(quotes1.snp.top).offset(40)
+            make.leading.trailing.equalToSuperview().inset(40)
         }
-        
         etiquetteViewSubContent.snp.makeConstraints { make in
             make.top.equalTo(etiquetteViewMainContent.snp.bottom)
-            make.leading.equalTo(quotes1.snp.trailing)
-            make.trailing.equalTo(quotes2.snp.leading)
-            make.bottom.equalTo(quotes2.snp.bottom).inset(16)
+            make.leading.trailing.equalToSuperview().inset(40)
+            make.bottom.equalTo(quotes2.snp.bottom).offset(-40)
         }
-        
-        
+
         recentlyEtiquette.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteView.snp.bottom).offset(20)
+            make.top.equalTo(quotes2.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
         }
         recentlyEtiquetteLabel.snp.makeConstraints { make in
@@ -332,6 +333,8 @@ class MainView: UIView {
             make.trailing.equalToSuperview().inset(24)
             make.centerY.equalTo(recommendLabel)
         }
+
+        
     }
     
     private func updateView() {
@@ -339,7 +342,7 @@ class MainView: UIView {
         nameLabel.text = "\(mainViewModel?.nickname ?? "ㅇㅇㅇ")님은 현재"
         levelLabel.text = mainViewModel?.level
         etiquetteLabel.text = (mainViewModel?.place ?? "결혼식장") + "에서 알아두면 쓸모있는 에티켓"
-//        etiquetteViewPlace.text = mainViewModel?.place ?? "결혼식장"
+        //        etiquetteViewPlace.text = mainViewModel?.place ?? "결혼식장"
         etiquetteViewMainContent.text = randomContent?.mainContent
         etiquetteViewSubContent.text = randomContent?.subContent
         level.text = mainViewModel?.levelNumberText
@@ -352,6 +355,6 @@ class MainView: UIView {
     }
     
     
-  }
+}
 
 
