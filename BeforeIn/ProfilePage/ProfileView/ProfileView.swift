@@ -145,21 +145,26 @@ class ProfileView: UIView {
         imageView.image = UIImage(named: "level5")
         return imageView
     }()
-    private let levelRectangle: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
-        view.layer.cornerRadius = 2
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    private let levelRectangle: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
+//        view.layer.cornerRadius = 2
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
+//    
+//    private let myLevelRectangle: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
+//        view.layer.cornerRadius = 2
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
-    private let myLevelRectangle: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-        view.layer.cornerRadius = 2
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let levelProgressView = UIProgressView().then {
+        $0.progress = 0.5
+        $0.progressTintColor = .beforeInRed
+    }
     
     private let line: UIView = {
         let view = UIView()
@@ -214,8 +219,9 @@ class ProfileView: UIView {
         grayRectangle.addSubview(levelLabel)
         grayRectangle.addSubview(mentBoxLabel)
         grayRectangle.addSubview(level)
-        grayRectangle.addSubview(levelRectangle)
-        levelRectangle.addSubview(myLevelRectangle)
+        grayRectangle.addSubview(levelProgressView)
+//        grayRectangle.addSubview(levelRectangle)
+//        levelRectangle.addSubview(myLevelRectangle)
         
         grayRectangle.addSubview(levelImageStackView)
         levelImageStackView.addArrangedSubview(levelImage1)
@@ -283,24 +289,29 @@ class ProfileView: UIView {
         }
         
         levelImageStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(levelRectangle.snp.top)
+            make.bottom.equalTo(levelProgressView.snp.top)
             make.height.equalTo(72)
             make.leading.trailing.equalToSuperview()
-//            make.width.equalTo(levelRectangle)
         }
         
-        levelRectangle.snp.makeConstraints { make in
+        levelProgressView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(4)
             make.bottom.equalToSuperview().offset(-16)
         }
         
-        myLevelRectangle.snp.makeConstraints { make in
-            make.width.equalTo(currentUser.level * 60)
-            make.height.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.leading.equalToSuperview()
-        }
+//        levelRectangle.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview().inset(8)
+//            make.height.equalTo(4)
+//            make.bottom.equalToSuperview().offset(-16)
+//        }
+//        
+//        myLevelRectangle.snp.makeConstraints { make in
+//            make.width.equalTo(currentUser.level * 60)
+//            make.height.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.leading.equalToSuperview()
+//        }
         
         line.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -317,7 +328,7 @@ class ProfileView: UIView {
     }
     
     private func updateView() {
-        myLevelRectangleUpdate(profileViewModel?.level ?? 1)
+        levelProgressUpdate(profileViewModel?.level ?? 1)
         nicknameLabel.text = profileViewModel?.nameBox
         nameBoxLabel.text = profileViewModel?.nickname
         level.text = profileViewModel?.levelNumberText
@@ -338,13 +349,11 @@ class ProfileView: UIView {
         }
     }
 
-    private func myLevelRectangleUpdate(_ level: Int) {
-        if levelRectangle.bounds.width != 0 {
-            myLevelRectangle.snp.updateConstraints { make in
-                make.width.equalTo(levelRectangle.bounds.width / 5 * CGFloat(level))
-            }
-        }
+    private func levelProgressUpdate(_ level: Int) {
+        let progress = Float(level) / 5
+        levelProgressView.setProgress(progress, animated: true)
     }
+    
 
    
 }
