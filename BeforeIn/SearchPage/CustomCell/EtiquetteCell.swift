@@ -14,6 +14,7 @@ class EtiquetteCell: UICollectionViewCell {
     // MARK: - Properties
     var imageView = UIImageView().then {
         $0.backgroundColor = .gray
+        $0.contentMode = .scaleAspectFill
     }
     
     var stackView = UIStackView().then {
