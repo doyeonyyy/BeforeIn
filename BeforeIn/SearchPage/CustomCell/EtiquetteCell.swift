@@ -50,6 +50,7 @@ class EtiquetteCell: UICollectionViewCell {
 //        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 0.5
+        contentView.clipsToBounds = true
         contentView.layer.borderColor = UIColor.systemGray5.cgColor
 //        contentView.layer.shadowColor = UIColor.black.cgColor
 //        contentView.layer.shadowOpacity = 0.1
@@ -57,7 +58,7 @@ class EtiquetteCell: UICollectionViewCell {
 //        contentView.layer.shadowRadius = 4
 //        contentView.layer.masksToBounds = false
 //        
-//        imageView.layer.cornerRadius = 4
+//        imageView.layer.cornerRadius = 8
 //        imageView.layer.masksToBounds = true
         
         // addSubview
@@ -70,13 +71,13 @@ class EtiquetteCell: UICollectionViewCell {
         // makeConstraints
         imageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(24)
-            $0.width.equalTo(80)
-            $0.height.equalTo(80)
+            $0.leading.equalToSuperview()
+            $0.width.equalTo(116)
+            $0.height.equalTo(116)
         }
         stackView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.top).offset(5)
-            $0.leading.equalTo(imageView.snp.trailing).offset(12)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(imageView.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().offset(-24)
         }
         

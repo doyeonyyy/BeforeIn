@@ -50,17 +50,6 @@ class ProfileView: UIView {
         $0.setImage(resizedImage, for: .normal)
     }
     
-    private let shadowView: UIView = {
-        let view = UIView()
-        
-//        view.layer.shadowColor = UIColor.black.cgColor
-//        view.layer.shadowOpacity = 0.1
-//        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        view.layer.shadowRadius = 18
-//        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let grayRectangle: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -145,21 +134,6 @@ class ProfileView: UIView {
         imageView.image = UIImage(named: "level5")
         return imageView
     }()
-//    private let levelRectangle: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
-//        view.layer.cornerRadius = 2
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//    
-//    private let myLevelRectangle: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = UIColor(red: 0.616, green: 0.102, blue: 0.102, alpha: 1)
-//        view.layer.cornerRadius = 2
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
     
     private let levelProgressView = UIProgressView().then {
         $0.progress = 0.5
@@ -220,8 +194,6 @@ class ProfileView: UIView {
         grayRectangle.addSubview(mentBoxLabel)
         grayRectangle.addSubview(level)
         grayRectangle.addSubview(levelProgressView)
-//        grayRectangle.addSubview(levelRectangle)
-//        levelRectangle.addSubview(myLevelRectangle)
         
         grayRectangle.addSubview(levelImageStackView)
         levelImageStackView.addArrangedSubview(levelImage1)
@@ -262,7 +234,7 @@ class ProfileView: UIView {
         }
         
         grayRectangle.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(8)
+            make.width.equalToSuperview().inset(24)
             make.height.equalTo(200)
             make.top.equalTo(circularImageView.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
@@ -291,27 +263,14 @@ class ProfileView: UIView {
         levelImageStackView.snp.makeConstraints { make in
             make.bottom.equalTo(levelProgressView.snp.top)
             make.height.equalTo(72)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(8)
         }
         
         levelProgressView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(4)
             make.bottom.equalToSuperview().offset(-16)
         }
-        
-//        levelRectangle.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview().inset(8)
-//            make.height.equalTo(4)
-//            make.bottom.equalToSuperview().offset(-16)
-//        }
-//        
-//        myLevelRectangle.snp.makeConstraints { make in
-//            make.width.equalTo(currentUser.level * 60)
-//            make.height.equalToSuperview()
-//            make.bottom.equalToSuperview()
-//            make.leading.equalToSuperview()
-//        }
         
         line.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
