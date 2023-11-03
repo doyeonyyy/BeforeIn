@@ -76,7 +76,7 @@ class EtiquetteCell: UICollectionViewCell {
         }
         stackView.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.top).offset(5)
-            $0.leading.equalTo(imageView.snp.trailing).offset(24)
+            $0.leading.equalTo(imageView.snp.trailing).offset(12)
             $0.trailing.equalToSuperview().offset(-24)
         }
         
