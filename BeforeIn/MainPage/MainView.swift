@@ -101,10 +101,21 @@ class MainView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 24)
     }
     
-    private let etiquetteViewContent = UILabel().then{
-        $0.font = UIFont.systemFont(ofSize: 16)
+    private let etiquetteViewPlace = UILabel().then{
+        $0.font = UIFont.systemFont(ofSize: 14)
         $0.numberOfLines = 0
         $0.textAlignment = .center
+    }
+    
+    private let etiquetteViewMainContent = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.numberOfLines = 0
+//        $0.textAlignment = .center
+    }
+    
+    private let etiquetteViewSubContent = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.numberOfLines = 0
     }
     
     private let recentlyEtiquette = UILabel().then{
@@ -197,7 +208,9 @@ class MainView: UIView {
         contentView.addSubview(etiquetteView)
         etiquetteView.addSubview(quotes1)
         etiquetteView.addSubview(quotes2)
-        etiquetteView.addSubview(etiquetteViewContent)
+        etiquetteView.addSubview(etiquetteViewPlace)
+        etiquetteView.addSubview(etiquetteViewMainContent)
+        etiquetteView.addSubview(etiquetteViewSubContent)
         contentView.addSubview(recentlyEtiquette)
         contentView.addSubview(recentlyEtiquetteLabel)
         contentView.addSubview(recentlyEtiquetteCollectionView)
@@ -262,24 +275,36 @@ class MainView: UIView {
             make.leading.equalTo(etiquetteLabel.snp.trailing).offset(5)
         }
         etiquetteView.snp.makeConstraints { make in
-            make.top.equalTo(etiquetteLabel.snp.bottom).offset(15)
+            make.top.equalTo(etiquetteLabel.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(24)
-            make.height.equalTo(116)
+            make.height.equalTo(160)
+        }
+        etiquetteViewPlace.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
         }
         quotes1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalTo(etiquetteViewPlace.snp.bottom)
             make.leading.equalToSuperview().offset(3)
         }
         quotes2.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(3)
             make.bottom.equalToSuperview().inset(10)
         }
-        etiquetteViewContent.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().inset(10)
-            make.trailing.leading.equalToSuperview().inset(16)
+        etiquetteViewMainContent.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(quotes1.snp.bottom)
         }
+        
+        etiquetteViewSubContent.snp.makeConstraints { make in
+            make.top.equalTo(etiquetteViewMainContent.snp.bottom)
+            make.leading.equalTo(quotes1.snp.trailing)
+            make.trailing.equalTo(quotes2.snp.leading)
+            make.bottom.equalTo(quotes2.snp.bottom).inset(16)
+        }
+        
+        
         recentlyEtiquette.snp.makeConstraints { make in
             make.top.equalTo(etiquetteView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(24)
@@ -310,11 +335,14 @@ class MainView: UIView {
     }
     
     private func updateView() {
+        let randomContent = mainViewModel?.randomEtiquetteContent
         nameLabel.text = "\(mainViewModel?.nickname ?? "ㅇㅇㅇ")님은 현재"
         levelLabel.text = mainViewModel?.level
-        etiquetteViewContent.text = "\(mainViewModel?.etiquetteContent ?? "예")"
+        etiquetteLabel.text = (mainViewModel?.place ?? "결혼식장") + "에서 알아두면 쓸모있는 에티켓"
+//        etiquetteViewPlace.text = mainViewModel?.place ?? "결혼식장"
+        etiquetteViewMainContent.text = randomContent?.mainContent
+        etiquetteViewSubContent.text = randomContent?.subContent
         level.text = mainViewModel?.levelNumberText
-        print("view 업데이트")
     }
     
     private func updateProfileImage() {

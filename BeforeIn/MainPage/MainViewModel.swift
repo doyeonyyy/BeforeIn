@@ -58,7 +58,7 @@ class MainViewModel {
         }
     }
     
-    var etiquetteContent: String {
+    var randomEtiquetteContent: EtiquetteContent {
         var random = ""
         switch Int.random(in: 0...1){
         case 0: random = "good"
@@ -67,9 +67,17 @@ class MainViewModel {
         }
         let contentCount = etiquette?.content[random]?.count ?? 1
         let randomNumber = Int.random(in: 0..<contentCount)
-        let content = (etiquette?.place ?? "결혼식장") + "에서는 " + (etiquette?.content[random]?[randomNumber].mainContent ?? "밝은 옷은 피해주세요")
+        guard let content = etiquette?.content[random]?[randomNumber] else { return EtiquetteContent(mainContent: "ㅇㅇ", subContent: "ㅇㅇ", contentImage: nil, contentImageLink: "") }
         return content
     }
+    
+    var place: String {
+        guard let place = etiquette?.place else {
+            return "결혼식장"
+        }
+        return place
+    }
+    
     
     var updateView: (() -> Void)?
     var updateProfileImage: (() -> Void)?
@@ -80,13 +88,11 @@ class MainViewModel {
     }
     
     func updateUser(_ user: User) {
-        print("view모델 user 업데이트")
         self.user = user
     }
     
     func updateEtiquette(_ etiquette: Etiquette){
         self.etiquette = etiquette
-        print("view모델 etiquette 업데이트")
     }
 
 }

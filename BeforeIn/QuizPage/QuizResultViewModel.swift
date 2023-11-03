@@ -53,7 +53,6 @@ class QuizResultViewModel {
     }
     
     func updateUser(_ user: User) {
-        print("view모델 user 업데이트")
         self.user = user
     }
 }

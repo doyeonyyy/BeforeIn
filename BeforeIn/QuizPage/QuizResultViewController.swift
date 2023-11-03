@@ -24,7 +24,7 @@ class QuizResultViewController: BaseViewController {
         quizResultView.startButton.addTarget(self, action: #selector(startButtonClick), for: .touchUpInside)
     }
     private func updateView() {
-        print("View 업데이트")
+
     }
     
     @objc func startButtonClick() {
