@@ -67,13 +67,13 @@ class MainViewModel {
         }
         let contentCount = etiquette?.content[random]?.count ?? 1
         let randomNumber = Int.random(in: 0..<contentCount)
-        guard let content = etiquette?.content[random]?[randomNumber] else { return EtiquetteContent(mainContent: "ㅇㅇ", subContent: "ㅇㅇ", contentImage: nil, contentImageLink: "") }
+        guard let content = etiquette?.content[random]?[randomNumber] else { return EtiquetteContent(mainContent: "기본적으로 검은 정장 착용하기", subContent: "부득이하다면 어두운 계열의 차분한 차림으로 참석해 주세요. 존경과 경의의 표시입니다.", contentImage: nil, contentImageLink: "") }
         return content
     }
     
     var place: String {
         guard let place = etiquette?.place else {
-            return "결혼식장"
+            return "장례식장"
         }
         return place
     }
