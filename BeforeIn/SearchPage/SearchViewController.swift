@@ -25,6 +25,7 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         configureCollectionView()
         

@@ -29,12 +29,13 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     lazy var authIdButton = UIButton().then {
-        $0.setTitle("  인증메일전송  ", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        $0.setTitle("인증메일전송", for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     lazy var authCodeLabel = UILabel().then {
@@ -53,16 +54,17 @@ class RegisterView: UIView {
     }
     lazy var timerLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
         $0.textColor = .BeforeInRed
     }
     lazy var authCodeButton = UIButton().then {
-        $0.setTitle("  인증확인  ", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.setTitle("인증확인", for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     lazy var registerNameLabel = UILabel().then {
@@ -95,12 +97,13 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     lazy var checkNicknameButton = UIButton().then {
-        $0.setTitle("  중복확인  ", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.setTitle("중복확인", for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     lazy var registerPwLabel = UILabel().then {
@@ -147,7 +150,7 @@ class RegisterView: UIView {
     
     lazy var registerButton = UIButton().then {
         $0.setTitle("비포인 시작하기", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 8
@@ -218,7 +221,7 @@ class RegisterView: UIView {
         }
         authIdButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
-            $0.bottom.equalTo(registerIdBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(registerIdBottom.snp.top).offset(-8)
         }
         
         authCodeLabel.snp.makeConstraints {
@@ -236,12 +239,12 @@ class RegisterView: UIView {
             $0.height.equalTo(1)
         }
         timerLabel.snp.makeConstraints {
-            $0.right.equalTo(authCodeButton.snp.left).offset(-5)
-            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-8)
+            $0.right.equalTo(authCodeButton.snp.left).offset(-8)
+            $0.centerY.equalTo(authCodeButton.snp.centerY)
         }
         authCodeButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
-            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-8)
         }
         
         registerNameLabel.snp.makeConstraints {
@@ -275,7 +278,7 @@ class RegisterView: UIView {
         }
         checkNicknameButton.snp.makeConstraints{
             $0.right.equalTo(self.snp.right).offset(-25)
-            $0.bottom.equalTo(registerNicknameBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(registerNicknameBottom.snp.top).offset(-8)
         }
         
         registerPwLabel.snp.makeConstraints {
