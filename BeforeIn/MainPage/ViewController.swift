@@ -28,6 +28,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.mainViewModel?.updateUser(currentUser)
+        EtiquetteManager.shared.loadEtiquetteList()
         fetchEtiquetteContent()
         setRecentlyLabel()
         recentlyEtiquetteCollectionView.reloadData()
@@ -123,6 +124,7 @@ class MainViewController: BaseViewController {
             etiquetteList = []
             let data = snapshot?.value as! [String: Any]
             let dispatchGroup = DispatchGroup() // Create a DispatchGroup
+
             let fileManager = FileManager.default
             let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
             let imageCacheDirectoryURL = documentsURL?.appendingPathComponent("ImageCache")
@@ -187,7 +189,7 @@ class MainViewController: BaseViewController {
                 }
                 
                 dispatchGroup.notify(queue: .main) {
-                    let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description)
+                    let newEtiquette = Etiquette(category: category, place: place, content: ["good": good, "bad": bad], backgroundImage: mainImage!, mainImage: mainImage!, description: description, imageLink: gsLink)
                     etiquetteList.append(newEtiquette)
 //                    self.recommendedEtiquetteCollectionView.reloadData()
 //                    print("에티켓 리스트 업데이트 됨")
@@ -198,6 +200,11 @@ class MainViewController: BaseViewController {
                 self.fetchEtiquetteContent()
                 self.fetchRecommendedEtiquetteList()
                 self.recommendedEtiquetteCollectionView.reloadData()
+                EtiquetteManager.shared.loadEtiquetteList()
+                if !EtiquetteManager.shared.recentlyEtiquetteList.isEmpty {
+                    self.mainView.recentlyEtiquetteLabel.isHidden = true
+                }
+                self.recentlyEtiquetteCollectionView.reloadData()
                 self.mainView.indicator.stopAnimating()
             }
             
@@ -252,7 +259,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else {
             selectedEtiquette = recommendedEtiquetteList[indexPath.row]
         }
-        EtiquetteManager.shared.fetchRecentlyEtiquetteList(selectedEtiquette)
+        EtiquetteManager.shared.fetchSavedData(selectedEtiquette)
+        EtiquetteManager.shared.saveEtiquetteList()
         let detailVC = DetailViewController()
         detailVC.selectedEtiquette = selectedEtiquette
         navigationController?.pushViewController(detailVC, animated: true)
