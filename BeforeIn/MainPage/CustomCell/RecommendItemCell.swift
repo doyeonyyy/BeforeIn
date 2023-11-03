@@ -18,7 +18,10 @@ class RecommendItemCell: UICollectionViewCell {
     }
     var mainLabel = UILabel().then {
         $0.text = "XXX 권장 에티켓"
+        $0.numberOfLines = 2
         $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.adjustsFontSizeToFitWidth = true
+        $0.minimumScaleFactor = 0.7
     }
     var descriptionLabel = UILabel().then {
         $0.text = "\"너가 그래서 솔로\"...이것만 알면 너도 올해는 커플!"
