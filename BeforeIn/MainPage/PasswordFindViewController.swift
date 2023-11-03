@@ -34,13 +34,17 @@ class PasswordFindViewController: BaseViewController {
     lazy var registerIdBottom = UIView().then {
         $0.backgroundColor = .systemGray2
     }
+    
+//    lazy var authIdButton = UIButton(configuration: .filled()).then {
     lazy var authIdButton = UIButton().then {
-        $0.setTitle("  인증메일전송  ", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        $0.setTitle("인증메일전송", for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+//        $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 40, bottom: 20, trailing: 40)
     }
     
     lazy var authCodeLabel = UILabel().then {
@@ -59,31 +63,40 @@ class PasswordFindViewController: BaseViewController {
     }
     lazy var timerLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
         $0.textColor = .BeforeInRed
     }
     lazy var authCodeButton = UIButton().then {
-        $0.setTitle("  인증확인  ", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.setTitle("인증확인", for: .normal)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     lazy var changePasswordButton = UIButton().then {
         $0.setTitle("비밀번호 재설정 이메일 발송", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.setTitleColor(.systemGray, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
     }
     
+//    $0.setTitle("로그인", for: .normal)
+//    $0.setTitleColor(.white, for: .normal)
+//    $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//    $0.backgroundColor = .BeforeInRed
+//    $0.layer.cornerRadius = 8
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "비밀번호 찾기"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(backTapped))
+        
         addSubview()
         setUI()
         setTextField()
@@ -124,7 +137,7 @@ class PasswordFindViewController: BaseViewController {
         }
         authIdButton.snp.makeConstraints{
             $0.right.equalTo(view.snp.right).offset(-25)
-            $0.bottom.equalTo(registerIdBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(registerIdBottom.snp.top).offset(-8)
         }
         
         authCodeLabel.snp.makeConstraints {
@@ -142,12 +155,12 @@ class PasswordFindViewController: BaseViewController {
             $0.height.equalTo(1)
         }
         timerLabel.snp.makeConstraints {
-            $0.right.equalTo(authCodeButton.snp.left).offset(-5)
-            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-8)
+            $0.right.equalTo(authCodeButton.snp.left).offset(-8)
+            $0.centerY.equalTo(authCodeButton.snp.centerY)
         }
         authCodeButton.snp.makeConstraints{
             $0.right.equalTo(view.snp.right).offset(-25)
-            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-5)
+            $0.bottom.equalTo(authCodeBottom.snp.top).offset(-8)
         }
         
         changePasswordButton.snp.makeConstraints {
@@ -270,15 +283,19 @@ class PasswordFindViewController: BaseViewController {
     
     @objc func idTextFieldDidChange(_ textField: UITextField) {
         authIdButton.backgroundColor = .systemGray6
-        authIdButton.setTitleColor(UIColor.black, for: .normal)
+        authIdButton.setTitleColor(.darkGray, for: .normal)
         authCodeButton.backgroundColor = .systemGray6
-        authCodeButton.setTitleColor(UIColor.black, for: .normal)
+        authCodeButton.setTitleColor(.darkGray, for: .normal)
         changePasswordButton.backgroundColor = .systemGray6
-        changePasswordButton.setTitleColor(UIColor.black, for: .normal)
+        changePasswordButton.setTitleColor(.darkGray, for: .normal)
         userAuthCode = 9876
         checkEmail = false
     }
-    
+    @objc private func backTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
 }
 
 

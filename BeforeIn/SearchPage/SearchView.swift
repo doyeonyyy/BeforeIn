@@ -13,7 +13,6 @@ class SearchView: UIView {
     lazy var searchTextField = UITextField().then {
         $0.placeholder = "검색어를 입력하세요"
         $0.borderStyle = .none
-//        $0.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         $0.backgroundColor = .systemGray5
         $0.layer.cornerRadius = 10
         $0.addLeftPadding(8)
@@ -36,7 +35,7 @@ class SearchView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
-        $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     let divider = UIView().then {
@@ -83,7 +82,7 @@ class SearchView: UIView {
         
         // makeConstraints
         searchTextField.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(searchButton.snp.leading).offset(-16)
             $0.height.equalTo(50)
@@ -97,8 +96,7 @@ class SearchView: UIView {
         
         categoryCollectionView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(18)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(self)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(30)
         }
         

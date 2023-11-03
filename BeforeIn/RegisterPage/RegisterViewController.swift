@@ -28,6 +28,7 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "회원가입"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(backTapped))
         setTextField()
         setupAddTarget()
     }
@@ -227,16 +228,16 @@ class RegisterViewController: BaseViewController {
     
     @objc func idTextFieldDidChange(_ textField: UITextField) {
         registerView.authIdButton.backgroundColor = .systemGray6
-        registerView.authIdButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authIdButton.setTitleColor(.darkGray, for: .normal)
         registerView.authCodeButton.backgroundColor = .systemGray6
-        registerView.authCodeButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.authCodeButton.setTitleColor(.darkGray, for: .normal)
         userAuthCode = 9876
         checkEmail = false
     }
     
     @objc func nicknameTextFieldDidChange(_ textField: UITextField) {
         registerView.checkNicknameButton.backgroundColor = .systemGray6
-        registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
+        registerView.checkNicknameButton.setTitleColor(.darkGray, for: .normal)
         checkNickname = false
     }
     
@@ -259,6 +260,12 @@ class RegisterViewController: BaseViewController {
                     self.registerView.registerButton.isEnabled = false
                 }
             }
+        }
+    }
+    
+    @objc private func backTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
         }
     }
     
