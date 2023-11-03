@@ -47,6 +47,7 @@ class NewQuizContentViewController: UIViewController {
         let cancelButton = UIButton().then {
             $0.setTitle("돌아가기", for: .normal)
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            $0.setTitleColor(.systemBlack, for: .normal)
             $0.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         }
         
