@@ -56,7 +56,7 @@ class NewQuizContentViewController: UIViewController {
         }
         
         let quizLabel = UILabel().then {
-            $0.text = "\(self.question). \n(정답 : \(self.answer))"
+            $0.text = "\(self.question)."
             $0.numberOfLines = 0
             $0.font = UIFont(name: "SUITE-Medium", size: 18)
         }
@@ -254,7 +254,7 @@ class NewQuizContentViewController: UIViewController {
     
     
     private func goToNextPage() {
-        if index == 3 {
+        if index == 10 {
             var count = 0
             if let parentViewController = parent as? NewQuizViewController {
                 for parentVC in parentViewController.orderedViewControllers {
@@ -264,10 +264,10 @@ class NewQuizContentViewController: UIViewController {
                 }
             }
             switch count {
-            case 0: currentUser.level = 1
-            case 1: currentUser.level = 2
-            case 2: currentUser.level = 3
-            case 3: currentUser.level = 4
+            case 0,1,2: currentUser.level = 1
+            case 3,4,5: currentUser.level = 2
+            case 5,6,7: currentUser.level = 3
+            case 8,9: currentUser.level = 4
             default: currentUser.level = 5
             }
             changeUserLevel(currentUser.level)
