@@ -22,7 +22,7 @@ class RecommendItemCell: UICollectionViewCell {
     }
     var descriptionLabel = UILabel().then {
         $0.text = "\"너가 그래서 솔로\"...이것만 알면 너도 올해는 커플!"
-        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.font = UIFont.systemFont(ofSize: 13)
         $0.textColor = .systemGray
         $0.numberOfLines = 0
     }
@@ -64,7 +64,7 @@ class RecommendItemCell: UICollectionViewCell {
             make.leading.trailing.equalToSuperview().inset(16)
         }
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(mainLabel.snp.bottom).offset(16)
+            make.top.equalTo(mainLabel.snp.bottom).offset(6)
             make.leading.trailing.equalToSuperview().inset(16)
         }
         
