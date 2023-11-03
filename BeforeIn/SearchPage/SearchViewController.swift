@@ -37,6 +37,7 @@ class SearchViewController: BaseViewController {
         let indexPath = IndexPath(item: 0, section: 0)
         searchView.categoryCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
         collectionView(searchView.categoryCollectionView, didSelectItemAt: indexPath)
+        searchView.etiquetteCollectionView.reloadData()
     }
     
     // MARK: - Methods

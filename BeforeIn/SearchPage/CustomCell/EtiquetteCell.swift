@@ -46,6 +46,12 @@ class EtiquetteCell: UICollectionViewCell {
         setupUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
+    }
+    
     private func setupUI() {
 //        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
