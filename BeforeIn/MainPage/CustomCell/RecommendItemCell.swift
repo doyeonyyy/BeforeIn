@@ -43,6 +43,11 @@ class RecommendItemCell: UICollectionViewCell {
         descriptionLabel.text = etiquette.description
     }
     
+    override func prepareForReuse() {
+        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
+    }
+    
     private func setupUI() {
         
         contentView.layer.cornerRadius = 16

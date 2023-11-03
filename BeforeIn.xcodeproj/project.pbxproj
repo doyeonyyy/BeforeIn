@@ -79,6 +79,7 @@
 		159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79332ADE75DC00FE210E /* MainViewModel.swift */; };
 		159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79362ADFBAD200FE210E /* ProfileView.swift */; };
 		159B79392ADFBB3400FE210E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B79382ADFBB3400FE210E /* ProfileViewModel.swift */; };
+		15D1C69E2AF4A4B700A1B9A5 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D1C69D2AF4A4B700A1B9A5 /* Secret.swift */; };
 		63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */; };
 		63AB9D652ADD097D008E85BA /* QuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */; };
 		63AB9D672ADD0990008E85BA /* QuizContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */; };
@@ -102,7 +103,6 @@
 		67DAFC2C2AF0C4F700803A84 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */; };
 		67DBB4852AE516B100594C7C /* NicknameEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */; };
 		67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4862AE52F6800594C7C /* UIButton.swift */; };
-		67DDA4C32AF47EEF0047DBAA /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C22AF47EEF0047DBAA /* Secret.swift */; };
 		67DDA4C52AF48E6B0047DBAA /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */; };
 		67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C62AF48EED0047DBAA /* UIImageView.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
@@ -175,6 +175,7 @@
 		159B79332ADE75DC00FE210E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		159B79362ADFBAD200FE210E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		159B79382ADFBB3400FE210E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		15D1C69D2AF4A4B700A1B9A5 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		63AB9D5A2AD8E04D008E85BA /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		63AB9D642ADD097D008E85BA /* QuizStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartViewController.swift; sourceTree = "<group>"; };
 		63AB9D662ADD0990008E85BA /* QuizContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentsViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +196,6 @@
 		67DAFC2B2AF0C4F700803A84 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		67DBB4842AE516B100594C7C /* NicknameEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewController.swift; sourceTree = "<group>"; };
 		67DBB4862AE52F6800594C7C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
-		67DDA4C22AF47EEF0047DBAA /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		67DDA4C62AF48EED0047DBAA /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				67DDA4C22AF47EEF0047DBAA /* Secret.swift */,
+				15D1C69D2AF4A4B700A1B9A5 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -705,7 +705,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */,
-				67DDA4C32AF47EEF0047DBAA /* Secret.swift in Sources */,
 				159B79342ADE75DC00FE210E /* MainViewModel.swift in Sources */,
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */,
@@ -719,6 +718,7 @@
 				67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
+				15D1C69E2AF4A4B700A1B9A5 /* Secret.swift in Sources */,
 				1586ECA92AE40FD100055040 /* Date.swift in Sources */,
 				63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */,
 				1586ECAB2AE4160000055040 /* UIImage.swift in Sources */,
@@ -929,7 +929,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -957,7 +957,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

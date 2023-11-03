@@ -31,6 +31,7 @@ class MainViewController: BaseViewController {
         fetchEtiquetteContent()
         setRecentlyLabel()
         recentlyEtiquetteCollectionView.reloadData()
+        recommendedEtiquetteCollectionView.reloadData()
     }
     
     override func viewDidLoad() {

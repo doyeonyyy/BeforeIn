@@ -28,11 +28,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window.makeKeyAndVisible()
         self.window = window
-        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
-        if isDarkMode {
-            window.overrideUserInterfaceStyle = .dark
-        } else {
-            window.overrideUserInterfaceStyle = .light
+        
+        let isSystemMode = UserDefaults.standard.bool(forKey: "isSystemMode")
+        if isSystemMode {
+            window.overrideUserInterfaceStyle = .unspecified
+        }
+        else {
+            let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+            if isDarkMode {
+                window.overrideUserInterfaceStyle = .dark
+            } else {
+                window.overrideUserInterfaceStyle = .light
+            }
         }
         
         func sceneDidDisconnect(_ scene: UIScene) {

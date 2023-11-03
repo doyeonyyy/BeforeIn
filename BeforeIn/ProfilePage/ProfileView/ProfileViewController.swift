@@ -135,7 +135,8 @@ extension ProfileViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         
         let line = UIView()
-        line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
+//        line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
+        line.backgroundColor = .systemGray5
         line.translatesAutoresizingMaskIntoConstraints = false
         cell.contentView.addSubview(line)
         

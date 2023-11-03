@@ -208,7 +208,7 @@ class MainView: UIView {
     
     private func setupConstraint() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalTo(self)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
