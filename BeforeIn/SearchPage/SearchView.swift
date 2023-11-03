@@ -83,7 +83,7 @@ class SearchView: UIView {
         
         // makeConstraints
         searchTextField.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             $0.leading.equalToSuperview().offset(24)
             $0.trailing.equalTo(searchButton.snp.leading).offset(-16)
             $0.height.equalTo(50)
