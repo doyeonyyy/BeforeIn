@@ -13,6 +13,7 @@
 		1543EEDB2AE693AE00AD587B /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */; };
 		1543EEDE2AE7464200AD587B /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDD2AE7464200AD587B /* ModifyView.swift */; };
 		1547FE172AF1D3B7005E791D /* ImageCacheFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */; };
+		155CDF602AF512A400E32D0F /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CDF5F2AF512A400E32D0F /* Secret.swift */; };
 		1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA22AE3FCC300055040 /* CommunityView.swift */; };
 		1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA42AE3FF4C00055040 /* TagCell.swift */; };
 		1586ECA72AE404F500055040 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA62AE404F500055040 /* PostCell.swift */; };
@@ -104,7 +105,6 @@
 		67DBB4872AE52F6800594C7C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DBB4862AE52F6800594C7C /* UIButton.swift */; };
 		67DDA4C52AF48E6B0047DBAA /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */; };
 		67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C62AF48EED0047DBAA /* UIImageView.swift */; };
-		67DDA4C92AF4BE1C0047DBAA /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DDA4C82AF4BE1C0047DBAA /* Secret.swift */; };
 		67E5AA5C2AD92A8300EA1DA7 /* FirstDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */; };
 		67E5AA5E2AD92AAF00EA1DA7 /* SecondDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */; };
 		67E5AA602AD92AC000EA1DA7 /* ThirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */; };
@@ -142,6 +142,7 @@
 		1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		1543EEDD2AE7464200AD587B /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
 		1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFunction.swift; sourceTree = "<group>"; };
+		155CDF5F2AF512A400E32D0F /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		1586ECA22AE3FCC300055040 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		1586ECA42AE3FF4C00055040 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		1586ECA62AE404F500055040 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -197,7 +198,6 @@
 		67DBB4862AE52F6800594C7C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		67DDA4C42AF48E6B0047DBAA /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		67DDA4C62AF48EED0047DBAA /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		67DDA4C82AF4BE1C0047DBAA /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67E5AA5B2AD92A8300EA1DA7 /* FirstDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5D2AD92AAF00EA1DA7 /* SecondDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondDetailView.swift; sourceTree = "<group>"; };
 		67E5AA5F2AD92AC000EA1DA7 /* ThirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdDetailView.swift; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				67DDA4C82AF4BE1C0047DBAA /* Secret.swift */,
+				155CDF5F2AF512A400E32D0F /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -718,7 +718,7 @@
 				67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
-				67DDA4C92AF4BE1C0047DBAA /* Secret.swift in Sources */,
+				155CDF602AF512A400E32D0F /* Secret.swift in Sources */,
 				1586ECA92AE40FD100055040 /* Date.swift in Sources */,
 				63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */,
 				1586ECAB2AE4160000055040 /* UIImage.swift in Sources */,
