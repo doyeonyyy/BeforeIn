@@ -111,7 +111,6 @@ class MainView: UIView {
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
         $0.textAlignment = .center
-        $0.backgroundColor = .systemPink
     }
     
     private let etiquetteViewSubContent = UILabel().then {
@@ -119,7 +118,6 @@ class MainView: UIView {
         $0.numberOfLines = 0
         $0.textAlignment = .center
         $0.sizeToFit()
-        $0.backgroundColor = .yellow
     }
     
     private let recentlyEtiquette = UILabel().then{
@@ -224,8 +222,8 @@ class MainView: UIView {
     }
     
     private func setupConstraint() {
-//        etiquetteViewMainContent.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        etiquetteViewSubContent.setContentHuggingPriority(.defaultLow, for: .vertical)
+        etiquetteViewMainContent.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        etiquetteViewSubContent.setContentHuggingPriority(.defaultLow, for: .vertical)
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
@@ -295,7 +293,7 @@ class MainView: UIView {
             make.leading.equalToSuperview().offset(30)
         }
         quotes2.snp.makeConstraints { make in
-            make.top.equalTo(quotes1.snp.bottom).offset(100)
+            make.top.equalTo(etiquetteViewSubContent.snp.bottom).offset(20)
             make.trailing.equalToSuperview().inset(30)
         }
         etiquetteViewMainContent.snp.makeConstraints { make in
@@ -305,7 +303,7 @@ class MainView: UIView {
         etiquetteViewSubContent.snp.makeConstraints { make in
             make.top.equalTo(etiquetteViewMainContent.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.bottom.lessThanOrEqualTo(quotes2.snp.bottom).offset(-16)
+            make.bottom.equalTo(quotes2.snp.bottom).offset(-40)
         }
 
         recentlyEtiquette.snp.makeConstraints { make in
