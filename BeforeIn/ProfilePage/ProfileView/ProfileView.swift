@@ -137,7 +137,7 @@ class ProfileView: UIView {
     
     private let levelProgressView = UIProgressView().then {
         $0.progress = 0.5
-        $0.progressTintColor = .beforeInRed
+        $0.progressTintColor = .BeforeInRed
     }
     
     private let line: UIView = {
