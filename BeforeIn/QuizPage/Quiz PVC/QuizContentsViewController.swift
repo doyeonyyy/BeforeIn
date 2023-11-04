@@ -102,12 +102,13 @@ class NewQuizContentViewController: UIViewController {
         let previousButton = UIButton().then {
             $0.setTitle("이전", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            if isDarkMode {
-                $0.setTitleColor(.white, for: .normal)
-            }
-            else {
-                $0.setTitleColor(.black, for: .normal)
-            }
+            $0.setTitleColor(.systemBlack, for: .normal)
+//            if isDarkMode {
+//                $0.setTitleColor(.white, for: .normal)
+//            }
+//            else {
+//                $0.setTitleColor(.black, for: .normal)
+//            }
             
             $0.addTarget(self, action: #selector(previousButtonClick), for: .touchUpInside)
             self.previousButton = $0
@@ -183,12 +184,13 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = true
-            if isDarkMode {
-                nextButton.setTitleColor(.white, for: .normal)
-            }
-            else {
-                nextButton.setTitleColor(.black, for: .normal)
-            }
+            nextButton.setTitleColor(.systemBlack, for: .normal)
+//            if isDarkMode {
+//                nextButton.setTitleColor(.white, for: .normal)
+//            }
+//            else {
+//                nextButton.setTitleColor(.black, for: .normal)
+//            }
            
         }
         else {
@@ -204,12 +206,13 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = false
-            if isDarkMode {
-                nextButton.setTitleColor(.white, for: .normal)
-            }
-            else {
-                nextButton.setTitleColor(.black, for: .normal)
-            }
+            nextButton.setTitleColor(.systemBlack, for: .normal)
+//            if isDarkMode {
+//                nextButton.setTitleColor(.white, for: .normal)
+//            }
+//            else {
+//                nextButton.setTitleColor(.black, for: .normal)
+//            }
         }
         else {
             userAnswer = nil
