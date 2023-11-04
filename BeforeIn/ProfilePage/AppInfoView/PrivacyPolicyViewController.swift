@@ -12,13 +12,13 @@ import WebKit
 class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate {
     // MARK: - Properties
     private let webView = WKWebView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .systemBackground
     }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backTapped))
        
         webView.navigationDelegate = self
