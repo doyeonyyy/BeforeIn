@@ -13,7 +13,6 @@
 		1543EEDB2AE693AE00AD587B /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */; };
 		1543EEDE2AE7464200AD587B /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDD2AE7464200AD587B /* ModifyView.swift */; };
 		1547FE172AF1D3B7005E791D /* ImageCacheFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */; };
-		155CDF602AF512A400E32D0F /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CDF5F2AF512A400E32D0F /* Secret.swift */; };
 		1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA22AE3FCC300055040 /* CommunityView.swift */; };
 		1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA42AE3FF4C00055040 /* TagCell.swift */; };
 		1586ECA72AE404F500055040 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA62AE404F500055040 /* PostCell.swift */; };
@@ -87,6 +86,7 @@
 		63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */; };
 		63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */; };
 		67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */; };
+		672ED1842AF8913600648C35 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672ED1832AF8913600648C35 /* Secret.swift */; };
 		673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673609182AE2358B00934690 /* CommunityPageViewController.swift */; };
 		6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091A2AE235A500934690 /* CommunityPageView.swift */; };
 		6736091D2AE2941F00934690 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091C2AE2941F00934690 /* CommentCell.swift */; };
@@ -142,7 +142,6 @@
 		1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		1543EEDD2AE7464200AD587B /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
 		1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFunction.swift; sourceTree = "<group>"; };
-		155CDF5F2AF512A400E32D0F /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		1586ECA22AE3FCC300055040 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		1586ECA42AE3FF4C00055040 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		1586ECA62AE404F500055040 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -183,6 +182,7 @@
 		63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewModel.swift; sourceTree = "<group>"; };
 		67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDeletionViewController.swift; sourceTree = "<group>"; };
+		672ED1832AF8913600648C35 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		673609182AE2358B00934690 /* CommunityPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageViewController.swift; sourceTree = "<group>"; };
 		6736091A2AE235A500934690 /* CommunityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageView.swift; sourceTree = "<group>"; };
 		6736091C2AE2941F00934690 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				155CDF5F2AF512A400E32D0F /* Secret.swift */,
+				672ED1832AF8913600648C35 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -718,7 +718,7 @@
 				67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
-				155CDF602AF512A400E32D0F /* Secret.swift in Sources */,
+				672ED1842AF8913600648C35 /* Secret.swift in Sources */,
 				1586ECA92AE40FD100055040 /* Date.swift in Sources */,
 				63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */,
 				1586ECAB2AE4160000055040 /* UIImage.swift in Sources */,
@@ -936,7 +936,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chanho.BeforeIndkdkdk;
+				PRODUCT_BUNDLE_IDENTIFIER = sixCanDoIt.BeforeIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -967,7 +967,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chanho.BeforeIndkdkdk;
+				PRODUCT_BUNDLE_IDENTIFIER = sixCanDoIt.BeforeIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

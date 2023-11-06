@@ -19,7 +19,8 @@ class EtiquetteDetailCell: UICollectionViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
         $0.textColor = .white
-        $0.font = UIFont(name: "SUITE-Bold", size: 20)
+        $0.font = UIFont(name: "SUITE-Bold", size: 18)
+        $0.numberOfLines = 0
     }
     
     var descriptionLabel = UILabel().then {
@@ -58,6 +59,7 @@ class EtiquetteDetailCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalTo(descriptionLabel.snp.top).offset(-10)
+            $0.trailing.equalToSuperview().offset(-5)
         }
         descriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)

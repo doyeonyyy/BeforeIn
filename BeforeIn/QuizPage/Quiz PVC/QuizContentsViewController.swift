@@ -102,7 +102,7 @@ class NewQuizContentViewController: UIViewController {
         let previousButton = UIButton().then {
             $0.setTitle("이전", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            $0.setTitleColor(.systemBlack, for: .normal)
+            $0.setTitleColor(.SystemBlack, for: .normal)
 //            if isDarkMode {
 //                $0.setTitleColor(.white, for: .normal)
 //            }
@@ -184,7 +184,7 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = true
-            nextButton.setTitleColor(.systemBlack, for: .normal)
+            nextButton.setTitleColor(.SystemBlack, for: .normal)
 //            if isDarkMode {
 //                nextButton.setTitleColor(.white, for: .normal)
 //            }
@@ -206,7 +206,7 @@ class NewQuizContentViewController: UIViewController {
         }
         if sender.isSelected {
             userAnswer = false
-            nextButton.setTitleColor(.systemBlack, for: .normal)
+            nextButton.setTitleColor(.SystemBlack, for: .normal)
 //            if isDarkMode {
 //                nextButton.setTitleColor(.white, for: .normal)
 //            }

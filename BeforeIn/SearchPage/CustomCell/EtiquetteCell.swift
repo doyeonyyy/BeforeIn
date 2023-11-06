@@ -27,7 +27,7 @@ class EtiquetteCell: UICollectionViewCell {
     var titleLabel = UILabel().then {
         $0.text = "타이틀"
 //        $0.textColor = .black
-        $0.font = UIFont(name: "SUITE-Bold", size: 18)
+        $0.font = UIFont(name: "SUITE-Bold", size: 16)
     }
     
     var descriptionLabel = UILabel().then {

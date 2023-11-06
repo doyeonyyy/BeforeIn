@@ -295,7 +295,11 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == registerView.registerCheckTextField {
+        if textField == registerView.registerPwTextField {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -100
+            }
+        } else if textField == registerView.registerCheckTextField {
             UIView.animate(withDuration: 0.3) {
                 self.view.frame.origin.y = -230
             }
