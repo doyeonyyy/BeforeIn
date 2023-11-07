@@ -301,7 +301,7 @@ extension RegisterViewController: UITextFieldDelegate {
             }
         } else if textField == registerView.registerCheckTextField {
             UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -230
+                self.view.frame.origin.y = -210
             }
         } else {
             UIView.animate(withDuration: 0.3) {

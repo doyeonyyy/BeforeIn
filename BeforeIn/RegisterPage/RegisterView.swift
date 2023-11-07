@@ -195,28 +195,27 @@ class RegisterView: UIView {
         addSubview(registerPwTextField)
         addSubview(registerPwBottom)
         addSubview(showPwButton)
-        
+    
         addSubview(registerCheckLabel)
         addSubview(registerCheckTextField)
         addSubview(registerCheckBottom)
         addSubview(showCheckButton)
-        
         addSubview(registerButton)
     }
     
     func setUI(){
         registerIdLabel.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(120)
+            $0.top.equalTo(self.snp.top).offset(90)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerIdTextField.snp.makeConstraints {
-            $0.top.equalTo(registerIdLabel.snp.bottom).offset(17)
+            $0.top.equalTo(registerIdLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-100)
         }
         registerIdBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.bottom.equalTo(registerIdTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(registerIdTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         authIdButton.snp.makeConstraints{
@@ -225,17 +224,17 @@ class RegisterView: UIView {
         }
         
         authCodeLabel.snp.makeConstraints {
-            $0.top.equalTo(registerIdBottom.snp.bottom).offset(30)
+            $0.top.equalTo(registerIdBottom.snp.bottom).offset(20)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         authCodeTextField.snp.makeConstraints {
-            $0.top.equalTo(authCodeLabel.snp.bottom).offset(17)
+            $0.top.equalTo(authCodeLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-150)
         }
         authCodeBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.bottom.equalTo(authCodeTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(authCodeTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         timerLabel.snp.makeConstraints {
@@ -248,32 +247,32 @@ class RegisterView: UIView {
         }
         
         registerNameLabel.snp.makeConstraints {
-            $0.top.equalTo(authCodeBottom.snp.bottom).offset(30)
+            $0.top.equalTo(authCodeBottom.snp.bottom).offset(20)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerNameTextField.snp.makeConstraints {
-            $0.top.equalTo(registerNameLabel.snp.bottom).offset(17)
+            $0.top.equalTo(registerNameLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-24)
         }
         registerNameBottom.snp.makeConstraints {
             $0.left.right.equalTo(registerNameTextField)
-            $0.bottom.equalTo(registerNameTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(registerNameTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         
         registerNicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(registerNameBottom.snp.bottom).offset(30)
+            $0.top.equalTo(registerNameBottom.snp.bottom).offset(20)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerNicknameTextField.snp.makeConstraints {
-            $0.top.equalTo(registerNicknameLabel.snp.bottom).offset(17)
+            $0.top.equalTo(registerNicknameLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-100)
         }
         registerNicknameBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.bottom.equalTo(registerNicknameTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(registerNicknameTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         checkNicknameButton.snp.makeConstraints{
@@ -282,17 +281,17 @@ class RegisterView: UIView {
         }
         
         registerPwLabel.snp.makeConstraints {
-            $0.top.equalTo(registerNicknameBottom.snp.bottom).offset(30)
+            $0.top.equalTo(registerNicknameBottom.snp.bottom).offset(20)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerPwTextField.snp.makeConstraints {
-            $0.top.equalTo(registerPwLabel.snp.bottom).offset(17)
+            $0.top.equalTo(registerPwLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-62)
         }
         registerPwBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.bottom.equalTo(registerPwTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(registerPwTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         showPwButton.snp.makeConstraints{
@@ -301,17 +300,17 @@ class RegisterView: UIView {
         }
         
         registerCheckLabel.snp.makeConstraints {
-            $0.top.equalTo(registerPwBottom.snp.bottom).offset(30)
+            $0.top.equalTo(registerPwBottom.snp.bottom).offset(20)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerCheckTextField.snp.makeConstraints {
-            $0.top.equalTo(registerCheckLabel.snp.bottom).offset(17)
+            $0.top.equalTo(registerCheckLabel.snp.bottom).offset(15)
             $0.left.equalTo(self.snp.left).offset(24)
             $0.right.equalTo(self.snp.right).offset(-62)
         }
         registerCheckBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
-            $0.bottom.equalTo(registerCheckTextField.snp.bottom).offset(4)
+            $0.bottom.equalTo(registerCheckTextField.snp.bottom).offset(3)
             $0.height.equalTo(1)
         }
         showCheckButton.snp.makeConstraints{
@@ -320,9 +319,9 @@ class RegisterView: UIView {
         }
         
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(registerCheckBottom.snp.bottom).offset(64)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
             $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().offset(-45)
         }
         
     }
