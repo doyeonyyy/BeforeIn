@@ -18,27 +18,28 @@ class CommentCell: UITableViewCell {
     
     let authorLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 15)
     }
     
     let dateLabel = UILabel().then {
         $0.text = ""
         $0.textColor = .systemGray2
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 13)
     }
     
     let editButton = UIButton().then {
         $0.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = .systemGray
     }
     
     let deleteButton = UIButton().then {
         $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = .systemGray
     }
     
     let commentLabel = UILabel().then {
         $0.text = "댓글"
+        $0.font = UIFont.systemFont(ofSize: 16)
     }
     
     
@@ -94,7 +95,7 @@ class CommentCell: UITableViewCell {
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(8)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(5)
             $0.left.equalTo(profileImageView.snp.right).offset(8)
             $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
