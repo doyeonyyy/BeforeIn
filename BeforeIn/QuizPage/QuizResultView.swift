@@ -94,7 +94,7 @@ class QuizResultView: UIView {
         startButton.layer.cornerRadius = 8
         startButton.snp.makeConstraints { make in
             make.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
-            make.height.equalTo(50)
+            make.height.equalTo(45)
             make.bottom.equalToSuperview().offset(-80)
             make.centerX.equalToSuperview()
 
