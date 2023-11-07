@@ -48,6 +48,8 @@ class DetailView: UIView {
     
     
     func setUI() {
+        scrollView.contentSize = CGSize(width: frame.width, height: contentView.frame.height)
+
         scrollView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
@@ -70,7 +72,9 @@ class DetailView: UIView {
             $0.top.equalTo(secondDetailView.snp.bottom)
             $0.width.equalToSuperview()
             $0.height.equalTo(scrollView.snp.height)
-            $0.bottom.equalTo(scrollView.snp.bottom).offset(-10)
+            $0.bottom.equalTo(contentView)
         }
     }
+    
+
 }

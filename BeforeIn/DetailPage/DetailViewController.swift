@@ -13,7 +13,7 @@ class DetailViewController: BaseViewController {
     // MARK: - Properties
     private let detailView = DetailView()
     var selectedEtiquette: Etiquette?
-
+    
     // MARK: - Life Cycle
     override func loadView(){
         view = detailView
@@ -53,7 +53,7 @@ class DetailViewController: BaseViewController {
         /// firstDetailView
         detailView.firstDetailView.titleLabel.text = "\(selectedEtiquette?.place ?? "place") 에티켓 알아보기"
         detailView.firstDetailView.descriptionLabel.text = "\(selectedEtiquette?.place ?? "place")에서 지켜야할 기본 규칙을 알아봅시다"
-//        detailView.firstDetailView.detailImageView.image = selectedEtiquette?.backgroundImage
+        //        detailView.firstDetailView.detailImageView.image = selectedEtiquette?.backgroundImage
         if let image = selectedEtiquette?.backgroundImage {
             let maskedImage = applyMask(to: image)
             detailView.firstDetailView.detailImageView.image = maskedImage
@@ -62,9 +62,9 @@ class DetailViewController: BaseViewController {
         detailView.secondDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["bad"]?.count ?? 0)"
         /// thirdDetailView
         detailView.thirdDetailView.etiquetteTotalCountLabel.text = "/\(selectedEtiquette?.content["good"]?.count ?? 0)"
-
+        
     }
-
+    
     private func applyMask(to image: UIImage) -> UIImage {
         if let cgImage = image.cgImage {
             let width = cgImage.width
@@ -73,13 +73,13 @@ class DetailViewController: BaseViewController {
             let bytesPerRow = 4 * width
             let colorSpace = CGColorSpaceCreateDeviceRGB()
             let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-
+            
             if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
                 context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
                 context.clip(to: CGRect(x: 0, y: 0, width: width, height: height))
                 context.setFillColor(UIColor(white: 0, alpha: 0.7).cgColor)
                 context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-
+                
                 if let maskedImage = context.makeImage() {
                     return UIImage(cgImage: maskedImage)
                 }
@@ -90,45 +90,46 @@ class DetailViewController: BaseViewController {
     
     private func applyGradientMask(to image: UIImage) -> UIImage {
         if let cgImage = image.cgImage {
-                let width = cgImage.width
-                let height = cgImage.height
-                let bitsPerComponent = 8
-                let bytesPerRow = 4 * width
-                let colorSpace = CGColorSpaceCreateDeviceRGB()
-                let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-
-                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
-                    context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-
-                    let gradientColors: [CGFloat] = [0, 0, 0, 0.9,  
-                                                     0, 0, 0, 0,
-                                                    ]
-                    let gradientLocations: [CGFloat] = [0.0, 0.5]
-                    if let gradient = CGGradient(colorSpace: colorSpace, colorComponents: gradientColors, locations: gradientLocations, count: 2) {
-                        let startPoint = CGPoint(x: 0, y: 0)
-                        let endPoint = CGPoint(x: 0, y: height)
-
-                        context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
-
-                        if let maskedImage = context.makeImage() {
-                            return UIImage(cgImage: maskedImage)
-                        }
+            let width = cgImage.width
+            let height = cgImage.height
+            let bitsPerComponent = 8
+            let bytesPerRow = 4 * width
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+            let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+            
+            if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) {
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+                
+                let gradientColors: [CGFloat] = [0, 0, 0, 0.9,
+                                                 0, 0, 0, 0,
+                ]
+                let gradientLocations: [CGFloat] = [0.0, 0.5]
+                if let gradient = CGGradient(colorSpace: colorSpace, colorComponents: gradientColors, locations: gradientLocations, count: 2) {
+                    let startPoint = CGPoint(x: 0, y: 0)
+                    let endPoint = CGPoint(x: 0, y: height)
+                    
+                    context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+                    
+                    if let maskedImage = context.makeImage() {
+                        return UIImage(cgImage: maskedImage)
                     }
                 }
             }
-            return image
+        }
+        return image
     }
-
+    
     // MARK: - @objc
     @objc func backButtonTapped(){
         navigationController?.popViewController(animated: true)
     }
     
-   
+    
 }
 
 // MARK: - CollectionView
 extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
@@ -142,7 +143,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EtiquetteDetailCell", for: indexPath) as! EtiquetteDetailCell
-
+        
         if collectionView == detailView.secondDetailView.dontsCollectionView {
             /// dontsCollectionView 내용
             cell.backgroundColor = .clear
@@ -205,7 +206,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
                     print("컨텐츠 이미지 다운 실패")
                 }
             }
-
+            
         }
         for var (index, content) in badContent.enumerated(){
             let imageLink = content.contentImageLink
@@ -220,7 +221,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
                     print("컨텐츠 이미지 다운 실패")
                 }
             }
-
+            
         }
         
         dispatchGroup.notify(queue: .main) {
@@ -228,5 +229,17 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             self.detailView.thirdDetailView.dosCollectionView.reloadData()
         }
         
+    }
+}
+
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let collectionViewWidth = collectionView.frame.width
+        let itemWidth = collectionViewWidth - 48 
+        let collectionViewHeight = collectionView.frame.height
+        return CGSize(width: itemWidth, height: collectionViewHeight)
     }
 }
