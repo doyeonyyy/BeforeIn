@@ -37,6 +37,14 @@ class CommentCell: UITableViewCell {
         $0.tintColor = .black
     }
     
+    let reportButton = UIButton().then {
+//        $0.setImage(UIImage(systemName: "light.beacon.max.fill"), for: .normal)
+//        $0.tintColor = .black
+        $0.setTitle("신고", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+    }
+    
     let commentLabel = UILabel().then {
         $0.text = "댓글"
     }
@@ -63,6 +71,7 @@ class CommentCell: UITableViewCell {
         contentView.addSubview(dateLabel)
         contentView.addSubview(editButton)
         contentView.addSubview(deleteButton)
+        contentView.addSubview(reportButton)
         contentView.addSubview(commentLabel)
     }
     
@@ -89,6 +98,11 @@ class CommentCell: UITableViewCell {
         }
         
         deleteButton.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.top)
+            $0.right.equalTo(contentView.snp.right).offset(-16)
+        }
+        
+        reportButton.snp.makeConstraints {
             $0.top.equalTo(profileImageView.snp.top)
             $0.right.equalTo(contentView.snp.right).offset(-16)
         }
