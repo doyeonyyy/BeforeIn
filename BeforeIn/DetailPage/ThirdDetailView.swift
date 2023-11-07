@@ -12,10 +12,6 @@ import Then
 class ThirdDetailView: UIView {
     
     // MARK: - UI Properties
-    lazy var detailImageView = UIView().then {
-        $0.backgroundColor = .systemBackground
-    }
-    
     lazy var titleEmoji = UILabel().then {
         $0.text = "👍"
         $0.font = .systemFont(ofSize: 32)
@@ -36,7 +32,6 @@ class ThirdDetailView: UIView {
         당신의 작은 배려가 다른 사람들을 기분좋게 합니다.
         """
         $0.font = .systemFont(ofSize: 16)
-//        $0.textColor = .black
         $0.numberOfLines = 0
     }
     
@@ -55,12 +50,10 @@ class ThirdDetailView: UIView {
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 16
-        $0.itemSize = CGSize(width: 332, height: 422)
     }
     
     lazy var dosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
@@ -70,7 +63,6 @@ class ThirdDetailView: UIView {
         super.init(frame: frame)
         addSubview()
         setUI()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -80,8 +72,6 @@ class ThirdDetailView: UIView {
     
     
     func addSubview() {
-        addSubview(detailImageView)
-        addSubview(detailImageView)
         addSubview(titleEmoji)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
@@ -92,11 +82,8 @@ class ThirdDetailView: UIView {
     }
     
     func setUI(){
-        detailImageView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
         titleEmoji.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(86)
+            $0.top.equalToSuperview().offset(80)
             $0.leading.equalToSuperview().offset(24)
         }
         titleLabel.snp.makeConstraints {
@@ -116,9 +103,9 @@ class ThirdDetailView: UIView {
             $0.trailing.equalToSuperview().offset(-24)
         }
         dosCollectionView.snp.makeConstraints {
-            $0.top.equalTo(etiquetteTotalCountLabel.snp.bottom).offset(19)
+            $0.top.equalTo(etiquetteTotalCountLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(422)
+            $0.bottom.equalToSuperview().offset(-10)
         }
     }
     

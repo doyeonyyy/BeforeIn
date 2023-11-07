@@ -58,14 +58,15 @@ class EtiquetteDetailCell: UICollectionViewCell {
         }
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalTo(descriptionLabel.snp.top).offset(-10)
             $0.trailing.equalToSuperview().offset(-5)
+            $0.bottom.equalTo(descriptionLabel.snp.top).offset(-10)
         }
         descriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-24)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
     }
+    
 }

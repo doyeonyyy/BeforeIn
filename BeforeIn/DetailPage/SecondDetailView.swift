@@ -12,10 +12,6 @@ import Then
 class SecondDetailView: UIView {
     
     // MARK: - UI Properties
-    lazy var detailImageView = UIView().then {
-        $0.backgroundColor = .systemBackground
-    }
-    
     lazy var titleEmoji = UILabel().then {
         $0.text = "🚨"
         $0.font = .systemFont(ofSize: 32)
@@ -55,12 +51,10 @@ class SecondDetailView: UIView {
     let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 16
-        $0.itemSize = CGSize(width: 332, height: 422)
     }
 
     lazy var dontsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         
@@ -81,7 +75,6 @@ class SecondDetailView: UIView {
     
     
     func addSubview() {
-        addSubview(detailImageView)
         addSubview(titleEmoji)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
@@ -92,11 +85,8 @@ class SecondDetailView: UIView {
     }
     
     func setUI(){
-        detailImageView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
         titleEmoji.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(86)
+            $0.top.equalToSuperview().offset(80)
             $0.leading.equalToSuperview().offset(24)
         }
         titleLabel.snp.makeConstraints {
@@ -116,9 +106,9 @@ class SecondDetailView: UIView {
             $0.trailing.equalToSuperview().offset(-24)
         }
         dontsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(etiquetteTotalCountLabel.snp.bottom).offset(19)
+            $0.top.equalTo(etiquetteTotalCountLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(422)
+            $0.bottom.equalToSuperview().offset(-10)
         }
     }
     
