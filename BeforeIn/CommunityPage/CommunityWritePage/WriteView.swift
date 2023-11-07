@@ -25,7 +25,7 @@ class WriteView: UIView {
     
     let mainTextField = UITextField().then {
         $0.placeholder = "제목을 입력하세요"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
