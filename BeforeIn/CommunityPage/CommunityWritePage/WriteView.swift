@@ -115,10 +115,10 @@ class WriteView: UIView {
         }
         
         mainCustomView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(mainLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
         
         mainTextField.snp.makeConstraints { make in
@@ -133,7 +133,7 @@ class WriteView: UIView {
         }
         
         contentsCustomView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(contentsLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
             make.height.equalTo(200)
