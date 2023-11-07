@@ -148,7 +148,7 @@ class LoginView: UIView {
         pwLabel.translatesAutoresizingMaskIntoConstraints = false
         
         beforeInLabel.snp.makeConstraints {
-            $0.bottom.equalTo(idView.snp.top).offset(-80)
+            $0.bottom.equalTo(idView.snp.top).offset(-70)
             $0.centerX.equalToSuperview()
         }
         
@@ -164,7 +164,7 @@ class LoginView: UIView {
         }
         
         idView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(321)
+            $0.top.equalTo(self.snp.top).offset(280)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
         }
         
