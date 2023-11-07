@@ -93,7 +93,7 @@ class UserAccountDeletionViewController: BaseViewController {
         userDeletionButton.snp.makeConstraints{
             $0.left.right.equalTo(view).inset(24)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(50)
+            $0.height.equalTo(45)
         }
         
     }

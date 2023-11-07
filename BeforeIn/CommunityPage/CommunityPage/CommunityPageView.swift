@@ -70,8 +70,8 @@ class CommunityPageView: UIView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 14, bottom: 4, right: 14)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     private let divider = UIView().then {
@@ -155,7 +155,7 @@ class CommunityPageView: UIView {
         
         editButton.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(deleteButton.snp.left)
+            $0.right.equalTo(deleteButton.snp.left).offset(5)
         }
         
         deleteButton.snp.makeConstraints {

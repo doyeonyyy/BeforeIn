@@ -320,7 +320,7 @@ class RegisterView: UIView {
         
         registerButton.snp.makeConstraints {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
-            $0.height.equalTo(50)
+            $0.height.equalTo(45)
             $0.bottom.equalToSuperview().offset(-45)
         }
         

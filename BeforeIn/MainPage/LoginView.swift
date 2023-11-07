@@ -193,7 +193,7 @@ class LoginView: UIView {
         loginButton.snp.makeConstraints {
             $0.top.equalTo(pwView.snp.bottom).offset(40)
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
-            $0.height.equalTo(50)
+            $0.height.equalTo(45)
         }
         
         buttonStackView.snp.makeConstraints{

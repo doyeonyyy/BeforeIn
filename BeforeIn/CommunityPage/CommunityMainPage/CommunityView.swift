@@ -16,7 +16,6 @@ class CommunityView: UIView {
         $0.minimumLineSpacing = 8
         $0.itemSize = CGSize(width: 82, height: 30)
     }
-    
 
     lazy var tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tagCollectionViewLayout).then{
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -29,11 +28,9 @@ class CommunityView: UIView {
         $0.showsVerticalScrollIndicator = false
     }
     
-    
-    
     let plusButton = UIButton().then{
         $0.backgroundColor = .BeforeInRed?.withAlphaComponent(0.7)
-        $0.layer.cornerRadius = 30
+        $0.layer.cornerRadius = 25
         $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.tintColor = .white
     }
@@ -64,12 +61,11 @@ class CommunityView: UIView {
         }
         postTableView.snp.makeConstraints { make in
             make.top.equalTo(tagCollectionView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().inset(50)
         }
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(50)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(40)
             make.trailing.equalToSuperview().inset(16)
         }
