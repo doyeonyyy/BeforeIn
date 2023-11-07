@@ -89,18 +89,18 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 let writer = data["writer"] as! String
                                 let writerNickName = data["writerNickName"] as! String
                                 var comments: [Comment] = []
-                                let commentsData = data["comments"] as? [[String: Any]]
-                                for comment in commentsData! {
-                                    if let commentWriter = comment["writer"] as? String,
-                                       let commentPostingTime = comment["postingTime"] as? Timestamp,
-                                       let commentContent = comment["content"] as? String,
-                                       let commentWriterNickName = comment["writerNickName"] as? String{
-                                        let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue())
-                                        comments.append(newComment)
+                                if let commentsData = data["comments"] as? [[String: Any]] {
+                                    for comment in commentsData {
+                                        if let commentWriter = comment["writer"] as? String,
+                                           let commentPostingTime = comment["postingTime"] as? Timestamp,
+                                           var commentContent = comment["content"] as? String,
+                                           let commentWriterNickName = comment["writerNickName"] as? String{
+                                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: [])
+                                            comments.append(newComment)
+                                        }
                                     }
-                                       
                                 }
-                                let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
+                                let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: [])
                                 self.posts.insert(addPost, at: 0)
                                 self.postTableView.reloadData()
                             }
@@ -122,26 +122,40 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                             if error == nil && snapshot != nil && snapshot?.data() != nil {
                                 let data = snapshot!.data()!
                                 let category = data["category"] as! String
-                                let content = data["content"] as! String
                                 let likes = data["likes"] as! Int
                                 let postingTime = data["postingTime"] as! Timestamp
                                 let postingID = data["postingID"] as! String
-                                let title = data["title"] as! String
                                 let writer = data["writer"] as! String
                                 let writerNickName = data["writerNickName"] as! String
                                 var comments: [Comment] = []
-                                let commentsData = data["comments"] as? [[String: Any]]
-                                for comment in commentsData! {
-                                    if let commentWriter = comment["writer"] as? String,
-                                       let commentPostingTime = comment["postingTime"] as? Timestamp,
-                                       let commentContent = comment["content"] as? String,
-                                       let commentWriterNickName = comment["writerNickName"] as? String{
-                                        let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue())
-                                        comments.append(newComment)
+                                if let commentsData = data["comments"] as? [[String: Any]] {
+                                    for comment in commentsData {
+                                        if let commentWriter = comment["writer"] as? String,
+                                           let commentPostingTime = comment["postingTime"] as? Timestamp,
+                                           var commentContent = comment["content"] as? String,
+                                           let commentWriterNickName = comment["writerNickName"] as? String{
+                                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: [])
+                                            comments.append(newComment)
+                                        }
                                     }
-                                       
                                 }
-                                let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
+                                var reportUserList: [String] = []
+                                let reportedData = data["reportUserList"] as? [String: String]
+                                if let reportedData = reportedData {
+                                    for key in reportedData.keys {
+                                        if let email = reportedData[key] {
+                                            reportUserList.append(email)
+                                        }
+                                    }
+                                }
+                                var title = data["title"] as! String
+                                var content = data["content"] as! String
+                                if reportUserList.count >= 1 {
+                                    title = "신고당한 글이라 삭제됨"
+                                    content = "신고당한 글이라 삭제됨"
+                                }
+                                
+                                let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                                 for i in 0..<self.posts.count {
                                     if self.posts[i].postID == change.document.documentID {
                                         self.posts[i] = modifyPost

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		153CAD192AF9E45D00B38BAA /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CAD182AF9E45D00B38BAA /* Secret.swift */; };
 		1543EED22AE64E6500AD587B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EED12AE64E6500AD587B /* Post.swift */; };
 		1543EED42AE64E9300AD587B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EED32AE64E9300AD587B /* Comment.swift */; };
 		1543EED62AE68AD700AD587B /* CommunityPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EED52AE68AD700AD587B /* CommunityPageViewModel.swift */; };
@@ -86,7 +87,6 @@
 		63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */; };
 		63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */; };
 		67142C3E2AEB778A00328CF0 /* UserAccountDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */; };
-		672ED1842AF8913600648C35 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672ED1832AF8913600648C35 /* Secret.swift */; };
 		673609192AE2358B00934690 /* CommunityPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673609182AE2358B00934690 /* CommunityPageViewController.swift */; };
 		6736091B2AE235A500934690 /* CommunityPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091A2AE235A500934690 /* CommunityPageView.swift */; };
 		6736091D2AE2941F00934690 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736091C2AE2941F00934690 /* CommentCell.swift */; };
@@ -136,6 +136,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		153CAD182AF9E45D00B38BAA /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../Secret.swift; sourceTree = "<group>"; };
 		1543EED12AE64E6500AD587B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1543EED32AE64E9300AD587B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1543EED52AE68AD700AD587B /* CommunityPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageViewModel.swift; sourceTree = "<group>"; };
@@ -182,7 +183,6 @@
 		63AB9D6D2ADFEDC3008E85BA /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		63AB9D6F2AE0BBC5008E85BA /* QuizResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewModel.swift; sourceTree = "<group>"; };
 		67142C3D2AEB778A00328CF0 /* UserAccountDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDeletionViewController.swift; sourceTree = "<group>"; };
-		672ED1832AF8913600648C35 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		673609182AE2358B00934690 /* CommunityPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageViewController.swift; sourceTree = "<group>"; };
 		6736091A2AE235A500934690 /* CommunityPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityPageView.swift; sourceTree = "<group>"; };
 		6736091C2AE2941F00934690 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				672ED1832AF8913600648C35 /* Secret.swift */,
+				153CAD182AF9E45D00B38BAA /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -718,7 +718,7 @@
 				67DDA4C72AF48EED0047DBAA /* UIImageView.swift in Sources */,
 				159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */,
 				159B79372ADFBAD200FE210E /* ProfileView.swift in Sources */,
-				672ED1842AF8913600648C35 /* Secret.swift in Sources */,
+				153CAD192AF9E45D00B38BAA /* Secret.swift in Sources */,
 				1586ECA92AE40FD100055040 /* Date.swift in Sources */,
 				63AB9D702AE0BBC5008E85BA /* QuizResultViewModel.swift in Sources */,
 				1586ECAB2AE4160000055040 /* UIImage.swift in Sources */,

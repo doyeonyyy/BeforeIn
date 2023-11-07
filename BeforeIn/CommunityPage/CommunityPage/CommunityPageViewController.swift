@@ -89,14 +89,15 @@ class CommunityPageViewController: BaseViewController {
         let writerNickName = currentUser.nickname
         let content = comment
         let postingTime = Date()
-        let newComment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime)
+        let newComment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime, reportUserList: [])
         self.post.comments.append(newComment)
         let commentsData: [[String: Any]] = self.post.comments.map { comment in
             return [
                 "writer": comment.writer,
                 "writerNickName": comment.writerNickName,
                 "content": comment.content,
-                "postingTime": comment.postingTime
+                "postingTime": comment.postingTime,
+                "reportUserList": comment.reportUserList
             ]
         }
 
@@ -139,8 +140,8 @@ class CommunityPageViewController: BaseViewController {
                                let writerNickName = data["writerNickName"] as? String,
                                let content = data["content"] as? String,
                                let postingTime = data["postingTime"] as? Timestamp { // Firestore의 Timestamp 타입을 사용
-                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
-                                comments.append(comment)
+//                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
+//                                comments.append(comment)
                             }
                         }
                         self.comments = comments
@@ -166,28 +167,47 @@ class CommunityPageViewController: BaseViewController {
                 print("변화 감지됨")
                 let data = document.data() ?? [:]
                 let category = data["category"] as? String ?? ""
-                let content = data["content"] as? String ?? ""
                 let likes = data["likes"] as? Int ?? 0
                 let postingTime = data["postingTime"] as? Timestamp ?? Timestamp(date: Date())
                 let postingID = data["postingID"] as? String ?? ""
-                let title = data["title"] as? String ?? ""
                 let writer = data["writer"] as? String ?? ""
                 let writerNickName = data["writerNickName"] as? String ?? ""
-                
                 var comments: [Comment] = []
                 if let commentsData = data["comments"] as? [[String: Any]] {
                     for comment in commentsData {
                         if let commentWriter = comment["writer"] as? String,
                            let commentPostingTime = comment["postingTime"] as? Timestamp,
-                           let commentContent = comment["content"] as? String,
-                           let commentWriterNickName = comment["writerNickName"] as? String {
-                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue())
+                           var commentContent = comment["content"] as? String,
+                           let commentWriterNickName = comment["writerNickName"] as? String{
+                            var reportUserList: [String] = []
+                            if let reportData = comment["reportUserList"] as? [String] {
+                                reportUserList = reportData
+                            }
+                            if reportUserList.count >= 1 {
+                                commentContent = "신고누적으로 삭제된 댓글입니다."
+                            }
+                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: reportUserList)
                             comments.append(newComment)
                         }
                     }
                 }
+                var reportUserList: [String] = []
+                let reportedData = data["reportUserList"] as? [String: String]
+                if let reportedData = reportedData {
+                    for key in reportedData.keys {
+                        if let email = reportedData[key] {
+                            reportUserList.append(email)
+                        }
+                    }
+                }
+                var title = data["title"] as? String ?? ""
+                var content = data["content"] as? String ?? ""
+                if reportUserList.count >= 1 {
+                    title = "신고쳐먹음"
+                    content = "신고누적"
+                }
                 
-                let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue())
+                let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                 self.post = fetchedPost
                 self.communityPageView.communityPageViewModel?.updatePost(fetchedPost)
                 self.communityPageView.commentTableView.reloadData()

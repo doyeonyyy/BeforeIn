@@ -19,4 +19,5 @@ struct User {
     var phone: String
     var myPost: [Post] = []
     var myLikePost: [Post] = []
+    var blockList: [String] = [] //차단할 유저의 이메일 주소
 }
