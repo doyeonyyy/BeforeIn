@@ -106,7 +106,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 let likes = data["likes"] as! Int
                                 let postingTime = data["postingTime"] as! Timestamp
                                 let postingID = data["postingID"] as! String
-                                let title = data["title"] as! String
+                                var title = data["title"] as! String
                                 let writer = data["writer"] as! String
                                 let writerNickName = data["writerNickName"] as! String
                                 if blockedEmails.contains(writer) {
@@ -125,10 +125,22 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         }
                                     }
                                 }
-                                let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: [])
-                                self.posts.insert(addPost, at: 0)
-                                self.postTableView.reloadData()
+                                var reportUserList: [String] = []
+                                let reportedData = data["reportUserList"] as? [String]
+                                if let reportedData = reportedData {
+                                    for email in reportedData {
+                                        reportUserList.append(email)
+                                    }
+                                }
+                                if reportUserList.count >= 1 {
+//                                    print("차단글 발견")
+                                    title = "신고당한 글이라 삭제됨"
+                                }
+                                let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
+                                self.posts.append(addPost)
                             }
+                            self.posts.sort{$0.postingTime > $1.postingTime}
+                            self.postTableView.reloadData()
                             
                         }
                         
@@ -165,19 +177,16 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                     }
                                 }
                                 var reportUserList: [String] = []
-                                let reportedData = data["reportUserList"] as? [String: String]
+                                let reportedData = data["reportUserList"] as? [String]
                                 if let reportedData = reportedData {
-                                    for key in reportedData.keys {
-                                        if let email = reportedData[key] {
-                                            reportUserList.append(email)
-                                        }
+                                    for email in reportedData {
+                                        reportUserList.append(email)
                                     }
                                 }
                                 var title = data["title"] as! String
                                 var content = data["content"] as! String
                                 if reportUserList.count >= 1 {
                                     title = "신고당한 글이라 삭제됨"
-                                    content = "신고당한 글이라 삭제됨"
                                 }
                                 
                                 let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
@@ -192,7 +201,6 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                             
                         }
                     }
-                    self.postTableView.reloadData()
                 }
             } else {
                 // error. do something

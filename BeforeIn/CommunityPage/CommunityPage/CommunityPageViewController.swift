@@ -49,9 +49,11 @@ class CommunityPageViewController: BaseViewController {
     
     func addTarget(){
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-        communityPageView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
-        communityPageView.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+//        communityPageView.editButton.addTarget(self, action: #selector(commentEditButtonTapped), for: .touchUpInside)
+//        communityPageView.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
         communityPageView.blockButton.addTarget(self, action: #selector(blockButtonTapped), for: .touchUpInside)
+        communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        communityPageView.reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
     }
     
     func setTextField(){
@@ -61,23 +63,37 @@ class CommunityPageViewController: BaseViewController {
     
     
     // MARK: - @objc
-    @objc func editButtonTapped() {
-        let post = post
-        let modifyVC = ModifyViewController()
-        modifyVC.post = post
-        self.navigationController?.pushViewController(modifyVC, animated: true)
-    }
-    
-    @objc func deleteButtonTapped() {
-        let alert = UIAlertController(title: "정말로 삭제하시겠습니까?", message: "삭제하시면 복구가 불가능합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "예" , style: .destructive) { _ in
-            self.db.collection("Post").document(self.post.postID).delete()
-            self.navigationController?.popViewController(animated: true)
+    @objc func moreButtonTapped() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let editAction = UIAlertAction(title: "수정", style: .default) { _ in
+            let post = self.post
+            let modifyVC = ModifyViewController()
+            modifyVC.post = post
+            self.navigationController?.pushViewController(modifyVC, animated: true)
         }
-        let cancel = UIAlertAction(title: "아니오", style: .cancel)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
+
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            let alert = UIAlertController(title: "정말로 삭제하시겠습니까?", message: "삭제하시면 복구가 불가능합니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "예" , style: .destructive) { _ in
+                self.db.collection("Post").document(self.post.postID).delete()
+                self.navigationController?.popViewController(animated: true)
+            }
+            let cancel = UIAlertAction(title: "아니오", style: .cancel)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            actionSheet.dismiss(animated: true)
+        }
+
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+
+        self.present(actionSheet, animated: true)
     }
     
     @objc func sendButtonTapped() {
@@ -89,10 +105,23 @@ class CommunityPageViewController: BaseViewController {
         }
     }
     
-    @objc func commentReportButtonTapped() {
-        let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "신고" , style: .destructive) { _ in
-            // TODO: - fireStore 신고 아이디가 추가되는 로직(1. 있는지 체크, 2. 없다면 추가)
+    @objc func reportButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
+            if !self.post.reportUserList.contains(currentUser.email) {
+                self.post.reportUserList.append(currentUser.email)
+                self.db.collection("Post").document(self.post.postID).updateData(["reportUserList": self.post.reportUserList]) { error in
+                    if let error = error {
+                        print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
+                    } else {
+                        print("추가 성공")
+                    }
+                }
+            } else {
+                let alert = UIAlertController(title: "신고못해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self.present(alert, animated: true)
+            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(ok)
@@ -220,19 +249,17 @@ class CommunityPageViewController: BaseViewController {
                     }
                 }
                 var reportUserList: [String] = []
-                let reportedData = data["reportUserList"] as? [String: String]
+                let reportedData = data["reportUserList"] as? [String]
                 if let reportedData = reportedData {
-                    for key in reportedData.keys {
-                        if let email = reportedData[key] {
-                            reportUserList.append(email)
-                        }
+                    for email in reportedData {
+                        reportUserList.append(email)
                     }
                 }
                 var title = data["title"] as? String ?? ""
                 var content = data["content"] as? String ?? ""
                 if reportUserList.count >= 1 {
-                    title = "신고쳐먹음"
-                    content = "신고누적"
+                    title = "신고당한 글이라 삭제됨"
+                    content = "신고당한 글이라 삭제됨"
                 }
                 
                 let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
@@ -374,8 +401,47 @@ extension CommunityPageViewController: UITableViewDataSource {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
-    
-    
+
+
+    @objc func commentReportButtonTapped(_ sender: UIButton) {
+        let comment = post.comments[sender.tag]
+        let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "신고" , style: .destructive) { _ in
+            for i in 0..<self.post.comments.count{
+                if comment == self.post.comments[i] {
+                    if !self.post.comments[i].reportUserList.contains(currentUser.email){
+                        self.post.comments[i].reportUserList.append(currentUser.email)
+                        let commentsData: [[String: Any]] = self.post.comments.map { comment in
+                            return [
+                                "writer": comment.writer,
+                                "writerNickName": comment.writerNickName,
+                                "content": comment.content,
+                                "reportUserList": comment.reportUserList,
+                                "postingTime": comment.postingTime
+                            ]
+                        }
+                        self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
+                            if let error = error {
+                                print("Error updating comments in Firestore: \(error.localizedDescription)")
+                            } else {
+                                print("추가 성공")
+                            }
+                        }
+                        break
+                    } else {
+                        let alert = UIAlertController(title: "신고모ㅅ해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "확인", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+
 }
 
 // MARK: - UITextFieldDelegate
