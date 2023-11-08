@@ -68,7 +68,14 @@ class WriteViewController: UIViewController {
         let writer = currentUser.email
         let writerNickName = currentUser.nickname
         let likes = 0
-        let category = "질문답변"
+        var category = ""
+        
+        if writeView.dailyButton.isSelected {
+            category = "일상잡담"
+        } else if writeView.qnaButton.isSelected {
+            category = "궁금해요"
+        }
+        
         let postingTime = Date()
         let mydoc = db.collection("Post").document()
         let postingID = mydoc.documentID
