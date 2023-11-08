@@ -71,7 +71,7 @@ class CommunityPageView: UIView {
 //        $0.font = UIFont.systemFont(ofSize: 15)
 //    }
     
-    private let reportButton = UIButton().then {
+    let reportButton = UIButton().then {
         $0.setImage(UIImage(systemName: "light.beacon.max.fill"), for: .normal)
         $0.setTitle(" 신고", for: .normal)
         $0.setTitleColor(.black, for: .normal)

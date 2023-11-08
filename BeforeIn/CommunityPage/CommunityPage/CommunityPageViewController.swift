@@ -46,6 +46,7 @@ class CommunityPageViewController: BaseViewController {
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         communityPageView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         communityPageView.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        communityPageView.reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
     }
     
     func setTextField(){
@@ -81,6 +82,31 @@ class CommunityPageViewController: BaseViewController {
                 self.communityPageView.commentTextField.text = ""
             }
         }
+    }
+    
+    @objc func reportButtonTapped(_ sender: UIButton) {
+        let comment = post
+        let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
+            if !self.post.reportUserList.contains(currentUser.email) {
+                self.post.reportUserList.append(currentUser.email)
+                self.db.collection("Post").document(self.post.postID).updateData(["reportUserList": self.post.reportUserList]) { error in
+                    if let error = error {
+                        print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
+                    } else {
+                        print("추가 성공")
+                    }
+                }
+            } else {
+                let alert = UIAlertController(title: "신고못해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self.present(alert, animated: true)
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     
     // 댓글 fireStore에 저장
