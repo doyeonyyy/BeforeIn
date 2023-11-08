@@ -22,7 +22,8 @@ struct UserManager {
             "nickname": user.nickname,
             "profileImage": user.profileImage,
             "level": user.level,
-            "phone": user.phone
+            "phone": user.phone,
+            "blockList": user.blockList
         ])
     }
     
@@ -57,7 +58,8 @@ struct UserManager {
                     let profileImage = data["profileImage"] as? String ?? ""
                     let level = data["level"] as? Int ?? 0
                     let phone = data["phone"] as? String ?? ""
-                    let user = User(email: email, name: name, nickname: nickname, profileImage: profileImage, level: level, phone: phone)
+                    let blockList = data["blockList"] as? [String] ?? [String]()
+                    let user = User(email: email, name: name, nickname: nickname, profileImage: profileImage, level: level, phone: phone, blockList: blockList)
                     completion(user)
                 } else {
                     completion(nil)
@@ -156,7 +158,7 @@ struct UserManager {
         }
     }
 
-    // 차단리스트 추가
+    // 차단
     func addToBlockList(userEmail: String) {
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let userCollection = Firestore.firestore().collection("User")
@@ -167,7 +169,7 @@ struct UserManager {
                     let userDocument = documents[0]
                     var blockList = userDocument["blockList"] as? [String] ?? []
                     
-                    // 이미 블록 리스트에 추가되어 있는지 확인
+                    // 이미 추가되어 있는지 확인
                     if !blockList.contains(userEmail) {
                         blockList.append(userEmail)
                         userDocument.reference.updateData(["blockList": blockList]) { error in
