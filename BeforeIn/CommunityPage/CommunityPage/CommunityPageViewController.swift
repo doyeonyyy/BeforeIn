@@ -15,6 +15,8 @@ class CommunityPageViewController: BaseViewController {
     var post: Post!
     var comments = [Comment]()
     let db = Firestore.firestore()
+    let userManager = UserManager()
+    
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -31,7 +33,7 @@ class CommunityPageViewController: BaseViewController {
         setTableView()
         addTarget()
         setTextField()
-//        loadComments()
+        //        loadComments()
     }
     
     
@@ -46,6 +48,7 @@ class CommunityPageViewController: BaseViewController {
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         communityPageView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         communityPageView.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        communityPageView.blockButton.addTarget(self, action: #selector(blockButtonTapped), for: .touchUpInside)
     }
     
     func setTextField(){
@@ -93,6 +96,15 @@ class CommunityPageViewController: BaseViewController {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
+
+    // 사용자 차단
+    @objc func blockButtonTapped() {
+        showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
+            let blockEmail = self.post.writer
+            self.userManager.addToBlockList(userEmail: blockEmail)
+            self.showAlertOneButton(title: "차단 완료", message: "차단 완료되었습니다.", buttonTitle: "확인")
+        }
+    }
     
     // 댓글 fireStore에 저장
     func addComment(comment: String) {
@@ -111,7 +123,7 @@ class CommunityPageViewController: BaseViewController {
                 "reportUserList": comment.reportUserList
             ]
         }
-
+        
         db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
             if let error = error {
                 print("Error updating comments in Firestore: \(error.localizedDescription)")
@@ -119,18 +131,18 @@ class CommunityPageViewController: BaseViewController {
                 print("Comments updated successfully")
             }
         }
-//        db.collection("Comment").addDocument(data: [
-//            "writer": currentUser.email,
-//            "writerNickName": currentUser.nickname,
-//            "content": comment,
-//            "postingTime": postingTime
-//        ]) { error in
-//            if let error = error {
-//                print("Error adding comment: \(error.localizedDescription)")
-//            } else {
-//                print("Comment added successfully")
-//            }
-//        }
+        //        db.collection("Comment").addDocument(data: [
+        //            "writer": currentUser.email,
+        //            "writerNickName": currentUser.nickname,
+        //            "content": comment,
+        //            "postingTime": postingTime
+        //        ]) { error in
+        //            if let error = error {
+        //                print("Error adding comment: \(error.localizedDescription)")
+        //            } else {
+        //                print("Comment added successfully")
+        //            }
+        //        }
     }
     
     // 댓글 불러오기
@@ -151,8 +163,8 @@ class CommunityPageViewController: BaseViewController {
                                let writerNickName = data["writerNickName"] as? String,
                                let content = data["content"] as? String,
                                let postingTime = data["postingTime"] as? Timestamp { // Firestore의 Timestamp 타입을 사용
-//                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
-//                                comments.append(comment)
+                                //                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
+                                //                                comments.append(comment)
                             }
                         }
                         self.comments = comments
@@ -226,7 +238,7 @@ class CommunityPageViewController: BaseViewController {
             }
         }
     }
-
+    
     
     
 }
@@ -237,8 +249,8 @@ class CommunityPageViewController: BaseViewController {
 extension CommunityPageViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          view.endEditing(true)
-      }
+        view.endEditing(true)
+    }
     
 }
 
@@ -273,7 +285,7 @@ extension CommunityPageViewController: UITableViewDataSource {
         } else {
             cell.editButton.isHidden = true
             cell.deleteButton.isHidden = true
-
+            
             cell.reportButton.isHidden = false
             cell.reportButton.tag = indexPath.row
             cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
@@ -301,7 +313,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             "postingTime": comment.postingTime
                         ]
                     }
-
+                    
                     self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
                         if let error = error {
                             print("Error updating comments in Firestore: \(error.localizedDescription)")
@@ -337,7 +349,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             "postingTime": comment.postingTime
                         ]
                     }
-
+                    
                     self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
                         if let error = error {
                             print("Error updating comments in Firestore: \(error.localizedDescription)")
@@ -356,7 +368,7 @@ extension CommunityPageViewController: UITableViewDataSource {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
-
+    
     
 }
 
