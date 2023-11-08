@@ -44,8 +44,7 @@ class CommunityPageViewController: BaseViewController {
     
     func addTarget(){
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-        communityPageView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
-        communityPageView.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
         communityPageView.reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
     }
     
@@ -56,23 +55,37 @@ class CommunityPageViewController: BaseViewController {
     
     
     // MARK: - @objc
-    @objc func editButtonTapped() {
-        let post = post
-        let modifyVC = ModifyViewController()
-        modifyVC.post = post
-        self.navigationController?.pushViewController(modifyVC, animated: true)
-    }
-    
-    @objc func deleteButtonTapped() {
-        let alert = UIAlertController(title: "정말로 삭제하시겠습니까?", message: "삭제하시면 복구가 불가능합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "예" , style: .destructive) { _ in
-            self.db.collection("Post").document(self.post.postID).delete()
-            self.navigationController?.popViewController(animated: true)
+    @objc func moreButtonTapped() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let editAction = UIAlertAction(title: "수정", style: .default) { _ in
+            let post = self.post
+            let modifyVC = ModifyViewController()
+            modifyVC.post = post
+            self.navigationController?.pushViewController(modifyVC, animated: true)
         }
-        let cancel = UIAlertAction(title: "아니오", style: .cancel)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
+
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            let alert = UIAlertController(title: "정말로 삭제하시겠습니까?", message: "삭제하시면 복구가 불가능합니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "예" , style: .destructive) { _ in
+                self.db.collection("Post").document(self.post.postID).delete()
+                self.navigationController?.popViewController(animated: true)
+            }
+            let cancel = UIAlertAction(title: "아니오", style: .cancel)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            actionSheet.dismiss(animated: true)
+        }
+
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+
+        self.present(actionSheet, animated: true)
     }
     
     @objc func sendButtonTapped() {
@@ -85,7 +98,6 @@ class CommunityPageViewController: BaseViewController {
     }
     
     @objc func reportButtonTapped(_ sender: UIButton) {
-        let comment = post
         let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
             if !self.post.reportUserList.contains(currentUser.email) {

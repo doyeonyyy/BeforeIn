@@ -18,16 +18,12 @@ class CommunityPageView: UIView {
         $0.backgroundColor = .lightGray
     }
     
-    let editButton = UIButton().then {
-        $0.setTitle("수정", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-    }
-    
-    let deleteButton = UIButton().then {
-        $0.setTitle("삭제", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+    let moreButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        $0.tintColor = .systemGray
+        $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
+        
+        $0.imageView?.contentMode = .scaleAspectFit
     }
     
     let blockButton = UIButton().then {
@@ -148,9 +144,8 @@ class CommunityPageView: UIView {
     // MARK: - Methods
     func addSubview(){
         addSubview(profileImageView)
-        addSubview(editButton)
+        addSubview(moreButton)
         addSubview(blockButton)
-        addSubview(deleteButton)
         addSubview(authorLabel)
         addSubview(dateLabel)
         addSubview(titleLabel)
@@ -174,14 +169,10 @@ class CommunityPageView: UIView {
             $0.height.width.equalTo(60)
         }
         
-        editButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(deleteButton.snp.left).offset(5)
-        }
-        
-        deleteButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(self.snp.right).offset(-10)
+        moreButton.snp.makeConstraints {
+            $0.centerY.equalTo(profileImageView.snp.centerY)
+            $0.right.equalTo(self.snp.right).offset(-16)
+            $0.height.width.equalTo(15)
         }
         
         blockButton.snp.makeConstraints {
@@ -275,24 +266,18 @@ class CommunityPageView: UIView {
 //        likeLabel.text = communityPageViewModel?.likes
         
         if currentUser.email == communityPageViewModel?.writerEmail {
-            // 수정 삭제
-            editButton.isHidden = false
-            deleteButton.isHidden = false
+            moreButton.isHidden = false
             
             blockButton.isHidden = true
             reportButton.isHidden = true
         } else {
-            // 차단, 신고버튼
-            editButton.isHidden = true
-            deleteButton.isHidden = true
+            moreButton.isHidden = true
             
             blockButton.isHidden = false
             reportButton.isHidden = false
         }
-
        
         print("커뮤니티 디테일view 업데이트")
     }
-    
     
 }
