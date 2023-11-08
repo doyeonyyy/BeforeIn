@@ -41,8 +41,8 @@ class CommentCell: UITableViewCell {
 //        $0.setImage(UIImage(systemName: "light.beacon.max.fill"), for: .normal)
 //        $0.tintColor = .black
         $0.setTitle("신고", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
     }
     
     let commentLabel = UILabel().then {
