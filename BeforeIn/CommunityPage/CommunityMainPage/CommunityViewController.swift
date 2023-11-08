@@ -4,6 +4,7 @@
 import UIKit
 import SnapKit
 import FirebaseFirestore
+import FirebaseAuth
 
 
 //더미 데이터
@@ -14,6 +15,8 @@ class CommunityViewController: UIViewController {
     
     let communityMainView = CommunityView()
     var postTableView: UITableView!
+    private var handle: AuthStateDidChangeListenerHandle?
+    let userManager = UserManager()
   
     //더미 데이터
     let tags = ["전체보기", "일상잡담", "요즘문화", "궁금해요", "기타"]
@@ -22,11 +25,10 @@ class CommunityViewController: UIViewController {
     
     override func loadView() {
         view = communityMainView
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        postTableView.reloadData()
+        //fetchPosts()
     }
     
     override func viewDidLoad() {
@@ -46,6 +48,22 @@ class CommunityViewController: UIViewController {
         let writeVC = WriteViewController()
         self.navigationController?.pushViewController(writeVC, animated: true)
     }
+    
+    func observeBlockListChanges() {
+        print(#function)
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user, let email = user.email {
+                self.userManager.findUser(email: email) { findUser in
+                    if let user = findUser {
+                        currentUser = user
+                        self.postTableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+
 }
 
 
@@ -71,6 +89,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
     
     
     func fetchPosts() {
+        print(#function)
         let db = Firestore.firestore()
         let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
             if error == nil && snapshot != nil {
