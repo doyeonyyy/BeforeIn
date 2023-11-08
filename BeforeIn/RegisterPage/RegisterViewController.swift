@@ -54,8 +54,12 @@ class RegisterViewController: BaseViewController {
         registerView.showPwButton.addTarget(self, action: #selector(showPwButtonTapped), for: .touchUpInside)
         registerView.showCheckButton.addTarget(self, action: #selector(showCheckButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        
         registerView.registerIdTextField.addTarget(self, action: #selector(idTextFieldDidChange(_:)), for: .editingChanged)
         registerView.registerNicknameTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(_:)), for: .editingChanged)
+        
+        registerView.authCodeButton.addTarget(self, action: #selector(writingComplete), for: .touchUpInside)
+        registerView.checkNicknameButton.addTarget(self, action: #selector(writingComplete), for: .touchUpInside)
         registerView.registerPwTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
     }
