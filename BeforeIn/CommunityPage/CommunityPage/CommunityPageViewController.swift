@@ -250,9 +250,10 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = dateFormatter.string(from: post.comments[indexPath.row].postingTime)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let dateString = dateFormatter.string(from: post.comments[indexPath.row].postingTime)
+        let dateString = post.comments[indexPath.row].postingTime.getTimeText()
         
         cell.dateLabel.text = dateString
         cell.commentLabel.text = post.comments[indexPath.row].content
