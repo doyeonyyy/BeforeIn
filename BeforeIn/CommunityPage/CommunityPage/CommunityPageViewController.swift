@@ -203,19 +203,17 @@ class CommunityPageViewController: BaseViewController {
                     }
                 }
                 var reportUserList: [String] = []
-                let reportedData = data["reportUserList"] as? [String: String]
+                let reportedData = data["reportUserList"] as? [String]
                 if let reportedData = reportedData {
-                    for key in reportedData.keys {
-                        if let email = reportedData[key] {
-                            reportUserList.append(email)
-                        }
+                    for email in reportedData {
+                        reportUserList.append(email)
                     }
                 }
                 var title = data["title"] as? String ?? ""
                 var content = data["content"] as? String ?? ""
                 if reportUserList.count >= 1 {
-                    title = "신고쳐먹음"
-                    content = "신고누적"
+                    title = "신고당한 글이라 삭제됨"
+                    content = "신고당한 글이라 삭제됨"
                 }
                 
                 let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
