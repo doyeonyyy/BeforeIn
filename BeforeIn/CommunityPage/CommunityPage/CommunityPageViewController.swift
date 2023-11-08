@@ -102,7 +102,9 @@ class CommunityPageViewController: BaseViewController {
         showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
             let blockEmail = self.post.writer
             self.userManager.addToBlockList(userEmail: blockEmail)
-            self.showAlertOneButton(title: "차단 완료", message: "차단 완료되었습니다.", buttonTitle: "확인")
+            self.showAlertOneButton(title: "차단 완료", message: "차단 완료되었습니다.", buttonTitle: "확인"){
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
