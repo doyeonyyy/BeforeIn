@@ -30,6 +30,10 @@ class CommunityPageViewModel{
         return post.writerNickName
     }
     
+    var writerEmail: String {
+        return post.writer
+    }
+    
     var postingTime: String{
         var timeText = ""
         let timeInterval = Date().timeIntervalSince(post.postingTime)

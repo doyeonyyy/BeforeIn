@@ -83,6 +83,17 @@ class CommunityPageViewController: BaseViewController {
         }
     }
     
+    @objc func commentReportButtonTapped() {
+        let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "신고" , style: .destructive) { _ in
+            // TODO: - fireStore 신고 아이디가 추가되는 로직(1. 있는지 체크, 2. 없다면 추가)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
     // 댓글 fireStore에 저장
     func addComment(comment: String) {
         let writer = currentUser.email
@@ -246,10 +257,24 @@ extension CommunityPageViewController: UITableViewDataSource {
         cell.dateLabel.text = dateString
         cell.commentLabel.text = post.comments[indexPath.row].content
         cell.authorLabel.text = post.comments[indexPath.row].writerNickName
-        cell.editButton.tag = indexPath.row
-        cell.deleteButton.tag = indexPath.row
-        cell.editButton.addTarget(self, action: #selector(commentEditButtonTapped), for: .touchUpInside)
-        cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
+        
+        if currentUser.email == post.comments[indexPath.row].writer {
+            cell.editButton.isHidden = false
+            cell.deleteButton.isHidden = false
+            cell.reportButton.isHidden = true
+            
+            cell.editButton.tag = indexPath.row
+            cell.deleteButton.tag = indexPath.row
+            cell.editButton.addTarget(self, action: #selector(commentEditButtonTapped), for: .touchUpInside)
+            cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
+        } else {
+            cell.editButton.isHidden = true
+            cell.deleteButton.isHidden = true
+
+            cell.reportButton.isHidden = false
+            cell.reportButton.tag = indexPath.row
+            cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
+        }
         
         return cell
     }
