@@ -191,11 +191,7 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
         cell.selectionStyle = .none
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
-    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
         let communityPageVC = CommunityPageViewController()

@@ -13,7 +13,7 @@ class WriteView: UIView {
     
     let mainLabel = UILabel().then {
         $0.text = "제목"
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -25,13 +25,13 @@ class WriteView: UIView {
     
     let mainTextField = UITextField().then {
         $0.placeholder = "제목을 입력하세요"
-        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let contentsLabel = UILabel().then {
         $0.text = "내용"
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -43,7 +43,7 @@ class WriteView: UIView {
 
     let contentTextView = UITextView().then {
         $0.backgroundColor = .systemGray6
-        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = UIColor.placeholderText
         $0.text = "메세지를 입력하세요"
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -51,34 +51,32 @@ class WriteView: UIView {
     
     let categoryMainLabel = UILabel().then {
         $0.text = "카테고리 설정"
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let dailyButton = UIButton().then {
-        $0.setTitle("일상/자유", for: .normal)
+        $0.setTitle("일상잡담", for: .normal)
         $0.setTitleColor(.BeforeInRed, for: .normal)
         $0.backgroundColor = .white
         $0.layer.borderColor = UIColor.BeforeInRed?.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 16.5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
     }
     
     let qnaButton = UIButton().then {
-        $0.setTitle("질문답변", for: .normal)
+        $0.setTitle("궁금해요", for: .normal)
         $0.setTitleColor(.BeforeInRed, for: .normal)
         $0.backgroundColor = .white
         $0.layer.borderColor = UIColor.BeforeInRed?.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 16.5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
     }
     
     let confirmButton = UIButton().then {
-        $0.setTitle("글 올리기", for: .normal)
+        $0.setTitle("등록하기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.backgroundColor = .BeforeInRed
@@ -113,14 +111,14 @@ class WriteView: UIView {
     func setupConstraint() {
         mainLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(120)
+            make.top.equalToSuperview().offset(100)
         }
         
         mainCustomView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(mainLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
         
         mainTextField.snp.makeConstraints { make in
@@ -135,10 +133,10 @@ class WriteView: UIView {
         }
         
         contentsCustomView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(contentsLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
-            make.height.equalTo(300)
+            make.height.equalTo(200)
         }
         
         contentTextView.snp.makeConstraints { make in
@@ -155,17 +153,21 @@ class WriteView: UIView {
         dailyButton.snp.makeConstraints { make in
             make.top.equalTo(categoryMainLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
+            make.width.equalTo(82)
+            make.height.equalTo(30)
         }
         
         qnaButton.snp.makeConstraints { make in
             make.top.equalTo(categoryMainLabel.snp.bottom).offset(16)
             make.leading.equalTo(dailyButton.snp.trailing).offset(8)
+            make.width.equalTo(82)
+            make.height.equalTo(30)
         }
 
         confirmButton.snp.makeConstraints { make in
-            make.top.equalTo(contentsCustomView.snp.bottom).offset(140)
-            make.height.equalTo(50)
+            make.height.equalTo(45)
             make.trailing.leading.equalToSuperview().inset(24)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
         }
     }
 }

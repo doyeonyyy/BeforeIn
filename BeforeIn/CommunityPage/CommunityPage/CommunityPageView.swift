@@ -21,13 +21,13 @@ class CommunityPageView: UIView {
     let editButton = UIButton().then {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
     
     let deleteButton = UIButton().then {
         $0.setTitle("삭제", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
     
     let blockButton = UIButton().then {
@@ -38,25 +38,25 @@ class CommunityPageView: UIView {
     
     private let authorLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     private let dateLabel = UILabel().then {
         $0.text = "10분 전"
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = .systemGray2
     }
     
     private let titleLabel = UILabel().then {
-        $0.text = "제목제목제목제목제목"
-        $0.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.text = "제목"
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
         $0.numberOfLines = 2
     }
     
     private let contentTextView = UITextView().then {
-        $0.text = "내용내요앵ㄴ어ㅐ엉러ㅏㅇ라으ㅏㄹ아루아ㅜㄹ울우ㅏ루아ㅜ라우ㅏㄹ우루우라우ㅏ루아ㅜ라우라우ㅏ루아루ㅏ우라우ㅏ루아루ㅏ우어뤄우라ㅜ아ㅜ랑"
-        // $0.backgroundColor = .systemGray6
-        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.text = "내용"
+//        $0.backgroundColor = .systemGray6
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.isEditable = false
         $0.isSelectable = false
     }
@@ -89,8 +89,8 @@ class CommunityPageView: UIView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 14, bottom: 4, right: 14)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     private let divider = UIView().then {
@@ -99,15 +99,11 @@ class CommunityPageView: UIView {
     
     private let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
     let commentTableView = UITableView().then {
         $0.separatorStyle = .none
-    }
-    
-    private let bottomDivider = UIView().then {
-        $0.backgroundColor = .systemGray6
     }
     
     let commentTextField = UITextField().then {
@@ -122,7 +118,7 @@ class CommunityPageView: UIView {
         $0.setTitle("등록", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         $0.layer.cornerRadius = 16.5
     }
     
@@ -166,7 +162,6 @@ class CommunityPageView: UIView {
         addSubview(divider)
         addSubview(commentLabel)
         addSubview(commentTableView)
-        addSubview(bottomDivider)
         addSubview(commentTextField)
         addSubview(sendButton)
     }
@@ -181,12 +176,12 @@ class CommunityPageView: UIView {
         
         editButton.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(deleteButton.snp.left).offset(-2)
+            $0.right.equalTo(deleteButton.snp.left).offset(5)
         }
         
         deleteButton.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(self.snp.right).offset(-16)
+            $0.right.equalTo(self.snp.right).offset(-10)
         }
         
         blockButton.snp.makeConstraints {
@@ -195,24 +190,24 @@ class CommunityPageView: UIView {
         }
         
         authorLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
             $0.left.equalTo(profileImageView.snp.right).offset(8)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(authorLabel.snp.bottom).offset(8)
+            $0.top.equalTo(authorLabel.snp.bottom).offset(5)
             $0.left.equalTo(authorLabel.snp.left)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(32)
+            $0.top.equalTo(profileImageView.snp.bottom)
             $0.left.right.equalTo(self).inset(16)
             $0.height.equalTo(48)
         }
         
         contentTextView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
-            $0.left.right.equalTo(self).inset(10)
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.left.right.equalTo(self).inset(12)
             $0.height.equalTo(200)
         }
         
@@ -232,36 +227,31 @@ class CommunityPageView: UIView {
         }
         
         categoryButton.snp.makeConstraints {
+            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
             $0.left.equalTo(self.snp.left).offset(16)
-            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
         }
         
         divider.snp.makeConstraints {
-            $0.top.equalTo(categoryButton.snp.bottom).offset(24)
+            $0.top.equalTo(categoryButton.snp.bottom).offset(10)
             $0.left.right.equalToSuperview()
-            $0.height.equalTo(3)
+            $0.height.equalTo(1)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(16)
+            $0.top.equalTo(divider.snp.bottom).offset(8)
             $0.left.equalTo(self).offset(16)
         }
         
         commentTableView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom)
             $0.left.right.equalToSuperview()
-        }
-        
-        bottomDivider.snp.makeConstraints {
-            $0.top.equalTo(commentTableView.snp.bottom).offset(8)
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(3)
+            $0.bottom.equalTo(commentTextField.snp.top)
         }
         
         commentTextField.snp.makeConstraints {
-            $0.top.equalTo(bottomDivider.snp.bottom).offset(8)
+            $0.top.equalTo(commentTableView.snp.bottom).offset(8)
             $0.left.equalTo(self).offset(16)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.right.equalTo(sendButton.snp.left).offset(-8)
         }
         
@@ -269,8 +259,8 @@ class CommunityPageView: UIView {
             $0.centerY.equalTo(commentTextField.snp.centerY)
             $0.left.equalTo(commentTextField.snp.right).offset(8)
             $0.right.equalTo(self).offset(-16)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
-            $0.width.equalTo(60)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
+            $0.width.equalTo(40)
         }
         
         
