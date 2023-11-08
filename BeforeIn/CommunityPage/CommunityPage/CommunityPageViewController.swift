@@ -83,17 +83,6 @@ class CommunityPageViewController: BaseViewController {
         }
     }
     
-    @objc func commentReportButtonTapped() {
-        let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "신고" , style: .destructive) { _ in
-            // TODO: - fireStore 신고 아이디가 추가되는 로직(1. 있는지 체크, 2. 없다면 추가)
-        }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
-    
     // 댓글 fireStore에 저장
     func addComment(comment: String) {
         let writer = currentUser.email
@@ -355,7 +344,39 @@ extension CommunityPageViewController: UITableViewDataSource {
         present(alert, animated: true)
     }
 
-    
+    @objc func commentReportButtonTapped(_ sender: UIButton) {
+        let comment = post.comments[sender.tag]
+        let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "신고" , style: .destructive) { _ in
+            for i in 0..<self.post.comments.count{
+               if comment == self.post.comments[i] {
+                   // TODO: - 이미 신고했다면 중복신고 불가(reportUserList에 이미 아이디가 들어가 있다면 이미 신고했다고 얼럿 띄우고 추가 안되게 돌리기..)
+                   self.post.comments[i].reportUserList.append(currentUser.email)
+                   let commentsData: [[String: Any]] = self.post.comments.map { comment in
+                       return [
+                           "writer": comment.writer,
+                           "writerNickName": comment.writerNickName,
+                           "content": comment.content,
+                           "reportUserList": comment.reportUserList,
+                           "postingTime": comment.postingTime
+                       ]
+                   }
+                   self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
+                       if let error = error {
+                           print("Error updating comments in Firestore: \(error.localizedDescription)")
+                       } else {
+                           print("추가 성공")
+                       }
+                   }
+                   break
+               }
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
