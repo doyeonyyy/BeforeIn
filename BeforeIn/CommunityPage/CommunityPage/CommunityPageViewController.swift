@@ -24,6 +24,7 @@ class CommunityPageViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         fetchPost()
     }
     
@@ -35,6 +36,8 @@ class CommunityPageViewController: BaseViewController {
         setTextField()
         //        loadComments()
     }
+    
+  //override func
     
     
     // MARK: - Methods

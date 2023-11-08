@@ -14,16 +14,10 @@ class CommunityViewController: UIViewController {
     
     let communityMainView = CommunityView()
     var postTableView: UITableView!
-    //    var blockList: [String] = [] {
-    //        didSet {
-    //            blockedEmails = blockList
-    //        }
-    //    }
-    //
+  
     //더미 데이터
     let tags = ["전체보기", "일상잡담", "요즘문화", "궁금해요", "기타"]
     var posts: [Post] = []
-    //    var posts: [String] = []
     var count = 0
     
     override func loadView() {
@@ -54,6 +48,8 @@ class CommunityViewController: UIViewController {
     }
 }
 
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension CommunityViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count
@@ -185,6 +181,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         }
     }
 }
+
 
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
