@@ -236,6 +236,10 @@ class CommunityPageViewController: BaseViewController {
 // MARK: - UITableViewDelegate
 extension CommunityPageViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          view.endEditing(true)
+      }
+    
 }
 
 
@@ -244,7 +248,6 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return post.comments.count
-//        return post.comments.count
     }
     
     
@@ -361,8 +364,8 @@ extension CommunityPageViewController: UITableViewDataSource {
 extension CommunityPageViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-         view.endEditing(true)
-     }
+        view.endEditing(true)
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == communityPageView.commentTextField {
@@ -381,7 +384,4 @@ extension CommunityPageViewController: UITextFieldDelegate {
             self.view.frame.origin.y = 0
         }
     }
-    
-    
-    
 }
