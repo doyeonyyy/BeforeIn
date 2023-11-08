@@ -153,6 +153,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 break
                             }
                         }
+                        self.postTableView.reloadData()
                     }
                     else {
                         let modifyDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
