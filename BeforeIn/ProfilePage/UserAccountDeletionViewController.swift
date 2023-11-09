@@ -140,6 +140,7 @@ class UserAccountDeletionViewController: BaseViewController {
                                 print("Firebase Error: \(error)")
                             } else {
                                 print("회원탈퇴 성공")
+                                self.userManager.deleteImage()
                                 let loginViewController = LoginViewController()
                                 self.transitionToRootView(view: UINavigationController(rootViewController: loginViewController))
                             }

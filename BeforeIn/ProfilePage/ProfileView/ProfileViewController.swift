@@ -24,25 +24,27 @@ class ProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         profileView.profileViewModel?.updateUser(currentUser)
         profileView.updateProfileImage()
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
-        setNavi()
         setPicker()
         setTableView()
         addTarget()
         //        configureUser()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     
     // MARK: - Methods
-    
-    func setNavi(){
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
     
     func setTableView(){
         profileView.tableView.dataSource = self
