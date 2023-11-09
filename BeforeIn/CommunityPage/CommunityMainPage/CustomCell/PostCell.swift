@@ -100,14 +100,14 @@ class PostCell: UITableViewCell {
         
         titleLable.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-50)
             make.top.equalToSuperview().inset(8)
 //            make.width.equalTo(329)
 //            make.height.equalTo(44)
         }
         
         categoryButton.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLable)
+            make.top.equalTo(titleLable.snp.top)
             make.trailing.equalToSuperview().offset(5)
         }
         
@@ -135,7 +135,7 @@ class PostCell: UITableViewCell {
         commentImageView.snp.makeConstraints { make in
             make.top.equalTo(titleLable.snp.bottom).offset(10)
             make.width.height.equalTo(14)
-            make.trailing.equalTo(commentsLabel.snp.leading).offset(-10)
+            make.trailing.equalTo(commentsLabel.snp.leading).offset(-4)
         }
         
         commentsLabel.snp.makeConstraints { make in
