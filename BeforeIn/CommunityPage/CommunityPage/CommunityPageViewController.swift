@@ -37,8 +37,6 @@ class CommunityPageViewController: BaseViewController {
         //        loadComments()
     }
     
-  //override func
-    
     
     // MARK: - Methods
     func setTableView(){
@@ -49,8 +47,6 @@ class CommunityPageViewController: BaseViewController {
     
     func addTarget(){
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-//        communityPageView.editButton.addTarget(self, action: #selector(commentEditButtonTapped), for: .touchUpInside)
-//        communityPageView.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
         communityPageView.blockButton.addTarget(self, action: #selector(blockButtonTapped), for: .touchUpInside)
         communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
         communityPageView.reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
@@ -129,7 +125,7 @@ class CommunityPageViewController: BaseViewController {
         present(alert, animated: true)
     }
 
-    // 사용자 차단
+    // 차단
     @objc func blockButtonTapped() {
         showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
             let blockEmail = self.post.writer
@@ -181,7 +177,6 @@ class CommunityPageViewController: BaseViewController {
     
     // 댓글 불러오기
     func loadComments() {
-        
         db.collection("Comment")
             .order(by: "postingTime")
             .addSnapshotListener { querySnapshot, error in
