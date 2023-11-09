@@ -235,7 +235,7 @@ class ProfileView: UIView {
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(35)
+            make.top.equalToSuperview().offset(30)
             make.leading.equalToSuperview().offset(24)
         }
         
@@ -252,7 +252,7 @@ class ProfileView: UIView {
         circularImageView.snp.makeConstraints { make in
             make.width.height.equalTo(90)
             make.trailing.equalToSuperview().offset(-24)
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(25)
         }
         
         editProfileButton.snp.makeConstraints { make in
