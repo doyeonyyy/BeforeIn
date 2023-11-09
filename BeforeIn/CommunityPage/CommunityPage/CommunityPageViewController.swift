@@ -192,16 +192,29 @@ class CommunityPageViewController: BaseViewController {
             }
             
             if document.exists {
-                
+                let dispatchGroup = DispatchGroup()
                 let data = document.data() ?? [:]
                 let category = data["category"] as? String ?? ""
                 let likes = data["likes"] as? Int ?? 0
                 let postingTime = data["postingTime"] as? Timestamp ?? Timestamp(date: Date())
                 let postingID = data["postingID"] as? String ?? ""
                 let writer = data["writer"] as? String ?? ""
-                var writerNickName = data["writerNickName"] as? String ?? ""
+                var writerNickName = ""
+                
+                if let writerRef = data["writerNickName"] as? DocumentReference {
+                    dispatchGroup.enter()
+                    writerRef.getDocument{ (snapshot, error) in
+                        if let data = snapshot?.data() {
+                            if let nickname = data["nickname"] as? String {
+                                writerNickName = nickname
+                                dispatchGroup.leave()
+                            }
+                        }
+                        
+                    }
+                }
+                
                 var comments: [Comment] = []
-                let dispatchGroup = DispatchGroup()
                 if let commentsData = data["comments"] as? [[String: Any]] {
                     for comment in commentsData {
                         if let commentWriter = comment["writer"] as? String,
@@ -236,7 +249,6 @@ class CommunityPageViewController: BaseViewController {
                             }
                             
                             dispatchGroup.notify(queue: .main) {
-                                print(commentWriterNickName)
                                 let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: reportUserList, writerRef: commentWriterRef)
                                 comments.append(newComment)
                             }
@@ -259,6 +271,7 @@ class CommunityPageViewController: BaseViewController {
                 }
                 
                 dispatchGroup.notify(queue: .main) {
+                    print(writerNickName)
                     let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                     self.post = fetchedPost
                     self.communityPageView.communityPageViewModel?.updatePost(fetchedPost)
@@ -419,7 +432,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                                 "content": comment.content,
                                 "reportUserList": comment.reportUserList,
                                 "postingTime": comment.postingTime,
-                                "wrterRef": comment.writerRef
+                                "writerRef": comment.writerRef
                             ]
                         }
                         self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
