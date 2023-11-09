@@ -58,6 +58,10 @@ class MainViewModel {
         }
     }
     
+    var blockList: [String] {
+        return user.blockList
+    }
+    
     var randomEtiquetteContent: EtiquetteContent {
         var random = ""
         switch Int.random(in: 0...1){
