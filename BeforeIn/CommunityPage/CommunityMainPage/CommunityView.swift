@@ -37,7 +37,6 @@ class CommunityView: UIView {
     
     let postTableView = UITableView().then{
         $0.showsVerticalScrollIndicator = false
-        $0.bounces = false
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
