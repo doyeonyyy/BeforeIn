@@ -206,7 +206,7 @@ class ProfileView: UIView {
     
     private func defineLayoutConstraints() {
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(80)
+            make.top.equalTo(self.snp.top).offset(85)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
@@ -216,7 +216,7 @@ class ProfileView: UIView {
         }
         
         editNicknameButton.snp.makeConstraints { make in
-            make.top.equalTo(idLabel.snp.bottom).offset(12)
+            make.top.equalTo(idLabel.snp.bottom).offset(10)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
