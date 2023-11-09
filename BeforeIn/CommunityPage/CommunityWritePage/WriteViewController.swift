@@ -19,6 +19,7 @@ class WriteViewController: BaseViewController {
         
     }
     func addTarget() {
+        writeView.mainTextField.delegate = self
         writeView.contentTextView.delegate = self
         writeView.confirmButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
         writeView.dailyButton.addTarget(self, action: #selector(dailyButtonTapped), for: .touchUpInside)
@@ -108,9 +109,21 @@ class WriteViewController: BaseViewController {
     
 }
 
+// MARK: - UITextFieldDelegate
+extension WriteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == writeView.mainTextField {
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return updatedText.count <= 45
+        }
+        return true
+    }
+}
 
 // MARK: - UITextViewDelegate
-extension WriteViewController: UITextViewDelegate{
+extension WriteViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
             if textView.textColor == UIColor.placeholderText {
                 textView.text = nil
@@ -118,10 +131,22 @@ extension WriteViewController: UITextViewDelegate{
             }
             
         }
+    
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
                 textView.text = "메세지를 입력하세요"
                 textView.textColor = UIColor.placeholderText
             }
         }
+    
+    func textViewDidChange(_ textView: UITextView) {
+           if textView == writeView.contentTextView {
+               if let text = textView.text, text.count > 800 {
+                   let truncatedText = String(text.prefix(800))
+                   textView.text = truncatedText
+               }
+           }
+       }
 }
+
+

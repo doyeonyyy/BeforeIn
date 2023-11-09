@@ -25,6 +25,7 @@ class ModifyViewController: BaseViewController {
     }
     
     func addTarget() {
+        modifyVeiw.mainTextField.delegate = self
         modifyVeiw.contentTextView.delegate = self
         modifyVeiw.confirmButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
         modifyVeiw.dailyButton.addTarget(self, action: #selector(dailyButtonTapped), for: .touchUpInside)
@@ -104,6 +105,19 @@ class ModifyViewController: BaseViewController {
 
 }
 
+// MARK: - UITextFieldDelegate
+extension ModifyViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == modifyVeiw.mainTextField {
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return updatedText.count <= 45
+        }
+        return true
+    }
+}
+
 
 // MARK: - UITextViewDelegate
 extension ModifyViewController: UITextViewDelegate {
@@ -114,10 +128,21 @@ extension ModifyViewController: UITextViewDelegate {
         }
         
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty && !textView.isFirstResponder {
             textView.text = "메세지를 입력하세요"
             textView.textColor = UIColor.placeholderText
         }
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+           if textView == modifyVeiw.contentTextView {
+               if let text = textView.text, text.count > 800 {
+                   let truncatedText = String(text.prefix(800))
+                   textView.text = truncatedText
+               }
+           }
+       }
+    
 }
