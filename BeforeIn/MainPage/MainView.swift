@@ -240,11 +240,11 @@ class MainView: UIView {
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(levelLabel.snp.top).offset(-10)
+            make.top.equalToSuperview().offset(35)
             make.leading.equalToSuperview().offset(24)
         }
         levelLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.centerY).offset(-2)
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(24)
         }
         subLabel.snp.makeConstraints { make in
