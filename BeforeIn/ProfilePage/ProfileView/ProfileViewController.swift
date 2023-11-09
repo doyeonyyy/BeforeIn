@@ -13,8 +13,8 @@ class ProfileViewController: BaseViewController {
     var picker: PHPickerViewController?
     let userManager = UserManager()
     let profileView = ProfileView()
-    let header = ["커뮤니티", "계정관리", "기기설정"]
-    private let cellData = [["차단한 사용자"], ["로그아웃", "비밀번호 변경", "회원탈퇴"], ["화면설정", "앱 정보"]]
+    let header = ["커뮤니티", "기기설정", "계정관리"]
+    private let cellData = [["차단한 사용자"], ["화면설정", "앱 정보"], ["비밀번호 변경", "로그아웃", "회원탈퇴"]]
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -129,9 +129,20 @@ extension ProfileViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let cellText = cellData[indexPath.section][indexPath.row]
+        
         switch cellText {
         case "차단한 사용자":
-            break
+            let blockListVC = BlockListViewController()
+            self.navigationController?.pushViewController(blockListVC, animated: true)
+        case "화면설정":
+            let displayVC = DisplayViewController()
+            self.navigationController?.pushViewController(displayVC, animated: true)
+        case "앱 정보":
+            let appInfoVC = AppInfoViewController()
+            self.navigationController?.pushViewController(appInfoVC, animated: true)
+        case "비밀번호 변경":
+            let passwordEditVC = PasswordEditViewController()
+            self.navigationController?.pushViewController(passwordEditVC, animated: true)
         case "로그아웃":
             showAlertTwoButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 do {
@@ -142,22 +153,14 @@ extension ProfileViewController: UITableViewDelegate {
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
             }
-        case "비밀번호 변경":
-            let passwordEditVC = PasswordEditViewController()
-            self.navigationController?.pushViewController(passwordEditVC, animated: true)
         case "회원탈퇴":
             let userAccountDeletionVC = UserAccountDeletionViewController()
             self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
-        case "화면설정":
-            let displayVC = DisplayViewController()
-            self.navigationController?.pushViewController(displayVC, animated: true)
-        case "앱 정보":
-            let appInfoVC = AppInfoViewController()
-            self.navigationController?.pushViewController(appInfoVC, animated: true)
         default:
             break
         }
     }
+
     
 }
 
