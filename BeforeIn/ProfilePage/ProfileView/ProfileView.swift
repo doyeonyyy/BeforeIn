@@ -38,7 +38,7 @@ class ProfileView: UIView {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "profilePlaceholder")
         imageView.backgroundColor = .systemGray6
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 45
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         return imageView
@@ -148,11 +148,9 @@ class ProfileView: UIView {
     }()
     
     let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.isScrollEnabled = false
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -194,8 +192,8 @@ class ProfileView: UIView {
         grayRectangle.addSubview(mentBoxLabel)
         grayRectangle.addSubview(level)
         grayRectangle.addSubview(levelProgressView)
-        
         grayRectangle.addSubview(levelImageStackView)
+        
         levelImageStackView.addArrangedSubview(levelImage1)
         levelImageStackView.addArrangedSubview(levelImage2)
         levelImageStackView.addArrangedSubview(levelImage3)
@@ -208,7 +206,7 @@ class ProfileView: UIView {
     
     private func defineLayoutConstraints() {
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(100)
+            make.top.equalTo(self.snp.top).offset(85)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
@@ -218,14 +216,14 @@ class ProfileView: UIView {
         }
         
         editNicknameButton.snp.makeConstraints { make in
-            make.top.equalTo(idLabel.snp.bottom).offset(12)
+            make.top.equalTo(idLabel.snp.bottom).offset(10)
             make.leading.equalTo(self.snp.leading).offset(24)
         }
         
         circularImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(100)
+            make.width.height.equalTo(90)
             make.trailing.equalTo(self.snp.trailing).offset(-24)
-            make.top.equalTo(self.snp.top).offset(86)
+            make.top.equalTo(self.snp.top).offset(80)
         }
         
         editProfileButton.snp.makeConstraints { make in
@@ -235,8 +233,8 @@ class ProfileView: UIView {
         
         grayRectangle.snp.makeConstraints { make in
             make.width.equalToSuperview().inset(24)
-            make.height.equalTo(200)
-            make.top.equalTo(circularImageView.snp.bottom).offset(24)
+            make.height.equalTo(170)
+            make.top.equalTo(circularImageView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
         
@@ -262,7 +260,7 @@ class ProfileView: UIView {
         
         levelImageStackView.snp.makeConstraints { make in
             make.bottom.equalTo(levelProgressView.snp.top)
-            make.height.equalTo(72)
+            make.height.equalTo(70)
             make.leading.trailing.equalToSuperview().inset(8)
         }
         
@@ -275,11 +273,11 @@ class ProfileView: UIView {
         line.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
-            make.top.equalTo(grayRectangle.snp.bottom).offset(24)
+            make.top.equalTo(grayRectangle.snp.bottom).offset(15)
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(line.snp.bottom)
+            make.top.equalTo(line.snp.bottom).offset(-15)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalTo(self.safeAreaLayoutGuide)

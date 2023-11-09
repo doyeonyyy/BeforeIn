@@ -13,13 +13,8 @@ class ProfileViewController: BaseViewController {
     var picker: PHPickerViewController?
     let userManager = UserManager()
     let profileView = ProfileView()
-    private let cellData: [String] = [
-        "화면 설정",
-        "비밀번호 변경",
-        "로그아웃",
-        "회원탈퇴",
-        "앱 정보",
-    ]
+    let header = ["커뮤니티", "기기설정", "계정관리"]
+    private let cellData = [["차단한 사용자"], ["화면설정", "앱 정보"], ["비밀번호 변경", "로그아웃", "회원탈퇴"]]
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -34,9 +29,8 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
+        setNavi()
         setPicker()
         setTableView()
         addTarget()
@@ -45,6 +39,11 @@ class ProfileViewController: BaseViewController {
     
     
     // MARK: - Methods
+    
+    func setNavi(){
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
     func setTableView(){
         profileView.tableView.dataSource = self
         profileView.tableView.delegate = self
@@ -87,18 +86,64 @@ class ProfileViewController: BaseViewController {
 // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UITableViewHeaderFooterView()
+        headerView.textLabel?.text = header[section]
+        headerView.textLabel?.textColor = .systemGray2
+        headerView.textLabel?.textAlignment = .left
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section < header.count - 1 {
+            let footerView = UIView()
+            footerView.backgroundColor = .clear
+            
+            let separatorLine = UIView()
+            separatorLine.backgroundColor = .systemGray6
+            footerView.addSubview(separatorLine)
+            
+            separatorLine.snp.makeConstraints { make in
+                make.leading.equalTo(footerView.snp.leading)
+                make.trailing.equalTo(footerView.snp.trailing)
+                make.bottom.equalTo(footerView.snp.bottom).offset(10)
+                make.height.equalTo(1)
+            }
+            return footerView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section < header.count - 1 {
+            return 1
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20.0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 0 {
+        let cellText = cellData[indexPath.section][indexPath.row]
+        
+        switch cellText {
+        case "차단한 사용자":
+            let blockListVC = BlockListViewController()
+            self.navigationController?.pushViewController(blockListVC, animated: true)
+        case "화면설정":
             let displayVC = DisplayViewController()
             self.navigationController?.pushViewController(displayVC, animated: true)
-        } else if indexPath.row == 1 {
-            // 비밀번호 변경
+        case "앱 정보":
+            let appInfoVC = AppInfoViewController()
+            self.navigationController?.pushViewController(appInfoVC, animated: true)
+        case "비밀번호 변경":
             let passwordEditVC = PasswordEditViewController()
             self.navigationController?.pushViewController(passwordEditVC, animated: true)
-        } else if indexPath.row == 2 {
-            // 로그아웃
+        case "로그아웃":
             showAlertTwoButton(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 do {
                     try Auth.auth().signOut()
@@ -108,45 +153,39 @@ extension ProfileViewController: UITableViewDelegate {
                     print("Error signing out: \(signOutError.localizedDescription)")
                 }
             }
-        } else if indexPath.row == 3 {
+        case "회원탈퇴":
             let userAccountDeletionVC = UserAccountDeletionViewController()
             self.navigationController?.pushViewController(userAccountDeletionVC, animated: true)
-        } else if indexPath.row == 4 {
-            let appInfoVC = AppInfoViewController()
-            self.navigationController?.pushViewController(appInfoVC, animated: true)
+        default:
+            break
         }
     }
+
     
 }
+
 
 
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return header.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return header[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellData.count
+        return cellData[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let text = cellData[indexPath.row]
-        
+        let text = cellData[indexPath.section][indexPath.row]
         cell.textLabel?.text = text
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
-        
-        let line = UIView()
-//        line.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
-        line.backgroundColor = .systemGray5
-        line.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(line)
-        
-        line.snp.makeConstraints { make in
-            make.leading.equalTo(cell.contentView.snp.leading)
-            make.trailing.equalTo(cell.contentView.snp.trailing)
-            make.bottom.equalTo(cell.contentView.snp.bottom)
-            make.height.equalTo(1)
-        }
-        
         
         let chevronImageView = UIImageView()
         chevronImageView.image = UIImage(systemName: "chevron.forward")
@@ -165,10 +204,18 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
-        return tableView.bounds.height / CGFloat(numberOfCells)
+        return UITableView.automaticDimension
     }
+    
+    
+    //        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //            let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
+    //            return tableView.bounds.height / CGFloat(numberOfCells)
+    //        }
+    
+    
 }
+
 
 // MARK: - PHPickerViewControllerDelegate
 extension ProfileViewController: PHPickerViewControllerDelegate {
@@ -187,7 +234,7 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 alertController.dismiss(animated: true, completion: nil)
             }
-
+            
         }
     }
     
@@ -198,3 +245,5 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
     }
     
 }
+
+

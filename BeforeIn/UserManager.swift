@@ -191,6 +191,74 @@ struct UserManager {
     }
 
     
+    // 차단해제
+//    func removeFromBlockList(userEmail: String) {
+//        if let currentUserEmail = Auth.auth().currentUser?.email {
+//            let userCollection = Firestore.firestore().collection("User")
+//            userCollection.whereField("email", isEqualTo: currentUserEmail).getDocuments { (querySnapshot, error) in
+//                if let error = error {
+//                    print("에러: \(error.localizedDescription)")
+//                } else if let documents = querySnapshot?.documents, !documents.isEmpty {
+//                    let userDocument = documents[0]
+//                    var blockList = userDocument["blockList"] as? [String] ?? []
+//
+//                    // 차단 목록에서 사용자 제거
+//                    if let index = blockList.firstIndex(of: userEmail) {
+//                        blockList.remove(at: index)
+//                        userDocument.reference.updateData(["blockList": blockList]) { error in
+//                            if let error = error {
+//                                print("차단 해제 실패: \(error.localizedDescription)")
+//                            } else {
+//                                print("차단 해제 성공")
+//                                currentUser.blockList = blockList
+//                            }
+//                        }
+//                    } else {
+//                        print("차단 목록에서 사용자를 찾을 수 없음")
+//                    }
+//                }
+//            }
+//        } else {
+//            print("사용자 이메일을 가져올 수 없음.")
+//        }
+//    }
+
+    func removeFromBlockList(userEmail: String, completion: @escaping (Bool) -> Void) {
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let userCollection = Firestore.firestore().collection("User")
+            userCollection.whereField("email", isEqualTo: currentUserEmail).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("에러: \(error.localizedDescription)")
+                    completion(false) 
+                } else if let documents = querySnapshot?.documents, !documents.isEmpty {
+                    let userDocument = documents[0]
+                    var blockList = userDocument["blockList"] as? [String] ?? []
+
+                    // 차단 목록에서 사용자 제거
+                    if let index = blockList.firstIndex(of: userEmail) {
+                        blockList.remove(at: index)
+                        userDocument.reference.updateData(["blockList": blockList]) { error in
+                            if let error = error {
+                                print("차단 해제 실패: \(error.localizedDescription)")
+                                completion(false) // 실패 시 호출
+                            } else {
+                                print("차단 해제 성공")
+                                currentUser.blockList = blockList
+                                completion(true) // 성공 시 호출
+                            }
+                        }
+                    } else {
+                        print("차단 목록에서 사용자를 찾을 수 없음")
+                        completion(false) // 실패 시 호출
+                    }
+                }
+            }
+        } else {
+            print("사용자 이메일을 가져올 수 없음.")
+            completion(false) // 실패 시 호출
+        }
+    }
+
     
     
 }
