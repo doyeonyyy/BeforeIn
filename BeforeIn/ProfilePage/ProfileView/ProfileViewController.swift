@@ -24,6 +24,7 @@ class ProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         profileView.profileViewModel?.updateUser(currentUser)
         profileView.updateProfileImage()
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -33,8 +34,13 @@ class ProfileViewController: BaseViewController {
         setPicker()
         setTableView()
         addTarget()
-        navigationController?.isNavigationBarHidden = true
         //        configureUser()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
