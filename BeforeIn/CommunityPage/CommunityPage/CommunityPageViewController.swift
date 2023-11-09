@@ -138,74 +138,50 @@ class CommunityPageViewController: BaseViewController {
     
     // 댓글 fireStore에 저장
     func addComment(comment: String) {
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        
         let writer = currentUser.email
-        let writerNickName = currentUser.nickname
+        var writerNickName = currentUser.nickname
         let content = comment
         let postingTime = Date()
-        let newComment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime, reportUserList: [])
-        self.post.comments.append(newComment)
-        let commentsData: [[String: Any]] = self.post.comments.map { comment in
-            return [
-                "writer": comment.writer,
-                "writerNickName": comment.writerNickName,
-                "content": comment.content,
-                "postingTime": comment.postingTime,
-                "reportUserList": comment.reportUserList
-            ]
-        }
-        
-        db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
-            if let error = error {
-                print("Error updating comments in Firestore: \(error.localizedDescription)")
-            } else {
-                print("Comments updated successfully")
+        var writerRef: DocumentReference?
+        let query = db.collection("User").whereField("email", isEqualTo: writer)
+        query.getDocuments{ (snapshot, error) in
+            let docs = snapshot!.documents
+            for doc in docs {
+                writerRef = self.db.collection("User").document(doc.documentID)
+                if let nickname = doc.get("nickname") as? String{
+                    writerNickName = nickname
+                }
+                dispatchGroup.leave()
             }
         }
-        //        db.collection("Comment").addDocument(data: [
-        //            "writer": currentUser.email,
-        //            "writerNickName": currentUser.nickname,
-        //            "content": comment,
-        //            "postingTime": postingTime
-        //        ]) { error in
-        //            if let error = error {
-        //                print("Error adding comment: \(error.localizedDescription)")
-        //            } else {
-        //                print("Comment added successfully")
-        //            }
-        //        }
-    }
-    
-    // 댓글 불러오기
-    func loadComments() {
-        db.collection("Comment")
-            .order(by: "postingTime")
-            .addSnapshotListener { querySnapshot, error in
+        dispatchGroup.notify(queue: .main) {
+            
+            let newComment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime, reportUserList: [], writerRef: writerRef)
+            self.post.comments.append(newComment)
+            let commentsData: [[String: Any]] = self.post.comments.map { comment in
+                return [
+                    "writer": comment.writer,
+                    "writerNickName": comment.writerNickName,
+                    "content": comment.content,
+                    "postingTime": comment.postingTime,
+                    "reportUserList": comment.reportUserList,
+                    "writerRef": comment.writerRef
+                ]
+            }
+            
+            self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
                 if let error = error {
-                    print("댓글을 불러오는 중 오류 발생: \(error.localizedDescription)")
+                    print("Error updating comments in Firestore: \(error.localizedDescription)")
                 } else {
-                    var comments = [Comment]()
-                    
-                    if let documents = querySnapshot?.documents {
-                        for document in documents {
-                            let data = document.data()
-                            if let writer = data["writer"] as? String,
-                               let writerNickName = data["writerNickName"] as? String,
-                               let content = data["content"] as? String,
-                               let postingTime = data["postingTime"] as? Timestamp { // Firestore의 Timestamp 타입을 사용
-                                //                                let comment = Comment(writer: writer, writerNickName: writerNickName, content: content, postingTime: postingTime.dateValue())
-                                //                                comments.append(comment)
-                            }
-                        }
-                        self.comments = comments
-                        self.communityPageView.commentTableView.reloadData()
-                        
-                        if !comments.isEmpty {
-                            let indexPath = IndexPath(row: self.comments.count - 1, section: 0)
-                            self.communityPageView.commentTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                        }
-                    }
+                    print("Comments updated successfully")
                 }
             }
+        }
+        
+
     }
     
     func fetchPost() {
@@ -216,21 +192,41 @@ class CommunityPageViewController: BaseViewController {
             }
             
             if document.exists {
-                print("변화 감지됨")
+                
                 let data = document.data() ?? [:]
                 let category = data["category"] as? String ?? ""
                 let likes = data["likes"] as? Int ?? 0
                 let postingTime = data["postingTime"] as? Timestamp ?? Timestamp(date: Date())
                 let postingID = data["postingID"] as? String ?? ""
                 let writer = data["writer"] as? String ?? ""
-                let writerNickName = data["writerNickName"] as? String ?? ""
+                var writerNickName = data["writerNickName"] as? String ?? ""
                 var comments: [Comment] = []
+                let dispatchGroup = DispatchGroup()
                 if let commentsData = data["comments"] as? [[String: Any]] {
                     for comment in commentsData {
                         if let commentWriter = comment["writer"] as? String,
                            let commentPostingTime = comment["postingTime"] as? Timestamp,
                            var commentContent = comment["content"] as? String,
-                           let commentWriterNickName = comment["writerNickName"] as? String{
+//                           var commentWriterNickName = comment["writerNickName"] as? String,
+                           let commentWriterRef = comment["writerRef"] as? DocumentReference {
+                            var commentWriterNickName = ""
+                            dispatchGroup.enter()
+                            
+                            commentWriterRef.getDocument{ (snapshot, error) in
+                                if error == nil && snapshot != nil{
+                                    if let data = snapshot!.data() {
+                                        if let nickname = data["nickname"] as? String {
+                                            commentWriterNickName = nickname
+                                            dispatchGroup.leave()
+                                        }
+                                    }
+                                    else {
+                                        commentWriterNickName = "탈퇴한 회원"
+                                        dispatchGroup.leave()
+                                    }
+                                    
+                                }
+                            }
                             var reportUserList: [String] = []
                             if let reportData = comment["reportUserList"] as? [String] {
                                 reportUserList = reportData
@@ -238,8 +234,13 @@ class CommunityPageViewController: BaseViewController {
                             if reportUserList.count >= 1 {
                                 commentContent = "신고누적으로 삭제된 댓글입니다."
                             }
-                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: reportUserList)
-                            comments.append(newComment)
+                            
+                            dispatchGroup.notify(queue: .main) {
+                                print(commentWriterNickName)
+                                let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: reportUserList, writerRef: commentWriterRef)
+                                comments.append(newComment)
+                            }
+                            
                         }
                     }
                 }
@@ -257,11 +258,14 @@ class CommunityPageViewController: BaseViewController {
                     content = "신고당한 글이라 삭제됨"
                 }
                 
-                let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
-                self.post = fetchedPost
-                self.communityPageView.communityPageViewModel?.updatePost(fetchedPost)
-                self.communityPageView.commentTableView.reloadData()
-                print("패치완료")
+                dispatchGroup.notify(queue: .main) {
+                    let fetchedPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
+                    self.post = fetchedPost
+                    self.communityPageView.communityPageViewModel?.updatePost(fetchedPost)
+                    self.communityPageView.commentTableView.reloadData()
+                    print("패치완료")
+                }
+                
             }
         }
     }
@@ -338,7 +342,8 @@ extension CommunityPageViewController: UITableViewDataSource {
                             "writer": comment.writer,
                             "writerNickName": comment.writerNickName,
                             "content": comment.content,
-                            "postingTime": comment.postingTime
+                            "postingTime": comment.postingTime,
+                            "writerRef": comment.writerRef
                         ]
                     }
                     
@@ -374,7 +379,8 @@ extension CommunityPageViewController: UITableViewDataSource {
                             "writer": comment.writer,
                             "writerNickName": comment.writerNickName,
                             "content": comment.content,
-                            "postingTime": comment.postingTime
+                            "postingTime": comment.postingTime,
+                            "writerRef": comment.writerRef
                         ]
                     }
                     
@@ -412,7 +418,8 @@ extension CommunityPageViewController: UITableViewDataSource {
                                 "writerNickName": comment.writerNickName,
                                 "content": comment.content,
                                 "reportUserList": comment.reportUserList,
-                                "postingTime": comment.postingTime
+                                "postingTime": comment.postingTime,
+                                "wrterRef": comment.writerRef
                             ]
                         }
                         self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in

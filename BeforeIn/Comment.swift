@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Comment: Equatable {
     
@@ -14,4 +15,5 @@ struct Comment: Equatable {
     var content: String
     let postingTime: Date
     var reportUserList: [String] // 신고한 사람들의 이메일 리스트
+    var writerRef: DocumentReference?
 }

@@ -94,10 +94,12 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
             if error == nil && snapshot != nil {
                 var blockedEmails = currentUser.blockList
+                let dispatchGroup = DispatchGroup()
                 // 변화가 있는것만 가져올 수 있다.
                 for change in snapshot!.documentChanges {
                     // change type remove, modified 일때도 로직 추가 예정
                     if change.type == .added {
+                        dispatchGroup.enter()
                         let addDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
                             if error == nil && snapshot != nil && snapshot?.data() != nil {
                                 let data = snapshot!.data()!
@@ -110,7 +112,24 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                     let postingTime = data["postingTime"] as! Timestamp
                                     let postingID = data["postingID"] as! String
                                     var title = data["title"] as! String
-                                    let writerNickName = data["writerNickName"] as! String
+                                    var writerNickName = "로딩 실패"
+                                    let writerRef = data["writerNickName"] as? DocumentReference
+                                    if let writerRef = writerRef {
+                                        writerRef.getDocument{ (wrterSnapshot, error) in
+                                            if error == nil && wrterSnapshot != nil && wrterSnapshot!.exists {
+                                                let writerData = wrterSnapshot!.data()
+                                                if let nick = writerData?["nickname"] as? String {
+                                                    writerNickName = nick
+                                                    
+                                                }
+                                            }
+                                            else {
+                                                writerNickName = "탈퇴한 회원입니다."
+                                            }
+                                            dispatchGroup.leave()
+                                        }
+                                        
+                                    }
                                     var comments: [Comment] = []
                                     if let commentsData = data["comments"] as? [[String: Any]] {
                                         for comment in commentsData {
@@ -134,73 +153,100 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         //                                    print("차단글 발견")
                                         title = "신고당한 글이라 삭제됨"
                                     }
-                                    let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
-                                    self.posts.append(addPost)
+                                    dispatchGroup.notify(queue: .main) {
+                                        let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
+                                        self.posts.append(addPost)
+                                    }
+                                    
                                 }
-                                self.posts.sort{$0.postingTime > $1.postingTime}
-                                self.postTableView.reloadData()
+                                dispatchGroup.notify(queue: .main) {
+                                    self.posts.sort{$0.postingTime > $1.postingTime}
+                                    self.postTableView.reloadData()
+                                }
+                                
+                                
                             }
                         }
                     } else if change.type == .removed {
-                    for i in 0..<self.posts.count {
-                        if self.posts[i].postID == change.document.documentID {
-                            self.posts.remove(at: i)
-                            break
+                        for i in 0..<self.posts.count {
+                            if self.posts[i].postID == change.document.documentID {
+                                self.posts.remove(at: i)
+                                break
+                            }
                         }
-                    }
-                    self.postTableView.reloadData()
-                } else {
-                    let modifyDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
-                        if error == nil && snapshot != nil && snapshot?.data() != nil {
-                            let data = snapshot!.data()!
-                            let category = data["category"] as! String
-                            let likes = data["likes"] as! Int
-                            let postingTime = data["postingTime"] as! Timestamp
-                            let postingID = data["postingID"] as! String
-                            let writer = data["writer"] as! String
-                            let writerNickName = data["writerNickName"] as! String
-                            var comments: [Comment] = []
-                            if let commentsData = data["comments"] as? [[String: Any]] {
-                                for comment in commentsData {
-                                    if let commentWriter = comment["writer"] as? String,
-                                       let commentPostingTime = comment["postingTime"] as? Timestamp,
-                                       var commentContent = comment["content"] as? String,
-                                       let commentWriterNickName = comment["writerNickName"] as? String{
-                                        let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: [])
-                                        comments.append(newComment)
+                        self.postTableView.reloadData()
+                    } else {
+                        dispatchGroup.enter()
+                        let modifyDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
+                            if error == nil && snapshot != nil && snapshot?.data() != nil {
+                                let data = snapshot!.data()!
+                                let category = data["category"] as! String
+                                let likes = data["likes"] as! Int
+                                let postingTime = data["postingTime"] as! Timestamp
+                                let postingID = data["postingID"] as! String
+                                let writer = data["writer"] as! String
+                                var writerNickName = "로딩 실패"
+                                let writerRef = data["writerNickName"] as? DocumentReference
+                                if let writerRef = writerRef {
+                                    writerRef.getDocument{ (wrterSnapshot, error) in
+                                        if error == nil && wrterSnapshot != nil && wrterSnapshot!.exists {
+                                            let writerData = wrterSnapshot!.data()
+                                            if let nick = writerData?["nickname"] as? String {
+                                                writerNickName = nick
+                                                
+                                            }
+                                        }
+                                        else {
+                                            writerNickName = "탈퇴한 회원입니다."
+                                        }
+                                        dispatchGroup.leave()
+                                    }
+                                    
+                                }
+                                var comments: [Comment] = []
+                                if let commentsData = data["comments"] as? [[String: Any]] {
+                                    for comment in commentsData {
+                                        if let commentWriter = comment["writer"] as? String,
+                                           let commentPostingTime = comment["postingTime"] as? Timestamp,
+                                           var commentContent = comment["content"] as? String,
+                                           let commentWriterNickName = comment["writerNickName"] as? String{
+                                            let newComment = Comment(writer: commentWriter, writerNickName: commentWriterNickName, content: commentContent, postingTime: commentPostingTime.dateValue(), reportUserList: [])
+                                            comments.append(newComment)
+                                        }
                                     }
                                 }
-                            }
-                            var reportUserList: [String] = []
-                            let reportedData = data["reportUserList"] as? [String]
-                            if let reportedData = reportedData {
-                                for email in reportedData {
-                                    reportUserList.append(email)
+                                var reportUserList: [String] = []
+                                let reportedData = data["reportUserList"] as? [String]
+                                if let reportedData = reportedData {
+                                    for email in reportedData {
+                                        reportUserList.append(email)
+                                    }
+                                }
+                                var title = data["title"] as! String
+                                var content = data["content"] as! String
+                                if reportUserList.count >= 1 {
+                                    title = "신고당한 글이라 삭제됨"
+                                }
+                                
+                                dispatchGroup.notify(queue: .main) {
+                                    let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
+                                    for i in 0..<self.posts.count {
+                                        if self.posts[i].postID == change.document.documentID {
+                                            self.posts[i] = modifyPost
+                                            break
+                                        }
+                                    }
+                                    self.postTableView.reloadData()
                                 }
                             }
-                            var title = data["title"] as! String
-                            var content = data["content"] as! String
-                            if reportUserList.count >= 1 {
-                                title = "신고당한 글이라 삭제됨"
-                            }
-                            
-                            let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
-                            for i in 0..<self.posts.count {
-                                if self.posts[i].postID == change.document.documentID {
-                                    self.posts[i] = modifyPost
-                                    break
-                                }
-                            }
-                            self.postTableView.reloadData()
                         }
                     }
                 }
+            } else {
+                // error. do something
             }
-        } else {
-            // error. do something
         }
     }
-}
 }
 
 
