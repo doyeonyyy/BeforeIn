@@ -12,12 +12,12 @@ import Then
 class CommunityPageView: UIView {
     
     // MARK: - UI Properties
-    private let profileImageView = UIImageView().then {
-        $0.layer.cornerRadius = 30
-        $0.clipsToBounds = true
-        $0.backgroundColor = .lightGray
-    }
-    
+//    private let profileImageView = UIImageView().then {
+//        $0.layer.cornerRadius = 30
+//        $0.clipsToBounds = true
+//        $0.backgroundColor = .lightGray
+//    }
+//
     let moreButton = UIButton().then {
         $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         $0.tintColor = .systemGray
@@ -143,7 +143,7 @@ class CommunityPageView: UIView {
     
     // MARK: - Methods
     func addSubview(){
-        addSubview(profileImageView)
+//        addSubview(profileImageView)
         addSubview(moreButton)
         addSubview(blockButton)
         addSubview(authorLabel)
@@ -163,14 +163,14 @@ class CommunityPageView: UIView {
     
     
     func setUI(){
-        profileImageView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.left.equalTo(self.snp.left).offset(16)
-            $0.height.width.equalTo(60)
-        }
+//        profileImageView.snp.makeConstraints {
+//            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+//            $0.left.equalTo(self.snp.left).offset(16)
+//            $0.height.width.equalTo(60)
+//        }
         
         moreButton.snp.makeConstraints {
-            $0.centerY.equalTo(profileImageView.snp.centerY)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
             $0.right.equalTo(self.snp.right).offset(-16)
             $0.height.width.equalTo(15)
         }
@@ -181,17 +181,17 @@ class CommunityPageView: UIView {
         }
         
         authorLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
-            $0.left.equalTo(profileImageView.snp.right).offset(8)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.left.equalToSuperview().offset(16)
         }
         
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(authorLabel.snp.bottom).offset(5)
-            $0.left.equalTo(authorLabel.snp.left)
+            $0.left.equalToSuperview().offset(16)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom)
+            $0.top.equalTo(dateLabel.snp.bottom)
             $0.left.right.equalTo(self).inset(16)
             $0.height.equalTo(48)
         }

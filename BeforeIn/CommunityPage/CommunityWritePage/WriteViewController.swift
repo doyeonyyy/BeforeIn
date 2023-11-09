@@ -5,7 +5,7 @@ import UIKit
 import SnapKit
 import FirebaseFirestore
 
-class WriteViewController: UIViewController {
+class WriteViewController: BaseViewController {
     
     let writeView = WriteView()
     
@@ -58,13 +58,26 @@ class WriteViewController: UIViewController {
     
     @objc func confirmButtonClick() {
         let db = Firestore.firestore()
-        
-        guard let title = writeView.mainTextField.text else {
+
+        guard let title = writeView.mainTextField.text, !title.trimmingCharacters(in: .whitespaces).isEmpty else {
+              showAlertOneButton(title: "제목", message: "제목을 입력하세요.", buttonTitle: "확인")
+              return
+          }
+
+          guard let content = writeView.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "메세지를 입력하세요" else {
+              showAlertOneButton(title: "내용", message: "내용을 입력하세요.", buttonTitle: "확인")
+              return
+          }
+        var category = ""
+        if writeView.dailyButton.isSelected {
+            category = "일상잡담"
+        } else if writeView.qnaButton.isSelected {
+            category = "궁금해요"
+        } else {
+            showAlertOneButton(title: "카테고리", message: "카테고리를 선택하세요.", buttonTitle: "확인")
             return
         }
-        guard let content = writeView.contentTextView.text else {
-            return
-        }
+
         let writer = currentUser.email
         db.collection("User").whereField("email", isEqualTo: writer).getDocuments { [self] (snapshot, error) in
             if let error = error {
@@ -73,14 +86,6 @@ class WriteViewController: UIViewController {
                 for document in snapshot.documents {
                     let userRef = db.collection("User").document(document.documentID)
                     let likes = 0
-                    var category = ""
-                    
-                    if writeView.dailyButton.isSelected {
-                        category = "일상잡담"
-                    } else if writeView.qnaButton.isSelected {
-                        category = "궁금해요"
-                    }
-                    
                     let postingTime = Date()
                     let mydoc = db.collection("Post").document()
                     let postingID = mydoc.documentID
@@ -98,12 +103,13 @@ class WriteViewController: UIViewController {
                 }
             }
         }
-        
-        
     }
+
     
 }
 
+
+// MARK: - UITextViewDelegate
 extension WriteViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
             if textView.textColor == UIColor.placeholderText {

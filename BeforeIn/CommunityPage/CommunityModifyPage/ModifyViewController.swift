@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-class ModifyViewController: UIViewController {
+class ModifyViewController: BaseViewController {
     
     let db = Firestore.firestore()
     var post: Post?
@@ -23,6 +23,7 @@ class ModifyViewController: UIViewController {
         addTarget()
         setupContent()
     }
+    
     func addTarget() {
         modifyVeiw.contentTextView.delegate = self
         modifyVeiw.confirmButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
@@ -69,32 +70,43 @@ class ModifyViewController: UIViewController {
     }
     
     @objc func confirmButtonClick() {
-        guard let title = modifyVeiw.mainTextField.text else { return }
-        guard let content = modifyVeiw.contentTextView.text else { return }
         guard let postID = post?.postID else { return }
+        guard let title = modifyVeiw.mainTextField.text, !title.trimmingCharacters(in: .whitespaces).isEmpty else {
+               showAlertOneButton(title: "제목", message: "제목을 입력하세요.", buttonTitle: "확인")
+               return
+           }
+
+           guard let content = modifyVeiw.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "메세지를 입력하세요" else {
+               showAlertOneButton(title: "내용", message: "내용을 입력하세요.", buttonTitle: "확인")
+               return
+           }
         
-        // 선택한 카테고리를 확인
         var category = ""
         if modifyVeiw.dailyButton.isSelected {
             category = "일상잡담"
         } else if modifyVeiw.qnaButton.isSelected {
             category = "궁금해요"
+        } else {
+            showAlertOneButton(title: "카테고리", message: "카테고리를 선택하세요.", buttonTitle: "확인")
+            return
         }
         
-        // 업데이트할 데이터를 설정
         let updateData: [String: Any] = [
             "title": title,
             "content": content,
             "category": category
         ]
-        
-        // 데이터베이스에 업데이트
+
         db.collection("Post").document(postID).setData(updateData, merge: true)
-        
+
         self.navigationController?.popViewController(animated: true)
     }
+
 }
-extension ModifyViewController: UITextViewDelegate{
+
+
+// MARK: - UITextViewDelegate
+extension ModifyViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.placeholderText {
             textView.text = nil
