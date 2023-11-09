@@ -41,7 +41,7 @@ class CommunityView: UIView {
     }
     
     let plusButton = UIButton().then{
-        $0.backgroundColor = .BeforeInRed?.withAlphaComponent(0.7)
+        $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 25
         $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.tintColor = .white
