@@ -11,6 +11,17 @@ import Then
 
 class CommunityView: UIView {
     
+    let titleLabel = UILabel().then {
+        $0.text = "에티켓숲"
+        $0.font = UIFont.boldSystemFont(ofSize: 24)
+    }
+    
+    let titleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "tree")
+        return imageView
+    }()
+    
     let tagCollectionViewLayout = UICollectionViewFlowLayout().then{
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 8
@@ -49,19 +60,32 @@ class CommunityView: UIView {
     
     private func setupUI() {
         backgroundColor = .systemBackground
+        addSubview(titleLabel)
+        addSubview(titleImageView)
         addSubview(tagCollectionView)
         addSubview(postTableView)
         addSubview(plusButton)
     }
     
     private func setupConstraint() {
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(-10)
+            make.leading.equalToSuperview().offset(24)
+            make.height.equalTo(32)
+        }
+        titleImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(titleLabel.snp.bottom).offset(-3)
+            make.leading.equalTo(titleLabel.snp.trailing).offset(3)
+            make.width.height.equalTo(30)
+        }
         tagCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(32)
         }
         postTableView.snp.makeConstraints { make in
-            make.top.equalTo(tagCollectionView.snp.bottom).offset(24)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().inset(50)
         }
