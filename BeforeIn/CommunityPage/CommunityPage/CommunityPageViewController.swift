@@ -432,7 +432,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                                 "content": comment.content,
                                 "reportUserList": comment.reportUserList,
                                 "postingTime": comment.postingTime,
-                                "wrterRef": comment.writerRef
+                                "writerRef": comment.writerRef
                             ]
                         }
                         self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
