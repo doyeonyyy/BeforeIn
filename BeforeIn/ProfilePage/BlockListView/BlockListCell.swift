@@ -9,12 +9,14 @@ import UIKit
 
 class BlockListCell: UITableViewCell {
     // MARK: - UI Properties
-    let nameLabel = UILabel()
+    let nameLabel = UILabel().then {
+        $0.numberOfLines = 0
+    }
     
     lazy var unblockButton = UIButton().then {
         $0.setTitle("해제", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
@@ -41,6 +43,7 @@ class BlockListCell: UITableViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
+            make.right.lessThanOrEqualTo(unblockButton.snp.left).offset(-5)
             make.centerY.equalTo(contentView)
         }
         

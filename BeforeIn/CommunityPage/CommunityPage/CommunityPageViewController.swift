@@ -302,6 +302,7 @@ extension CommunityPageViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension CommunityPageViewController: UITableViewDataSource {
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return post.comments.count
     }

@@ -5,7 +5,7 @@ import UIKit
 import SnapKit
 import FirebaseFirestore
 
-class WriteViewController: UIViewController {
+class WriteViewController: BaseViewController {
     
     let writeView = WriteView()
     
@@ -19,6 +19,7 @@ class WriteViewController: UIViewController {
         
     }
     func addTarget() {
+        writeView.mainTextField.delegate = self
         writeView.contentTextView.delegate = self
         writeView.confirmButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
         writeView.dailyButton.addTarget(self, action: #selector(dailyButtonTapped), for: .touchUpInside)
@@ -58,13 +59,26 @@ class WriteViewController: UIViewController {
     
     @objc func confirmButtonClick() {
         let db = Firestore.firestore()
-        
-        guard let title = writeView.mainTextField.text else {
+
+        guard let title = writeView.mainTextField.text, !title.trimmingCharacters(in: .whitespaces).isEmpty else {
+              showAlertOneButton(title: "제목", message: "제목을 입력하세요.", buttonTitle: "확인")
+              return
+          }
+
+          guard let content = writeView.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "메세지를 입력하세요" else {
+              showAlertOneButton(title: "내용", message: "내용을 입력하세요.", buttonTitle: "확인")
+              return
+          }
+        var category = ""
+        if writeView.dailyButton.isSelected {
+            category = "일상잡담"
+        } else if writeView.qnaButton.isSelected {
+            category = "궁금해요"
+        } else {
+            showAlertOneButton(title: "카테고리", message: "카테고리를 선택하세요.", buttonTitle: "확인")
             return
         }
-        guard let content = writeView.contentTextView.text else {
-            return
-        }
+
         let writer = currentUser.email
         db.collection("User").whereField("email", isEqualTo: writer).getDocuments { [self] (snapshot, error) in
             if let error = error {
@@ -73,14 +87,6 @@ class WriteViewController: UIViewController {
                 for document in snapshot.documents {
                     let userRef = db.collection("User").document(document.documentID)
                     let likes = 0
-                    var category = ""
-                    
-                    if writeView.dailyButton.isSelected {
-                        category = "일상잡담"
-                    } else if writeView.qnaButton.isSelected {
-                        category = "궁금해요"
-                    }
-                    
                     let postingTime = Date()
                     let mydoc = db.collection("Post").document()
                     let postingID = mydoc.documentID
@@ -98,13 +104,26 @@ class WriteViewController: UIViewController {
                 }
             }
         }
-        
-        
     }
+
     
 }
 
-extension WriteViewController: UITextViewDelegate{
+// MARK: - UITextFieldDelegate
+extension WriteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == writeView.mainTextField {
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return updatedText.count <= 45
+        }
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension WriteViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
             if textView.textColor == UIColor.placeholderText {
                 textView.text = nil
@@ -112,10 +131,22 @@ extension WriteViewController: UITextViewDelegate{
             }
             
         }
+    
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
                 textView.text = "메세지를 입력하세요"
                 textView.textColor = UIColor.placeholderText
             }
         }
+    
+    func textViewDidChange(_ textView: UITextView) {
+           if textView == writeView.contentTextView {
+               if let text = textView.text, text.count > 800 {
+                   let truncatedText = String(text.prefix(800))
+                   textView.text = truncatedText
+               }
+           }
+       }
 }
+
+

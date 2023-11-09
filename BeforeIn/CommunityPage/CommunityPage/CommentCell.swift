@@ -10,15 +10,15 @@ import UIKit
 class CommentCell: UITableViewCell {
     
     // MARK: - UI Properties
-    let profileImageView = UIImageView().then {
-        $0.layer.cornerRadius = 20
-        $0.clipsToBounds = true
-        $0.backgroundColor = .lightGray
-    }
+//    let profileImageView = UIImageView().then {
+//        $0.layer.cornerRadius = 20
+//        $0.clipsToBounds = true
+//        $0.backgroundColor = .lightGray
+//    }
     
     let authorLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     let dateLabel = UILabel().then {
@@ -67,7 +67,7 @@ class CommentCell: UITableViewCell {
     func addSubview(){
         self.selectionStyle = .none
         
-        contentView.addSubview(profileImageView)
+//        contentView.addSubview(profileImageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(editButton)
@@ -77,15 +77,15 @@ class CommentCell: UITableViewCell {
     }
     
     func setCell(){
-        profileImageView.snp.makeConstraints {
-            $0.centerY.equalTo(contentView.snp.centerY)
-            $0.left.equalTo(contentView.snp.left).offset(16)
-            $0.width.height.equalTo(40)
-        }
+//        profileImageView.snp.makeConstraints {
+//            $0.centerY.equalTo(contentView.snp.centerY)
+//            $0.left.equalTo(contentView.snp.left).offset(16)
+//            $0.width.height.equalTo(40)
+//        }
         
         authorLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top)
-            $0.left.equalTo(profileImageView.snp.right).offset(8)
+            $0.top.equalToSuperview().offset(5)
+            $0.left.equalToSuperview().offset(16)
         }
         
         dateLabel.snp.makeConstraints {
@@ -94,23 +94,23 @@ class CommentCell: UITableViewCell {
         }
         
         editButton.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top)
+            $0.top.equalToSuperview().offset(5)
             $0.right.equalTo(deleteButton.snp.left).offset(-3)
         }
         
         deleteButton.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top)
+            $0.top.equalToSuperview().offset(5)
             $0.right.equalTo(contentView.snp.right).offset(-16)
         }
         
         reportButton.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top)
+            $0.top.equalToSuperview().offset(5)
             $0.right.equalTo(contentView.snp.right).offset(-16)
         }
         
         commentLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(5)
-            $0.left.equalTo(profileImageView.snp.right).offset(8)
+            $0.left.equalToSuperview().offset(16)
             $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
     }
