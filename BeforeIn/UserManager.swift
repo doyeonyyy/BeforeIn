@@ -96,7 +96,7 @@ struct UserManager {
             }
         }
     }
-
+    
     // 이미지 업로드
     func uploadImage(_ image: UIImage) {
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
@@ -157,7 +157,21 @@ struct UserManager {
             print("사용자 이메일을 가져올 수 없음.")
         }
     }
-
+    
+    func deleteImage(){
+        let storageRef = Storage.storage().reference().child("profileImages/\(currentUser.email).jpg")
+        
+        storageRef.delete { error in
+            if let error = error {
+                print("Storage 파일 삭제 오류: \(error.localizedDescription)")
+            } else {
+                print("Storage 파일 삭제 성공")
+            }
+        }
+    }
+    
+    
+    
     // 차단
     func addToBlockList(userEmail: String) {
         if let currentUserEmail = Auth.auth().currentUser?.email {
@@ -189,7 +203,7 @@ struct UserManager {
             print("사용자 이메일을 가져올 수 없음.")
         }
     }
-
+    
     // 차단해제
     func removeFromBlockList(userEmail: String, completion: @escaping (Bool) -> Void) {
         if let currentUserEmail = Auth.auth().currentUser?.email {
@@ -197,11 +211,11 @@ struct UserManager {
             userCollection.whereField("email", isEqualTo: currentUserEmail).getDocuments { (querySnapshot, error) in
                 if let error = error {
                     print("에러: \(error.localizedDescription)")
-                    completion(false) 
+                    completion(false)
                 } else if let documents = querySnapshot?.documents, !documents.isEmpty {
                     let userDocument = documents[0]
                     var blockList = userDocument["blockList"] as? [String] ?? []
-
+                    
                     if let index = blockList.firstIndex(of: userEmail) {
                         blockList.remove(at: index)
                         userDocument.reference.updateData(["blockList": blockList]) { error in
@@ -225,7 +239,7 @@ struct UserManager {
             completion(false)
         }
     }
-
+    
     
     
 }

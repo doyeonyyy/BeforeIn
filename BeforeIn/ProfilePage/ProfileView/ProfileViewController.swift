@@ -39,7 +39,6 @@ class ProfileViewController: BaseViewController {
     
     
     // MARK: - Methods
-    
     func setNavi(){
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
