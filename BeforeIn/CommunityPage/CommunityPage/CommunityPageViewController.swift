@@ -54,6 +54,7 @@ class CommunityPageViewController: BaseViewController {
     
     func setTextField(){
         communityPageView.commentTextField.delegate = self
+        communityPageView.contentTextView.delegate = self
     }
     
     
@@ -465,9 +466,9 @@ extension CommunityPageViewController: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        view.endEditing(true)
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == communityPageView.commentTextField {
@@ -486,4 +487,14 @@ extension CommunityPageViewController: UITextFieldDelegate {
             self.view.frame.origin.y = 0
         }
     }
+}
+
+
+// MARK: - UITextViewDelegate
+extension CommunityPageViewController: UITextViewDelegate {
+//    func textViewDidChange(_ textView: UITextView) {
+//        communityPageView.updateTextViewHeight()
+//    }
+    
+
 }

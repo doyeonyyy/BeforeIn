@@ -24,7 +24,7 @@ class WriteView: UIView {
     }
     
     let mainTextField = UITextField().then {
-        $0.placeholder = "제목을 입력하세요"
+        $0.placeholder = "제목을 입력하세요. (20자 이하)"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -45,7 +45,7 @@ class WriteView: UIView {
         $0.backgroundColor = .systemGray6
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = UIColor.placeholderText
-        $0.text = "메세지를 입력하세요"
+        $0.text = "내용을 입력하세요. (2,000자 이하)"
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     

@@ -17,12 +17,24 @@ class CommunityPageView: UIView {
 //        $0.clipsToBounds = true
 //        $0.backgroundColor = .lightGray
 //    }
-//
+    
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.alwaysBounceVertical = true
+        view.showsVerticalScrollIndicator = false
+        return view
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
     let moreButton = UIButton().then {
         $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         $0.tintColor = .systemGray
         $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
-        
+        $0.isUserInteractionEnabled = true
         $0.imageView?.contentMode = .scaleAspectFit
     }
     
@@ -34,12 +46,12 @@ class CommunityPageView: UIView {
     
     private let authorLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 14)
     }
     
     private let dateLabel = UILabel().then {
         $0.text = "10분 전"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .systemGray2
     }
     
@@ -49,7 +61,7 @@ class CommunityPageView: UIView {
         $0.numberOfLines = 2
     }
     
-    private let contentTextView = UITextView().then {
+    let contentTextView = UITextView().then {
         $0.text = "내용"
 //        $0.backgroundColor = .systemGray6
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -144,21 +156,24 @@ class CommunityPageView: UIView {
     // MARK: - Methods
     func addSubview(){
 //        addSubview(profileImageView)
-        addSubview(moreButton)
-        addSubview(blockButton)
-        addSubview(authorLabel)
-        addSubview(dateLabel)
-        addSubview(titleLabel)
-        addSubview(contentTextView)
+        
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(moreButton)
+        contentView.addSubview(blockButton)
+        contentView.addSubview(authorLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(contentTextView)
 //        addSubview(likeButton)
 //        addSubview(likeLabel)
-        addSubview(reportButton)
-        addSubview(categoryButton)
-        addSubview(divider)
-        addSubview(commentLabel)
-        addSubview(commentTableView)
-        addSubview(commentTextField)
-        addSubview(sendButton)
+        contentView.addSubview(reportButton)
+        contentView.addSubview(categoryButton)
+        contentView.addSubview(divider)
+        contentView.addSubview(commentLabel)
+        contentView.addSubview(commentTableView)
+       addSubview(commentTextField)
+       addSubview(sendButton)
     }
     
     
@@ -169,37 +184,49 @@ class CommunityPageView: UIView {
 //            $0.height.width.equalTo(60)
 //        }
         
-        moreButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
-            $0.right.equalTo(self.snp.right).offset(-16)
-            $0.height.width.equalTo(15)
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalTo(self)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
-        blockButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(self.snp.right).offset(-16)
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalTo(moreButton.snp.left).offset(-5)
+            $0.height.equalTo(48)
         }
         
         authorLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(2)
             $0.left.equalToSuperview().offset(16)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(authorLabel.snp.bottom).offset(5)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.left.equalTo(authorLabel.snp.right).offset(7)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom)
-            $0.left.right.equalTo(self).inset(16)
-            $0.height.equalTo(48)
+        moreButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.right.equalToSuperview().offset(-16)
+            $0.height.width.equalTo(15)
         }
         
+        blockButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.right.equalToSuperview().offset(-16)
+        }
+
         contentTextView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
-            $0.left.right.equalTo(self).inset(12)
-            $0.height.equalTo(200)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(12)
+            $0.height.equalTo(220)
         }
         
 //        likeButton.snp.makeConstraints {
@@ -213,13 +240,13 @@ class CommunityPageView: UIView {
 //            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
 //        }
         reportButton.snp.makeConstraints {
-            $0.right.equalTo(self.snp.right).offset(-40)
+            $0.right.equalToSuperview().offset(-40)
             $0.top.equalTo(contentTextView.snp.bottom).offset(8)
         }
         
         categoryButton.snp.makeConstraints {
             $0.top.equalTo(contentTextView.snp.bottom).offset(10)
-            $0.left.equalTo(self.snp.left).offset(16)
+            $0.left.equalToSuperview().offset(16)
         }
         
         divider.snp.makeConstraints {
@@ -230,26 +257,25 @@ class CommunityPageView: UIView {
         
         commentLabel.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(8)
-            $0.left.equalTo(self).offset(16)
+            $0.left.equalToSuperview().offset(16)
         }
         
         commentTableView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(commentTextField.snp.top)
+            $0.bottom.equalTo(commentTextField.snp.top).offset(-2)
+            //$0.height.equalTo(200)
         }
         
         commentTextField.snp.makeConstraints {
-            $0.top.equalTo(commentTableView.snp.bottom).offset(8)
-            $0.left.equalTo(self).offset(16)
+            $0.left.equalTo(self.safeAreaLayoutGuide).offset(16)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.right.equalTo(sendButton.snp.left).offset(-8)
         }
         
         sendButton.snp.makeConstraints {
-            $0.centerY.equalTo(commentTextField.snp.centerY)
             $0.left.equalTo(commentTextField.snp.right).offset(8)
-            $0.right.equalTo(self).offset(-16)
+            $0.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.width.equalTo(40)
         }
@@ -279,5 +305,16 @@ class CommunityPageView: UIView {
        
         print("커뮤니티 디테일view 업데이트")
     }
+    
+//    
+//    func updateTextViewHeight() {
+//        let fixedWidth = contentTextView.frame.size.width
+//        let newSize = contentTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+//        contentTextView.snp.updateConstraints { make in
+//            make.height.greaterThanOrEqualTo( max(220, newSize.height) )
+//        }
+//        self.layoutIfNeeded()
+//    }
+
     
 }
