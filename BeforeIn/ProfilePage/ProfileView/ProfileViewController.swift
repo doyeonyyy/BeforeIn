@@ -30,18 +30,15 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
-        setNavi()
         setPicker()
         setTableView()
         addTarget()
+        navigationController?.isNavigationBarHidden = true
         //        configureUser()
     }
     
     
     // MARK: - Methods
-    func setNavi(){
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
     
     func setTableView(){
         profileView.tableView.dataSource = self
