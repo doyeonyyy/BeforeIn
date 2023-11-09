@@ -28,7 +28,12 @@ class CommunityViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //fetchPosts()
+        super.viewWillAppear(animated)
+
+        let indexPath = IndexPath(item: 0, section: 0)
+        communityMainView.tagCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        collectionView(communityMainView.tagCollectionView, didSelectItemAt: indexPath)
+        communityMainView.postTableView.reloadData()
     }
     
     override func viewDidLoad() {
