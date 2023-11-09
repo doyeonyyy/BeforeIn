@@ -118,12 +118,12 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                 for change in snapshot!.documentChanges {
                     // change type remove, modified 일때도 로직 추가 예정
                     if change.type == .added {
-                        dispatchGroup.enter()
                         let addDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
                             if error == nil && snapshot != nil && snapshot?.data() != nil {
                                 let data = snapshot!.data()!
                                 let writer = data["writer"] as! String
                                 if !blockedEmails.contains(writer) {
+                                    dispatchGroup.enter()
                                     // 차단되지 않은 사용자의 글만 처리
                                     let category = data["category"] as! String
                                     let content = data["content"] as! String
@@ -139,7 +139,6 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                                 let writerData = wrterSnapshot!.data()
                                                 if let nick = writerData?["nickname"] as? String {
                                                     writerNickName = nick
-                                                    
                                                 }
                                             }
                                             else {
