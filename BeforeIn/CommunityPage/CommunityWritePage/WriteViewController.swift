@@ -66,30 +66,40 @@ class WriteViewController: UIViewController {
             return
         }
         let writer = currentUser.email
-        let writerNickName = currentUser.nickname
-        let likes = 0
-        var category = ""
-        
-        if writeView.dailyButton.isSelected {
-            category = "일상잡담"
-        } else if writeView.qnaButton.isSelected {
-            category = "궁금해요"
+        db.collection("User").whereField("email", isEqualTo: writer).getDocuments { [self] (snapshot, error) in
+            if let error = error {
+                print("Error fetching documents: \(error)")
+            } else if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    let userRef = db.collection("User").document(document.documentID)
+                    let likes = 0
+                    var category = ""
+                    
+                    if writeView.dailyButton.isSelected {
+                        category = "일상잡담"
+                    } else if writeView.qnaButton.isSelected {
+                        category = "궁금해요"
+                    }
+                    
+                    let postingTime = Date()
+                    let mydoc = db.collection("Post").document()
+                    let postingID = mydoc.documentID
+                    mydoc.setData(["writer": writer,
+                                   "writerNickName": userRef,
+                                   "title": title,
+                                   "content": content,
+                                   "comments": [],
+                                   "likes": likes,
+                                   "category": category,
+                                   "postingTime": postingTime,
+                                   "postingID": postingID,
+                                  ])
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }
         
-        let postingTime = Date()
-        let mydoc = db.collection("Post").document()
-        let postingID = mydoc.documentID
-        mydoc.setData(["writer": writer,
-                       "writerNickName": writerNickName,
-                       "title": title,
-                       "content": content,
-                       "comments": [],
-                       "likes": likes,
-                       "category": category,
-                       "postingTime": postingTime,
-                       "postingID": postingID,
-                      ])
-        self.navigationController?.popViewController(animated: true)
+        
     }
     
 }
