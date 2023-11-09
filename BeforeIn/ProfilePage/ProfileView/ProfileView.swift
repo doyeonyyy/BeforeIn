@@ -9,6 +9,21 @@ import Foundation
 import UIKit
 
 class ProfileView: UIView {
+    
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.alwaysBounceVertical = true
+        view.showsVerticalScrollIndicator = false
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -33,12 +48,12 @@ class ProfileView: UIView {
         $0.setTitleColor(.systemGray, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
-
+    
     let circularImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "profilePlaceholder")
         imageView.backgroundColor = .systemGray6
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 45
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         return imageView
@@ -65,7 +80,7 @@ class ProfileView: UIView {
     private let nameBoxLabel: UILabel = {
         let label = UILabel()
         label.text = "000님은 현재"
-//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+        //        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -75,7 +90,7 @@ class ProfileView: UIView {
     private let levelLabel: UILabel = {
         let label = UILabel()
         label.text = "검은머리 짐승"
-//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+        //        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -95,7 +110,7 @@ class ProfileView: UIView {
     private let mentBoxLabel: UILabel = {
         let label = UILabel()
         label.text = "입니다"
-//        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
+        //        label.textColor = UIColor(red: 0.192, green: 0.192, blue: 0.192, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -148,11 +163,9 @@ class ProfileView: UIView {
     }()
     
     let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.isScrollEnabled = false
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -182,50 +195,64 @@ class ProfileView: UIView {
     }
     
     private func addSubViews() {
-        addSubview(nicknameLabel)
-        addSubview(idLabel)
-        addSubview(editNicknameButton)
-        addSubview(circularImageView)
-        addSubview(editProfileButton)
-        addSubview(grayRectangle)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(nicknameLabel)
+        contentView.addSubview(idLabel)
+        contentView.addSubview(editNicknameButton)
+        contentView.addSubview(circularImageView)
+        contentView.addSubview(editProfileButton)
+        contentView.addSubview(grayRectangle)
         
         grayRectangle.addSubview(nameBoxLabel)
         grayRectangle.addSubview(levelLabel)
         grayRectangle.addSubview(mentBoxLabel)
         grayRectangle.addSubview(level)
         grayRectangle.addSubview(levelProgressView)
-        
         grayRectangle.addSubview(levelImageStackView)
+        
         levelImageStackView.addArrangedSubview(levelImage1)
         levelImageStackView.addArrangedSubview(levelImage2)
         levelImageStackView.addArrangedSubview(levelImage3)
         levelImageStackView.addArrangedSubview(levelImage4)
         levelImageStackView.addArrangedSubview(levelImage5)
-
-        addSubview(line)
-        addSubview(tableView)
+        
+        contentView.addSubview(line)
+        contentView.addSubview(tableView)
     }
     
     private func defineLayoutConstraints() {
+        
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalTo(self)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(100)
-            make.leading.equalTo(self.snp.leading).offset(24)
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(24)
         }
         
         idLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(5)
-            make.leading.equalTo(self.snp.leading).offset(24)
+            make.leading.equalToSuperview().offset(24)
         }
         
         editNicknameButton.snp.makeConstraints { make in
-            make.top.equalTo(idLabel.snp.bottom).offset(12)
-            make.leading.equalTo(self.snp.leading).offset(24)
+            make.top.equalTo(idLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(24)
         }
         
         circularImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(100)
-            make.trailing.equalTo(self.snp.trailing).offset(-24)
-            make.top.equalTo(self.snp.top).offset(86)
+            make.width.height.equalTo(90)
+            make.trailing.equalToSuperview().offset(-24)
+            make.top.equalToSuperview().offset(25)
         }
         
         editProfileButton.snp.makeConstraints { make in
@@ -235,8 +262,8 @@ class ProfileView: UIView {
         
         grayRectangle.snp.makeConstraints { make in
             make.width.equalToSuperview().inset(24)
-            make.height.equalTo(200)
-            make.top.equalTo(circularImageView.snp.bottom).offset(24)
+            make.height.equalTo(170)
+            make.top.equalTo(circularImageView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
         }
         
@@ -262,7 +289,7 @@ class ProfileView: UIView {
         
         levelImageStackView.snp.makeConstraints { make in
             make.bottom.equalTo(levelProgressView.snp.top)
-            make.height.equalTo(72)
+            make.height.equalTo(70)
             make.leading.trailing.equalToSuperview().inset(8)
         }
         
@@ -275,14 +302,14 @@ class ProfileView: UIView {
         line.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
-            make.top.equalTo(grayRectangle.snp.bottom).offset(24)
+            make.top.equalTo(grayRectangle.snp.bottom).offset(15)
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(line.snp.bottom)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(line.snp.bottom).offset(-15)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     
@@ -292,7 +319,7 @@ class ProfileView: UIView {
         nameBoxLabel.text = profileViewModel?.nickname
         level.text = profileViewModel?.levelNumberText
         levelLabel.text = profileViewModel?.levelText
-     //   circularImageView.image = profileViewModel?.profileImage
+        //   circularImageView.image = profileViewModel?.profileImage
         idLabel.text = profileViewModel?.email
     }
     
@@ -301,12 +328,12 @@ class ProfileView: UIView {
             self.circularImageView.setImageUrl(imageURL.absoluteString)
         }
     }
-
+    
     private func levelProgressUpdate(_ level: Int) {
         let progress = Float(level) / 5
         levelProgressView.setProgress(progress, animated: true)
     }
     
-
-   
+    
+    
 }
