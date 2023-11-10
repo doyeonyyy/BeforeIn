@@ -145,6 +145,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         } else if collectionView == etiquetteCollectionView {
             let selectedEtiquette = filteredEtiquetteList[indexPath.row]
             EtiquetteManager.shared.fetchSavedData(selectedEtiquette)
+            EtiquetteManager.shared.saveEtiquetteList()
             let detailVC = DetailViewController()
             detailVC.selectedEtiquette = selectedEtiquette
             navigationController?.pushViewController(detailVC, animated: true)
