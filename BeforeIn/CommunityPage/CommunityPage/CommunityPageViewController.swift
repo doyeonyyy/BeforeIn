@@ -328,17 +328,14 @@ extension CommunityPageViewController: UITableViewDataSource {
             cell.authorLabel.text = comment.writerNickName
             
             if currentUser.email == comment.writer {
-                cell.editButton.isHidden = false
-                cell.deleteButton.isHidden = false
+                cell.moreButton.isHidden = false
                 cell.reportButton.isHidden = true
                 
-                cell.editButton.tag = indexPath.row
-                cell.deleteButton.tag = indexPath.row
-                cell.editButton.addTarget(self, action: #selector(commentEditButtonTapped), for: .touchUpInside)
-                cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
+                cell.moreButton.tag = indexPath.row
+                cell.moreButton.addTarget(self, action: #selector(commentMoreButtonTapped), for: .touchUpInside)
+//                cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
             } else {
-                cell.editButton.isHidden = true
-                cell.deleteButton.isHidden = true
+                cell.moreButton.isHidden = true
                 
                 cell.reportButton.isHidden = false
                 cell.reportButton.tag = indexPath.row
@@ -349,83 +346,96 @@ extension CommunityPageViewController: UITableViewDataSource {
         return cell
     }
     
-    @objc func commentEditButtonTapped(_ sender: UIButton) {
-        let comment = post.comments[sender.tag]
-        let alert = UIAlertController(title: "댓글을 수정하시겠습니까?", message: "수정 후에는 복구가 불가능합니다." , preferredStyle: .alert)
-        alert.addTextField() {
-            $0.text = comment.content
-        }
-        let ok = UIAlertAction(title: "확인", style: .default) {_ in
-            for i in 0..<self.post.comments.count{
-                if comment == self.post.comments[i] {
-                    guard let editContent = alert.textFields?[0].text else { return }
-                    self.post.comments[i].content = editContent
-                    let commentsData: [[String: Any]] = self.post.comments.map { comment in
-                        return [
-                            "writer": comment.writer,
-                            "writerNickName": comment.writerNickName,
-                            "content": comment.content,
-                            "postingTime": comment.postingTime,
-                            "writerRef": comment.writerRef
-                        ]
-                    }
-                    
-                    self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
-                        if let error = error {
-                            print("Error updating comments in Firestore: \(error.localizedDescription)")
-                        } else {
-                            print("수정 성공")
-                        }
-                    }
-                    break
-                }
-            }
-            
-            
-        }
-        let cancel = UIAlertAction(title: "취소", style: .default)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
-    
-    @objc func commentDeleteButtonTapped(_ sender: UIButton) {
-        
-        let comment = post.comments[sender.tag]
-        let alert = UIAlertController(title: "댓글을 삭제하시겠습니까?", message: "삭제 후에는 복구가 불가능합니다." , preferredStyle: .alert)
-        let ok = UIAlertAction(title: "삭제", style: .destructive) {_ in
-            for i in 0..<self.post.comments.count{
-                if comment == self.post.comments[i] {
-                    self.post.comments.remove(at: i)
-                    let commentsData: [[String: Any]] = self.post.comments.map { comment in
-                        return [
-                            "writer": comment.writer,
-                            "writerNickName": comment.writerNickName,
-                            "content": comment.content,
-                            "postingTime": comment.postingTime,
-                            "writerRef": comment.writerRef
-                        ]
-                    }
-                    
-                    self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
-                        if let error = error {
-                            print("Error updating comments in Firestore: \(error.localizedDescription)")
-                        } else {
-                            print("삭제 성공")
-                        }
-                    }
-                    break
-                }
-            }
-            
-            
-        }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
+    @objc func commentMoreButtonTapped(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        let editAction = UIAlertAction(title: "수정", style: .default) { _ in
+            let comment = self.post.comments[sender.tag]
+            let alert = UIAlertController(title: "댓글을 수정하시겠습니까?", message: "수정 후에는 복구가 불가능합니다." , preferredStyle: .alert)
+            alert.addTextField() {
+                $0.text = comment.content
+            }
+            let ok = UIAlertAction(title: "확인", style: .default) {_ in
+                for i in 0..<self.post.comments.count{
+                    if comment == self.post.comments[i] {
+                        guard let editContent = alert.textFields?[0].text else { return }
+                        self.post.comments[i].content = editContent
+                        let commentsData: [[String: Any]] = self.post.comments.map { comment in
+                            return [
+                                "writer": comment.writer,
+                                "writerNickName": comment.writerNickName,
+                                "content": comment.content,
+                                "postingTime": comment.postingTime,
+                                "writerRef": comment.writerRef
+                            ]
+                        }
+                        
+                        self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
+                            if let error = error {
+                                print("Error updating comments in Firestore: \(error.localizedDescription)")
+                            } else {
+                                print("수정 성공")
+                            }
+                        }
+                        break
+                    }
+                }
+                
+                
+            }
+            let cancel = UIAlertAction(title: "취소", style: .default)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            let comment = self.post.comments[sender.tag]
+            let alert = UIAlertController(title: "댓글을 삭제하시겠습니까?", message: "삭제 후에는 복구가 불가능합니다." , preferredStyle: .alert)
+            let ok = UIAlertAction(title: "삭제", style: .destructive) {_ in
+                for i in 0..<self.post.comments.count{
+                    if comment == self.post.comments[i] {
+                        self.post.comments.remove(at: i)
+                        let commentsData: [[String: Any]] = self.post.comments.map { comment in
+                            return [
+                                "writer": comment.writer,
+                                "writerNickName": comment.writerNickName,
+                                "content": comment.content,
+                                "postingTime": comment.postingTime,
+                                "writerRef": comment.writerRef
+                            ]
+                        }
+                        
+                        self.db.collection("Post").document(self.post.postID).updateData(["comments": commentsData]) { error in
+                            if let error = error {
+                                print("Error updating comments in Firestore: \(error.localizedDescription)")
+                            } else {
+                                print("삭제 성공")
+                            }
+                        }
+                        break
+                    }
+                }
+                
+                
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            actionSheet.dismiss(animated: true)
+        }
+        
+       
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+
+        self.present(actionSheet, animated: true)
+    }
 
     @objc func commentReportButtonTapped(_ sender: UIButton) {
         let comment = post.comments[sender.tag]

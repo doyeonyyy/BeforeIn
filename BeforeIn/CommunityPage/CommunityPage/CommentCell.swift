@@ -27,14 +27,12 @@ class CommentCell: UITableViewCell {
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
-    let editButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+    let moreButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         $0.tintColor = .systemGray
-    }
-    
-    let deleteButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        $0.tintColor = .systemGray
+        $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
+        $0.isUserInteractionEnabled = true
+        $0.imageView?.contentMode = .scaleAspectFit
     }
     
     let reportButton = UIButton().then {
@@ -70,8 +68,7 @@ class CommentCell: UITableViewCell {
 //        contentView.addSubview(profileImageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(editButton)
-        contentView.addSubview(deleteButton)
+        contentView.addSubview(moreButton)
         contentView.addSubview(reportButton)
         contentView.addSubview(commentLabel)
     }
@@ -92,15 +89,11 @@ class CommentCell: UITableViewCell {
             $0.centerY.equalTo(authorLabel.snp.centerY)
             $0.left.equalTo(authorLabel.snp.right).offset(6)
         }
-        
-        editButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(deleteButton.snp.left).offset(-3)
-        }
-        
-        deleteButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
+
+        moreButton.snp.makeConstraints {
+            $0.top.equalTo(authorLabel.snp.top).offset(5)
             $0.right.equalTo(contentView.snp.right).offset(-20)
+            $0.height.width.equalTo(10)
         }
         
         reportButton.snp.makeConstraints {
