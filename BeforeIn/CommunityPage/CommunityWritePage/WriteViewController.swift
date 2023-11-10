@@ -30,18 +30,19 @@ class WriteViewController: BaseViewController {
         writeView.dailyButton.addTarget(self, action: #selector(dailyButtonTapped), for: .touchUpInside)
         writeView.qnaButton.addTarget(self, action: #selector(qnaButtonTapped), for: .touchUpInside)
     }
+    
     @objc func dailyButtonTapped() {
-        writeView.dailyButton.isSelected.toggle()
-        if writeView.qnaButton.isSelected {
-            writeView.qnaButton.isSelected = false
-        }
+        guard !writeView.dailyButton.isSelected else { return }
+        
+        writeView.dailyButton.isSelected = true
+        writeView.qnaButton.isSelected = false
     }
 
     @objc func qnaButtonTapped() {
-        writeView.qnaButton.isSelected.toggle()
-        if writeView.dailyButton.isSelected {
-            writeView.dailyButton.isSelected = false
-        }
+        guard !writeView.qnaButton.isSelected else { return }
+        
+        writeView.qnaButton.isSelected = true
+        writeView.dailyButton.isSelected = false
     }
     
     @objc func confirmButtonClick() {
