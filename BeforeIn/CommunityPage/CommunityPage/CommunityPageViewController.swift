@@ -80,7 +80,7 @@ class CommunityPageViewController: BaseViewController {
             self.present(alert, animated: true)
         }
         
-        let blockAction = UIAlertAction(title: "유저 차단", style: .default) { _ in
+        let blockAction = UIAlertAction(title: "유저 차단", style: .destructive) { _ in
             self.showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
                 let blockEmail = self.post.writer
                 self.userManager.addToBlockList(userEmail: blockEmail)
@@ -90,7 +90,7 @@ class CommunityPageViewController: BaseViewController {
             }
         }
         
-        let reportAction = UIAlertAction(title: "게시글 신고", style: .default) { _ in
+        let reportAction = UIAlertAction(title: "게시글 신고", style: .destructive) { _ in
             let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
                 if !self.post.reportUserList.contains(currentUser.email) {
@@ -103,7 +103,7 @@ class CommunityPageViewController: BaseViewController {
                         }
                     }
                 } else {
-                    let alert = UIAlertController(title: "신고못해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "실패", message: "이미 신고한 게시물은 다시 신고할 수 없습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default))
                     self.present(alert, animated: true)
                 }
