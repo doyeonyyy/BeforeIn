@@ -24,7 +24,7 @@ class CommentCell: UITableViewCell {
     let dateLabel = UILabel().then {
         $0.text = ""
         $0.textColor = .systemGray2
-        $0.font = UIFont.systemFont(ofSize: 13)
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     let editButton = UIButton().then {
@@ -47,7 +47,7 @@ class CommentCell: UITableViewCell {
     
     let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 15)
     }
     
     
@@ -85,12 +85,12 @@ class CommentCell: UITableViewCell {
         
         authorLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.left.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.left.equalTo(authorLabel.snp.right).offset(4)
-            $0.bottom.equalTo(authorLabel.snp.bottom)
+            $0.centerY.equalTo(authorLabel.snp.centerY)
+            $0.left.equalTo(authorLabel.snp.right).offset(6)
         }
         
         editButton.snp.makeConstraints {
@@ -100,17 +100,17 @@ class CommentCell: UITableViewCell {
         
         deleteButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(contentView.snp.right).offset(-16)
+            $0.right.equalTo(contentView.snp.right).offset(-20)
         }
         
         reportButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(contentView.snp.right).offset(-16)
+            $0.right.equalTo(contentView.snp.right).offset(-20)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(5)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(10)
+            $0.left.equalToSuperview().offset(20)
             $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
     }

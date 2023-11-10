@@ -56,7 +56,7 @@ class CommunityPageView: UIView {
     let contentTextView = UITextView().then {
         $0.text = "내용"
 //        $0.backgroundColor = .systemGray6
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 15)
         $0.isEditable = false
         $0.isSelectable = false
     }
@@ -76,8 +76,8 @@ class CommunityPageView: UIView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 14, bottom: 4, right: 14)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
     
     private let divider = UIView().then {
@@ -86,7 +86,7 @@ class CommunityPageView: UIView {
     
     private let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.boldSystemFont(ofSize: 17)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     let commentTableView = UITableView().then {
@@ -174,18 +174,18 @@ class CommunityPageView: UIView {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalTo(moreButton.snp.left).offset(-5)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalTo(moreButton.snp.left).offset(-20)
             $0.height.equalTo(48)
         }
         
         authorLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(2)
-            $0.left.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.centerY.equalTo(authorLabel.snp.centerY)
             $0.left.equalTo(authorLabel.snp.right).offset(7)
         }
         
@@ -197,7 +197,7 @@ class CommunityPageView: UIView {
 
         contentTextView.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(12)
+            $0.left.right.equalToSuperview().inset(15)
             $0.height.equalTo(220)
         }
         
@@ -213,23 +213,23 @@ class CommunityPageView: UIView {
 //        }
         
         categoryButton.snp.makeConstraints {
-            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         divider.snp.makeConstraints {
-            $0.top.equalTo(categoryButton.snp.bottom).offset(10)
+            $0.top.equalTo(categoryButton.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(1)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(8)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(divider.snp.bottom).offset(12)
+            $0.left.equalToSuperview().offset(20)
         }
         
         commentTableView.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.bottom)
+            $0.top.equalTo(commentLabel.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
             $0.bottom.equalTo(contentView.snp.bottom)
             $0.height.equalTo(200)
@@ -257,6 +257,7 @@ class CommunityPageView: UIView {
         authorLabel.text = communityPageViewModel?.nickname
         dateLabel.text = communityPageViewModel?.postingTime
         categoryButton.setTitle(communityPageViewModel?.category, for: .normal)
+        commentLabel.text = "댓글 \(communityPageViewModel?.comment.count ?? 0)"
 //        likeLabel.text = communityPageViewModel?.likes
         
     }
