@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 import Then
+import NVActivityIndicatorView
 
 class CommunityView: UIView {
+    
+    let indicator = NVActivityIndicatorView(frame: CGRect(x: 162, y: 100, width: 50, height: 50),
+                                                            type: .lineSpinFadeLoader,
+                                                            color: .BeforeInRed,
+                                                            padding: 0)
     
     let titleLabel = UILabel().then {
         $0.text = "에티켓숲"
@@ -65,6 +71,7 @@ class CommunityView: UIView {
         addSubview(tagCollectionView)
         addSubview(postTableView)
         addSubview(plusButton)
+        addSubview(indicator)
     }
     
     private func setupConstraint() {
@@ -93,6 +100,9 @@ class CommunityView: UIView {
             make.width.height.equalTo(50)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(40)
             make.trailing.equalToSuperview().inset(16)
+        }
+        indicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

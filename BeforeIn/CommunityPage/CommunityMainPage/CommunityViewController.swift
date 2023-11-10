@@ -106,6 +106,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
     
     func fetchPosts() {
         print(#function)
+        communityMainView.indicator.startAnimating()
         let db = Firestore.firestore()
         self.posts = []
         let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
@@ -178,6 +179,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 dispatchGroup.notify(queue: .main) {
                                     self.posts.sort{$0.postingTime > $1.postingTime}
                                     self.updateFilteredPostList(self.selectedCategory)
+                                    self.communityMainView.indicator.stopAnimating()
                                 }
 
 
