@@ -99,7 +99,6 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
 //    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == categoryCollectionView {
             let selectedCategory = postCategories[indexPath.row]
             switch selectedCategory {
             case "전체보기": filteredPostList = posts
@@ -108,62 +107,13 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
             default:
                 break
             }
-            self.categoryCollectionView.reloadData()
-//            self.postTableView.reloadData()
+//            self.categoryCollectionView.reloadData()
+            self.postTableView.reloadData()
+            print(filteredPostList.count)
+        
         }
-    }
     
-    func fetchPosts() {
-        print("Fetching posts...")
-        let db = Firestore.firestore()
-        let blockedEmails = currentUser.blockList
 
-        // 이전에 등록된 리스너가 있다면 제거
-        if let listener = postsListener {
-            listener.remove()
-        }
-
-        // 모든 게시물을 가져옴
-        postsListener = db.collection("Post").addSnapshotListener { [weak self] (snapshot, error) in
-            guard let self = self else { return }
-
-            if let error = error {
-                print("Error fetching posts: \(error.localizedDescription)")
-                return
-            }
-
-            guard let snapshot = snapshot else {
-                print("Snapshot is nil.")
-                return
-            }
-
-            print("Received snapshot with \(snapshot.documents.count) documents.")
-
-            var newPosts: [Post] = []
-
-            for document in snapshot.documents {
-                let data = document.data()
-                let writer = data["writer"] as! String
-
-                if !blockedEmails.contains(writer) {
-                    // 중복 코드를 방지하기 위해 Post 객체 생성 후 배열에 추가
-//                    let post = self.createPost(from: data, documentID: document.documentID)
-//                    newPosts.append(post)
-                }
-            }
-
-            // 새로 받아온 게시물로 업데이트
-            self.posts = newPosts.sorted { $0.postingTime > $1.postingTime }
-            self.filteredPostList = self.posts
-
-            // UI 갱신
-            DispatchQueue.main.async {
-                print("Updating UI...")
-                self.postTableView.reloadData()
-            }
-        }
-    }
-/*
     func fetchPosts() {
         print(#function)
         let db = Firestore.firestore()
@@ -236,6 +186,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 }
                                 dispatchGroup.notify(queue: .main) {
                                     self.posts.sort{$0.postingTime > $1.postingTime}
+                                    self.filteredPostList = self.posts
                                     self.postTableView.reloadData()
                                 }
 
@@ -249,6 +200,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 break
                             }
                         }
+                        self.filteredPostList = self.posts
                         self.postTableView.reloadData()
                     } else {
                         dispatchGroup.enter()
@@ -311,6 +263,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             break
                                         }
                                     }
+                                    self.filteredPostList = self.posts
                                     self.postTableView.reloadData()
                                 }
                             }
@@ -322,36 +275,14 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
             }
         }
     }
- */
 }
 
 
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//        return posts.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
-//            return UITableViewCell()
-//        }
-//        let post = posts[indexPath.row]
-//        cell.configureUI(post)
-//        cell.selectionStyle = .none
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let post = posts[indexPath.row]
-//
-//        let communityPageVC = CommunityPageViewController()
-//        communityPageVC.post = post
-//        self.navigationController?.pushViewController(communityPageVC, animated: true)
-//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return filteredPostList.count
     }
 
@@ -359,11 +290,32 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-        print(posts)
-        print(filteredPostList)
         let post = filteredPostList[indexPath.row]
         cell.configureUI(post)
         cell.selectionStyle = .none
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = filteredPostList[indexPath.row]
+
+        let communityPageVC = CommunityPageViewController()
+        communityPageVC.post = post
+        self.navigationController?.pushViewController(communityPageVC, animated: true)
+    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return filteredPostList.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
+//            return UITableViewCell()
+//        }
+//        print(posts)
+//        print(filteredPostList)
+//        let post = filteredPostList[indexPath.row]
+//        cell.configureUI(post)
+//        cell.selectionStyle = .none
+//        return cell
+//    }
 }
