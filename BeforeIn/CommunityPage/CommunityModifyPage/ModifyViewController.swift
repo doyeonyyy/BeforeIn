@@ -77,7 +77,7 @@ class ModifyViewController: BaseViewController {
                return
            }
 
-           guard let content = modifyVeiw.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "메세지를 입력하세요" else {
+           guard let content = modifyVeiw.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "내용을 입력하세요. (2,000자 이하)" else {
                showAlertOneButton(title: "내용", message: "내용을 입력하세요.", buttonTitle: "확인")
                return
            }
@@ -112,7 +112,7 @@ extension ModifyViewController: UITextFieldDelegate {
             let currentText = textField.text ?? ""
             let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
             
-            return updatedText.count <= 45
+            return updatedText.count <= 20
         }
         return true
     }
@@ -131,15 +131,15 @@ extension ModifyViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty && !textView.isFirstResponder {
-            textView.text = "메세지를 입력하세요"
+            textView.text = "내용을 입력하세요. (2,000자 이하)"
             textView.textColor = UIColor.placeholderText
         }
     }
     
     func textViewDidChange(_ textView: UITextView) {
            if textView == modifyVeiw.contentTextView {
-               if let text = textView.text, text.count > 800 {
-                   let truncatedText = String(text.prefix(800))
+               if let text = textView.text, text.count > 2000 {
+                   let truncatedText = String(text.prefix(2000))
                    textView.text = truncatedText
                }
            }
