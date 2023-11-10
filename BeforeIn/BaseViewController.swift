@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
 
