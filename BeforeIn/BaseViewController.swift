@@ -13,6 +13,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
 
     // Alert
@@ -58,5 +61,9 @@ class BaseViewController: UIViewController {
         self.view.window?.rootViewController = view
     }
     
+    // 키보드 외 다른 영역 터치 시, 키보드 내리기
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
 }
