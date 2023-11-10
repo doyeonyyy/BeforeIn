@@ -19,9 +19,15 @@ class CommunityViewController: UIViewController {
     let userManager = UserManager()
     
     //더미 데이터
-    let tags = ["전체보기", "일상잡담", "궁금해요"]
+//    let tags = ["전체보기", "일상잡담", "궁금해요"]
     var posts: [Post] = []
     var count = 0
+    
+    // 도연 연습중
+    var postsListener: ListenerRegistration?
+    var categoryCollectionView: UICollectionView!
+    var postCategories: [String] = ["전체보기", "일상잡담", "궁금해요"]
+    var filteredPostList: [Post] = []
     
     override func loadView() {
         view = communityMainView
@@ -41,10 +47,10 @@ class CommunityViewController: UIViewController {
         communityMainView.tagCollectionView.dataSource = self
         communityMainView.tagCollectionView.delegate = self
         communityMainView.tagCollectionView.register(TagCell.self, forCellWithReuseIdentifier: "TagCell")
+        postTableView = communityMainView.postTableView
         communityMainView.postTableView.dataSource = self
         communityMainView.postTableView.delegate = self
         communityMainView.postTableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
-        postTableView = communityMainView.postTableView
         communityMainView.plusButton.addTarget(self, action: #selector(plusButtonClick), for: .touchUpInside)
         fetchPosts()
     }
@@ -75,24 +81,39 @@ class CommunityViewController: UIViewController {
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension CommunityViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
+        return postCategories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as? TagCell else {
             return UICollectionViewCell()
         }
-        cell.tagLabel.text = tags[indexPath.row]
+        cell.tagLabel.text = postCategories[indexPath.row]
         return cell
     }
     
     //태그 선택 로직
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let tag = tags[indexPath.row]
+//        print("\(tag) 선택됨")
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tag = tags[indexPath.row]
-        print("\(tag) 선택됨")
-    }
+            let selectedCategory = postCategories[indexPath.row]
+            switch selectedCategory {
+            case "전체보기": filteredPostList = posts
+            case "일상잡담": filteredPostList = posts.filter { $0.category=="일상잡담"}
+            case "궁금해요": filteredPostList = posts.filter { $0.category=="궁금해요"}
+            default:
+                break
+            }
+//            self.categoryCollectionView.reloadData()
+            self.postTableView.reloadData()
+            print(filteredPostList.count)
+        
+        }
     
-    
+
     func fetchPosts() {
         print(#function)
         let db = Firestore.firestore()
@@ -132,7 +153,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             }
                                             dispatchGroup.leave()
                                         }
-                                        
+
                                     }
                                     var comments: [Comment] = []
                                     if let commentsData = data["comments"] as? [[String: Any]] {
@@ -161,14 +182,15 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                                         self.posts.append(addPost)
                                     }
-                                    
+
                                 }
                                 dispatchGroup.notify(queue: .main) {
                                     self.posts.sort{$0.postingTime > $1.postingTime}
+                                    self.filteredPostList = self.posts
                                     self.postTableView.reloadData()
                                 }
-                                
-                                
+
+
                             }
                         }
                     } else if change.type == .removed {
@@ -178,6 +200,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 break
                             }
                         }
+                        self.filteredPostList = self.posts
                         self.postTableView.reloadData()
                     } else {
                         dispatchGroup.enter()
@@ -197,7 +220,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             let writerData = wrterSnapshot!.data()
                                             if let nick = writerData?["nickname"] as? String {
                                                 writerNickName = nick
-                                                
+
                                             }
                                         }
                                         else {
@@ -205,7 +228,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         }
                                         dispatchGroup.leave()
                                     }
-                                    
+
                                 }
                                 var comments: [Comment] = []
                                 if let commentsData = data["comments"] as? [[String: Any]] {
@@ -231,7 +254,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 if reportUserList.count >= 1 {
                                     title = "신고당한 글이라 삭제됨"
                                 }
-                                
+
                                 dispatchGroup.notify(queue: .main) {
                                     let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                                     for i in 0..<self.posts.count {
@@ -240,6 +263,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             break
                                         }
                                     }
+                                    self.filteredPostList = self.posts
                                     self.postTableView.reloadData()
                                 }
                             }
@@ -258,27 +282,40 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return posts.count
+
+        return filteredPostList.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-        let post = posts[indexPath.row]
+        let post = filteredPostList[indexPath.row]
         cell.configureUI(post)
         cell.selectionStyle = .none
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = posts[indexPath.row]
-        
+        let post = filteredPostList[indexPath.row]
+
         let communityPageVC = CommunityPageViewController()
         communityPageVC.post = post
         self.navigationController?.pushViewController(communityPageVC, animated: true)
     }
-    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return filteredPostList.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
+//            return UITableViewCell()
+//        }
+//        print(posts)
+//        print(filteredPostList)
+//        let post = filteredPostList[indexPath.row]
+//        cell.configureUI(post)
+//        cell.selectionStyle = .none
+//        return cell
+//    }
 }
-
