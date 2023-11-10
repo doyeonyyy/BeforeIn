@@ -116,12 +116,12 @@ class WriteView: UIView {
     
     func setupConstraint() {
         mainLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(100)
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(120)
         }
         
         mainCustomView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(mainLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
             make.height.equalTo(40)
@@ -134,12 +134,12 @@ class WriteView: UIView {
         }
         
         contentsLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(20)
             make.top.equalTo(mainCustomView.snp.bottom).offset(24)
         }
         
         contentsCustomView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(contentsLabel.snp.bottom).offset(8)
             make.width.equalTo(361)
             make.height.equalTo(200)
@@ -152,13 +152,13 @@ class WriteView: UIView {
         }
         
         categoryMainLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(20)
             make.top.equalTo(contentsCustomView.snp.bottom).offset(24)
         }
         
         dailyButton.snp.makeConstraints { make in
             make.top.equalTo(categoryMainLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(20)
             make.width.equalTo(82)
             make.height.equalTo(30)
         }

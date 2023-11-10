@@ -17,6 +17,8 @@ class BaseViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(backTapped))
     }
 
     // Alert
@@ -67,4 +69,9 @@ class BaseViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @objc private func backTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
 }

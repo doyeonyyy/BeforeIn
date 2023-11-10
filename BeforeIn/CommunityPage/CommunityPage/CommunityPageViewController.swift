@@ -248,8 +248,8 @@ class CommunityPageViewController: BaseViewController {
                             if let reportData = comment["reportUserList"] as? [String] {
                                 reportUserList = reportData
                             }
-                            if reportUserList.count >= 1 {
-                                commentContent = "신고누적으로 삭제된 댓글입니다."
+                            if reportUserList.count >= 3 {
+                                commentContent = "다수의 신고에 의해 삭제된 댓글입니다."
                             }
                             
                             dispatchGroup.notify(queue: .main) {
@@ -269,9 +269,9 @@ class CommunityPageViewController: BaseViewController {
                 }
                 var title = data["title"] as? String ?? ""
                 var content = data["content"] as? String ?? ""
-                if reportUserList.count >= 1 {
-                    title = "신고당한 글이라 삭제됨"
-                    content = "신고당한 글이라 삭제됨"
+                if reportUserList.count >= 3 {
+                    title = "다수의 신고에 의해 삭제된 게시물입니다."
+                    content = "다수의 신고에 의해 삭제된 게시물입니다."
                 }
                 
                 dispatchGroup.notify(queue: .main) {
@@ -464,7 +464,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                         }
                         break
                     } else {
-                        let alert = UIAlertController(title: "신고모ㅅ해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "실패", message: "이미 신고한 댓글입니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default))
                         self.present(alert, animated: true)
                     }
