@@ -78,8 +78,7 @@ class BlockListViewController: BaseViewController {
                     let docs = snapshot.documents
                     for doc in docs {
                         if let nickname = doc.get("nickname") as? String {
-                            self.blockNicknameList.append(nickname)
-                            print(nickname)
+                            self.blockNicknameList.insert(nickname, at: 0)
                         }
                     }
                 }
@@ -125,13 +124,15 @@ extension BlockListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlockListCell", for: indexPath) as! BlockListCell
-        let user = blockNicknameList[indexPath.row]
+        
+        let user = blockList[indexPath.row]
         
         cell.configure(with: user) {
             self.showAlertTwoButton(title: "차단 해제", message: "차단을 해제하시겠습니까?", button1Title: "확인", button2Title: "취소"){
                 self.userManager.removeFromBlockList(userEmail: user) { success in
                     if success {
                         DispatchQueue.main.async {
+                            self.blockNicknameList.remove(at: indexPath.row)
                             self.blockList = currentUser.blockList
                             self.showAlertOneButton(title: "차단 해제", message: "차단이 해제되었습니다.", buttonTitle: "확인")
                             tableView.reloadData()
@@ -143,8 +144,12 @@ extension BlockListViewController: UITableViewDataSource {
                 }
             }
         }
+        let nickname = blockNicknameList[indexPath.row]
+        cell.nameLabel.text = nickname
+        
         return cell
     }
+    
     
     
     
