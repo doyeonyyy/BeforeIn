@@ -18,12 +18,10 @@ class CommunityPageView: UIView {
 //        $0.backgroundColor = .lightGray
 //    }
     
-    private let scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.alwaysBounceVertical = true
-        view.showsVerticalScrollIndicator = false
-        return view
-    }()
+    private let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = false
+    }
     
     private let contentView: UIView = {
         let view = UIView()
@@ -184,15 +182,15 @@ class CommunityPageView: UIView {
 //            $0.height.width.equalTo(60)
 //        }
         
-        scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalTo(self)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalTo(self)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
-        contentView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
-            make.width.equalTo(scrollView.frameLayoutGuide)
+        contentView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
         }
         
         titleLabel.snp.makeConstraints {
@@ -263,8 +261,8 @@ class CommunityPageView: UIView {
         commentTableView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(commentTextField.snp.top).offset(-2)
-            //$0.height.equalTo(200)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(200)
         }
         
         commentTextField.snp.makeConstraints {

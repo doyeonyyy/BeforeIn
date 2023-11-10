@@ -128,6 +128,8 @@ class CommunityPageViewController: BaseViewController {
 
     // 차단
     @objc func blockButtonTapped() {
+        
+        print("asdasdas🧔🏻‍♂️🧔🏻‍♂️")
         showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
             let blockEmail = self.post.writer
             self.userManager.addToBlockList(userEmail: blockEmail)
@@ -305,6 +307,9 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.snp.updateConstraints {
+            $0.height.equalTo(post.comments.count * 50) // TODO: - 카운트로 곱하는게아닌 모든댓글의 총합 높이를 구해서.. 댓글줄수가 각각다르니까 모든댓글의 사이즈를 구해서 업데이트 하는 식으로
+        }
         return post.comments.count
     }
     
