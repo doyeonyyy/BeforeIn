@@ -47,6 +47,8 @@ class ModifyViewController: BaseViewController {
     }
     
     @objc func dailyButtonTapped() {
+        guard !modifyVeiw.dailyButton.isSelected else { return }
+        
         modifyVeiw.dailyButton.isSelected.toggle()
         if modifyVeiw.qnaButton.isSelected {
             modifyVeiw.qnaButton.isSelected = false
@@ -54,6 +56,8 @@ class ModifyViewController: BaseViewController {
     }
     
     @objc func qnaButtonTapped() {
+        guard !modifyVeiw.qnaButton.isSelected else { return }
+        
         modifyVeiw.qnaButton.isSelected.toggle()
         if modifyVeiw.dailyButton.isSelected {
             modifyVeiw.dailyButton.isSelected = false
