@@ -19,8 +19,7 @@ class NoticeViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backTapped))
-        
+
         webView.navigationDelegate = self
    
         if let url = URL(string: "https://chalk-fir-f36.notion.site/4693d7b6de8743fb9000e1e3be246c4e?pvs=4") {
@@ -41,12 +40,6 @@ class NoticeViewController: UIViewController, WKNavigationDelegate {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.bottom.equalToSuperview()
            
-        }
-    }
-    
-    @objc private func backTapped() {
-        if let navigationController = self.navigationController {
-            navigationController.popViewController(animated: true)
         }
     }
 }

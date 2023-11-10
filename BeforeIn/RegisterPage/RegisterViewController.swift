@@ -28,7 +28,6 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "회원가입"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(backTapped))
         setTextField()
         setupAddTarget()
     }
@@ -266,14 +265,6 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
-    
-    @objc private func backTapped() {
-        if let navigationController = self.navigationController {
-            navigationController.popViewController(animated: true)
-        }
-    }
-    
-    
 }
 
 

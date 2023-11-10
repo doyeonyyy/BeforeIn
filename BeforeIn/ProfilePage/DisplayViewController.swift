@@ -6,7 +6,7 @@ import UIKit
 import SnapKit
 import Then
 
-class DisplayViewController: UIViewController {
+class DisplayViewController: BaseViewController {
     
     // MARK: - Properties
     private var isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")

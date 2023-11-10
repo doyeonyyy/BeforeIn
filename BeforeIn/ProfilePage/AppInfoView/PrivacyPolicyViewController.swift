@@ -19,7 +19,6 @@ class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backTapped))
        
         webView.navigationDelegate = self
    
@@ -39,12 +38,6 @@ class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate {
         webView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
-    @objc private func backTapped() {
-        if let navigationController = self.navigationController {
-            navigationController.popViewController(animated: true)
         }
     }
 }
