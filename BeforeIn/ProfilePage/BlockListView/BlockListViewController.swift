@@ -28,10 +28,15 @@ class BlockListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         fetchBlockList()
         title = "차단 목록"
         setTableView()
         setPlaceholder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     func setTableView() {
