@@ -131,9 +131,10 @@ extension BlockListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlockListCell", for: indexPath) as! BlockListCell
         
         let user = blockList[indexPath.row]
+        let nickname = blockNicknameList[indexPath.row]
         
         cell.configure(with: user) {
-            self.showAlertTwoButton(title: "차단 해제", message: "차단을 해제하시겠습니까?", button1Title: "확인", button2Title: "취소"){
+            self.showAlertTwoButton(title: "차단 해제", message: "\(nickname)님을 차단해제하시겠습니까?", button1Title: "확인", button2Title: "취소"){
                 self.userManager.removeFromBlockList(userEmail: user) { success in
                     if success {
                         DispatchQueue.main.async {
@@ -149,7 +150,6 @@ extension BlockListViewController: UITableViewDataSource {
                 }
             }
         }
-        let nickname = blockNicknameList[indexPath.row]
         cell.nameLabel.text = nickname
         
         return cell
