@@ -24,9 +24,10 @@ class CommunityViewController: UIViewController {
     var count = 0
     
     // 도연 연습중
+    var postsListener: ListenerRegistration?
     var categoryCollectionView: UICollectionView!
     var postCategories: [String] = ["전체보기", "일상잡담", "궁금해요"]
-    var filteredPostList: [Post] = postList
+    var filteredPostList: [Post] = []
     
     override func loadView() {
         view = communityMainView
@@ -41,10 +42,10 @@ class CommunityViewController: UIViewController {
         communityMainView.tagCollectionView.dataSource = self
         communityMainView.tagCollectionView.delegate = self
         communityMainView.tagCollectionView.register(TagCell.self, forCellWithReuseIdentifier: "TagCell")
+        postTableView = communityMainView.postTableView
         communityMainView.postTableView.dataSource = self
         communityMainView.postTableView.delegate = self
         communityMainView.postTableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
-        postTableView = communityMainView.postTableView
         communityMainView.plusButton.addTarget(self, action: #selector(plusButtonClick), for: .touchUpInside)
         fetchPosts()
     }
@@ -103,10 +104,61 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                 break
             }
             self.categoryCollectionView.reloadData()
+//            self.postTableView.reloadData()
         }
     }
     
-    
+    func fetchPosts() {
+        print("Fetching posts...")
+        let db = Firestore.firestore()
+        let blockedEmails = currentUser.blockList
+
+        // 이전에 등록된 리스너가 있다면 제거
+        if let listener = postsListener {
+            listener.remove()
+        }
+
+        // 모든 게시물을 가져옴
+        postsListener = db.collection("Post").addSnapshotListener { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+
+            if let error = error {
+                print("Error fetching posts: \(error.localizedDescription)")
+                return
+            }
+
+            guard let snapshot = snapshot else {
+                print("Snapshot is nil.")
+                return
+            }
+
+            print("Received snapshot with \(snapshot.documents.count) documents.")
+
+            var newPosts: [Post] = []
+
+            for document in snapshot.documents {
+                let data = document.data()
+                let writer = data["writer"] as! String
+
+                if !blockedEmails.contains(writer) {
+                    // 중복 코드를 방지하기 위해 Post 객체 생성 후 배열에 추가
+//                    let post = self.createPost(from: data, documentID: document.documentID)
+//                    newPosts.append(post)
+                }
+            }
+
+            // 새로 받아온 게시물로 업데이트
+            self.posts = newPosts.sorted { $0.postingTime > $1.postingTime }
+            self.filteredPostList = self.posts
+
+            // UI 갱신
+            DispatchQueue.main.async {
+                print("Updating UI...")
+                self.postTableView.reloadData()
+            }
+        }
+    }
+/*
     func fetchPosts() {
         print(#function)
         let db = Firestore.firestore()
@@ -146,7 +198,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             }
                                             dispatchGroup.leave()
                                         }
-                                        
+
                                     }
                                     var comments: [Comment] = []
                                     if let commentsData = data["comments"] as? [[String: Any]] {
@@ -175,14 +227,14 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                                         self.posts.append(addPost)
                                     }
-                                    
+
                                 }
                                 dispatchGroup.notify(queue: .main) {
                                     self.posts.sort{$0.postingTime > $1.postingTime}
                                     self.postTableView.reloadData()
                                 }
-                                
-                                
+
+
                             }
                         }
                     } else if change.type == .removed {
@@ -211,7 +263,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             let writerData = wrterSnapshot!.data()
                                             if let nick = writerData?["nickname"] as? String {
                                                 writerNickName = nick
-                                                
+
                                             }
                                         }
                                         else {
@@ -219,7 +271,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                         }
                                         dispatchGroup.leave()
                                     }
-                                    
+
                                 }
                                 var comments: [Comment] = []
                                 if let commentsData = data["comments"] as? [[String: Any]] {
@@ -245,7 +297,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 if reportUserList.count >= 1 {
                                     title = "신고당한 글이라 삭제됨"
                                 }
-                                
+
                                 dispatchGroup.notify(queue: .main) {
                                     let modifyPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
                                     for i in 0..<self.posts.count {
@@ -265,6 +317,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
             }
         }
     }
+ */
 }
 
 
@@ -301,10 +354,11 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
+        print(posts)
+        print(filteredPostList)
         let post = filteredPostList[indexPath.row]
         cell.configureUI(post)
         cell.selectionStyle = .none
         return cell
     }
 }
-
