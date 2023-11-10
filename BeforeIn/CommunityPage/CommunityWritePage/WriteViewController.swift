@@ -13,6 +13,11 @@ class WriteViewController: BaseViewController {
         view = writeView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        writeView.dailyButton.sendActions(for: .touchUpInside)
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTarget()
