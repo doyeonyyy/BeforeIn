@@ -29,6 +29,7 @@ class CommunityViewController: UIViewController {
     var categoryCollectionView: UICollectionView!
     var postCategories: [String] = ["전체보기", "일상잡담", "궁금해요"]
     var filteredPostList: [Post] = []
+    var blockListCount: Int?
     
     override func loadView() {
         view = communityMainView
@@ -36,10 +37,15 @@ class CommunityViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if blockListCount != currentUser.blockList.count {
+            fetchPosts()
+            blockListCount = currentUser.blockList.count
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        blockListCount = currentUser.blockList.count
         collectionViewSetting()
         communityMainView.plusButton.addTarget(self, action: #selector(plusButtonClick), for: .touchUpInside)
         fetchPosts()
@@ -62,21 +68,6 @@ class CommunityViewController: UIViewController {
         communityMainView.postTableView.register(PostCell.self, forCellReuseIdentifier: "PostCell")
     }
     
-    func observeBlockListChanges() {
-        print(#function)
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user, let email = user.email {
-                self.userManager.findUser(email: email) { findUser in
-                    if let user = findUser {
-                        currentUser = user
-                        self.postTableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
-    
 }
 
 
@@ -93,12 +84,6 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         cell.tagLabel.text = postCategories[indexPath.row]
         return cell
     }
-    
-    //태그 선택 로직
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        let tag = tags[indexPath.row]
-    //        print("\(tag) 선택됨")
-    //    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCategory = postCategories[indexPath.row]
@@ -122,6 +107,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
     func fetchPosts() {
         print(#function)
         let db = Firestore.firestore()
+        self.posts = []
         let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
             if error == nil && snapshot != nil {
                 var blockedEmails = currentUser.blockList
@@ -305,19 +291,4 @@ extension CommunityViewController: UITableViewDataSource, UITableViewDelegate{
         communityPageVC.post = post
         self.navigationController?.pushViewController(communityPageVC, animated: true)
     }
-    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //        return filteredPostList.count
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell else {
-    //            return UITableViewCell()
-    //        }
-    //        print(posts)
-    //        print(filteredPostList)
-    //        let post = filteredPostList[indexPath.row]
-    //        cell.configureUI(post)
-    //        cell.selectionStyle = .none
-    //        return cell
-    //    }
 }
