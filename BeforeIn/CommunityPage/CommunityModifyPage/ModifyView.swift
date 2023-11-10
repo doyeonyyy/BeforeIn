@@ -45,7 +45,7 @@ class ModifyView: UIView {
         $0.backgroundColor = .systemGray6
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = UIColor.placeholderText
-        $0.text = "내용을 입력하세요. (2,000자 이하)"
+        $0.text = postPlaceholder
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     

@@ -71,7 +71,7 @@ class ModifyViewController: BaseViewController {
                return
            }
 
-           guard let content = modifyVeiw.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != "내용을 입력하세요. (2,000자 이하)" else {
+           guard let content = modifyVeiw.contentTextView.text, !content.trimmingCharacters(in: .whitespaces).isEmpty, content != postPlaceholder else {
                showAlertOneButton(title: "내용", message: "내용을 입력하세요.", buttonTitle: "확인")
                return
            }
@@ -125,7 +125,7 @@ extension ModifyViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty && !textView.isFirstResponder {
-            textView.text = "내용을 입력하세요. (2,000자 이하)"
+            textView.text = postPlaceholder
             textView.textColor = UIColor.placeholderText
         }
     }
