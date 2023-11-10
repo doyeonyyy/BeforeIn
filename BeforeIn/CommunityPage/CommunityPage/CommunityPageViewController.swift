@@ -47,9 +47,7 @@ class CommunityPageViewController: BaseViewController {
     
     func addTarget(){
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-        communityPageView.blockButton.addTarget(self, action: #selector(blockButtonTapped), for: .touchUpInside)
         communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
-        communityPageView.reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
     }
     
     func setTextField(){
@@ -82,12 +80,52 @@ class CommunityPageViewController: BaseViewController {
             self.present(alert, animated: true)
         }
         
+        let blockAction = UIAlertAction(title: "유저 차단", style: .default) { _ in
+            self.showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
+                let blockEmail = self.post.writer
+                self.userManager.addToBlockList(userEmail: blockEmail)
+                self.showAlertOneButton(title: "차단 완료", message: "차단 완료되었습니다.", buttonTitle: "확인"){
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        
+        let reportAction = UIAlertAction(title: "게시글 신고", style: .default) { _ in
+            let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
+                if !self.post.reportUserList.contains(currentUser.email) {
+                    self.post.reportUserList.append(currentUser.email)
+                    self.db.collection("Post").document(self.post.postID).updateData(["reportUserList": self.post.reportUserList]) { error in
+                        if let error = error {
+                            print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
+                        } else {
+                            print("추가 성공")
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: "신고못해요", message: "이미신고햇거든여", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alert, animated: true)
+                }
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+        
+        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
             actionSheet.dismiss(animated: true)
         }
-
-        actionSheet.addAction(editAction)
-        actionSheet.addAction(deleteAction)
+        
+        if currentUser.email == communityPageView.communityPageViewModel?.writerEmail {
+            actionSheet.addAction(editAction)
+            actionSheet.addAction(deleteAction)
+        } else {
+            actionSheet.addAction(blockAction)
+            actionSheet.addAction(reportAction)
+        }
         actionSheet.addAction(cancelAction)
 
         self.present(actionSheet, animated: true)
@@ -98,43 +136,6 @@ class CommunityPageViewController: BaseViewController {
             addComment(comment: commentText)
             DispatchQueue.main.async {
                 self.communityPageView.commentTextField.text = ""
-            }
-        }
-    }
-    
-    @objc func reportButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "신고", style: .destructive) { _ in
-            if !self.post.reportUserList.contains(currentUser.email) {
-                self.post.reportUserList.append(currentUser.email)
-                self.db.collection("Post").document(self.post.postID).updateData(["reportUserList": self.post.reportUserList]) { error in
-                    if let error = error {
-                        print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
-                    } else {
-                        print("추가 성공")
-                    }
-                }
-            } else {
-                let alert = UIAlertController(title: "신고못해요", message: "이미신고햇거든여", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
-                self.present(alert, animated: true)
-            }
-        }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
-
-    // 차단
-    @objc func blockButtonTapped() {
-        
-        print("asdasdas🧔🏻‍♂️🧔🏻‍♂️")
-        showAlertTwoButton(title: "사용자 차단", message: "해당 사용자를 차단하시겠습니까?", button1Title: "확인", button2Title: "취소") {
-            let blockEmail = self.post.writer
-            self.userManager.addToBlockList(userEmail: blockEmail)
-            self.showAlertOneButton(title: "차단 완료", message: "차단 완료되었습니다.", buttonTitle: "확인"){
-                self.navigationController?.popViewController(animated: true)
             }
         }
     }
