@@ -167,7 +167,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                     }
                                     if reportUserList.count >= 1 {
                                         //                                    print("차단글 발견")
-                                        title = "신고당한 글이라 삭제됨"
+                                        title = "다수의 신고에 의해 삭제된 게시글입니다."
                                     }
                                     dispatchGroup.notify(queue: .main) {
                                         let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
@@ -241,7 +241,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 var title = data["title"] as! String
                                 var content = data["content"] as! String
                                 if reportUserList.count >= 1 {
-                                    title = "신고당한 글이라 삭제됨"
+                                    title = "다수의 신고에 의해 삭제된 게시글입니다."
                                 }
                                 
                                 dispatchGroup.notify(queue: .main) {
