@@ -12,34 +12,38 @@ import Then
 class CommunityPageView: UIView {
     
     // MARK: - UI Properties
-    private let profileImageView = UIImageView().then {
-        $0.layer.cornerRadius = 30
-        $0.clipsToBounds = true
-        $0.backgroundColor = .lightGray
+//    private let profileImageView = UIImageView().then {
+//        $0.layer.cornerRadius = 30
+//        $0.clipsToBounds = true
+//        $0.backgroundColor = .lightGray
+//    }
+    
+    private let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = false
     }
     
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
     let moreButton = UIButton().then {
         $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         $0.tintColor = .systemGray
         $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
-        
+        $0.isUserInteractionEnabled = true
         $0.imageView?.contentMode = .scaleAspectFit
-    }
-    
-    let blockButton = UIButton().then {
-        $0.setTitle("차단", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     private let authorLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 14)
     }
     
     private let dateLabel = UILabel().then {
         $0.text = "10분 전"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .systemGray2
     }
     
@@ -49,10 +53,10 @@ class CommunityPageView: UIView {
         $0.numberOfLines = 2
     }
     
-    private let contentTextView = UITextView().then {
+    let contentTextView = UITextView().then {
         $0.text = "내용"
 //        $0.backgroundColor = .systemGray6
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 15)
         $0.isEditable = false
         $0.isSelectable = false
     }
@@ -67,26 +71,13 @@ class CommunityPageView: UIView {
 //        $0.font = UIFont.systemFont(ofSize: 15)
 //    }
     
-    let reportButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "light.beacon.max.fill"), for: .normal)
-        $0.setTitle(" 신고", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        $0.sizeToFit()
-    }
-    
-//    private let reportLabel = UILabel().then {
-//        $0.text = "신고"
-//        $0.font = UIFont.systemFont(ofSize: 14)
-//    }
-//    
     private let categoryButton = UIButton().then {
         $0.setTitle("", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 14, bottom: 4, right: 14)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
     
     private let divider = UIView().then {
@@ -95,7 +86,7 @@ class CommunityPageView: UIView {
     
     private let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.boldSystemFont(ofSize: 17)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     let commentTableView = UITableView().then {
@@ -143,63 +134,71 @@ class CommunityPageView: UIView {
     
     // MARK: - Methods
     func addSubview(){
-        addSubview(profileImageView)
-        addSubview(moreButton)
-        addSubview(blockButton)
-        addSubview(authorLabel)
-        addSubview(dateLabel)
-        addSubview(titleLabel)
-        addSubview(contentTextView)
+//        addSubview(profileImageView)
+        
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(moreButton)
+        contentView.addSubview(authorLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(contentTextView)
 //        addSubview(likeButton)
 //        addSubview(likeLabel)
-        addSubview(reportButton)
-        addSubview(categoryButton)
-        addSubview(divider)
-        addSubview(commentLabel)
-        addSubview(commentTableView)
-        addSubview(commentTextField)
-        addSubview(sendButton)
+        contentView.addSubview(categoryButton)
+        contentView.addSubview(divider)
+        contentView.addSubview(commentLabel)
+        contentView.addSubview(commentTableView)
+       addSubview(commentTextField)
+       addSubview(sendButton)
     }
     
     
     func setUI(){
-        profileImageView.snp.makeConstraints {
+//        profileImageView.snp.makeConstraints {
+//            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+//            $0.left.equalTo(self.snp.left).offset(16)
+//            $0.height.width.equalTo(60)
+//        }
+        
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.left.equalTo(self.snp.left).offset(16)
-            $0.height.width.equalTo(60)
+            $0.leading.trailing.equalTo(self)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
-        moreButton.snp.makeConstraints {
-            $0.centerY.equalTo(profileImageView.snp.centerY)
-            $0.right.equalTo(self.snp.right).offset(-16)
-            $0.height.width.equalTo(15)
-        }
-        
-        blockButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            $0.right.equalTo(self.snp.right).offset(-16)
-        }
-        
-        authorLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
-            $0.left.equalTo(profileImageView.snp.right).offset(8)
-        }
-        
-        dateLabel.snp.makeConstraints {
-            $0.top.equalTo(authorLabel.snp.bottom).offset(5)
-            $0.left.equalTo(authorLabel.snp.left)
+        contentView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom)
-            $0.left.right.equalTo(self).inset(16)
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalTo(moreButton.snp.left).offset(-20)
             $0.height.equalTo(48)
         }
         
+        authorLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(2)
+            $0.left.equalToSuperview().offset(20)
+        }
+        
+        dateLabel.snp.makeConstraints {
+            $0.centerY.equalTo(authorLabel.snp.centerY)
+            $0.left.equalTo(authorLabel.snp.right).offset(7)
+        }
+        
+        moreButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.right.equalToSuperview().offset(-16)
+            $0.height.width.equalTo(15)
+        }
+
         contentTextView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
-            $0.left.right.equalTo(self).inset(12)
-            $0.height.equalTo(200)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(15)
+            $0.height.equalTo(220)
         }
         
 //        likeButton.snp.makeConstraints {
@@ -212,44 +211,39 @@ class CommunityPageView: UIView {
 //            $0.right.equalTo(self.snp.right).offset(-3)
 //            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
 //        }
-        reportButton.snp.makeConstraints {
-            $0.right.equalTo(self.snp.right).offset(-40)
-            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
-        }
         
         categoryButton.snp.makeConstraints {
-            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
-            $0.left.equalTo(self.snp.left).offset(16)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         divider.snp.makeConstraints {
-            $0.top.equalTo(categoryButton.snp.bottom).offset(10)
+            $0.top.equalTo(categoryButton.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(1)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(8)
-            $0.left.equalTo(self).offset(16)
+            $0.top.equalTo(divider.snp.bottom).offset(12)
+            $0.left.equalToSuperview().offset(20)
         }
         
         commentTableView.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.bottom)
+            $0.top.equalTo(commentLabel.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(commentTextField.snp.top)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(200)
         }
         
         commentTextField.snp.makeConstraints {
-            $0.top.equalTo(commentTableView.snp.bottom).offset(8)
-            $0.left.equalTo(self).offset(16)
+            $0.left.equalTo(self.safeAreaLayoutGuide).offset(16)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.right.equalTo(sendButton.snp.left).offset(-8)
         }
         
         sendButton.snp.makeConstraints {
-            $0.centerY.equalTo(commentTextField.snp.centerY)
             $0.left.equalTo(commentTextField.snp.right).offset(8)
-            $0.right.equalTo(self).offset(-16)
+            $0.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.width.equalTo(40)
         }
@@ -263,21 +257,20 @@ class CommunityPageView: UIView {
         authorLabel.text = communityPageViewModel?.nickname
         dateLabel.text = communityPageViewModel?.postingTime
         categoryButton.setTitle(communityPageViewModel?.category, for: .normal)
+        commentLabel.text = "댓글 \(communityPageViewModel?.comment.count ?? 0)"
 //        likeLabel.text = communityPageViewModel?.likes
         
-        if currentUser.email == communityPageViewModel?.writerEmail {
-            moreButton.isHidden = false
-            
-            blockButton.isHidden = true
-            reportButton.isHidden = true
-        } else {
-            moreButton.isHidden = true
-            
-            blockButton.isHidden = false
-            reportButton.isHidden = false
-        }
-       
-        print("커뮤니티 디테일view 업데이트")
     }
+    
+//    
+//    func updateTextViewHeight() {
+//        let fixedWidth = contentTextView.frame.size.width
+//        let newSize = contentTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+//        contentTextView.snp.updateConstraints { make in
+//            make.height.greaterThanOrEqualTo( max(220, newSize.height) )
+//        }
+//        self.layoutIfNeeded()
+//    }
+
     
 }

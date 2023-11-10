@@ -99,6 +99,7 @@
 		678D2C582AF387A700B42226 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 678D2C572AF387A700B42226 /* NVActivityIndicatorView */; };
 		67C7D2152AFC7E5C00240865 /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */; };
 		67C7D2192AFC80DF00240865 /* BlockListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2182AFC80DF00240865 /* BlockListCell.swift */; };
+		67C7D21D2AFCDD8300240865 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D21C2AFCDD8300240865 /* Secret.swift */; };
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
 		67CB1BC92AE3E7F9003834B1 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */; };
 		67DAFBFF2AF08FF200803A84 /* PasswordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */; };
@@ -194,6 +195,7 @@
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		67C7D2182AFC80DF00240865 /* BlockListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListCell.swift; sourceTree = "<group>"; };
+		67C7D21C2AFCDD8300240865 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		67CB1BC82AE3E7F9003834B1 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
 		67DAFBFE2AF08FF200803A84 /* PasswordFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFindViewController.swift; sourceTree = "<group>"; };
@@ -332,7 +334,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				637861222AFCC386005D666B /* Secret.swift */,
+				67C7D21C2AFCDD8300240865 /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -723,7 +725,7 @@
 				63AB9D5B2AD8E04D008E85BA /* QuizResultViewController.swift in Sources */,
 				67FFB4FF2AE0D2F6008108FA /* String.swift in Sources */,
 				63AB9D6E2ADFEDC3008E85BA /* QuizResultView.swift in Sources */,
-				637861232AFCC386005D666B /* Secret.swift in Sources */,
+				67C7D21D2AFCDD8300240865 /* Secret.swift in Sources */,
 				1543EED22AE64E6500AD587B /* Post.swift in Sources */,
 				1596DCA72AD6B18A00E6D388 /* ViewController.swift in Sources */,
 				1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */,

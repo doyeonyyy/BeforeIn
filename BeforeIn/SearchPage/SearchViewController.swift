@@ -29,7 +29,6 @@ class SearchViewController: BaseViewController {
         setupAddTarget()
         configureCollectionView()
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +89,7 @@ class SearchViewController: BaseViewController {
         filteredEtiquetteList = etiquetteList
         self.etiquetteCollectionView.reloadData()
     }
-    
+
 }
 // MARK: - categoryCollectionView / etiquetteCollectionView
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
