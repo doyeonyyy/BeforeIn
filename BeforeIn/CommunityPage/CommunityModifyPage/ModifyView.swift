@@ -58,21 +58,28 @@ class ModifyView: UIView {
     let dailyButton = UIButton().then {
         $0.setTitle("일상잡담", for: .normal)
         $0.setTitleColor(.BeforeInRed, for: .normal)
-        $0.backgroundColor = .white
+        $0.setTitleColor(.systemBackground, for: .selected)
         $0.layer.borderColor = UIColor.BeforeInRed?.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 16.5
+        $0.layer.masksToBounds = true
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        $0.backgroundColor = .systemBackground
+        $0.setBackgroundImage(UIImage(color: .beforeInRed), for: .selected)
     }
     
     let qnaButton = UIButton().then {
         $0.setTitle("궁금해요", for: .normal)
         $0.setTitleColor(.BeforeInRed, for: .normal)
-        $0.backgroundColor = .white
+        $0.setTitleColor(.systemBackground, for: .selected)
         $0.layer.borderColor = UIColor.BeforeInRed?.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 16.5
+        $0.layer.masksToBounds = true
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        let yourSelectedColor = UIColor.red
+        $0.backgroundColor = .systemBackground
+        $0.setBackgroundImage(UIImage(color: .beforeInRed), for: .selected)
     }
     
     let confirmButton = UIButton().then {

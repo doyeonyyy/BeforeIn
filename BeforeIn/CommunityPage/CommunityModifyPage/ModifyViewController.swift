@@ -33,41 +33,31 @@ class ModifyViewController: BaseViewController {
     }
     
     private func setupContent() {
-        modifyVeiw.mainTextField.text = post?.title
-        modifyVeiw.contentTextView.text = post?.content
-        modifyVeiw.contentTextView.textColor = .black
+        if let post = post {
+            modifyVeiw.mainTextField.text = post.title
+            modifyVeiw.contentTextView.text = post.content
+            modifyVeiw.contentTextView.textColor = .black
+            switch post.category {
+            case "일상잡담": modifyVeiw.dailyButton.isSelected = true
+            case "궁금해요": modifyVeiw.qnaButton.isSelected = true
+            default: break
+            }
+        }
+        
     }
     
     @objc func dailyButtonTapped() {
-        modifyVeiw.dailyButton.isSelected = !modifyVeiw.dailyButton.isSelected // 반전 선택 상태
-        
-        if modifyVeiw.dailyButton.isSelected {
-            // 버튼이 선택된 경우
-            modifyVeiw.dailyButton.setTitleColor(.white, for: .normal)
-            modifyVeiw.dailyButton.backgroundColor = UIColor.BeforeInRed
-            modifyVeiw.qnaButton.setTitleColor(UIColor.BeforeInRed, for: .normal)
-            modifyVeiw.qnaButton.backgroundColor = .white
-        } else {
-            // 버튼이 선택되지 않은 경우
-            modifyVeiw.dailyButton.setTitleColor(UIColor.BeforeInRed, for: .normal)
-            modifyVeiw.dailyButton.backgroundColor = .white
+        modifyVeiw.dailyButton.isSelected.toggle()
+        if modifyVeiw.qnaButton.isSelected {
+            modifyVeiw.qnaButton.isSelected = false
         }
-        print("일상잡담 카테고리 선택")
     }
     
     @objc func qnaButtonTapped() {
-        modifyVeiw.qnaButton.isSelected = !modifyVeiw.qnaButton.isSelected
-        
-        if modifyVeiw.qnaButton.isSelected {
-            modifyVeiw.qnaButton.setTitleColor(.white, for: .normal)
-            modifyVeiw.qnaButton.backgroundColor = UIColor.BeforeInRed
-            modifyVeiw.dailyButton.setTitleColor(UIColor.BeforeInRed, for: .normal)
-            modifyVeiw.dailyButton.backgroundColor = .white
-        } else {
-            modifyVeiw.qnaButton.setTitleColor(UIColor.BeforeInRed, for: .normal)
-            modifyVeiw.qnaButton.backgroundColor = .white
+        modifyVeiw.qnaButton.isSelected.toggle()
+        if modifyVeiw.dailyButton.isSelected {
+            modifyVeiw.dailyButton.isSelected = false
         }
-        print("궁금해요 카테고리 선택")
     }
     
     @objc func confirmButtonClick() {
