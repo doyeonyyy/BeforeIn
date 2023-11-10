@@ -165,7 +165,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                             reportUserList.append(email)
                                         }
                                     }
-                                    if reportUserList.count >= 1 {
+                                    if reportUserList.count >= 3 {
                                         //                                    print("차단글 발견")
                                         title = "다수의 신고에 의해 삭제된 게시글입니다."
                                     }
@@ -240,7 +240,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                 }
                                 var title = data["title"] as! String
                                 var content = data["content"] as! String
-                                if reportUserList.count >= 1 {
+                                if reportUserList.count >= 3 {
                                     title = "다수의 신고에 의해 삭제된 게시글입니다."
                                 }
                                 

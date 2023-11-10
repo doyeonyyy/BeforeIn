@@ -248,7 +248,7 @@ class CommunityPageViewController: BaseViewController {
                             if let reportData = comment["reportUserList"] as? [String] {
                                 reportUserList = reportData
                             }
-                            if reportUserList.count >= 1 {
+                            if reportUserList.count >= 3 {
                                 commentContent = "다수의 신고에 의해 삭제된 댓글입니다."
                             }
                             
@@ -269,7 +269,7 @@ class CommunityPageViewController: BaseViewController {
                 }
                 var title = data["title"] as? String ?? ""
                 var content = data["content"] as? String ?? ""
-                if reportUserList.count >= 1 {
+                if reportUserList.count >= 3 {
                     title = "다수의 신고에 의해 삭제된 게시물입니다."
                     content = "다수의 신고에 의해 삭제된 게시물입니다."
                 }
