@@ -25,12 +25,9 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
         navigationController?.setNavigationBarHidden(true, animated: true)
         setupAddTarget()
         configureCollectionView()
-        
         
     }
     
@@ -91,10 +88,6 @@ class SearchViewController: BaseViewController {
         
         filteredEtiquetteList = etiquetteList
         self.etiquetteCollectionView.reloadData()
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 
 }

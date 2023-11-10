@@ -18,12 +18,10 @@ class CommunityPageView: UIView {
 //        $0.backgroundColor = .lightGray
 //    }
     
-    private let scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.alwaysBounceVertical = true
-        view.showsVerticalScrollIndicator = false
-        return view
-    }()
+    private let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = false
+    }
     
     private let contentView: UIView = {
         let view = UIView()
@@ -36,12 +34,6 @@ class CommunityPageView: UIView {
         $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
         $0.isUserInteractionEnabled = true
         $0.imageView?.contentMode = .scaleAspectFit
-    }
-    
-    let blockButton = UIButton().then {
-        $0.setTitle("차단", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     private let authorLabel = UILabel().then {
@@ -64,7 +56,7 @@ class CommunityPageView: UIView {
     let contentTextView = UITextView().then {
         $0.text = "내용"
 //        $0.backgroundColor = .systemGray6
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 15)
         $0.isEditable = false
         $0.isSelectable = false
     }
@@ -79,26 +71,13 @@ class CommunityPageView: UIView {
 //        $0.font = UIFont.systemFont(ofSize: 15)
 //    }
     
-    let reportButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "light.beacon.max.fill"), for: .normal)
-        $0.setTitle(" 신고", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        $0.sizeToFit()
-    }
-    
-//    private let reportLabel = UILabel().then {
-//        $0.text = "신고"
-//        $0.font = UIFont.systemFont(ofSize: 14)
-//    }
-//    
     private let categoryButton = UIButton().then {
         $0.setTitle("", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = .BeforeInRed
         $0.layer.cornerRadius = 5
-        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 14, bottom: 4, right: 14)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
     
     private let divider = UIView().then {
@@ -107,7 +86,7 @@ class CommunityPageView: UIView {
     
     private let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.boldSystemFont(ofSize: 17)
+        $0.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     let commentTableView = UITableView().then {
@@ -160,14 +139,12 @@ class CommunityPageView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(moreButton)
-        contentView.addSubview(blockButton)
         contentView.addSubview(authorLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(contentTextView)
 //        addSubview(likeButton)
 //        addSubview(likeLabel)
-        contentView.addSubview(reportButton)
         contentView.addSubview(categoryButton)
         contentView.addSubview(divider)
         contentView.addSubview(commentLabel)
@@ -184,31 +161,31 @@ class CommunityPageView: UIView {
 //            $0.height.width.equalTo(60)
 //        }
         
-        scrollView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalTo(self)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalTo(self)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
-        contentView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
-            make.width.equalTo(scrollView.frameLayoutGuide)
+        contentView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalTo(moreButton.snp.left).offset(-5)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalTo(moreButton.snp.left).offset(-20)
             $0.height.equalTo(48)
         }
         
         authorLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(2)
-            $0.left.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.centerY.equalTo(authorLabel.snp.centerY)
             $0.left.equalTo(authorLabel.snp.right).offset(7)
         }
         
@@ -217,15 +194,10 @@ class CommunityPageView: UIView {
             $0.right.equalToSuperview().offset(-16)
             $0.height.width.equalTo(15)
         }
-        
-        blockButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(15)
-            $0.right.equalToSuperview().offset(-16)
-        }
 
         contentTextView.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(12)
+            $0.left.right.equalToSuperview().inset(15)
             $0.height.equalTo(220)
         }
         
@@ -239,32 +211,28 @@ class CommunityPageView: UIView {
 //            $0.right.equalTo(self.snp.right).offset(-3)
 //            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
 //        }
-        reportButton.snp.makeConstraints {
-            $0.right.equalToSuperview().offset(-40)
-            $0.top.equalTo(contentTextView.snp.bottom).offset(8)
-        }
         
         categoryButton.snp.makeConstraints {
-            $0.top.equalTo(contentTextView.snp.bottom).offset(10)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         divider.snp.makeConstraints {
-            $0.top.equalTo(categoryButton.snp.bottom).offset(10)
+            $0.top.equalTo(categoryButton.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(1)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(8)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(divider.snp.bottom).offset(12)
+            $0.left.equalToSuperview().offset(20)
         }
         
         commentTableView.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.bottom)
+            $0.top.equalTo(commentLabel.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(commentTextField.snp.top).offset(-2)
-            //$0.height.equalTo(200)
+            $0.bottom.equalTo(contentView.snp.bottom)
+            $0.height.equalTo(200)
         }
         
         commentTextField.snp.makeConstraints {
@@ -289,21 +257,9 @@ class CommunityPageView: UIView {
         authorLabel.text = communityPageViewModel?.nickname
         dateLabel.text = communityPageViewModel?.postingTime
         categoryButton.setTitle(communityPageViewModel?.category, for: .normal)
+        commentLabel.text = "댓글 \(communityPageViewModel?.comment.count ?? 0)"
 //        likeLabel.text = communityPageViewModel?.likes
         
-        if currentUser.email == communityPageViewModel?.writerEmail {
-            moreButton.isHidden = false
-            
-            blockButton.isHidden = true
-            reportButton.isHidden = true
-        } else {
-            moreButton.isHidden = true
-            
-            blockButton.isHidden = false
-            reportButton.isHidden = false
-        }
-       
-        print("커뮤니티 디테일view 업데이트")
     }
     
 //    

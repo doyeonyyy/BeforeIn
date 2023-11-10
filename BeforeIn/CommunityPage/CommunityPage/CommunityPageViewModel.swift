@@ -39,6 +39,10 @@ class CommunityPageViewModel{
         return date.getTimeText()
     }
     
+    var comment: [Comment] {
+        return post.comments
+    }
+    
     var likes: String{
         return String(post.likes) 
     }

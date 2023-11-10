@@ -24,17 +24,15 @@ class CommentCell: UITableViewCell {
     let dateLabel = UILabel().then {
         $0.text = ""
         $0.textColor = .systemGray2
-        $0.font = UIFont.systemFont(ofSize: 13)
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
-    let editButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+    let moreButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         $0.tintColor = .systemGray
-    }
-    
-    let deleteButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        $0.tintColor = .systemGray
+        $0.transform = CGAffineTransform(rotationAngle: .pi / 2) // 세로로 뒤집기
+        $0.isUserInteractionEnabled = true
+        $0.imageView?.contentMode = .scaleAspectFit
     }
     
     let reportButton = UIButton().then {
@@ -47,7 +45,7 @@ class CommentCell: UITableViewCell {
     
     let commentLabel = UILabel().then {
         $0.text = "댓글"
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.systemFont(ofSize: 15)
     }
     
     
@@ -70,8 +68,7 @@ class CommentCell: UITableViewCell {
 //        contentView.addSubview(profileImageView)
         contentView.addSubview(authorLabel)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(editButton)
-        contentView.addSubview(deleteButton)
+        contentView.addSubview(moreButton)
         contentView.addSubview(reportButton)
         contentView.addSubview(commentLabel)
     }
@@ -85,32 +82,28 @@ class CommentCell: UITableViewCell {
         
         authorLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.left.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.left.equalTo(authorLabel.snp.right).offset(4)
-            $0.bottom.equalTo(authorLabel.snp.bottom)
+            $0.centerY.equalTo(authorLabel.snp.centerY)
+            $0.left.equalTo(authorLabel.snp.right).offset(6)
         }
-        
-        editButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(deleteButton.snp.left).offset(-3)
-        }
-        
-        deleteButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(contentView.snp.right).offset(-16)
+
+        moreButton.snp.makeConstraints {
+            $0.top.equalTo(authorLabel.snp.top).offset(5)
+            $0.right.equalTo(contentView.snp.right).offset(-20)
+            $0.height.width.equalTo(10)
         }
         
         reportButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.right.equalTo(contentView.snp.right).offset(-16)
+            $0.right.equalTo(contentView.snp.right).offset(-20)
         }
         
         commentLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(5)
-            $0.left.equalToSuperview().offset(16)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(10)
+            $0.left.equalToSuperview().offset(20)
             $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
     }
