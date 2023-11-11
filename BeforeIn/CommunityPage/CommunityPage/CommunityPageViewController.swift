@@ -308,9 +308,9 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.snp.updateConstraints {
-            $0.height.equalTo(post.comments.count * 50) // TODO: - 카운트로 곱하는게아닌 모든댓글의 총합 높이를 구해서.. 댓글줄수가 각각다르니까 모든댓글의 사이즈를 구해서 업데이트 하는 식으로
-        }
+//        tableView.snp.updateConstraints {
+//            $0.height.equalTo(post.comments.count * 50) // TODO: - 카운트로 곱하는게아닌 모든댓글의 총합 높이를 구해서.. 댓글줄수가 각각다르니까 모든댓글의 사이즈를 구해서 업데이트 하는 식으로
+//        }
         return post.comments.count
     }
     
@@ -318,17 +318,18 @@ extension CommunityPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         let comment = post.comments[indexPath.row]
+        let dateString = comment.postingTime.getTimeText()
+        cell.dateLabel.text = dateString
         if currentUser.blockList.contains(comment.writer){
-            cell.isHidden = true
+            cell.commentLabel.text = "차단된 사용자의 댓글입니다."
+            cell.authorLabel.text = "차단된 사용자"
         }
         else {
-            let dateString = comment.postingTime.getTimeText()
-            cell.dateLabel.text = dateString
             cell.commentLabel.text = comment.content
             cell.authorLabel.text = comment.writerNickName
-            
-            if currentUser.email == comment.writer {
-                cell.moreButton.isHidden = false
+        }
+        if currentUser.email == comment.writer {
+            cell.moreButton.isHidden = false
                 cell.reportButton.isHidden = true
                 
                 cell.moreButton.tag = indexPath.row
@@ -341,7 +342,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                 cell.reportButton.tag = indexPath.row
                 cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
             }
-        }
+        
         
         return cell
     }
