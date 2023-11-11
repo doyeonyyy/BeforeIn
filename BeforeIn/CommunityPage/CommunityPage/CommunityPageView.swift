@@ -17,6 +17,9 @@ class CommunityPageView: UIView {
 //        $0.clipsToBounds = true
 //        $0.backgroundColor = .lightGray
 //    }
+    private var contentTextViewHeightConstraint: Constraint?
+    private var commentTableViewHeightConstraint: Constraint?
+
     
     private let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
@@ -59,6 +62,7 @@ class CommunityPageView: UIView {
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.isEditable = false
         $0.isSelectable = false
+        $0.isScrollEnabled = false
     }
     
 //    private let likeButton = UIButton().then {
@@ -91,6 +95,7 @@ class CommunityPageView: UIView {
     
     let commentTableView = UITableView().then {
         $0.separatorStyle = .none
+        $0.isScrollEnabled = false
     }
     
     let commentTextField = UITextField().then {
@@ -198,7 +203,7 @@ class CommunityPageView: UIView {
         contentTextView.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(10)
             $0.left.right.equalToSuperview().inset(15)
-            $0.height.equalTo(220)
+//            $0.height.equalTo(220)
         }
         
 //        likeButton.snp.makeConstraints {
@@ -231,8 +236,8 @@ class CommunityPageView: UIView {
         commentTableView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom).offset(12)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(contentView.snp.bottom)
-            $0.height.equalTo(200)
+            $0.bottom.equalTo(contentView.snp.bottom).offset(-40)
+//            $0.height.equalTo(200)
         }
         
         commentTextField.snp.makeConstraints {
@@ -259,7 +264,40 @@ class CommunityPageView: UIView {
         categoryButton.setTitle(communityPageViewModel?.category, for: .normal)
         commentLabel.text = "댓글 \(communityPageViewModel?.comment.count ?? 0)"
 //        likeLabel.text = communityPageViewModel?.likes
-        
+        DispatchQueue.main.async {
+            self.updateContentViewConstraint()
+            self.updateCommentViewConstraint()
+        }
+    }
+    
+    private func updateContentViewConstraint() {
+        let newSize = contentTextView.sizeThatFits(CGSize(width: contentTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        if let existingConstraints = contentTextView.constraints.first(where: { $0.firstAttribute == .height }),
+           let constraint = contentTextViewHeightConstraint {
+            // 제약이 이미 존재하면 업데이트
+            constraint.update(offset: max(50, newSize.height))
+        } else {
+            // 제약이 없으면 새로 생성
+            contentTextView.snp.makeConstraints {
+                contentTextViewHeightConstraint = $0.height.greaterThanOrEqualTo(max(50, newSize.height)).constraint
+            }
+        }
+    }
+    
+    private func updateCommentViewConstraint() {
+        let newSize = commentTableView.sizeThatFits(CGSize(width: commentTableView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        if let existingConstraints = commentTableView.constraints.first(where: { $0.firstAttribute == .height }),
+           let constraint = commentTableViewHeightConstraint {
+            // 제약이 이미 존재하면 업데이트
+            print("제약이 이미 존재하면 업데이트")
+            constraint.update(offset: max(400, newSize.height + 50))
+        } else {
+            // 제약이 없으면 새로 생성
+            print("제약이 없으면 새로 생성")
+            commentTableView.snp.makeConstraints {
+                commentTableViewHeightConstraint = $0.height.greaterThanOrEqualTo(max(400, newSize.height + 50)).constraint
+            }
+        }
     }
     
 //    
