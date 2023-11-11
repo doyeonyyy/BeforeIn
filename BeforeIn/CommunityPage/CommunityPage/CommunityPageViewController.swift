@@ -120,7 +120,7 @@ class CommunityPageViewController: BaseViewController {
                         if let error = error {
                             print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
                         } else {
-                            print("추가 성공")
+                            self.showAlertOneButton(title: "게시글 신고", message: "해당 게시글이 신고되었습니다.", buttonTitle: "확인")
                         }
                     }
                 } else {
@@ -481,7 +481,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             if let error = error {
                                 print("Error updating comments in Firestore: \(error.localizedDescription)")
                             } else {
-                                print("추가 성공")
+                                self.showAlertOneButton(title: "댓글 신고", message: "해당 댓글이 신고되었습니다.", buttonTitle: "확인")
                             }
                         }
                         break
@@ -504,9 +504,4 @@ extension CommunityPageViewController: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
-    
-
 }
