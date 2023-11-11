@@ -66,6 +66,9 @@ class CommunityPageViewController: BaseViewController {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
             }
         }
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
+        communityPageView.sendButton.addGestureRecognizer(tapGesture)
+        communityPageView.sendButton.isUserInteractionEnabled = true
     }
     
     @objc func keyboardWillDisappear(notification: Notification) {
