@@ -33,8 +33,8 @@ class ProfileViewController: BaseViewController {
         profileView.profileViewModel = ProfileViewModel(user: currentUser)
         setPicker()
         setTableView()
+        setTapGesture()
         addTarget()
-        //        configureUser()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,6 +60,12 @@ class ProfileViewController: BaseViewController {
         picker = PHPickerViewController(configuration: configuration)
     }
     
+    func setTapGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        profileView.circularImageView.addGestureRecognizer(tapGesture)
+        profileView.circularImageView.isUserInteractionEnabled = true
+    }
+    
     func addTarget(){
         profileView.editNicknameButton.addTarget(self, action: #selector(editNicknameButtonTapped), for: .touchUpInside)
         profileView.editProfileButton.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
@@ -81,6 +87,13 @@ class ProfileViewController: BaseViewController {
         profileView.updateProfileImage()
     }
     
+    @objc func imageViewTapped() {
+          if let picker = picker {
+              picker.delegate = self
+              present(picker, animated: true, completion: nil)
+          }
+          profileView.updateProfileImage()
+      }
     
 }
 
@@ -165,7 +178,7 @@ extension ProfileViewController: UITableViewDelegate {
             break
         }
     }
-
+    
     
 }
 
@@ -212,10 +225,6 @@ extension ProfileViewController: UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    //        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //            let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
-    //            return tableView.bounds.height / CGFloat(numberOfCells)
-    //        }
     
     
 }
