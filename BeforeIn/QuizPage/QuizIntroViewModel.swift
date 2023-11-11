@@ -14,7 +14,7 @@ class QuizIntroViewModel {
         }
     }
     var nickname: String {
-        return user.name
+        return user.nickname
     }
     
     var updateView: (() -> Void)?

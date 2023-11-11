@@ -53,7 +53,7 @@ class NewQuizContentViewController: UIViewController {
         
         let progressLabel = UILabel().then {
             $0.text = "\(self.index)/10"
-            $0.font = UIFont.systemFont(ofSize: 12)
+            $0.font = UIFont.systemFont(ofSize: 18)
         }
         
         let quizLabel = UILabel().then {
