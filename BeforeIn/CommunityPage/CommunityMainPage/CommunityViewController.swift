@@ -35,6 +35,7 @@ class CommunityViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if blockListCount != currentUser.blockList.count {
+            postsListener?.remove()
             fetchPosts()
             blockListCount = currentUser.blockList.count
         }
@@ -115,7 +116,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
         print(#function)
         let db = Firestore.firestore()
         self.posts = []
-        let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
+        postsListener = db.collection("Post").addSnapshotListener { (snapshot, error) in
             if error == nil && snapshot != nil {
                 var blockedEmails = currentUser.blockList
                 let dispatchGroup = DispatchGroup()
@@ -179,6 +180,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                     }
                                     dispatchGroup.notify(queue: .main) {
                                         let addPost = Post(writer: writer, writerNickName: writerNickName, postID: postingID, title: title, content: content, comments: comments, likes: likes, category: category, postingTime: postingTime.dateValue(), reportUserList: reportUserList)
+                                        print(addPost.title, " 제목의 글이 추가됨")
                                         self.posts.append(addPost)
                                     }
 
