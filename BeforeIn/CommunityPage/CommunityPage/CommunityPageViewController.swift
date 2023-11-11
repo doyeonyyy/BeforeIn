@@ -503,5 +503,13 @@ extension CommunityPageViewController: UITableViewDataSource {
 
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == communityPageView.commentTextField {
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return updatedText.count <= 100
+        }
+        return true
+    }
 }
