@@ -212,7 +212,6 @@ extension ProfileViewController: UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    
     //        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     //            let numberOfCells = tableView.numberOfRows(inSection: indexPath.section)
     //            return tableView.bounds.height / CGFloat(numberOfCells)

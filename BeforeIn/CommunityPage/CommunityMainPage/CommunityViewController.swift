@@ -18,12 +18,9 @@ class CommunityViewController: UIViewController {
     private var handle: AuthStateDidChangeListenerHandle?
     let userManager = UserManager()
     
-    //더미 데이터
-    //    let tags = ["전체보기", "일상잡담", "궁금해요"]
     var posts: [Post] = []
     var count = 0
     
-    // 도연 연습중
     var selectedCategory = "전체보기"
     var postsListener: ListenerRegistration?
     var categoryCollectionView: UICollectionView!
@@ -41,6 +38,7 @@ class CommunityViewController: UIViewController {
             fetchPosts()
             blockListCount = currentUser.blockList.count
         }
+//        setPlaceholder()
     }
     
     override func viewDidLoad() {
@@ -49,6 +47,15 @@ class CommunityViewController: UIViewController {
         collectionViewSetting()
         communityMainView.plusButton.addTarget(self, action: #selector(plusButtonClick), for: .touchUpInside)
         fetchPosts()
+    }
+    
+    
+    func setPlaceholder() {
+        if posts.isEmpty {
+            communityMainView.placeholderLabel.isHidden = false
+        } else {
+            communityMainView.placeholderLabel.isHidden = true
+        }
     }
     
     @objc func plusButtonClick() {
@@ -106,7 +113,6 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
     
     func fetchPosts() {
         print(#function)
-        communityMainView.indicator.startAnimating()
         let db = Firestore.firestore()
         self.posts = []
         let listener = db.collection("Post").addSnapshotListener { (snapshot, error) in
@@ -117,6 +123,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                 for change in snapshot!.documentChanges {
                     // change type remove, modified 일때도 로직 추가 예정
                     if change.type == .added {
+                        self.communityMainView.indicator.startAnimating()
                         let addDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
                             if error == nil && snapshot != nil && snapshot?.data() != nil {
                                 let data = snapshot!.data()!
@@ -180,6 +187,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                                     self.posts.sort{$0.postingTime > $1.postingTime}
                                     self.updateFilteredPostList(self.selectedCategory)
                                     self.communityMainView.indicator.stopAnimating()
+                                    self.setPlaceholder()
                                 }
 
 
@@ -193,6 +201,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                             }
                         }
                         self.updateFilteredPostList(self.selectedCategory)
+                        self.setPlaceholder()
                     } else {
                         dispatchGroup.enter()
                         let modifyDoc = db.collection("Post").document(change.document.documentID).getDocument { (snapshot, error) in
@@ -261,7 +270,7 @@ extension CommunityViewController: UICollectionViewDataSource, UICollectionViewD
                     }
                 }
             } else {
-                // error. do something
+                // error
             }
         }
     }
