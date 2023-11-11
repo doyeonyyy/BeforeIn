@@ -14,7 +14,7 @@ class ProfileViewController: BaseViewController {
     let userManager = UserManager()
     let profileView = ProfileView()
     let header = ["커뮤니티", "기기설정", "계정관리"]
-    private let cellData = [["차단한 사용자"], ["화면설정", "앱 정보"], ["비밀번호 변경", "로그아웃", "회원탈퇴"]]
+    private let cellData = [["차단한 사용자", "에티켓숲 이용규칙"], ["화면설정", "앱 정보"], ["비밀번호 변경", "로그아웃", "회원탈퇴"]]
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -136,6 +136,9 @@ extension ProfileViewController: UITableViewDelegate {
         case "차단한 사용자":
             let blockListVC = BlockListViewController()
             self.navigationController?.pushViewController(blockListVC, animated: true)
+        case "에티켓숲 이용규칙":
+            let ruleListVC = CommunityRuleViewController()
+            self.navigationController?.pushViewController(ruleListVC, animated: true)
         case "화면설정":
             let displayVC = DisplayViewController()
             self.navigationController?.pushViewController(displayVC, animated: true)

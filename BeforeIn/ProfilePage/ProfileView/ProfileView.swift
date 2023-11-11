@@ -56,6 +56,7 @@ class ProfileView: UIView {
         imageView.layer.cornerRadius = 45
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -165,6 +166,7 @@ class ProfileView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
