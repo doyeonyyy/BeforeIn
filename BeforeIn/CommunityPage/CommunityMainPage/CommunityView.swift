@@ -17,6 +17,12 @@ class CommunityView: UIView {
                                                             color: .BeforeInRed,
                                                             padding: 0)
     
+    let placeholderLabel = UILabel().then {
+        $0.text = "등록된 게시글이 없습니다."
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.textColor = .systemGray
+    }
+    
     let titleLabel = UILabel().then {
         $0.text = "에티켓숲"
         $0.font = UIFont.boldSystemFont(ofSize: 24)
@@ -66,6 +72,7 @@ class CommunityView: UIView {
     
     private func setupUI() {
         backgroundColor = .systemBackground
+        postTableView.addSubview(placeholderLabel)
         addSubview(titleLabel)
         addSubview(titleImageView)
         addSubview(tagCollectionView)
@@ -75,6 +82,11 @@ class CommunityView: UIView {
     }
     
     private func setupConstraint() {
+        
+        placeholderLabel.snp.makeConstraints {
+            $0.centerX.equalTo(self.snp.centerX)
+            $0.centerY.equalTo(self.snp.centerY)
+        }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(-10)

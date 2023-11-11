@@ -52,6 +52,7 @@ class MainView: UIView {
         $0.layer.cornerRadius = 50
         $0.clipsToBounds = true
         $0.backgroundColor = .systemGray6
+        $0.contentMode = .scaleAspectFill
     }
     
     let quizButton = UIButton().then{

@@ -65,7 +65,7 @@ class ModifyView: UIView {
         $0.layer.masksToBounds = true
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         $0.backgroundColor = .systemBackground
-        $0.setBackgroundImage(UIImage(color: .beforeInRed), for: .selected)
+        $0.setBackgroundImage(UIImage(color: .BeforeInRed), for: .selected)
     }
     
     let qnaButton = UIButton().then {
@@ -79,7 +79,7 @@ class ModifyView: UIView {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         let yourSelectedColor = UIColor.red
         $0.backgroundColor = .systemBackground
-        $0.setBackgroundImage(UIImage(color: .beforeInRed), for: .selected)
+        $0.setBackgroundImage(UIImage(color: .BeforeInRed), for: .selected)
     }
     
     let confirmButton = UIButton().then {

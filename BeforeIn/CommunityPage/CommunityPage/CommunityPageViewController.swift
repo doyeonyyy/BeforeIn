@@ -46,28 +46,52 @@ class CommunityPageViewController: BaseViewController {
     }
     
     func addTarget(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
     }
     
     func setTextField(){
         communityPageView.commentTextField.delegate = self
-        communityPageView.contentTextView.delegate = self
     }
     
     
     
     // MARK: - @objc
+    @objc func keyboardWillAppear(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            UIView.animate(withDuration: duration) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            }
+        }
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
+        communityPageView.sendButton.addGestureRecognizer(tapGesture)
+        communityPageView.sendButton.isUserInteractionEnabled = true
+    }
+    
+    @objc func keyboardWillDisappear(notification: Notification) {
+        if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            // 텍스트 필드가 선택되어 있는 경우에만 키보드 내리기
+            if communityPageView.commentTextField.isFirstResponder {
+                UIView.animate(withDuration: duration) {
+                    self.view.transform = .identity
+                }
+            }
+        }
+    }
+    
     @objc func moreButtonTapped() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let editAction = UIAlertAction(title: "수정", style: .default) { _ in
             let post = self.post
             let modifyVC = ModifyViewController()
             modifyVC.post = post
             self.navigationController?.pushViewController(modifyVC, animated: true)
         }
-
+        
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
             let alert = UIAlertController(title: "정말로 삭제하시겠습니까?", message: "삭제하시면 복구가 불가능합니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "예" , style: .destructive) { _ in
@@ -99,7 +123,7 @@ class CommunityPageViewController: BaseViewController {
                         if let error = error {
                             print("Error updating reportUserList in Firestore: \(error.localizedDescription)")
                         } else {
-                            print("추가 성공")
+                            self.showAlertOneButton(title: "게시글 신고", message: "해당 게시글이 신고되었습니다.", buttonTitle: "확인")
                         }
                     }
                 } else {
@@ -127,7 +151,7 @@ class CommunityPageViewController: BaseViewController {
             actionSheet.addAction(reportAction)
         }
         actionSheet.addAction(cancelAction)
-
+        
         self.present(actionSheet, animated: true)
     }
     
@@ -185,7 +209,7 @@ class CommunityPageViewController: BaseViewController {
             }
         }
         
-
+        
     }
     
     func fetchPost() {
@@ -224,7 +248,7 @@ class CommunityPageViewController: BaseViewController {
                         if let commentWriter = comment["writer"] as? String,
                            let commentPostingTime = comment["postingTime"] as? Timestamp,
                            var commentContent = comment["content"] as? String,
-//                           var commentWriterNickName = comment["writerNickName"] as? String,
+                           //                           var commentWriterNickName = comment["writerNickName"] as? String,
                            let commentWriterRef = comment["writerRef"] as? DocumentReference {
                             var commentWriterNickName = ""
                             dispatchGroup.enter()
@@ -296,9 +320,9 @@ class CommunityPageViewController: BaseViewController {
 // MARK: - UITableViewDelegate
 extension CommunityPageViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        view.endEditing(true)
+//    }
     
 }
 
@@ -308,9 +332,9 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        tableView.snp.updateConstraints {
-//            $0.height.equalTo(post.comments.count * 50) // TODO: - 카운트로 곱하는게아닌 모든댓글의 총합 높이를 구해서.. 댓글줄수가 각각다르니까 모든댓글의 사이즈를 구해서 업데이트 하는 식으로
-//        }
+        //        tableView.snp.updateConstraints {
+        //            $0.height.equalTo(post.comments.count * 50) // TODO: - 카운트로 곱하는게아닌 모든댓글의 총합 높이를 구해서.. 댓글줄수가 각각다르니까 모든댓글의 사이즈를 구해서 업데이트 하는 식으로
+        //        }
         return post.comments.count
     }
     
@@ -330,18 +354,18 @@ extension CommunityPageViewController: UITableViewDataSource {
         }
         if currentUser.email == comment.writer {
             cell.moreButton.isHidden = false
-                cell.reportButton.isHidden = true
-                
-                cell.moreButton.tag = indexPath.row
-                cell.moreButton.addTarget(self, action: #selector(commentMoreButtonTapped), for: .touchUpInside)
-//                cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
-            } else {
-                cell.moreButton.isHidden = true
-                
-                cell.reportButton.isHidden = false
-                cell.reportButton.tag = indexPath.row
-                cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
-            }
+            cell.reportButton.isHidden = true
+            
+            cell.moreButton.tag = indexPath.row
+            cell.moreButton.addTarget(self, action: #selector(commentMoreButtonTapped), for: .touchUpInside)
+            //                cell.deleteButton.addTarget(self, action: #selector(commentDeleteButtonTapped), for: .touchUpInside)
+        } else {
+            cell.moreButton.isHidden = true
+            
+            cell.reportButton.isHidden = false
+            cell.reportButton.tag = indexPath.row
+            cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
+        }
         
         
         return cell
@@ -349,7 +373,7 @@ extension CommunityPageViewController: UITableViewDataSource {
     
     @objc func commentMoreButtonTapped(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let editAction = UIAlertAction(title: "수정", style: .default) { _ in
             let comment = self.post.comments[sender.tag]
             let alert = UIAlertController(title: "댓글을 수정하시겠습니까?", message: "수정 후에는 복구가 불가능합니다." , preferredStyle: .alert)
@@ -389,7 +413,7 @@ extension CommunityPageViewController: UITableViewDataSource {
             alert.addAction(cancel)
             self.present(alert, animated: true)
         }
-
+        
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
             let comment = self.post.comments[sender.tag]
             let alert = UIAlertController(title: "댓글을 삭제하시겠습니까?", message: "삭제 후에는 복구가 불가능합니다." , preferredStyle: .alert)
@@ -430,14 +454,14 @@ extension CommunityPageViewController: UITableViewDataSource {
             actionSheet.dismiss(animated: true)
         }
         
-       
+        
         actionSheet.addAction(editAction)
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
-
+        
         self.present(actionSheet, animated: true)
     }
-
+    
     @objc func commentReportButtonTapped(_ sender: UIButton) {
         let comment = post.comments[sender.tag]
         let alert = UIAlertController(title: "이 댓글을 신고하시겠습니까?", message: "신고하시면 취소가 불가능합니다.", preferredStyle: .alert)
@@ -460,7 +484,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                             if let error = error {
                                 print("Error updating comments in Firestore: \(error.localizedDescription)")
                             } else {
-                                print("추가 성공")
+                                self.showAlertOneButton(title: "댓글 신고", message: "해당 댓글이 신고되었습니다.", buttonTitle: "확인")
                             }
                         }
                         break
@@ -477,41 +501,18 @@ extension CommunityPageViewController: UITableViewDataSource {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
-
+    
 }
 
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == communityPageView.commentTextField {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -330
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = 0
-            }
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return updatedText.count <= 100
         }
+        return true
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = 0
-        }
-    }
-}
-
-
-// MARK: - UITextViewDelegate
-extension CommunityPageViewController: UITextViewDelegate {
-//    func textViewDidChange(_ textView: UITextView) {
-//        communityPageView.updateTextViewHeight()
-//    }
-    
-
 }

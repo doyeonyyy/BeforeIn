@@ -13,7 +13,7 @@ class AppInfoViewController: BaseViewController {
     
     // MARK: - Properties
     let AppInfoCellList = ["공지사항", "서비스 이용약관", "개인정보 처리방침", "문의하기", "앱 버전"]
-    let AppVersion = "1.0"
+    let AppVersion = "1.1"
     
     let tableView: UITableView = {
         let tableView = UITableView()
