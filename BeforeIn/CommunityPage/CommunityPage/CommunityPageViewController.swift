@@ -318,17 +318,18 @@ extension CommunityPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         let comment = post.comments[indexPath.row]
+        let dateString = comment.postingTime.getTimeText()
+        cell.dateLabel.text = dateString
         if currentUser.blockList.contains(comment.writer){
-            cell.isHidden = true
+            cell.commentLabel.text = "차단된 사용자의 댓글입니다."
+            cell.authorLabel.text = "차단된 사용자"
         }
         else {
-            let dateString = comment.postingTime.getTimeText()
-            cell.dateLabel.text = dateString
             cell.commentLabel.text = comment.content
             cell.authorLabel.text = comment.writerNickName
-            
-            if currentUser.email == comment.writer {
-                cell.moreButton.isHidden = false
+        }
+        if currentUser.email == comment.writer {
+            cell.moreButton.isHidden = false
                 cell.reportButton.isHidden = true
                 
                 cell.moreButton.tag = indexPath.row
@@ -341,7 +342,7 @@ extension CommunityPageViewController: UITableViewDataSource {
                 cell.reportButton.tag = indexPath.row
                 cell.reportButton.addTarget(self, action: #selector(commentReportButtonTapped), for: .touchUpInside)
             }
-        }
+        
         
         return cell
     }
