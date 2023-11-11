@@ -46,6 +46,8 @@ class CommunityPageViewController: BaseViewController {
     }
     
     func addTarget(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         communityPageView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         communityPageView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
     }
@@ -57,6 +59,25 @@ class CommunityPageViewController: BaseViewController {
     
     
     // MARK: - @objc
+    @objc func keyboardWillAppear(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            UIView.animate(withDuration: duration) {
+                // 키보드의 높이만큼 화면을 위로 올립니다.
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            }
+        }
+    }
+
+    @objc func keyboardWillDisappear(notification: Notification) {
+        if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            UIView.animate(withDuration: duration) {
+                // 원래 위치로 화면을 내립니다.
+                self.view.transform = .identity
+            }
+        }
+    }
+
     @objc func moreButtonTapped() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -482,21 +503,21 @@ extension CommunityPageViewController: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 extension CommunityPageViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == communityPageView.commentTextField {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -330
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = 0
-        }
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if textField == communityPageView.commentTextField {
+//            UIView.animate(withDuration: 0.3) {
+//                self.view.frame.origin.y = -330
+//            }
+//        } else {
+//            UIView.animate(withDuration: 0.3) {
+//                self.view.frame.origin.y = 0
+//            }
+//        }
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        UIView.animate(withDuration: 0.3) {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
 }
