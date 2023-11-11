@@ -46,6 +46,8 @@ class CommentCell: UITableViewCell {
     let commentLabel = UILabel().then {
         $0.text = "댓글"
         $0.font = UIFont.systemFont(ofSize: 15)
+        $0.numberOfLines = 0
+        $0.textAlignment = .natural
     }
     
     
@@ -104,6 +106,7 @@ class CommentCell: UITableViewCell {
         commentLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(10)
             $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().inset(20)
             $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
     }
