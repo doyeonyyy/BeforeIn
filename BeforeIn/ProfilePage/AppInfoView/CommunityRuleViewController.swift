@@ -16,7 +16,7 @@ class CommunityRuleViewController: BaseViewController, WKNavigationDelegate {
         $0.backgroundColor = .systemBackground
     }
     
-    let indicator = NVActivityIndicatorView(frame: CGRect(x: 162, y: 100, width: 50, height: 50),
+    private let indicator = NVActivityIndicatorView(frame: CGRect(x: 162, y: 100, width: 50, height: 50),
                                             type: .lineSpinFadeLoader,
                                             color: .BeforeInRed,
                                             padding: 0)
