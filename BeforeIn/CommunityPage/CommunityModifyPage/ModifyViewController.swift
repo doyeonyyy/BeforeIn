@@ -36,7 +36,7 @@ class ModifyViewController: BaseViewController {
         if let post = post {
             modifyVeiw.mainTextField.text = post.title
             modifyVeiw.contentTextView.text = post.content
-            modifyVeiw.contentTextView.textColor = .black
+            modifyVeiw.contentTextView.textColor = .systemBlack
             switch post.category {
             case "일상잡담": modifyVeiw.dailyButton.isSelected = true
             case "궁금해요": modifyVeiw.qnaButton.isSelected = true
@@ -118,7 +118,7 @@ extension ModifyViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.placeholderText {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.systemBlack
         }
         
     }
