@@ -156,7 +156,7 @@ class RegisterViewController: BaseViewController {
                         self.registerView.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
                         self.checkNickname = false
                     } else {
-                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 닉네임입니다.", buttonTitle: "확인")
+                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 닉네임입니다. \n 입력하신 닉네임은 아이디 찾기시 이용됩니다.", buttonTitle: "확인")
                         self.registerView.checkNicknameButton.backgroundColor = .BeforeInRed
                         self.registerView.checkNicknameButton.setTitleColor(UIColor.white, for: .normal)
                         self.checkNickname = true
@@ -330,14 +330,42 @@ extension RegisterViewController: UITextFieldDelegate {
                 return false
             }
         } else if textField == registerView.registerNicknameTextField {
-            let currentText = textField.text ?? ""
-            let textCount = currentText.count + input.count
+            let maxLength = 8
+            let oldText = textField.text ?? ""
+            let addedText = input
+            let newText = oldText + addedText
+            let newTextLength = newText.count
             
-            return textCount <= 8
+            if newTextLength <= maxLength {
+                return true
+            }
+            
+            let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)])
+            let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) }
+            let separatedCharactersCount = separatedCharacters.count
+            
+            if separatedCharactersCount == 1 && !addedText.isConsonant {
+                return true
+            }
+            if separatedCharactersCount == 2 && addedText.isConsonant {
+                return true
+            }
+            if separatedCharactersCount == 3 && addedText.isConsonant {
+                return true
+            }
+            return false
         }
         return true
     }
     
-    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        var text = textField.text ?? ""
+        let maxLength = 8
+        if text.count > maxLength {
+            let startIndex = text.startIndex
+            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+            let fixedText = String(text[startIndex...endIndex])
+            textField.text = fixedText
+        }
+    }
 }
-

@@ -18,7 +18,7 @@ class CommentCell: UITableViewCell {
     
     let authorLabel = UILabel().then {
         $0.text = ""
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
     
     let dateLabel = UILabel().then {

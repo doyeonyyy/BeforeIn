@@ -279,7 +279,8 @@ class MainView: UIView {
         }
         randomButton.snp.makeConstraints { make in
             make.top.equalTo(etiquetteLabel.snp.top)
-            make.leading.equalTo(etiquetteLabel.snp.trailing).offset(5)
+           // make.leading.equalTo(etiquetteLabel.snp.trailing).offset(5)
+            make.trailing.equalToSuperview().offset(-26)
         }
 //        etiquetteView.snp.makeConstraints { make in
 //            make.top.equalTo(etiquetteLabel.snp.bottom).offset(30)

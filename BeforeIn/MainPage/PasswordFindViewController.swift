@@ -38,8 +38,8 @@ class PasswordFindViewController: BaseViewController {
 //    lazy var authIdButton = UIButton(configuration: .filled()).then {
     lazy var authIdButton = UIButton().then {
         $0.setTitle("인증메일전송", for: .normal)
-        $0.setTitleColor(.darkGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
@@ -68,8 +68,8 @@ class PasswordFindViewController: BaseViewController {
     }
     lazy var authCodeButton = UIButton().then {
         $0.setTitle("인증확인", for: .normal)
-        $0.setTitleColor(.darkGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true

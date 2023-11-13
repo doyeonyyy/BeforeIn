@@ -66,18 +66,16 @@ class CommunityPageViewController: BaseViewController {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
             }
         }
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
         communityPageView.sendButton.addGestureRecognizer(tapGesture)
         communityPageView.sendButton.isUserInteractionEnabled = true
     }
     
     @objc func keyboardWillDisappear(notification: Notification) {
         if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
-            // 텍스트 필드가 선택되어 있는 경우에만 키보드 내리기
-            if communityPageView.commentTextField.isFirstResponder {
-                UIView.animate(withDuration: duration) {
-                    self.view.transform = .identity
-                }
+            UIView.animate(withDuration: duration) {
+                self.view.transform = .identity
+                
             }
         }
     }
@@ -320,9 +318,9 @@ class CommunityPageViewController: BaseViewController {
 // MARK: - UITableViewDelegate
 extension CommunityPageViewController: UITableViewDelegate {
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        view.endEditing(true)
-//    }
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        view.endEditing(true)
+    //    }
     
 }
 
