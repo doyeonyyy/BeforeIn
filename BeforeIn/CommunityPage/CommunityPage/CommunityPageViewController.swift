@@ -37,6 +37,12 @@ class CommunityPageViewController: BaseViewController {
         //        loadComments()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     
     // MARK: - Methods
     func setTableView(){
@@ -61,23 +67,28 @@ class CommunityPageViewController: BaseViewController {
     // MARK: - @objc
     @objc func keyboardWillAppear(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-           let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
-            UIView.animate(withDuration: duration) {
-                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+               let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+                
+                let contentInsetBottom = keyboardSize.height
+
+                UIView.animate(withDuration: duration) {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                    self.communityPageView.scrollView.contentInset.top = contentInsetBottom
+                }
             }
-        }
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
-        communityPageView.sendButton.addGestureRecognizer(tapGesture)
-        communityPageView.sendButton.isUserInteractionEnabled = true
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(sendButtonTapped))
+            communityPageView.sendButton.addGestureRecognizer(tapGesture)
+            communityPageView.sendButton.isUserInteractionEnabled = true
     }
     
     @objc func keyboardWillDisappear(notification: Notification) {
         if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
-            UIView.animate(withDuration: duration) {
-                self.view.transform = .identity
-                
+                UIView.animate(withDuration: duration) {
+                    self.view.transform = .identity
+                    self.communityPageView.scrollView.contentInset.top = 0
+                }
             }
-        }
     }
     
     @objc func moreButtonTapped() {

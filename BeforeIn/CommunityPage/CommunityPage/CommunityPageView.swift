@@ -21,7 +21,7 @@ class CommunityPageView: UIView {
     private var commentTableViewHeightConstraint: Constraint?
 
     
-    private let scrollView = UIScrollView().then {
+    let scrollView = UIScrollView().then {
         $0.alwaysBounceVertical = true
         $0.showsVerticalScrollIndicator = false
     }
@@ -292,12 +292,12 @@ class CommunityPageView: UIView {
            let constraint = commentTableViewHeightConstraint {
             // 제약이 이미 존재하면 업데이트
             print("제약이 이미 존재하면 업데이트")
-            constraint.update(offset: max(400, newSize.height + 50))
+            constraint.update(offset: max(80, newSize.height + 50))
         } else {
             // 제약이 없으면 새로 생성
             print("제약이 없으면 새로 생성")
             commentTableView.snp.makeConstraints {
-                commentTableViewHeightConstraint = $0.height.greaterThanOrEqualTo(max(400, newSize.height + 50)).constraint
+                commentTableViewHeightConstraint = $0.height.greaterThanOrEqualTo(max(80, newSize.height + 50)).constraint
             }
         }
     }
