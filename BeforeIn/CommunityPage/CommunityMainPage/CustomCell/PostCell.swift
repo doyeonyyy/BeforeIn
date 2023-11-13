@@ -54,7 +54,7 @@ class PostCell: UITableViewCell {
     
     private let commentImageView = UIImageView().then{
         $0.image = UIImage(systemName: "text.bubble")
-        $0.tintColor = .black
+        $0.tintColor = .SystemBlack
     }
     
     private let commentsLabel = UILabel().then{
