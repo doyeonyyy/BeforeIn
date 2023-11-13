@@ -104,6 +104,8 @@ class CommunityPageView: UIView {
         $0.layer.cornerRadius = 15
         $0.layer.masksToBounds = true
         $0.backgroundColor = .systemGray6
+        $0.layer.borderColor = UIColor.systemGray5.cgColor
+        $0.layer.borderWidth = 1
     }
     
     let sendButton = UIButton().then {
@@ -241,14 +243,14 @@ class CommunityPageView: UIView {
         }
         
         commentTextField.snp.makeConstraints {
-            $0.left.equalTo(self.safeAreaLayoutGuide).offset(16)
+            $0.left.equalTo(self.safeAreaLayoutGuide).offset(14)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.right.equalTo(sendButton.snp.left).offset(-8)
         }
         
         sendButton.snp.makeConstraints {
             $0.left.equalTo(commentTextField.snp.right).offset(8)
-            $0.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
+            $0.right.equalTo(self.safeAreaLayoutGuide).offset(-14)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-5)
             $0.width.equalTo(40)
         }

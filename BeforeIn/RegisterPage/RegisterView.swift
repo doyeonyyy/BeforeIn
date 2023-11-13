@@ -30,8 +30,8 @@ class RegisterView: UIView {
     }
     lazy var authIdButton = UIButton().then {
         $0.setTitle("인증메일전송", for: .normal)
-        $0.setTitleColor(.darkGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
@@ -59,8 +59,8 @@ class RegisterView: UIView {
     }
     lazy var authCodeButton = UIButton().then {
         $0.setTitle("인증확인", for: .normal)
-        $0.setTitleColor(.darkGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
@@ -98,8 +98,8 @@ class RegisterView: UIView {
     }
     lazy var checkNicknameButton = UIButton().then {
         $0.setTitle("중복확인", for: .normal)
-        $0.setTitleColor(.darkGray, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 9)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
@@ -144,7 +144,7 @@ class RegisterView: UIView {
         $0.backgroundColor = .systemGray2
     }
     lazy var showCheckButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "eye"), for: .normal)
+        $0.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         $0.tintColor = .systemGray2
     }
     
@@ -205,7 +205,7 @@ class RegisterView: UIView {
     
     func setUI(){
         registerIdLabel.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(90)
+            $0.top.equalTo(self.snp.top).offset(100)
             $0.left.equalTo(self.snp.left).offset(24)
         }
         registerIdTextField.snp.makeConstraints {

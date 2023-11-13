@@ -9,6 +9,14 @@ import Foundation
 
 extension String {
     
+    var isConsonant: Bool {
+        guard let scalar = UnicodeScalar(self)?.value else {
+            return false
+        }
+        let consonantScalarRange: ClosedRange<UInt32> = 12593...12622
+        return consonantScalarRange ~= scalar
+    }
+    
     // 아이디 정규 표현식
     // @와2글자 이상 확인 1@naver.com
     func isValidEmail() -> Bool {
@@ -26,5 +34,5 @@ extension String {
         
         return passwordValidation.evaluate(with: self)
     }
-
+    
 }

@@ -38,10 +38,11 @@ class NicknameEditViewController: BaseViewController {
     private let checkNicknameButton = UIButton().then {
         $0.setTitle("  중복확인  ", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         $0.backgroundColor = .systemGray6
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 12
         $0.layer.masksToBounds = true
+        $0.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     private let changeNicknameButton = UIButton().then {
@@ -116,7 +117,7 @@ class NicknameEditViewController: BaseViewController {
     func setTextField(){
         editNicknameTextField.delegate = self
     }
-
+    
     func addTarget(){
         checkNicknameButton.addTarget(self, action: #selector(checkNicknameButtonTapped), for: .touchUpInside)
         changeNicknameButton.addTarget(self, action: #selector(changeNicknameButtonTapped), for: .touchUpInside)
@@ -136,7 +137,7 @@ class NicknameEditViewController: BaseViewController {
                         self.checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
                         self.checkNickname = false
                     } else {
-                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 닉네임입니다.", buttonTitle: "확인")
+                        self.showAlertOneButton(title: "사용 가능", message: "사용 가능한 닉네임입니다. \n 입력하신 닉네임은 아이디 찾기시 이용됩니다.", buttonTitle: "확인")
                         self.checkNicknameButton.backgroundColor = .BeforeInRed
                         self.checkNicknameButton.setTitleColor(UIColor.white, for: .normal)
                         self.checkNickname = true
@@ -177,7 +178,7 @@ class NicknameEditViewController: BaseViewController {
         checkNicknameButton.setTitleColor(UIColor.black, for: .normal)
         checkNickname = false
     }
-
+    
 }
 
 
@@ -190,12 +191,44 @@ extension NicknameEditViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString input: String) -> Bool {
         if textField == editNicknameTextField {
-            let currentText = textField.text ?? ""
-            let textCount = currentText.count + input.count
             
-            return textCount <= 8
+            let maxLength = 8
+            let oldText = textField.text ?? ""
+            let addedText = input
+            let newText = oldText + addedText
+            let newTextLength = newText.count
+            
+            if newTextLength <= maxLength {
+                return true
+            }
+            
+            let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)])
+            let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) }
+            let separatedCharactersCount = separatedCharacters.count
+            
+            if separatedCharactersCount == 1 && !addedText.isConsonant {
+                return true
+            }
+            if separatedCharactersCount == 2 && addedText.isConsonant {
+                return true
+            }
+            if separatedCharactersCount == 3 && addedText.isConsonant {
+                return true
+            }
+            return false
         }
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        var text = textField.text ?? ""
+        let maxLength = 8
+        if text.count > maxLength {
+            let startIndex = text.startIndex
+            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+            let fixedText = String(text[startIndex...endIndex])
+            textField.text = fixedText
+        }
     }
 }
 

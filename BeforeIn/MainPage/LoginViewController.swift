@@ -24,6 +24,7 @@ class LoginViewController: BaseViewController {
         setTitle()
         setTextField()
         setupAddTarget()
+        navigationItem.leftBarButtonItem = nil
     }
     
     deinit {
