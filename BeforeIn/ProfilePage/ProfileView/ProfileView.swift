@@ -62,7 +62,7 @@ class ProfileView: UIView {
     
     let editProfileButton = UIButton().then {
         let image = UIImage(systemName: "pencil.circle.fill")
-        let resizedImage = $0.resizeImageButton(image: image, width: 25, height: 25, color: .systemGray4)
+        let resizedImage = $0.resizeImageButton(image: image, width: 30, height: 30, color: .systemGray4)
         $0.setImage(resizedImage, for: .normal)
     }
     
@@ -257,8 +257,8 @@ class ProfileView: UIView {
         }
         
         editProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(circularImageView.snp.bottom).offset(-25)
-            make.leading.equalTo(circularImageView.snp.trailing).offset(-20)
+            make.top.equalTo(circularImageView.snp.bottom).offset(-30)
+            make.leading.equalTo(circularImageView.snp.trailing).offset(-25)
         }
         
         grayRectangle.snp.makeConstraints { make in
