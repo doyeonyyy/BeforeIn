@@ -34,12 +34,12 @@ class FirstDetailView: UIView {
     }
     
     lazy var swipeDownGuideImageUp = UIImageView().then {
-        $0.image = UIImage(systemName: "chevron.compact.down")
+        $0.image = UIImage(systemName: "chevron.compact.up")
         $0.tintColor = UIColor(white: 1, alpha: 0.5)
     }
     
     lazy var swipeDownGuideImageDown = UIImageView().then {
-        $0.image = UIImage(systemName: "chevron.compact.down")
+        $0.image = UIImage(systemName: "chevron.compact.up")
         $0.tintColor = UIColor(white: 1, alpha: 0.5)
     }
 
@@ -105,20 +105,20 @@ class FirstDetailView: UIView {
     }
     
     func addSwipeDownGuideImageAnimation() {
-        swipeDownGuideImageUp.alpha = 0.0
-        UIView.animate(withDuration: 0.5, animations: {
-            self.swipeDownGuideImageUp.alpha = 1.0
-        }) { (finished) in
-            UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
-                self.swipeDownGuideImageUp.alpha = 0.0
-            })
-        }
         swipeDownGuideImageDown.alpha = 0.0
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.swipeDownGuideImageDown.alpha = 1.0
         }) { (finished) in
             UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
                 self.swipeDownGuideImageDown.alpha = 0.0
+            })
+        }
+        swipeDownGuideImageUp.alpha = 0.0
+        UIView.animate(withDuration: 1.0, animations: {
+            self.swipeDownGuideImageUp.alpha = 1.0
+        }) { (finished) in
+            UIView.animate(withDuration: 0.5, delay: 0.8, animations: {
+                self.swipeDownGuideImageUp.alpha = 0.0
             })
         }
     }
