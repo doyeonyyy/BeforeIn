@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WebKit
 
-class CommunityRuleViewController: UIViewController, WKNavigationDelegate {
+class CommunityRuleViewController: BaseViewController, WKNavigationDelegate {
     // MARK: - Properties
     private let webView = WKWebView().then {
         $0.backgroundColor = .systemBackground

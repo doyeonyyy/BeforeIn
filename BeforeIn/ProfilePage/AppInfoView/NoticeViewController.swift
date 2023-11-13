@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WebKit
 
-class NoticeViewController: UIViewController, WKNavigationDelegate {
+class NoticeViewController: BaseViewController, WKNavigationDelegate {
     // MARK: - Properties
     private let webView = WKWebView().then {
         $0.backgroundColor = .systemBackground

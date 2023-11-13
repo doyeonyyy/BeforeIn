@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WebKit
 
-class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate {
+class PrivacyPolicyViewController: BaseViewController, WKNavigationDelegate {
     // MARK: - Properties
     private let webView = WKWebView().then {
         $0.backgroundColor = .systemBackground
