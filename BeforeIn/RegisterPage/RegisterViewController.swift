@@ -359,13 +359,15 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        var text = textField.text ?? ""
-        let maxLength = 8
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textField.text = fixedText
+        if textField == registerView.registerNicknameTextField {
+            var text = textField.text ?? ""
+            let maxLength = 8
+            if text.count > maxLength {
+                let startIndex = text.startIndex
+                let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+                let fixedText = String(text[startIndex...endIndex])
+                textField.text = fixedText
+            }
         }
     }
 }
