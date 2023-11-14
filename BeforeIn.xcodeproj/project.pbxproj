@@ -40,7 +40,6 @@
 		1596DCDE2AD7B7D800E6D388 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCDD2AD7B7D800E6D388 /* MainView.swift */; };
 		1596DCE22AD7E45500E6D388 /* RecentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */; };
 		1596DCE42AD800A300E6D388 /* RecommendItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */; };
-		1597F0D12B021106008452C4 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597F0D02B021106008452C4 /* Secret.swift */; };
 		159B78C02ADD56E900FE210E /* Etiquette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78BF2ADD56E900FE210E /* Etiquette.swift */; };
 		159B78C32ADD573B00FE210E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78C22ADD573B00FE210E /* User.swift */; };
 		159B78C52ADD57A700FE210E /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B78C42ADD57A700FE210E /* Quiz.swift */; };
@@ -98,6 +97,7 @@
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		678D2C582AF387A700B42226 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 678D2C572AF387A700B42226 /* NVActivityIndicatorView */; };
+		67AEA1442B02FAD9004C2EAD /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEA1432B02FAD9004C2EAD /* Secret.swift */; };
 		67C7D2152AFC7E5C00240865 /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */; };
 		67C7D2192AFC80DF00240865 /* BlockListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2182AFC80DF00240865 /* BlockListCell.swift */; };
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
@@ -171,7 +171,6 @@
 		1596DCDD2AD7B7D800E6D388 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1596DCE12AD7E45500E6D388 /* RecentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemCell.swift; sourceTree = "<group>"; };
 		1596DCE32AD800A300E6D388 /* RecommendItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItemCell.swift; sourceTree = "<group>"; };
-		1597F0D02B021106008452C4 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../../Secret.swift; sourceTree = "<group>"; };
 		159B78BF2ADD56E900FE210E /* Etiquette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etiquette.swift; sourceTree = "<group>"; };
 		159B78C22ADD573B00FE210E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		159B78C42ADD57A700FE210E /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -194,6 +193,7 @@
 		6755E3C92AFF49B800CCEE81 /* CommunityRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRuleViewController.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		67AEA1432B02FAD9004C2EAD /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		67C7D2182AFC80DF00240865 /* BlockListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListCell.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
@@ -334,7 +334,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				1597F0D02B021106008452C4 /* Secret.swift */,
+				67AEA1432B02FAD9004C2EAD /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -781,7 +781,7 @@
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */,
 				E7EFDA222AD8F3F7000963C8 /* EtiquetteCell.swift in Sources */,
-				1597F0D12B021106008452C4 /* Secret.swift in Sources */,
+				67AEA1442B02FAD9004C2EAD /* Secret.swift in Sources */,
 				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
 				1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,

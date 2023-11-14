@@ -115,7 +115,7 @@ extension WriteViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
             if textView.textColor == UIColor.placeholderText {
                 textView.text = nil
-                textView.textColor = UIColor.systemBlack
+                textView.textColor = UIColor.SystemBlack
             }
             
         }

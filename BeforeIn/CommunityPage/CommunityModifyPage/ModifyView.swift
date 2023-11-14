@@ -44,7 +44,7 @@ class ModifyView: UIView {
     let contentTextView = UITextView().then{
         $0.backgroundColor = .systemGray6
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = UIColor.systemBlack
+        $0.textColor = UIColor.SystemBlack
         $0.text = postPlaceholder
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
