@@ -32,6 +32,12 @@ class RegisterViewController: BaseViewController {
         setupAddTarget()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     deinit {
         print("회원가입VC 해제")
     }
@@ -61,6 +67,12 @@ class RegisterViewController: BaseViewController {
         registerView.checkNicknameButton.addTarget(self, action: #selector(writingComplete), for: .touchUpInside)
         registerView.registerPwTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
         registerView.registerCheckTextField.addTarget(self, action: #selector(writingComplete), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
     }
     
     func isValidAuthCode(_ enteredCode: String) -> Bool {
@@ -289,28 +301,27 @@ extension RegisterViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == registerView.registerPwTextField {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -100
-            }
-        } else if textField == registerView.registerCheckTextField {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = -210
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.view.frame.origin.y = 0
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            let viewHeight = view.frame.height
+            let registerCheckTextFieldTop = registerView.registerCheckTextField.frame.origin.y
+            let distanceFromTop = registerCheckTextFieldTop - view.frame.origin.y
+            if viewHeight - keyboardHeight < distanceFromTop {
+                animateViewUpward(offset: keyboardHeight)
             }
         }
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        animateViewUpward(offset: 0)
+    }
+
+    private func animateViewUpward(offset: CGFloat) {
         UIView.animate(withDuration: 0.3) {
-            self.view.frame.origin.y = 0
+            self.view.frame.origin.y = -offset
         }
     }
-    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString input: String) -> Bool {
         if textField == registerView.authCodeTextField {
