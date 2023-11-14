@@ -302,19 +302,25 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
-            let viewHeight = view.frame.height
-            let registerCheckTextFieldTop = registerView.registerCheckTextField.frame.origin.y
-            let distanceFromTop = registerCheckTextFieldTop - view.frame.origin.y
-            if viewHeight - keyboardHeight < distanceFromTop {
-                animateViewUpward(offset: keyboardHeight)
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+               let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+                
+                let contentInsetBottom = keyboardSize.height
+
+                UIView.animate(withDuration: duration) {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                    self.registerView.scrollView.contentInset.top = contentInsetBottom
+                }
             }
-        }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        animateViewUpward(offset: 0)
+        if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+        UIView.animate(withDuration: duration) {
+            self.view.transform = .identity
+            self.registerView.scrollView.contentInset.top = 0
+        }
+    }
     }
 
     private func animateViewUpward(offset: CGFloat) {

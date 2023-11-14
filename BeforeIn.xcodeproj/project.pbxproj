@@ -13,6 +13,7 @@
 		1543EEDB2AE693AE00AD587B /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */; };
 		1543EEDE2AE7464200AD587B /* ModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543EEDD2AE7464200AD587B /* ModifyView.swift */; };
 		1547FE172AF1D3B7005E791D /* ImageCacheFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */; };
+		1561D4502B03493100C84B1C /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1561D44F2B03493100C84B1C /* Secret.swift */; };
 		1586ECA32AE3FCC300055040 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA22AE3FCC300055040 /* CommunityView.swift */; };
 		1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA42AE3FF4C00055040 /* TagCell.swift */; };
 		1586ECA72AE404F500055040 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1586ECA62AE404F500055040 /* PostCell.swift */; };
@@ -97,7 +98,6 @@
 		675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F21762AD8157300C4BD37 /* RegisterView.swift */; };
 		676DE2272ADE62280002C6D8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		678D2C582AF387A700B42226 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 678D2C572AF387A700B42226 /* NVActivityIndicatorView */; };
-		67AEA1492B034622004C2EAD /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AEA1482B034622004C2EAD /* Secret.swift */; };
 		67C7D2152AFC7E5C00240865 /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */; };
 		67C7D2192AFC80DF00240865 /* BlockListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7D2182AFC80DF00240865 /* BlockListCell.swift */; };
 		67CB1BC72AE3E7E5003834B1 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */; };
@@ -145,6 +145,7 @@
 		1543EEDA2AE693AE00AD587B /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 		1543EEDD2AE7464200AD587B /* ModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyView.swift; sourceTree = "<group>"; };
 		1547FE162AF1D3B7005E791D /* ImageCacheFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheFunction.swift; sourceTree = "<group>"; };
+		1561D44F2B03493100C84B1C /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Secret.swift; path = ../../Secret.swift; sourceTree = "<group>"; };
 		1586ECA22AE3FCC300055040 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		1586ECA42AE3FF4C00055040 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		1586ECA62AE404F500055040 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -193,7 +194,6 @@
 		6755E3C92AFF49B800CCEE81 /* CommunityRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRuleViewController.swift; sourceTree = "<group>"; };
 		675F21722AD7B6F800C4BD37 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		675F21762AD8157300C4BD37 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		67AEA1482B034622004C2EAD /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		67C7D2142AFC7E5C00240865 /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		67C7D2182AFC80DF00240865 /* BlockListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListCell.swift; sourceTree = "<group>"; };
 		67CB1BC62AE3E7E5003834B1 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
@@ -334,7 +334,7 @@
 		1596DC962AD6B18A00E6D388 = {
 			isa = PBXGroup;
 			children = (
-				67AEA1482B034622004C2EAD /* Secret.swift */,
+				1561D44F2B03493100C84B1C /* Secret.swift */,
 				1596DCA12AD6B18A00E6D388 /* BeforeIn */,
 				1596DCA02AD6B18A00E6D388 /* Products */,
 				676DE2252ADE62280002C6D8 /* Frameworks */,
@@ -781,7 +781,7 @@
 				1596DCCC2AD6B2CF00E6D388 /* DetailViewController.swift in Sources */,
 				63AB9D6B2ADFD558008E85BA /* QuizIntroViewModel.swift in Sources */,
 				E7EFDA222AD8F3F7000963C8 /* EtiquetteCell.swift in Sources */,
-				67AEA1492B034622004C2EAD /* Secret.swift in Sources */,
+				1561D4502B03493100C84B1C /* Secret.swift in Sources */,
 				675F21772AD8157300C4BD37 /* RegisterView.swift in Sources */,
 				1586ECA52AE3FF4C00055040 /* TagCell.swift in Sources */,
 				1596DCBE2AD6B23100E6D388 /* LoginViewController.swift in Sources */,

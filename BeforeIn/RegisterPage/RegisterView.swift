@@ -13,6 +13,16 @@ import Then
 class RegisterView: UIView {
     
     // MARK: - UI Properties
+    let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+        $0.showsVerticalScrollIndicator = false
+    }
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     lazy var registerIdLabel = UILabel().then {
         $0.text = "아이디"
         $0.font = UIFont.boldSystemFont(ofSize: 16)
@@ -171,47 +181,61 @@ class RegisterView: UIView {
     
     // MARK: - Methods
     func addSubview(){
-        addSubview(registerIdLabel)
-        addSubview(registerIdTextField)
-        addSubview(registerIdBottom)
-        addSubview(authIdButton)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        addSubview(authCodeLabel)
-        addSubview(authCodeTextField)
-        addSubview(authCodeBottom)
-        addSubview(timerLabel)
-        addSubview(authCodeButton)
+        contentView.addSubview(registerIdLabel)
+        contentView.addSubview(registerIdTextField)
+        contentView.addSubview(registerIdBottom)
+        contentView.addSubview(authIdButton)
         
-        addSubview(registerNameLabel)
-        addSubview(registerNameTextField)
-        addSubview(registerNameBottom)
+        contentView.addSubview(authCodeLabel)
+        contentView.addSubview(authCodeTextField)
+        contentView.addSubview(authCodeBottom)
+        contentView.addSubview(timerLabel)
+        contentView.addSubview(authCodeButton)
         
-        addSubview(registerNicknameLabel)
-        addSubview(registerNicknameTextField)
-        addSubview(registerNicknameBottom)
-        addSubview(checkNicknameButton)
+        contentView.addSubview(registerNameLabel)
+        contentView.addSubview(registerNameTextField)
+        contentView.addSubview(registerNameBottom)
         
-        addSubview(registerPwLabel)
-        addSubview(registerPwTextField)
-        addSubview(registerPwBottom)
-        addSubview(showPwButton)
+        contentView.addSubview(registerNicknameLabel)
+        contentView.addSubview(registerNicknameTextField)
+        contentView.addSubview(registerNicknameBottom)
+        contentView.addSubview(checkNicknameButton)
+        
+        contentView.addSubview(registerPwLabel)
+        contentView.addSubview(registerPwTextField)
+        contentView.addSubview(registerPwBottom)
+        contentView.addSubview(showPwButton)
     
-        addSubview(registerCheckLabel)
-        addSubview(registerCheckTextField)
-        addSubview(registerCheckBottom)
-        addSubview(showCheckButton)
-        addSubview(registerButton)
+        contentView.addSubview(registerCheckLabel)
+        contentView.addSubview(registerCheckTextField)
+        contentView.addSubview(registerCheckBottom)
+        contentView.addSubview(showCheckButton)
+        contentView.addSubview(registerButton)
     }
     
     func setUI(){
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalTo(self)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
         registerIdLabel.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(100)
-            $0.left.equalTo(self.snp.left).offset(24)
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview().offset(24)
         }
         registerIdTextField.snp.makeConstraints {
             $0.top.equalTo(registerIdLabel.snp.bottom).offset(15)
-            $0.left.equalTo(self.snp.left).offset(24)
-            $0.right.equalTo(self.snp.right).offset(-100)
+            $0.left.equalToSuperview().offset(24)
+            $0.right.equalToSuperview().offset(-100)
         }
         registerIdBottom.snp.makeConstraints {
             $0.left.right.equalTo(self).inset(24)
@@ -321,7 +345,8 @@ class RegisterView: UIView {
         registerButton.snp.makeConstraints {
             $0.left.right.equalTo(self.safeAreaLayoutGuide).inset(24)
             $0.height.equalTo(45)
-            $0.bottom.equalToSuperview().offset(-45)
+            $0.top.equalTo(registerCheckBottom.snp.bottom).offset(20)
+            $0.bottom.equalToSuperview()
         }
         
     }
