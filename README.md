@@ -77,8 +77,11 @@
 <br><br>
 
 ## 🧐 앱 실행 및 사용 방법
-![sns_v1@3x](이것도 파일올리기 이후)
-앱 가이드 영상 : (이것도 파일올리기 이후)
+
+https://github.com/lcho3878/BeforeIn/assets/74814587/c0c8b629-781e-4734-b9cc-f4e25ab3d89c
+
+
+
 
 
 <br><br>
