@@ -58,8 +58,8 @@ Design: <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&
 
 | 역할 | 이름 | 깃허브 |
 |------|---|---|
-| leader | 이찬호 | [lcho3878](https://github.com/lcho3878) |
-| Associate-leader | 이한솔 | [Leehan-sol](https://github.com/Leehan-sol) |
+| Leader | 이찬호 | [lcho3878](https://github.com/lcho3878) |
+| Associate-Leader | 이한솔 | [Leehan-sol](https://github.com/Leehan-sol) |
 | iOS Developer | 김상훈 | [Sanghun K.](https://github.com/sanc93) |
 | iOS Developer | 김도연 | [Daisy Kim](https://github.com/doyeonyyy) |
 | iOS Developer | 허수빈 | [Heasoobean](https://github.com/Heasoobean/) |
