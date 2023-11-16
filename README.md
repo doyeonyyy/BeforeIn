@@ -1,3 +1,5 @@
+<img src="https://github.com/lcho3878/BeforeIn/assets/60124491/8c1227bd-91e7-4c1c-990b-94d82307e38b" width="2000"/>
+
 # nbcamp-Project-BeforeIn
 [내일배움캠프 iOS트랙] iOS 앱개발 최종 프로젝트
 <br>
@@ -7,7 +9,9 @@
 - 당신의 에티켓 점수는 몇점인가요?
 - 어딘가 들어가기전, 지켜야할 에티켓을 체크해보세요!
 <br>
-https://apps.apple.com/kr/app/%EB%B9%84%ED%8F%AC%EC%9D%B8-%EB%8B%B9%EC%8B%A0%EC%9D%98-%EC%97%90%ED%8B%B0%EC%BC%93-%EC%A0%90%EC%88%98%EB%8A%94-%EB%AA%87%EC%A0%90%EC%9D%B8%EA%B0%80%EC%9A%94/id6471390154
+
+
+<a href="https://apps.apple.com/kr/app/%EB%B9%84%ED%8F%AC%EC%9D%B8-%EB%8B%B9%EC%8B%A0%EC%9D%98-%EC%97%90%ED%8B%B0%EC%BC%93-%EC%A0%90%EC%88%98%EB%8A%94-%EB%AA%87%EC%A0%90%EC%9D%B8%EA%B0%80%EC%9A%94/id6471390154">→ App Store로 이동</a>
 <br><br><br><br>
 
 
@@ -30,13 +34,13 @@ https://apps.apple.com/kr/app/%EB%B9%84%ED%8F%AC%EC%9D%B8-%EB%8B%B9%EC%8B%A0%EC%
 <br><br>
 
 ## 🛠️ 사용한 기술 스택 (Tech Stack)
-Programming: <img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white">
+Programming: <img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white" height="20">
 <br>
-Communication: <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white"><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+Communication: <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" height="20"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white" height="20"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white" height="20">
 <br>
-FrameWork: <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+FrameWork: <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" height="20">
 <br>
-Design: <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+Design: <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" height="20">
 
 
 <br><br>
