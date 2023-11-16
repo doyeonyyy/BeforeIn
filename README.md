@@ -1,9 +1,21 @@
 # nbcamp-Project-BeforeIn
 [내일배움캠프 iOS트랙] iOS 앱개발 최종 프로젝트
+<br>
+<img src="https://github.com/lcho3878/BeforeIn/assets/74814587/2d12cf52-fbcf-4929-8420-b6aee147ae4b" width="200" height="200"/>
+<br>
+"비포인(BeforeIn)"<br>
+- 당신의 에티켓 점수는 몇점인가요?
+- 어딘가 들어가기전, 지켜야할 에티켓을 체크해보세요!
+<br>
+https://apps.apple.com/kr/app/%EB%B9%84%ED%8F%AC%EC%9D%B8-%EB%8B%B9%EC%8B%A0%EC%9D%98-%EC%97%90%ED%8B%B0%EC%BC%93-%EC%A0%90%EC%88%98%EB%8A%94-%EB%AA%87%EC%A0%90%EC%9D%B8%EA%B0%80%EC%9A%94/id6471390154
 <br><br><br><br>
 
+
+
 ## 🧑🏻‍💻 프로젝트 소개
-"에티켓 앱 프로젝트"<p> 
+"에티켓 정보 제공 앱 프로젝트"<p> 
+
+
 이 프로젝트는 Swift 언어를 사용하여 Xcode에서 개발한 애플리케이션입니다. <br>
 우리 팀의 SNS 어플은 에티켓 정보 정달 및 공유를 위한 플랫폼으로, 주요 기능은 아래와 같습니다.
 1. **장소 및 상황별 에티켓 제공**: 장소 및 상황에 따른 지키고 피해야할 에티켓들을 제공합니다.
@@ -18,7 +30,14 @@
 <br><br>
 
 ## 🛠️ 사용한 기술 스택 (Tech Stack)
-<img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
+Programming: <img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white">
+<br>
+Communication: <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white"><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<br>
+FrameWork: <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+<br>
+Design: <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+
 
 <br><br>
 
