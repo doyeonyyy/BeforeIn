@@ -44,6 +44,10 @@ Design: <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&
 
 
 <br><br>
+## 아키텍쳐
+<img src="https://github.com/lcho3878/BeforeIn/assets/74814587/767bf269-715c-46c0-9a89-8ccd8881bd0f" width="500" height="800">
+
+<br><br>
 
 ## 🗓️ 개발 기간
 * 2023-10-10(화) ~ 2023-11-17(금)
